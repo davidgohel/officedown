@@ -1,0 +1,17 @@
+Package: worded
+Type: Package
+Title: R Markdown to Microsoft Word Document
+Version: 0.0.1
+Authors@R: c(
+    person("David", "Gohel", role = c("aut", "cre"),
+    email = "david.gohel@ardata.fr")
+    )
+Description: Format function for converting from an 'R Markdown' document to an 'Microsoft Word' document. 
+ A set of macro is provided to let users add sections, break pages, table of contents and 
+ several other formatting features. The function is handling also tables created with package 'flextable' and 
+ graphics with package 'mschart'.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Imports: knitr, rmarkdown, officer, xml2, htmltools, stringr
+RoxygenNote: 6.0.1.9000
