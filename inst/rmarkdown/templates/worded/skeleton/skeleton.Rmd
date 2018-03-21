@@ -17,7 +17,7 @@ library(worded)
 
 ## Table of content
 
-<!---aMACRO_TOC--->
+<!---MACRO_TOC--->
 
 Ce `r chunk_ftext("document", textfp(color = "red", shading.color = "yellow"))` présente la plupart des fonctionnalités du package `worded`. 
 
