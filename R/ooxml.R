@@ -1,14 +1,14 @@
 
 # sections ----
 #' @export
-macro_section_continuous <- function( ){
+add_section_continuous <- function( ){
   str <- "<w:p><w:pPr><w:sectPr><w:worded/><w:type w:val=\"continuous\"/></w:sectPr></w:pPr></w:p>"
   class(str) <- "ooxml"
   str
 }
 
 #' @export
-macro_section_landscape <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
+add_section_landscape <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
   w = w * 20 * 72
   h = h * 20 * 72
   pgsz_str <- "<w:pgSz w:orient=\"landscape\" w:w=\"%.0f\" w:h=\"%.0f\"/>"
@@ -19,7 +19,7 @@ macro_section_landscape <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
 }
 
 #' @export
-macro_section_portrait <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
+add_section_portrait <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
   w = w * 20 * 72
   h = h * 20 * 72
   pgsz_str <- "<w:pgSz w:orient=\"portrait\" w:w=\"%.0f\" w:h=\"%.0f\"/>"
@@ -30,7 +30,7 @@ macro_section_portrait <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
 }
 
 #' @export
-macro_section_columns <- function(widths = c(2.5,2.5), space = .25, sep = FALSE){
+add_section_columns <- function(widths = c(2.5,2.5), space = .25, sep = FALSE){
 
   widths <- widths * 20 * 72
   space <- space * 20 * 72
@@ -65,14 +65,14 @@ chunk_column_break <- function( ){
 
 # misc ----
 #' @export
-block_docx_pour <- function(docx_file){
+add_external_docx <- function(docx_file){
   str <- paste0("<w:altChunk r:id=\"", docx_file, "\"/>")
   class(str) <- "ooxml"
   str
 }
 
 #' @export
-block_toc <- function( level = 3, style = NULL, separator = ";"){
+add_toc <- function( level = 3, style = NULL, separator = ";"){
 
   if( is.null( style )){
     str <- paste0("<w:p>", "<w:pPr/>",
@@ -125,7 +125,7 @@ chunk_page_break <- function( ){
 }
 
 #' @export
-chunk_text <- function( str, style ){
+macro_text_styled <- function( str, style ){
   str <- paste0("<w:r>",
                 sprintf("<w:rPr><w:rStyle w:chunk_style=\"%s\"/></w:rPr>", style),
                 sprintf("<w:t xml:space=\"preserve\">%s</w:t>", str),
@@ -135,8 +135,17 @@ chunk_text <- function( str, style ){
 }
 
 #' @export
-chunk_ftext <- function( str, fp ){
+macro_text_format <- function( str, color = NULL, size = NULL,
+                               bold = FALSE, italic = FALSE, underlined = FALSE,
+                               font = NULL,
+                               vertical.align = "baseline",
+                               shading.color = "transparent" ){
 
+  fp <- textfp(color = color, size = size,
+               bold = bold, italic = italic, underlined = underlined,
+               font = font,
+               vertical.align = vertical.align,
+               shading.color = shading.color)
   str <- paste0("<w:r>",
                 format(fp, type = "docx"),
                 sprintf("<w:t xml:space=\"preserve\">%s</w:t>", str),

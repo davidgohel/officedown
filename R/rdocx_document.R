@@ -84,7 +84,7 @@ correct_styles <- function( rdoc, fig_cap, fig, title, author, date ){
   rdoc
 }
 
-process_parinst <- function( rdoc ){
+process_par_settings <- function( rdoc ){
 
   all_nodes <- xml_find_all(rdoc$doc_obj$get(), "//w:pPrworded")
   for(node_id in seq_along(all_nodes) ){
@@ -194,6 +194,7 @@ process_sections <- function( rdoc ){
 }
 
 process_embedded_docx <- function( rdoc ){
+
   rel <- rdoc$doc_obj$relationship()
   hl_nodes <- xml_find_all(rdoc$doc_obj$get(), "//w:altChunk[@r:id]")
   which_to_add <- hl_nodes[!grepl( "^rId[0-9]+$", xml_attr(hl_nodes, "id") )]
@@ -203,8 +204,9 @@ process_embedded_docx <- function( rdoc ){
     which_match_id <- grepl( hl_ref[i], xml_attr(which_to_add, "id"), fixed = TRUE )
 
     if( !file.exists(hl_ref[i]) ){
-      for( n in seq_along(which_to_add[which_match_id] )) xml_remove(which_to_add[which_match_id][[n]] )
-      break
+      for( n in seq_along(which_to_add[which_match_id] ))
+        xml_remove(which_to_add[which_match_id][[n]] )
+      next
     }
 
     rid <- sprintf("rId%.0f", rel$get_next_id() )
@@ -213,10 +215,10 @@ process_embedded_docx <- function( rdoc ){
     file.copy(hl_ref[i], to = file.path(rdoc$package_dir, new_docx_file))
     rel$add(
       id = rid, type = "http://schemas.openxmlformats.org/officeDocument/2006/relationships/aFChunk",
-      target = file.path("../", new_docx_file) )
+      target = file.path("..", new_docx_file) )
 
-    override <- paste0("/", new_docx_file)
-    names(override) <- "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+    override <- "application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"
+    names(override) <- paste0("/", new_docx_file)
     rdoc$content_type$add_override( override )
     xml_attr(which_to_add[which_match_id], "r:id") <- rep(rid, sum(which_match_id))
 
@@ -224,65 +226,7 @@ process_embedded_docx <- function( rdoc ){
   rdoc
 }
 
-# macro ----
-LIST_CHUNK_MACRO <- list(
-  MACRO_PAGEBREAK = chunk_page_break,
-  MACRO_COLUMNBREAK = chunk_column_break
-  )
-LIST_CHUNK_MACRO_PAR <- list(
-  MACRO_PAR_SETTING = "macro_paragraph_format"
-  )
 
-LIST_BLOCK_MACRO <- list(
-  MACRO_TOC = "block_toc",
-  MACRO_POUR_DOCX = "block_docx_pour",
-  MACRO_LANDSCAPE_START = "macro_section_continuous",
-  MACRO_LANDSCAPE_STOP = "macro_section_landscape",
-  MACRO_MULTICOL_START = "macro_section_continuous",
-  MACRO_MULTICOL_STOP = "macro_section_columns"
-)
-
-chunk_macro <- function(txt, type = "docx"){
-  for( i in names(LIST_CHUNK_MACRO) ){
-    txt <- gsub(paste0("<!---", i, "--->"), format(LIST_CHUNK_MACRO[[i]](), type = type), txt)
-  }
-  txt
-}
-#' @import stringr
-chunk_macro_par <- function(txt, type = "docx"){
-  for( i in names(LIST_CHUNK_MACRO_PAR) ){
-    regex <- paste0("<!---", i, "[ ]*(\\{.*\\}){0,1}[ ]*--->")
-    reg_ <- regexpr(pattern = regex, text = txt)
-    if( any( macro_ <- reg_ > -1 ) ){
-      newpars <- substr(txt[macro_], reg_[macro_], stop = reg_[macro_] + attr(reg_, "match.length")[macro_])
-      newpars <- gsub(paste0("<!---", i, "[ ]*\\{"), "", newpars)
-      newpars <- gsub(paste0("\\}--->"), "", newpars)
-      newpars <- sapply( newpars, function(x, fname, type){
-        x <- eval(parse( text = paste0( fname, "(", x, ")") ) )
-        format(x, type = type)
-      },
-      fname = LIST_CHUNK_MACRO_PAR[[i]], type = type )
-      txt[macro_] <- str_replace(txt[macro_], pattern = regex, replacement = newpars)
-    }
-  }
-  txt
-}
-
-
-block_macro <- function(txt, type = "docx"){
-  for( i in names(LIST_BLOCK_MACRO) ){
-    regex <- paste0("^([ ]*<!---)(", i, ")([ ]*)(\\{.*\\}){0,1}(--->[ ]*)$")
-    if( any( macro_ <- grepl(regex, txt) ) ){
-      txt[macro_] <- sapply( gsub(regex, "\\4", txt)[macro_], function(x, fname, type){
-        x <- gsub("(^\\{|\\}$)", "", x)
-        x <- eval(parse( text = paste0( fname, "(", x, ")") ) )
-        format(x, type = type)
-      },
-      fname = LIST_BLOCK_MACRO[[i]], type = type )
-    }
-  }
-  txt
-}
 
 # rdocx_document ----
 #' @export
@@ -294,7 +238,6 @@ rdocx_document <- function(fig_cap = "Image Caption", fig = "Captioned Figure",
   output_formats$pre_processor =  function(metadata, input_file, runtime, knit_meta, files_dir, output_dir){
     md <- readLines(input_file)
     md <- chunk_macro(md)
-    md <- chunk_macro_par(md)
     md <- block_macro(md)
     writeLines(md, input_file)
   }
@@ -306,7 +249,7 @@ rdocx_document <- function(fig_cap = "Image Caption", fig = "Captioned Figure",
     x <- process_embedded_docx(x)
     x <- process_chunk_style(x)
     x <- process_sections(x)
-    x <- process_parinst(x)
+    x <- process_par_settings(x)
     x <- correct_styles(x, fig_cap = fig_cap, fig = fig, title = title, author = author, date = date)
 
     print(x, target = output_file)
