@@ -13,13 +13,12 @@ library(worded)
 
 <!---MACRO_PAGEBREAK--->
 
-> Pourquoi ne pas parler un peu le français? 
+Ce document présente la plupart des fonctionnalités du package <!---MACRO_FTEXT{str: worded, bold: true, shading.color: '#EFEFEF'}--->. <!---MACRO_PAR_SETTING {text.align: center}--->
 
 ## Table of content
 
 <!---MACRO_TOC--->
 
-Ce `r chunk_ftext("document", textfp(color = "red", shading.color = "yellow"))` présente la plupart des fonctionnalités du package `worded`. 
 
 > Et maintenant un saut de page. Notez bien que c'est un chunk, c'est à dire un morceau de 
 texte. Il faut le positionner en fin de paragraphe idéalement 
@@ -37,7 +36,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu, quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam, at euismod massa magna at magna. Sed facilisis dapibus diam nec volutpat. Maecenas facilisis dapibus egestas. Curabitur dignissim pharetra pulvinar. Nunc bibendum elit sed cursus congue. Curabitur ligula quam, iaculis faucibus orci quis, vestibulum lobortis lectus. Suspendisse fringilla nisl pulvinar, laoreet tellus sed, sollicitudin tortor. Donec consequat congue erat in iaculis. Curabitur luctus tellus ut turpis iaculis, nec laoreet ligula scelerisque.
 
-<!---MACRO_MULTICOL_STOP{widths=c(3,3), space=.2, sep=TRUE}--->
+<!---MACRO_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
 
 ### End of two columns section
 
@@ -52,8 +51,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
 
 MACRO_SECTION_LANDSCAPE Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu, quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam, at euismod massa magna at magna. Sed facilisis dapibus diam nec volutpat. 
 
-```{r, fig.cap="plotting example", echo=FALSE}
-barplot(1:10)
+```{r, echo=FALSE}
+barplot(1:5, col=1:5)
 ```
 
 <!---MACRO_LANDSCAPE_STOP--->
