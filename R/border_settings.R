@@ -1,18 +1,6 @@
 border_styles = c( "none", "solid", "dotted", "dashed" )
 
-#' @title border properties object
-#'
-#' @description create a border properties object.
-#'
-#' @param color border color - single character value (e.g. "#000000" or "black")
-#' @param style border style - single character value : "none" or "solid" or "dotted" or "dashed"
-#' @param width border width - an integer value : 0>= value
-#' @examples
-#' borderfp()
-#' borderfp(color="orange", style="solid", width=1)
-#' borderfp(color="gray", style="dotted", width=1)
-#' @export
-borderfp = function( color = "black", style = "solid", width = 1 ){
+border_settings = function( color = "black", style = "solid", width = 1 ){
 
   out <- list()
 
@@ -30,15 +18,11 @@ borderfp = function( color = "black", style = "solid", width = 1 ){
     stop("style must be one of ", paste( shQuote(border_styles), collapse = ", "), call. = FALSE )
   out$style <- style
 
-  class( out ) = "borderfp"
+  class( out ) = "border_settings"
   out
 }
 
-#' @export
-#' @rdname borderfp
-#' @param x \code{borderfp} object
-#' @param type output type
-format.borderfp = function (x, type = "docx", side = "left", ...){
+format.border_settings = function (x, side = "left", type = "docx", ...){
 
   if( !is_visible(x$color) || x$width < .001 || x$style == "none") {
     return("")

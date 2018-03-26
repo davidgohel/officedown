@@ -1,21 +1,21 @@
-# macro ----
-LIST_CHUNK_MACRO_PAR <- list(
-  MACRO_PAGEBREAK = "chunk_page_break",
-  MACRO_COLUMNBREAK = "chunk_column_break",
-  MACRO_FTEXT = "macro_text_format",
-  MACRO_PAR_SETTING = "macro_paragraph_format",
-  MACRO_TEXT_STYLE = "macro_text_styled"
+# macro variables ----
+LIST_CHUNK_MACRO <- list(
+  CHUNK_PAGEBREAK = "chunk_page_break",
+  CHUNK_COLUMNBREAK = "chunk_column_break",
+  CHUNK_TEXT = "chunk_styled_text",
+  CHUNK_TEXT_STYLE = "chunk_text_stylenamed"
 )
 
 LIST_BLOCK_MACRO <- list(
-  MACRO_TOC = "add_toc",
-  MACRO_POUR_DOCX = "add_external_docx",
-  MACRO_LANDSCAPE_START = "add_section_continuous",
-  MACRO_LANDSCAPE_STOP = "add_section_landscape",
-  MACRO_MULTICOL_START = "add_section_continuous",
-  MACRO_MULTICOL_STOP = "add_section_columns"
+  BLOCK_TOC = "block_toc",
+  BLOCK_POUR_DOCX = "block_pour_docx",
+  BLOCK_LANDSCAPE_START = "block_section_continuous",
+  BLOCK_LANDSCAPE_STOP = "block_section_landscape",
+  BLOCK_MULTICOL_START = "block_section_continuous",
+  BLOCK_MULTICOL_STOP = "block_section_columns"
 )
 
+# macro regexpr ----
 yaml_pattern <- "\\{[^\\}]+\\}"
 
 chunk_pattern <- function( id ){
@@ -29,11 +29,13 @@ is_match <- function(str, regex){
   grepl(regex, str)
 }
 
+# to ooxml ----
+#' @importFrom yaml yaml.load
 chunk_to_ooxml <- function(text, fname, type) {
   text <- str_extract(text, paste0("(", yaml_pattern, "){0,1}[ ]*--->") )
   text <- gsub("[ ]*--->$", "", text)
   sapply( text, function(x, fname, type) {
-    x <- yaml::yaml.load(x)
+    x <- yaml.load(x)
     if( is.null(x) )
       x <- list()
     x <- do.call(fname, x)
@@ -49,10 +51,10 @@ ooxml_values <- function(txt, regex, fname, type){
 
 #' @import stringr
 chunk_macro <- function(txt, type = "docx"){
-  for( i in names(LIST_CHUNK_MACRO_PAR) ){
+  for( i in names(LIST_CHUNK_MACRO) ){
     regex <- chunk_pattern(i)
     if( any( macro_ <- is_match(txt, regex) ) ){
-      ooxml_str <- ooxml_values(txt[macro_], regex, LIST_CHUNK_MACRO_PAR[[i]], type = type)
+      ooxml_str <- ooxml_values(txt[macro_], regex, LIST_CHUNK_MACRO[[i]], type = type)
       new_txt <- mapply(function(txtline, replacts){
         chunks <- c(txtline, replacts)
         chunks <- chunks[order(c(seq_along(txtline) * 2 - 1, seq_along(replacts) * 2))]
@@ -75,4 +77,3 @@ block_macro <- function(txt, type = "docx"){
   }
   txt
 }
-

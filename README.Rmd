@@ -1,0 +1,93 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+library(htmltools)
+taghl <- function(x){
+  span(x, style="color:red;")
+}
+```
+
+
+## Usage
+
+use RStudio Menu to create a document from `worded` template.
+
+![](tools/rstudio_new_rmd.gif)
+
+
+It will create an R markdown document, parameter `output` is to be set to `worded::rdocx_document`. 
+Also package `worded` need to be loaded.
+
+<pre>
+---
+date: "`r Sys.Date()`"
+author: "David Gohel"
+title: "Document title"
+output: 
+  worded::rdocx_document
+---
+
+&#96;&#96;&#96;{r setup, include=FALSE}
+library(worded)
+&#96;&#96;&#96;
+
+...
+
+</pre>
+
+
+
+## Available functions
+
+### Chunks
+
+Chunks are to be used in a paragraph in an R markdown document.
+
+#### Break page
+
+
+<pre>This will add a break page: `r taghl("<!---CHUNK_PAGEBREAK--->")`
+It is also possible to use inline R expression <code>&#96;`r taghl("r chunk_page_break()")`&#96;</code>.
+</pre> 
+
+#### Styled text
+
+<pre>This will add a styled text: `r taghl("<!---CHUNK_TEXT{str: 'text', color: 'orange'}--->")`
+It is also possible to use inline R expression <code>&#96;`r taghl("r chunk_styled_text('text', color = 'orange')")`&#96;</code>.
+</pre> 
+
+#### Associate text with a style name
+
+<pre>This will add a styled text: `r taghl("<!---CHUNK_TEXT_STYLE{str: 'text', style: 'redstrong'}--->")`
+It is also possible to use inline R expression <code>&#96;`r taghl("r chunk_text_stylenamed('text', style = 'redstrong')")`&#96;</code>.
+</pre> 
+
+#### Break column
+
+Break column has to be used with a section with multiple columns.
+
+<pre>This will add a break column: `r taghl("<!---CHUNK_COLUMNBREAK--->")`
+It is also possible to use inline R expression <code>&#96;`r taghl("r chunk_column_break()")`&#96;</code>.
+</pre> 
+
+### Blocks
+
+
+
+## Installation
+
+You can install worded from github with:
+
+```{r gh-installation, eval = FALSE}
+# install.packages("devtools")
+devtools::install_github("davidgohel/worded")
+```

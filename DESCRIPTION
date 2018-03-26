@@ -1,7 +1,7 @@
 Package: worded
 Type: Package
-Title: R Markdown to Microsoft Word Document
-Version: 0.0.2
+Title: Convert from an R Markdown to an Microsoft Word Document
+Version: 0.0.2.990
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr")
@@ -13,5 +13,5 @@ Description: Format function for converting from an 'R Markdown' document to an 
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: knitr, rmarkdown, officer, xml2, htmltools, stringr
+Imports: knitr, rmarkdown, officer, xml2, stringr, grDevices, yaml, utils
 RoxygenNote: 6.0.1.9000
