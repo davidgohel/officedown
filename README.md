@@ -18,7 +18,8 @@ paragraphs have to be centered.
 
 ## Usage
 
-use RStudio Menu to create a document from `worded` template.
+use RStudio Menu to create a document from `worded` template. **It
+requires pandoc V2**.
 
 ![](tools/rstudio_new_rmd.gif)
 
