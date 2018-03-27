@@ -163,6 +163,9 @@ block_toc <- function( level = 3, style = NULL, separator = ";"){
 #' containing border styles. Expected values are "none" or "solid" or "dotted" or "dashed".
 #' @param shading shading color - a single character value specifying
 #' a valid color (e.g. "#000000" or "black").
+#' @examples
+#' add_paragraph_settings(paddings = list(t = 120, b = 20),
+#'   border_widths = list(b = 5) )
 add_paragraph_settings <- function( align = "left",
                                     paddings = list(),
                                     border_widths = list(),

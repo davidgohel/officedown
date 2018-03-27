@@ -30,3 +30,7 @@ a valid color (e.g. "#000000" or "black").}
 \description{
 add settings for a paragraph into a Word document.
 }
+\examples{
+add_paragraph_settings(paddings = list(t = 120, b = 20),
+  border_widths = list(b = 5) )
+}

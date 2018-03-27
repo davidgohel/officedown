@@ -10,7 +10,7 @@ Description: Format function for converting from an 'R Markdown' document to an 
  A set of macro is provided to let users add sections, break pages, table of contents and 
  several other formatting features. The function is handling also tables created with package 'flextable' and 
  graphics with package 'mschart'.
-License: GPL-3
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: knitr, rmarkdown, officer, xml2, stringr, grDevices, yaml, utils
