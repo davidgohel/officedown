@@ -1,17 +1,16 @@
 #' @import officer xml2
 
 # for flextables ----
-process_images <- function( rdoc ){
-  rel <- rdoc$doc_obj$relationship()
-  blips <- xml_find_all(rdoc$doc_obj$get(), "//a:blip[@r:embed]")
+process_images <- function( x ){
+  rel <- x$doc_obj$relationship()
+  blips <- xml_find_all(x$doc_obj$get(), "//a:blip[@r:embed]")
   invalid_blips <- blips[!grepl( "^rId[0-9]+$", xml_attr(blips, "embed") )]
   image_paths <- unique(xml_attr(invalid_blips, "embed") )
 
   for(i in seq_along(image_paths) ){
 
     rid <- sprintf("rId%.0f", rel$get_next_id() )
-
-    img_dir <- file.path(rdoc$doc_obj$package_dirname(), "word", "media")
+    img_dir <- file.path(x$package_dir, "word", "media")
     dir.create(img_dir, recursive = TRUE, showWarnings = FALSE)
 
     new_img_path <- basename(tempfile(fileext = gsub("(.*)(\\.[0-9a-zA-Z]+$)", "\\2", image_paths[i])))
@@ -22,8 +21,9 @@ process_images <- function( rdoc ){
     which_match_path <- grepl( image_paths[i], xml_attr(invalid_blips, "embed"), fixed = TRUE )
     xml_attr(invalid_blips[which_match_path], "r:embed") <- rep(rid, sum(which_match_path))
   }
-  rdoc
+  x
 }
+
 
 htmlEscape <- function( text ){
   specials <- list( `&` = '&amp;', `<` = '&lt;', `>` = '&gt;' )
@@ -224,39 +224,6 @@ process_embedded_docx <- function( rdoc ){
     rdoc$content_type$add_override( override )
     xml_attr(which_to_add[which_match_id], "r:id") <- rep(rid, sum(which_match_id))
 
-  }
-  rdoc
-}
-
-
-update_styles <- function( rdoc, mapstyles ){
-  styles_table <- styles_info(rdoc)
-
-  for( what in names(mapstyles) ){
-
-    id_from <- which( styles_table$style_type %in% "paragraph" & styles_table$style_name %in% what )
-    id_to <- which( styles_table$style_type %in% "paragraph" & styles_table$style_name %in% mapstyles[what] )
-
-    if( length(id_from) > 0 && length(id_to) > 0 ){
-
-      style_id_from <- styles_table$style_id[id_from]
-      style_id_to <- styles_table$style_id[id_to]
-
-      all_nodes <- xml_find_all(rdoc$doc_obj$get(), sprintf("//w:pStyle[@w:val='%s']", style_id_from))
-      xml_attr(all_nodes, "w:val") <- rep(style_id_to, length(all_nodes) )
-
-    } else if( length(id_from) < 1 && length(id_to) < 1 ) {
-      warning("could not find styles ",
-              shQuote(mapstyles[what]),
-              " and ",
-              shQuote(what), ".", call. = FALSE)
-    } else if( length(id_from) < 1 ) {
-      warning("could not find style ",
-              shQuote(what), ".", call. = FALSE)
-    } else {
-      warning("could not find style ",
-              shQuote(mapstyles[what]), ".", call. = FALSE)
-    }
   }
   rdoc
 }

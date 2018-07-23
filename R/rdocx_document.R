@@ -13,6 +13,7 @@
 #' file.copy(skeleton, to = "worded.Rmd")
 #' library(rmarkdown)
 #' render("worded.Rmd", output_file = "worded.docx")
+#' @importFrom officer change_styles
 rdocx_document <- function(mapstyles, ...) {
 
   output_formats <- rmarkdown::word_document(...)
@@ -35,7 +36,7 @@ rdocx_document <- function(mapstyles, ...) {
     x <- process_chunk_style(x)
     x <- process_sections(x)
     x <- process_par_settings(x)
-    x <- update_styles(x, mapstyles = mapstyles)
+    x <- change_styles(x, mapstyles = mapstyles)
 
     print(x, target = output_file)
     output_file
