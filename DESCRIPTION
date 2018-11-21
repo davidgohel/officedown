@@ -1,11 +1,12 @@
 Package: worded
 Type: Package
 Title: Convert from an R Markdown to an Microsoft Word Document
-Version: 0.0.2.990
+Version: 0.0.3.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
-    email = "david.gohel@ardata.fr")
-    )
+    email = "david.gohel@ardata.fr"),
+    person("Noam", "Ross", role = "ctb", email = 'noam.ross@gmail.com', 
+    comment = "rvg for rmarkdown implementation"))
 Description: Format function for converting from an 'R Markdown' document to an 'Microsoft Word' document. 
  A set of macro is provided to let users add sections, break pages, table of contents and 
  several other formatting features. The function is handling also tables created with package 'flextable' and 
@@ -13,5 +14,11 @@ Description: Format function for converting from an 'R Markdown' document to an 
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Imports: knitr, rmarkdown, officer, xml2, stringr, grDevices, yaml, utils
-RoxygenNote: 6.0.1.9000
+Imports: knitr, 
+ rmarkdown, 
+ officer, 
+ xml2, 
+ stringr, 
+ grDevices, yaml, utils, memoise, 
+ rvg
+RoxygenNote: 6.1.1
