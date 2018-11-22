@@ -100,7 +100,6 @@ knit_print.dml <- function(x, ...) {
 
 #' If size is not provided, get the size of the main content area of the slide
 #' @noRd
-#' @importFrom officer read_pptx
 get_content_layout_uncached <- function(layout) {
   ref_pptx <- read_pptx(get_reference_pptx())
   if (layout == "full_slide") {
@@ -121,10 +120,6 @@ get_content_layout_uncached <- function(layout) {
 #' @noRd
 get_content_layout <- memoise(get_content_layout_uncached)
 
-
-#' @noRd
-#' @importFrom memoise memoise
-get_reference_pptx <- memoise(officer::get_reference_pptx)
 
 #' @export
 print.dml <- function(x, ...) {
