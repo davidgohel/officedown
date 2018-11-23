@@ -5,7 +5,7 @@ Version: 0.0.3.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
-    person("Noam", "Ross", role = "ctb", email = 'noam.ross@gmail.com', 
+    person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 
     comment = "rvg for rmarkdown implementation"))
 Description: Format function for converting from an 'R Markdown' document to an 'Microsoft Word' document. 
  A set of macro is provided to let users add sections, break pages, table of contents and 
@@ -16,7 +16,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
- officer, 
+ officer (>= 0.3.3), 
  xml2, 
  stringr, 
  grDevices, yaml, utils, memoise, 
