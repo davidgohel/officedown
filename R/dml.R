@@ -18,7 +18,7 @@ dml <- function(code, ggobj = NULL, layout = "default",
   out <- list()
   out$code <- substitute(code)
   out$ggobj <- ggobj
-  if (!(layout %in% c("default", "left_col", "right_col", "full_slide") ||
+  if (!(all(layout %in% c("default", "left_col", "right_col", "full_slide")) ||
         (inherits(layout, "list") &&
          setequal(names(layout), c("width", "height", "left", "top"))))) {
     stop("Invalid layout value")
@@ -84,7 +84,9 @@ knit_print.dml <- function(x, ...) {
     rast_element <- xml_find_all(dml_xml, "//p:pic/p:blipFill/a:blip")
     raster_files <- list_raster_files(img_dir = img_directory )
     raster_id <- xml_attr(rast_element, "embed")
-    xml_attr(rast_element, "r:embed") <- raster_files
+    for (i in seq_along(raster_files)) {
+      xml_attr(rast_element[i], "r:embed") <- raster_files[i]
+    }
   }
   dml_str <- paste(
     as.character(xml_find_first(dml_xml, "//p:grpSp")),

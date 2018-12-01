@@ -19,8 +19,10 @@ rpptx_document <- function(...) {
       is_hacked <- grepl( "\\.png$", xml_attr(blips, "embed") )
       blips <- blips[is_hacked]
       imgs <- xml_attr(blips, "embed")[is_hacked]
-      for( img in imgs )
+      for( img in imgs ) {
         slide$reference_img(src = img, dir_name = file.path(x$package_dir, "ppt/media"))
+        if(clean) file.remove(img)
+      }
       rel_df <- slide$rel_df()
       rids <- rel_df$id[match( imgs, rel_df$ext_src)]
       for( rid in seq_along(rids) ){
