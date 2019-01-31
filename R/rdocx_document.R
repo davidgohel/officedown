@@ -8,11 +8,11 @@
 #' stylename "Author".
 #' @param ... arguments used by \link[rmarkdown]{word_document}
 #' @examples
-#' skeleton <- system.file(package = "worded",
-#'   "rmarkdown/templates/worded/skeleton/skeleton.Rmd")
-#' file.copy(skeleton, to = "worded.Rmd")
+#' skeleton <- system.file(package = "officedown",
+#'   "rmarkdown/templates/officedown/skeleton/skeleton.Rmd")
+#' file.copy(skeleton, to = "officedown.Rmd")
 #' library(rmarkdown)
-#' render("worded.Rmd", output_file = "worded.docx")
+#' render("officedown.Rmd", output_file = "officedown.docx")
 #' @importFrom officer change_styles
 rdocx_document <- function(mapstyles, ...) {
 

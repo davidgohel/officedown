@@ -16,7 +16,7 @@
 #' @rdname sections
 #' @name sections
 block_section_continuous <- function( ){
-  str <- "<w:p><w:pPr><w:sectPr><w:worded/><w:type w:val=\"continuous\"/></w:sectPr></w:pPr></w:p>"
+  str <- "<w:p><w:pPr><w:sectPr><w:officedown/><w:type w:val=\"continuous\"/></w:sectPr></w:pPr></w:p>"
   class(str) <- "ooxml"
   str
 }
@@ -28,7 +28,7 @@ block_section_landscape <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
   h = h * 20 * 72
   pgsz_str <- "<w:pgSz w:orient=\"landscape\" w:w=\"%.0f\" w:h=\"%.0f\"/>"
   pgsz_str <- sprintf(pgsz_str, h, w )
-  str <- sprintf( "<w:p><w:pPr><w:sectPr><w:worded/>%s</w:pPr></w:p>", pgsz_str)
+  str <- sprintf( "<w:p><w:pPr><w:sectPr><w:officedown/>%s</w:pPr></w:p>", pgsz_str)
   class(str) <- "ooxml"
   str
 }
@@ -40,7 +40,7 @@ block_section_portrait <- function( w = 21 / 2.54, h = 29.7 / 2.54 ){
   h = h * 20 * 72
   pgsz_str <- "<w:pgSz w:orient=\"portrait\" w:w=\"%.0f\" w:h=\"%.0f\"/>"
   pgsz_str <- sprintf(pgsz_str, w, h )
-  str <- sprintf( "<w:p><w:pPr><w:sectPr><w:worded/>%s</w:pPr></w:p>", pgsz_str)
+  str <- sprintf( "<w:p><w:pPr><w:sectPr><w:officedown/>%s</w:pPr></w:p>", pgsz_str)
   class(str) <- "ooxml"
   str
 }
@@ -69,7 +69,7 @@ block_section_columns <- function(widths = c(2.5,2.5), space = .25, sep = FALSE)
                          length(widths), as.integer(sep), space, paste0(columns_str, collapse = "") )
 
   str <- paste0( "<w:p>",
-                 "<w:pPr><w:sectPr><w:worded/>",
+                 "<w:pPr><w:sectPr><w:officedown/>",
                  "<w:type w:val=\"continuous\"/>",
                  columns_str, "</w:sectPr></w:pPr></w:p>")
   class(str) <- "ooxml"

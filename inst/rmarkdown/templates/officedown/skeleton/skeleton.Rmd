@@ -3,18 +3,18 @@ date: "`r Sys.Date()`"
 author: "David Gohel"
 title: "Document title"
 output: 
-  worded::rdocx_document
+  officedown::rdocx_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
-library(worded)
+library(officedown)
 ```
 
 
 <!---CHUNK_PAGEBREAK--->
 
-Ce document présente la plupart des fonctionnalités du package <!---CHUNK_TEXT{str: worded, bold: true, shading: '#EFEFEF'}--->. 
+Ce document présente la plupart des fonctionnalités du package <!---CHUNK_TEXT{str: officedown, bold: true, shading: '#EFEFEF'}--->. 
 `r add_paragraph_settings(align="center", paddings = list(t= 120, b= 20))`
 
 ## Table of content

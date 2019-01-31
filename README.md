@@ -26,25 +26,22 @@ requires pandoc V2**.
 It will create an R markdown document, parameter `output` is to be set
 to `worded::rdocx_document`. Also package `worded` need to be loaded.
 
-<pre>
----
-date: "2018-03-27"
-author: "David Gohel"
-title: "Document title"
-output: 
-  worded::rdocx_document
----
-
-&#96;&#96;&#96;{r setup, include=FALSE}
-library(worded)
-&#96;&#96;&#96;
-
-...
-
-</pre>
+    ---
+    date: "2019-01-31"
+    author: "David Gohel"
+    title: "Document title"
+    output: 
+      worded::rdocx_document
+    ---
+    
+    &#96;&#96;&#96;{r setup, include=FALSE}
+    library(worded)
+    &#96;&#96;&#96;
+    
+    ...
 
 Tags have been made to make less verbose and easier use. Some are
-expected parameters (i.e. `CHUNK_TEXT`, `BLOCK_MULTICOL_STOP`). These
+expected parameters (i.e. `CHUNK_TEXT`, `BLOCK_MULTICOL_STOP`). These
 parameters need to be defined as inline yaml.
 
 ### Chunks

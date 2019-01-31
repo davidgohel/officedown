@@ -140,7 +140,7 @@ process_par_settings <- function( rdoc ){
 
 process_sections <- function( rdoc ){
 
-  all_nodes <- xml_find_all(rdoc$doc_obj$get(), "//w:sectPr[w:worded]")
+  all_nodes <- xml_find_all(rdoc$doc_obj$get(), "//w:sectPr[w:officedown]")
   main_sect <- xml_find_first(rdoc$doc_obj$get(), "w:body/w:sectPr")
 
   for(node_id in seq_along(all_nodes) ){
