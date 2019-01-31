@@ -124,7 +124,7 @@ Blah blah blah on column 2.
 <!--html_preserve--><span style="color:#7b1b47;">&lt;!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}---&gt;</span><!--/html_preserve-->
 </pre>
 
-## Working with flextable
+## Working with worded
 
 ## Installation
 

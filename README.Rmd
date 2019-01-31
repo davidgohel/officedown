@@ -142,7 +142,7 @@ Blah blah blah on column 2.
 `r taghl("<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->")`
 </pre>
 
-## Working with flextable
+## Working with worded
 
 
 
