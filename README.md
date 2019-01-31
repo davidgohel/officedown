@@ -2,12 +2,12 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 [![Travis build
-status](https://travis-ci.org/davidgohel/worded.svg?branch=master)](https://travis-ci.org/davidgohel/worded)
+status](https://travis-ci.org/davidgohel/officedown.svg?branch=master)](https://travis-ci.org/davidgohel/officedown)
 [![AppVeyor build
-status](https://ci.appveyor.com/api/projects/status/github/davidgohel/worded?branch=master&svg=true)](https://ci.appveyor.com/project/davidgohel/worded)
+status](https://ci.appveyor.com/api/projects/status/github/davidgohel/officedown?branch=master&svg=true)](https://ci.appveyor.com/project/davidgohel/officedown)
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
-status](https://www.r-pkg.org/badges/version/worded)](https://cran.r-project.org/package=worded)
+status](https://www.r-pkg.org/badges/version/officedown)](https://cran.r-project.org/package=officedown)
 
 > Pimp your R markdown documents… to produce Word documents.
 
@@ -18,24 +18,25 @@ paragraphs have to be centered.
 
 ## Usage
 
-use RStudio Menu to create a document from `worded` template. **It
+use RStudio Menu to create a document from `officedown` template. **It
 requires pandoc V2**.
 
 ![](tools/rstudio_new_rmd.gif)
 
 It will create an R markdown document, parameter `output` is to be set
-to `worded::rdocx_document`. Also package `worded` need to be loaded.
+to `officedown::rdocx_document`. Also package `officedown` need to be
+loaded.
 
     ---
     date: "2019-01-31"
     author: "David Gohel"
     title: "Document title"
     output: 
-      worded::rdocx_document
+      officedown::rdocx_document
     ---
     
     &#96;&#96;&#96;{r setup, include=FALSE}
-    library(worded)
+    library(officedown)
     &#96;&#96;&#96;
     
     ...
@@ -61,7 +62,7 @@ document.
 
 <code>&#96;<!--html_preserve--><span style="color:#7b1b47;">r add_paragraph_settings(align='center', paddings = list(t= 120, b= 20))</span><!--/html_preserve-->&#96;</code>
 This paragraph will be centered and wil have a 120 pts top padding and 20 bottom padding.
-Text can be styles: <!--html_preserve--><span style="color:#7b1b47;">&lt;!---CHUNK_TEXT{str: 'worded', color: 'orange'}---&gt;</span><!--/html_preserve--> is really cool.
+Text can be styles: <!--html_preserve--><span style="color:#7b1b47;">&lt;!---CHUNK_TEXT{str: 'officedown', color: 'orange'}---&gt;</span><!--/html_preserve--> is really cool.
 </pre>
 
 ### Blocks
@@ -125,9 +126,9 @@ Blah blah blah on column 2.
 
 ## Installation
 
-You can install worded from github with:
+You can install officedown from github with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("davidgohel/worded")
+devtools::install_github("davidgohel/officedown")
 ```

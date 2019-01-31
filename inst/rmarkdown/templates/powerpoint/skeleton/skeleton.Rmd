@@ -1,0 +1,105 @@
+---
+date: "`r Sys.Date()`"
+author: "Your Name"
+title: "Untitled"
+output: 
+  officedown::rpptx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+library(officedown)
+library(ggplot2)
+library(rvg)
+```
+
+## Slide with Plot
+
+```{r plot1}
+dml(plot(pressure))
+```
+
+## Slide with ggplot
+
+```{r ggplot1}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg)
+```
+
+## Slide with ggplot
+
+```{r}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg, layout = "full_slide")
+``` 
+
+## ggplot in left column
+
+```{r}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg, layout = "left_col")
+``` 
+
+## ggplot in right column
+
+
+- Some
+- Bullets
+
+```{r}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg, layout = "right_col")
+``` 
+
+## ggplot in both columns
+
+
+```{r}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg, layout = "left_col")
+``` 
+```{r}
+mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
+  geom_point()
+dml(ggobj = mygg, layout = "right_col")
+``` 
+
+## custom plot location
+
+
+```{r}
+dml(plot(pressure), layout = list(width = 2, height = 2, offx = 2, offy = 2))
+```
+
+## custom plot locations
+
+
+```{r}
+dml(plot(pressure), layout = list(width = 2, height = 2, offx = 2, offy = 2))
+```
+
+```{r}
+dml(plot(pressure), layout = list(width = 3, height = 3, offx = 4, offy = 4))
+```
+
+## Non-editable plot
+
+
+```{r}
+dml(plot(pressure), editable = FALSE)
+```
+
+
+## Text and custom size
+
+This is some text.
+
+```{r}
+dml(plot(pressure), layout = list(width = 9, height = 3.7, offx = 0.75, offy = 3))
+```
+

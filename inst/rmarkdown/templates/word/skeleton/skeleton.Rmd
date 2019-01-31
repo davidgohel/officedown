@@ -1,7 +1,7 @@
 ---
 date: "`r Sys.Date()`"
-author: "David Gohel"
-title: "Document title"
+author: "Your Name"
+title: "Untitled"
 output: 
   officedown::rdocx_document
 ---

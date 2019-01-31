@@ -1,8 +1,7 @@
 Package: officedown
 Type: Package
-Title: Convert from an R Markdown to a Microsoft Word Document or a Microsoft 
- PowerPoint Presentation
-Version: 0.0.3.001
+Title: Convert from an R Markdown to a Microsoft Word Document or a Microsoft PowerPoint Presentation
+Version: 0.0.4.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
@@ -10,8 +9,7 @@ Authors@R: c(
     comment = "rvg for rmarkdown implementation"))
 Description: Format function for converting from an 'R Markdown' document to an 'Microsoft Word' document. 
  A set of macro is provided to let users add sections, break pages, table of contents and 
- several other formatting features. The function is handling also tables created with package 'flextable' and 
- graphics with package 'mschart'.
+ several other formatting features. The function is handling also tables created with package 'flextable'.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

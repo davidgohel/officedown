@@ -19,9 +19,9 @@ Format for converting from R Markdown to an MS Word
 document. The function comes also with improved output options.
 }
 \examples{
-skeleton <- system.file(package = "worded",
-  "rmarkdown/templates/worded/skeleton/skeleton.Rmd")
-file.copy(skeleton, to = "worded.Rmd")
+skeleton <- system.file(package = "officedown",
+  "rmarkdown/templates/word/skeleton/skeleton.Rmd")
+file.copy(skeleton, to = "officedown.Rmd")
 library(rmarkdown)
-render("worded.Rmd", output_file = "worded.docx")
+render("officedown.Rmd", output_file = "officedown.docx")
 }

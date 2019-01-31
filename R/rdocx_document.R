@@ -9,7 +9,7 @@
 #' @param ... arguments used by \link[rmarkdown]{word_document}
 #' @examples
 #' skeleton <- system.file(package = "officedown",
-#'   "rmarkdown/templates/officedown/skeleton/skeleton.Rmd")
+#'   "rmarkdown/templates/word/skeleton/skeleton.Rmd")
 #' file.copy(skeleton, to = "officedown.Rmd")
 #' library(rmarkdown)
 #' render("officedown.Rmd", output_file = "officedown.docx")
