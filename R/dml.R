@@ -21,7 +21,7 @@ dml <- function(code, ggobj = NULL, layout = "default",
   if (!(all(layout %in% c("default", "left_col", "right_col", "full_slide")) ||
         (inherits(layout, "list") &&
          setequal(names(layout), c("width", "height", "left", "top"))))) {
-    stop("Invalid layout value")
+    stop("Invalid layout value: ", names(layout))
   }
   out$layout <- layout
   out$bg <- bg
@@ -104,15 +104,16 @@ knit_print.dml <- function(x, ...) {
 #' @noRd
 get_content_layout_uncached <- function(layout) {
   ref_pptx <- read_pptx(get_reference_pptx())
+
   if (layout == "full_slide") {
-    officer::ph_location_fullsize(ref_pptx)
+    ph_location_fullsize(x = ref_pptx)
   } else if (layout == "default") {
-    officer::ph_location_type(ref_pptx, layout = "Title and Content",
-                              master = "Office Theme", type = "body")
+    ph_location_type(layout = "Title and Content",
+                     master = "Office Theme", type = "body", x = ref_pptx)
   } else if (layout == "left_col") {
-    officer::ph_location_left(ref_pptx)
+    ph_location_left(x = ref_pptx)
   } else if (layout == "right_col") {
-    officer::ph_location_right(ref_pptx)
+    ph_location_right(x = ref_pptx)
   } else {
     stop("Unknown layout type")
   }
