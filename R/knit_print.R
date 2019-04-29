@@ -1,5 +1,6 @@
 #' @importFrom rmarkdown pandoc_version
 #' @importFrom knitr knit_print asis_output opts_knit
+#' @importFrom stringr str_detect
 check_all <- function(){
   if (is.null(opts_knit$get("rmarkdown.pandoc.to")))
     stop("`knit_print.ooxml` needs to be used as a renderer for ",
@@ -8,7 +9,7 @@ check_all <- function(){
   if (!(pandoc_version() >= 2))
     stop("pandoc version >= 2.0 required for ooxml rendering in docx", call. = FALSE)
 
-  if (!(opts_knit$get("rmarkdown.pandoc.to") == "docx"))
+  if (!(str_detect(opts_knit$get("rmarkdown.pandoc.to"), "^docx")))
     stop("unsupported format for ooxml rendering:", opts_knit$get("rmarkdown.pandoc.to"), call. = FALSE)
   invisible()
 }
