@@ -53,11 +53,9 @@ output:
   officedown::rdocx_document
 ---
 
-&#96;&#96;&#96;{r setup, include=FALSE}
+````{r setup}
 library(officedown)
-&#96;&#96;&#96;
-
-...
+````
 
 `````
 

@@ -9,17 +9,24 @@ status](https://ci.appveyor.com/api/projects/status/github/davidgohel/officedown
 [![CRAN
 status](https://www.r-pkg.org/badges/version/officedown)](https://cran.r-project.org/package=officedown)
 
-> Pimp your R markdown documents… to produce Word documents.
+> `officedown` is bringing some
+> [officer](https://cran.r-project.org/package=officer) features into R
+> markdown documents.
+
+1.  Pimp your R markdown documents… to produce Word documents.
 
 The package is to be used when you want to use R Markdown documents to
 produce Microsoft Word documents but also want options for landscape
 orientation, with narrow margins, with formatted text, when some
 paragraphs have to be centered.
 
+2.  Add vector graphics into your PowerPoint document. This feature
+    let’s you add [rvg](https://cran.r-project.org/package=rvg) in you
+    presentation.
+
 ## Usage
 
-use RStudio Menu to create a document from `officedown` template. **It
-requires pandoc V2**.
+use RStudio Menu to create a document from `officedown` template.
 
 ![](tools/rstudio_new_rmd.gif)
 
@@ -28,18 +35,17 @@ to `officedown::rdocx_document`. Also package `officedown` need to be
 loaded.
 
     ---
-    date: "2019-01-31"
+    date: "2019-04-30"
     author: "David Gohel"
     title: "Document title"
     output: 
       officedown::rdocx_document
     ---
     
-    &#96;&#96;&#96;{r setup, include=FALSE}
-    library(officedown)
-    &#96;&#96;&#96;
     
-    ...
+    ```r
+    library(officedown)
+    ```
 
 Tags have been made to make less verbose and easier use. Some are
 expected parameters (i.e. `CHUNK_TEXT`, `BLOCK_MULTICOL_STOP`). These
@@ -132,3 +138,12 @@ You can install officedown from github with:
 # install.packages("devtools")
 devtools::install_github("davidgohel/officedown")
 ```
+
+Supported formats require some minimum
+[pandoc](https://pandoc.org/installing.html)
+versions:
+
+|    R Markdown output | pandoc version |                 comment                 |
+| -------------------: | :------------: | :-------------------------------------: |
+|       Microsoft Word |    \>= 2.0     | require a recent RStudio (\> june 2018) |
+| Microsoft PowerPoint |    \>= 2.4     |       require pandoc installation       |
