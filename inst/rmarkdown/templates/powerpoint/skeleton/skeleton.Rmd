@@ -29,7 +29,7 @@ dml(ggobj = mygg)
 
 ## Slide with ggplot
 
-```{r}
+```{r layout=officer::ph_location_fullsize()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
 dml(ggobj = mygg, layout = "full_slide")
@@ -37,10 +37,10 @@ dml(ggobj = mygg, layout = "full_slide")
 
 ## ggplot in left column
 
-```{r}
+```{r layout=officer::ph_location_left()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
-dml(ggobj = mygg, layout = "left_col")
+dml(ggobj = mygg)
 ``` 
 
 ## ggplot in right column
@@ -49,42 +49,37 @@ dml(ggobj = mygg, layout = "left_col")
 - Some
 - Bullets
 
-```{r}
+```{r layout=officer::ph_location_right()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
-dml(ggobj = mygg, layout = "right_col")
+dml(ggobj = mygg)
 ``` 
 
 ## ggplot in both columns
 
 
-```{r}
+```{r layout=officer::ph_location_left()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
-dml(ggobj = mygg, layout = "left_col")
+dml(ggobj = mygg)
 ``` 
-```{r}
+
+```{r layout=officer::ph_location_right()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
-dml(ggobj = mygg, layout = "right_col")
+dml(ggobj = mygg)
 ``` 
 
-## custom plot location
-
-
-```{r}
-dml(plot(pressure), layout = list(width = 2, height = 2, offx = 2, offy = 2))
-```
 
 ## custom plot locations
 
 
-```{r}
-dml(plot(pressure), layout = list(width = 2, height = 2, offx = 2, offy = 2))
+```{r layout=officer::ph_location(width = 2, height = 2, left = 2, top = 2)}
+dml(plot(pressure))
 ```
 
-```{r}
-dml(plot(pressure), layout = list(width = 3, height = 3, offx = 4, offy = 4))
+```{r layout=officer::ph_location(width = 3, height = 3, left = 4, top = 4)}
+dml(plot(pressure))
 ```
 
 ## Non-editable plot
@@ -94,12 +89,4 @@ dml(plot(pressure), layout = list(width = 3, height = 3, offx = 4, offy = 4))
 dml(plot(pressure), editable = FALSE)
 ```
 
-
-## Text and custom size
-
-This is some text.
-
-```{r}
-dml(plot(pressure), layout = list(width = 9, height = 3.7, offx = 0.75, offy = 3))
-```
 

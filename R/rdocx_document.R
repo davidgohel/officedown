@@ -41,8 +41,9 @@ rdocx_document <- function(mapstyles, ...) {
     print(x, target = output_file)
     output_file
   }
-
+  output_formats$bookdown_output_format = 'docx'
   output_formats
+
 }
 
 

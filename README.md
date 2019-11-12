@@ -35,7 +35,7 @@ to `officedown::rdocx_document`. Also package `officedown` need to be
 loaded.
 
     ---
-    date: "2019-04-30"
+    date: "2019-11-12"
     author: "David Gohel"
     title: "Document title"
     output: 
@@ -45,6 +45,7 @@ loaded.
     
     ```r
     library(officedown)
+    #> Warning: S3 method 'print.dml' was declared in NAMESPACE but not found
     ```
 
 Tags have been made to make less verbose and easier use. Some are
@@ -53,8 +54,7 @@ parameters need to be defined as inline yaml.
 
 ### Chunks
 
-Chunks are to be used in a paragraph in an R markdown
-document.
+Chunks are to be used in a paragraph in an R markdown document.
 
 | Output type | Tag name           | R function               | Has args |
 | ----------- | ------------------ | ------------------------ | -------- |
@@ -140,8 +140,7 @@ devtools::install_github("davidgohel/officedown")
 ```
 
 Supported formats require some minimum
-[pandoc](https://pandoc.org/installing.html)
-versions:
+[pandoc](https://pandoc.org/installing.html) versions:
 
 |    R Markdown output | pandoc version |                 comment                 |
 | -------------------: | :------------: | :-------------------------------------: |

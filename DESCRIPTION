@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: Convert from an R Markdown to a Microsoft Word Document or a Microsoft PowerPoint Presentation
-Version: 0.0.4.002
+Version: 0.0.5.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
@@ -16,9 +16,9 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
- officer (>= 0.3.3), 
- xml2, 
+ officer (>= 0.3.6), 
+ xml2, rlang,
  stringr, 
  grDevices, yaml, utils, memoise, 
- rvg
+ rvg (>= 0.2.2)
 RoxygenNote: 6.1.1
