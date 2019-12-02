@@ -4,9 +4,14 @@
 \alias{add_paragraph_settings}
 \title{add settings for a paragraph}
 \usage{
-add_paragraph_settings(align = "left", paddings = list(),
-  border_widths = list(), border_colors = list(),
-  border_styles = list(), shading = "transparent")
+add_paragraph_settings(
+  align = "left",
+  paddings = list(),
+  border_widths = list(),
+  border_colors = list(),
+  border_styles = list(),
+  shading = "transparent"
+)
 }
 \arguments{
 \item{align}{text alignment - a single character value, expected value

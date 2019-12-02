@@ -14,8 +14,7 @@ block_section_landscape(w = 21/2.54, h = 29.7/2.54)
 
 block_section_portrait(w = 21/2.54, h = 29.7/2.54)
 
-block_section_columns(widths = c(2.5, 2.5), space = 0.25,
-  sep = FALSE)
+block_section_columns(widths = c(2.5, 2.5), space = 0.25, sep = FALSE)
 }
 \arguments{
 \item{w, h}{width and height in inches of the section page. This will

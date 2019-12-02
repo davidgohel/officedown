@@ -4,9 +4,17 @@
 \alias{chunk_styled_text}
 \title{styled text}
 \usage{
-chunk_styled_text(str, color = NULL, size = NULL, bold = FALSE,
-  italic = FALSE, underlined = FALSE, font = NULL,
-  valign = "baseline", shading = "transparent")
+chunk_styled_text(
+  str,
+  color = NULL,
+  size = NULL,
+  bold = FALSE,
+  italic = FALSE,
+  underlined = FALSE,
+  font = NULL,
+  valign = "baseline",
+  shading = "transparent"
+)
 }
 \arguments{
 \item{str}{text}
