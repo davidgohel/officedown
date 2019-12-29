@@ -16,9 +16,10 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
+ bookdown (>= 0.13),
  officer (>= 0.3.6), 
  xml2, rlang,
  stringr, 
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
-RoxygenNote: 7.0.1
+RoxygenNote: 7.0.2

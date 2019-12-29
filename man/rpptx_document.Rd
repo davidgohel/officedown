@@ -2,14 +2,18 @@
 % Please edit documentation in R/rpptx_document.R
 \name{rpptx_document}
 \alias{rpptx_document}
+\alias{rdocx_document2}
 \title{Convert to an MS PowerPoint document}
 \usage{
 rpptx_document(...)
+
+rdocx_document2(...)
 }
 \arguments{
 \item{...}{arguments used by \link[rmarkdown]{powerpoint_presentation}}
 }
 \description{
 Format for converting from R Markdown to an MS PowerPoint
-document.
+document. \code{rpptx_document2} also supports cross reference based on the
+syntax of the bookdown package.
 }

@@ -2,9 +2,12 @@
 % Please edit documentation in R/rdocx_document.R
 \name{rdocx_document}
 \alias{rdocx_document}
+\alias{rdocx_document2}
 \title{Convert to an MS Word document}
 \usage{
 rdocx_document(mapstyles, base_format = rmarkdown::word_document, ...)
+
+rdocx_document2(...)
 }
 \arguments{
 \item{mapstyles}{a named list of style to be replaced in the generated
@@ -21,6 +24,8 @@ can also be word_document2 from bookdown}
 \description{
 Format for converting from R Markdown to an MS Word
 document. The function comes also with improved output options.
+\code{rdocx_document2} also supports cross reference based on the syntax of
+the bookdown package.
 }
 \examples{
 skeleton <- system.file(package = "officedown",

@@ -1,7 +1,8 @@
 #' @export
 #' @title Convert to an MS PowerPoint document
 #' @description Format for converting from R Markdown to an MS PowerPoint
-#' document.
+#' document. \code{rpptx_document2} also supports cross reference based on the
+#' syntax of the bookdown package.
 #' @param ... arguments used by \link[rmarkdown]{powerpoint_presentation}
 rpptx_document <- function(...) {
 
@@ -38,3 +39,9 @@ rpptx_document <- function(...) {
 }
 
 
+#' @rdname rpptx_document
+#' @importFrom bookdown markdown_document2
+#' @export
+rdocx_document2 <- function(...) {
+  rpptx_document2(..., base_format = rpptx_document)
+}
