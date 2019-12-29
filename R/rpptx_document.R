@@ -39,9 +39,9 @@ rpptx_document <- function(...) {
 }
 
 
-#' @rdname rdocx_document
+#' @rdname rpptx_document
 #' @importFrom bookdown markdown_document2
 #' @export
-rdocx_document2 <- function(...) {
+rpptx_document2 <- function(...) {
   rpptx_document(..., base_format = rpptx_document)
 }

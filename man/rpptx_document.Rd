@@ -2,12 +2,12 @@
 % Please edit documentation in R/rpptx_document.R
 \name{rpptx_document}
 \alias{rpptx_document}
-\alias{rdocx_document2}
+\alias{rpptx_document2}
 \title{Convert to an MS PowerPoint document}
 \usage{
 rpptx_document(...)
 
-rdocx_document2(...)
+rpptx_document2(...)
 }
 \arguments{
 \item{...}{arguments used by \link[rmarkdown]{powerpoint_presentation}}
