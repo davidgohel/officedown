@@ -1,3 +1,18 @@
+# utils ----
+#' @importFrom utils getAnywhere getFromNamespace
+get_fun <- function(x){
+  if( grepl("::", x, fixed = TRUE) ){
+    coumpounds <- strsplit(x, split = "::", x, fixed = TRUE)[[1]]
+    z <- getFromNamespace(coumpounds[2], ns = coumpounds[1] )
+  } else {
+    z <- getAnywhere(x)
+    if(length(z$objs) < 1){
+      stop("could not find any function named ", shQuote(z$name), " in loaded namespaces or in the search path. If the package is installed, specify name with `packagename::function_name`.")
+    }
+  }
+  z
+}
+
 #' @export
 #' @title Convert to an MS Word document
 #' @description Format for converting from R Markdown to an MS Word
@@ -8,7 +23,7 @@
 #' document. \code{list("Date"="Author")} will result in a document where
 #' all paragraphs styled with stylename "Date" will be styled with
 #' stylename "Author".
-#' @param base_format format to be used as a base document for
+#' @param base_format a scalar character, format to be used as a base document for
 #' officedown. default to \link[rmarkdown]{word_document} but
 #' can also be word_document2 from bookdown
 #' @param ... arguments used by \link[rmarkdown]{word_document}
@@ -19,9 +34,10 @@
 #' library(rmarkdown)
 #' render("officedown.Rmd", output_file = "officedown.docx")
 #' @importFrom officer change_styles
-rdocx_document <- function(mapstyles, base_format = rmarkdown::word_document, ...) {
+rdocx_document <- function(mapstyles, base_format = "rmarkdown::word_document", ...) {
 
-  output_formats <- base_format(...)
+  base_format_fun <- get_fun(base_format)
+  output_formats <- base_format_fun(...)
 
   if( missing(mapstyles) )
     mapstyles <- list()

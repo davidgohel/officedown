@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: Convert from an R Markdown to a Microsoft Word Document or a Microsoft PowerPoint Presentation
-Version: 0.0.5.002
+Version: 0.0.5.003
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),

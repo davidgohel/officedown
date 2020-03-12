@@ -5,11 +5,14 @@
 \alias{rpptx_document2}
 \title{Convert to an MS PowerPoint document}
 \usage{
-rpptx_document(...)
-
+rpptx_document(base_format = "rmarkdown::powerpoint_presentation", ...)
 rpptx_document2(...)
 }
 \arguments{
+\item{base_format}{a scalar character, format to be used as a base document for
+officedown. default to \link[rmarkdown]{powerpoint_presentation} but
+can also be powerpoint_presentation2 from bookdown}
+
 \item{...}{arguments used by \link[rmarkdown]{powerpoint_presentation}}
 }
 \description{

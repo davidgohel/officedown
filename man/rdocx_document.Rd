@@ -5,7 +5,7 @@
 \alias{rdocx_document2}
 \title{Convert to an MS Word document}
 \usage{
-rdocx_document(mapstyles, base_format = rmarkdown::word_document, ...)
+rdocx_document(mapstyles, base_format = "rmarkdown::word_document", ...)
 
 rdocx_document2(...)
 }
@@ -15,7 +15,7 @@ document. \code{list("Date"="Author")} will result in a document where
 all paragraphs styled with stylename "Date" will be styled with
 stylename "Author".}
 
-\item{base_format}{format to be used as a base document for
+\item{base_format}{a scalar character, format to be used as a base document for
 officedown. default to \link[rmarkdown]{word_document} but
 can also be word_document2 from bookdown}
 
