@@ -17,6 +17,8 @@ get_fun <- function(x){
 #' @title Convert to an MS Word document
 #' @description Format for converting from R Markdown to an MS Word
 #' document. The function comes also with improved output options.
+#' \code{rdocx_document2} also supports cross reference based on the syntax of
+#' the bookdown package.
 #' @param mapstyles a named list of style to be replaced in the generated
 #' document. \code{list("Date"="Author")} will result in a document where
 #' all paragraphs styled with stylename "Date" will be styled with
@@ -66,3 +68,9 @@ rdocx_document <- function(mapstyles, base_format = "rmarkdown::word_document", 
 }
 
 
+#' @rdname rdocx_document
+#' @importFrom bookdown markdown_document2
+#' @export
+rdocx_document2 <- function(...) {
+  markdown_document2(..., base_format = rdocx_document)
+}

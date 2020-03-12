@@ -16,6 +16,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
+ bookdown (>= 0.13),
  officer (>= 0.3.6), 
  xml2, rlang,
  stringr, 

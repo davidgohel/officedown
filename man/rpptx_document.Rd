@@ -2,9 +2,11 @@
 % Please edit documentation in R/rpptx_document.R
 \name{rpptx_document}
 \alias{rpptx_document}
+\alias{rpptx_document2}
 \title{Convert to an MS PowerPoint document}
 \usage{
 rpptx_document(base_format = "rmarkdown::powerpoint_presentation", ...)
+rpptx_document2(...)
 }
 \arguments{
 \item{base_format}{a scalar character, format to be used as a base document for
@@ -15,5 +17,6 @@ can also be powerpoint_presentation2 from bookdown}
 }
 \description{
 Format for converting from R Markdown to an MS PowerPoint
-document.
+document. \code{rpptx_document2} also supports cross reference based on the
+syntax of the bookdown package.
 }
