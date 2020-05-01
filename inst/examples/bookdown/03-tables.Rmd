@@ -1,0 +1,22 @@
+```{r include=FALSE}
+dat <- cbind(
+  data.frame(car = row.names(mtcars), stringsAsFactors = FALSE),
+  mtcars )
+```
+
+# Tables {#tables}
+
+
+This is famous `mtcars` dataset:
+
+```{r tab.cap='mtcars', tab.id='mtcars', first_column = TRUE}
+head(dat, n = 10)
+```
+
+
+This is famous `iris` dataset:
+
+```{r tab.cap='iris', tab.id='iris', no_hband = TRUE, first_column = FALSE}
+head(iris)
+```
+

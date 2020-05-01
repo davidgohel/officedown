@@ -1,0 +1,14 @@
+bookdown::markdown_document2:
+  base_format: officedown::rdocx_document
+  reference_docx: template.docx
+  lists:
+    ol.style: Default ol
+    ul.style: Default ul
+  tables:
+    conditional:
+      first_row: true
+      first_column: true
+      last_row: false
+      last_column: false
+      no_hband: false
+      no_vband: true

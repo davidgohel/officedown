@@ -1,0 +1,19 @@
+# Tables of content {#toc}
+
+## Table of figures
+
+<!---BLOCK_TOC{style: 'Image Caption'}--->
+
+## Table of tables
+
+You can use `officer` code : 
+
+```{r}
+block_toc(style = "Table Caption")
+```
+
+## Table of content
+
+<!---BLOCK_TOC--->
+
+\newpage

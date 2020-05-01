@@ -1,0 +1,18 @@
+# Graphics {#graphics}
+
+
+```{r fig.cap="economics plot", fig.id = "tsplot", fig.cap.style="Image Caption"}
+year <- function(x) as.POSIXlt(x)$year + 1900
+ggplot(economics, aes(date, unemploy / pop)) +
+  geom_line() + theme_minimal()
+```
+
+\newpage
+
+Math latex in captions is supported:
+
+```{r fig.cap="$\\sum_{i=1}^n X_i$", fig.id = "dotplot"}
+ggplot(mpg, aes(displ, cty, color = trans)) + geom_point() + theme_minimal()
+```
+
+

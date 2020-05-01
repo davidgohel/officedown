@@ -118,7 +118,7 @@ it. The style name must be used as the value of the "tab.style" argument.
 
 You should see a window that looks like the one below:
 
-\figure{new_style_table.png}{options: width=400px}
+\figure{TABLES-new-style.png}{options: width=400px}
 
 In the Define New Table Style window, start give your new style a name.
 There are a many formatting options available in this window.
@@ -148,7 +148,7 @@ as the value of the "ul.style" argument if you configure an unordered list
 
 You should see a window that looks like the one below:
 
-\figure{new_style_ol.png}{options: width=400px}
+\figure{LISTS-new_style.png}{options: width=400px}
 
 In the Define New List Style window, start give your new style a name.
 There are a many formatting options available in this window. You can
@@ -210,20 +210,22 @@ render(rmd_file, output_file = docx_file_1, quiet = TRUE)
 
 # bookdown example -----
 
-bookdown_loc <- system.file(package = "officedown",
-  "example/bookdown")
-
-file.copy(from = bookdown_loc, to = getwd(),
+# All above is only to make sure we do not write in your wd
+bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
+temp_dir <- tempfile()
+dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
+file.copy(
+  from = list.files(bookdown_loc, full.names = TRUE),
+  to = temp_dir,
   overwrite = TRUE, recursive = TRUE)
 
-render_site(input = "bookdown",
-  encoding = 'UTF-8',
-  quiet = TRUE)
-docx_file_2 <- file.path("bookdown", "_book", "bookdown.docx")
+render_site(
+  input = temp_dir, encoding = 'UTF-8',
+  envir = new.env(), quiet = TRUE)
 
-if(file.exists(docx_file_2))
+docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
+
+if(file.exists(docx_file_2)){
   message("file ", docx_file_2, " has been written.")
-
-# do not run the next command to see the result in your working directory
-unlink("bookdown", recursive = TRUE, force = TRUE)
+}
 }

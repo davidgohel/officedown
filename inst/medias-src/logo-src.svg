@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 124.44 144.00" id="svg2" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs id="defs4">
+    <style type="text/css" id="style6">
+    line, polyline, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  </style>
+  </defs>
+  <polyline points="2.285 37.429 2.285 106.799 62.105 141.486 121.926 106.799 121.926 37.429 62.105 2.743 2.285 37.429" style="stroke-width: 4; fill-opacity: 0.8; stroke: rgb(220, 62, 21);" clip-path="url(#cpMHwxMjQuNDQxfDE0My45OTd8MC4xNDMxMzc=)" id="polyline29"/>
+  <g xmlns="http://www.w3.org/2000/svg" transform="matrix(0.570463, 0, 0, 0.557948, -76.325073, -238.349777)" style="">
+    <g transform="matrix(1.8232952,0,0,1.8232952,-597.71681,-124.12247)">
+      <g transform="translate(0,-91.137241)">
+        <g fill="#eb3c00" transform="matrix(0.74069815,0,0,0.74069815,98.5698,-8.2505871)">
+          <path d="m469.87,671.03,0-28.52,25.229-9.3238,13.711,4.3877,0,38.392-13.711,4.133-25.229-9.0691,25.229,3.0361,0-33.201-16.454,3.8392,0,22.487z" style="fill: rgb(235, 60, 0); stroke: none;"/>
+        </g>
+      </g>
+    </g>
+  </g>
+  <text style="fill: rgb(220, 62, 21); font-family: &quot;Segoe UI&quot;; font-size: 22px; letter-spacing: 0.3px; white-space: pre;" x="7.143" y="63.988">officedown</text>
+  <text transform="matrix(0.866025, -0.5, 0.5, 0.866026, 46.601307, 88.062561)" style="fill: rgb(220, 62, 21); font-family: &quot;Segoe UI&quot;; font-size: 7px; white-space: pre;" x="0" y="50">www.ardata.fr</text>
+</svg>

@@ -1,0 +1,86 @@
+# Section {#sections}
+
+## A two columns section
+
+<!---BLOCK_MULTICOL_START--->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae
+iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam,
+at euismod massa magna at magna. 
+
+`r run_columnbreak()`Curabitur ligula quam, iaculis faucibus orci quis,
+vestibulum lobortis lectus. Suspendisse fringilla nisl pulvinar, laoreet tellus
+sed, sollicitudin tortor. Donec consequat congue erat in iaculis. 
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. 
+
+<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
+
+## End of two columns section
+
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae
+iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam,
+at euismod massa magna at magna.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae
+iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam,
+at euismod massa magna at magna. 
+
+<!---BLOCK_LANDSCAPE_START--->
+
+## Landscape section
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae
+iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam,
+at euismod massa magna at magna. Sed facilisis dapibus diam nec volutpat. 
+
+```{r, echo=FALSE, fig.cap='sin function', fig.id='sinus', fig.width=6, fig.height=4, fig.align='center'}
+x <- seq(1,30, by = .1)
+plot(x, sin(x), type = "l", main = "", xlab = "", ylab = "", col = "#CC4300")
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+## Section margins
+
+
+`r ftext("This is a custom text and the formatting of the paragraph is modified", fp_text(color = "orange", font.size = 40, bold = TRUE, font.family = "Bradley Hand"))` `r fp_par(text.align = "center", padding.top = 30)`
+
+```{r}
+img.file <- file.path( R.home("doc"), "html", "logo.jpg" )
+text_format <- fp_text(bold = TRUE, font.size = 24, font.family = "Bradley Hand", color = "#006699")
+fpar_1 <- fpar(
+  ftext("Hello World, how ", prop = text_format ),
+  external_img(src = img.file, height = 1.06/3, width = 1.39/3),
+  ftext(" you?", prop = text_format ), fp_p = fp_par(text.align = "center") )
+fpar_1
+```
+
+The following instructions define the section that applies to the text preceding
+it up to the end of the previous section.
+
+```{r}
+ps <- prop_section(
+  page_margins = page_mar(bottom = 1, top = 2, left = 1.5),
+  type = "oddPage"
+)
+block_section(ps)
+```
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
+quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae
+iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam,
+at euismod massa magna at magna. Sed facilisis dapibus diam nec volutpat.
+Maecenas facilisis dapibus egestas. Curabitur dignissim pharetra pulvinar. Nunc
+bibendum elit sed cursus congue. Curabitur ligula quam, iaculis faucibus orci
+quis, vestibulum lobortis lectus. Suspendisse fringilla nisl pulvinar, laoreet
+tellus sed, sollicitudin tortor. Donec consequat congue erat in iaculis.
+Curabitur luctus tellus ut turpis iaculis, nec laoreet ligula scelerisque.
+
+

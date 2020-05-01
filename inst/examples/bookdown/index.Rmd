@@ -1,0 +1,34 @@
+--- 
+title: "officedown Example"
+author: "David Gohel"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+description: "This is a minimal example of using the officedown package to write a Word document."
+---
+
+```{r include=FALSE}
+library(knitr)
+library(officedown)
+library(officer)
+library(magrittr)
+library(ggplot2)
+opts_chunk$set(echo = TRUE)
+fp <- fp_par(text.align = "center", padding = 20, border.bottom = fp_border())
+ft <- fp_text(font.size = 12, bold = TRUE, color = "#C32900", font.family = "Cambria")
+```
+
+
+# Prerequisites
+
+This is a _sample_ book written with R package **bookdown** and R package **officedown**.
+
+The `r ftext("officedown", ft)` package can be installed from CRAN or Github: `r fp`
+
+```{r eval=FALSE}
+install.packages("officedown")
+# remotes::install_github("davidgohel/officedown")
+```
+

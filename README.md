@@ -97,7 +97,7 @@ loaded in the Rmd.
 A bookdown is available in the package and can be used as a demo.
 
 ``` r
-dir <- system.file(package = "officedown", "example", "bookdown")
+dir <- system.file(package = "officedown", "examples", "bookdown")
 file.copy(dir, getwd(), recursive = TRUE, overwrite = TRUE)
 rmarkdown::render_site("bookdown")
 browseURL("bookdown/_book/bookdown.docx")

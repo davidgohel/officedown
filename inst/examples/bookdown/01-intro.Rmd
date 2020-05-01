@@ -1,0 +1,29 @@
+# Introduction {#intro}
+
+```{r}
+ft_link <- fp_text(font.size = 9, italic = TRUE, color = "#C32900", font.family = "Cambria")
+```
+
+The purpose of this bookdown is to test the functionality of the officedown package. It contains texts 
+of no interest but illustrates most of the functions of the package. 
+
+## List demo {#lists}
+
+* This is a linked reference to Chapter \@ref(lists).
+* This is a linked reference to Chapter \@ref(tables).
+* This is a linked reference to Chapter \@ref(sections).
+* Figures and tables can have auto-numbered captions that can also be cross referenced: 
+    * This is a linked reference to a figure: \@ref(fig:tsplot), its number is computed by Word 
+    and it's linked to the corresponding graphic when clicking on it.
+    * This is a linked reference to a table: \@ref(tab:mtcars), its number is computed by Word 
+    and it's linked to the corresponding table when clicking on it.
+
+
+1. An item
+1. An item
+    1. An item
+        1. An item
+        2. An item
+    2. An item
+2. An item
+
