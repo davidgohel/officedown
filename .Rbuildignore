@@ -4,3 +4,6 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^appveyor\.yml$
+^docs$
+^_pkgdown\.yml$
+^inst/medias-src$

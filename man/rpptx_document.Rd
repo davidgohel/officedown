@@ -3,20 +3,33 @@
 \name{rpptx_document}
 \alias{rpptx_document}
 \alias{rpptx_document2}
-\title{Convert to an MS PowerPoint document}
+\title{Advanced R Markdown PowerPoint Format}
 \usage{
 rpptx_document(base_format = "rmarkdown::powerpoint_presentation", ...)
+
 rpptx_document2(...)
 }
 \arguments{
 \item{base_format}{a scalar character, format to be used as a base document for
-officedown. default to \link[rmarkdown]{powerpoint_presentation} but
+officedown. default to \link[rmarkdown:powerpoint_presentation]{powerpoint_presentation} but
 can also be powerpoint_presentation2 from bookdown}
 
-\item{...}{arguments used by \link[rmarkdown]{powerpoint_presentation}}
+\item{...}{arguments used by \link[rmarkdown:powerpoint_presentation]{powerpoint_presentation}}
 }
 \description{
 Format for converting from R Markdown to an MS PowerPoint
 document. \code{rpptx_document2} also supports cross reference based on the
 syntax of the bookdown package.
+}
+\examples{
+library(rmarkdown)
+if(require("ggplot2")){
+  skeleton <- system.file(package = "officedown",
+    "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
+  rmd_file <- tempfile(fileext = ".Rmd")
+  file.copy(skeleton, to = rmd_file)
+
+  pptx_file_1 <- tempfile(fileext = ".pptx")
+  render(rmd_file, output_file = pptx_file_1)
+}
 }

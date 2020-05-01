@@ -1,0 +1,150 @@
+---
+title: "Tables"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tables}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{css, echo = FALSE}
+img {
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+```
+
+When officedown is loaded in the R Markdown document, data.frames 
+are printed with officedown renderer. 
+
+## Tables features
+
+The customization of the tables according to Word rules is possible with the
+"officedown" package. Word tables can have named styles, a group of settings
+that can be applied to a table. The settings include formatting for the overall
+table, rows, columns etc.  
+
+> there's no feature to apply a style to individual cells.
+
+![](../man/figures/TABLES-example.png)
+
+The possibilities with officedown are the following:
+
+* define the style of the Word table to be used
+* define the desired width of the table (in relation to the width of the document) and layout (fixed or autofit).
+* activate the "conditional formatting" instructions in Word (or PowerPoint), i.e. a style for the first or last row, the first or last column and a style for the row or column strips.
+* add captions with Word references (for cross-references).
+
+
+## Global settings
+
+These formatting settings can be defined globally, in the YAML header or 
+per output chunks (in the knitr chunk options). 
+
+This corresponds to argument `tables` in output_format function 
+`rdocx_document()`. Default value is shown below:
+
+```yaml
+# sample of R markdown yaml header
+tables: 
+  style: Table
+  layout: autofit
+  width: 1.0
+  caption:
+    style: Table Caption
+    pre: 'Table '
+    sep: ': '
+  conditional:
+    first_row: true
+    first_column: false
+    last_row: false
+    last_column: false
+    no_hband: false
+    no_vband: true
+```
+
+We have chosen the default values and argument names by trying to get 
+identical or close to the standards bookdown and R Markdown.
+
+| YAML header | chunk option | details |
+|-------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `style` | `tab.style` | the Word style name to use for tables. This is a __table style__. You can access them in the Word template used. Function `officer::styles_info(doc, type = "table")` lets you read these styles. |
+| `layout` | `tab.layout` | 'autofit' or 'fixed' algorithm. See `officer::table_layout`. |
+| `width` | `tab. width ` | Value of the preferred width of the table in percent (base 1). |
+| `caption` |  |  |
+|&nbsp;&nbsp;&nbsp;&nbsp;`style` | `tab.cap.style` | Word style name to use for table captions.You can access them  in the Word template used. Function `officer::styles_info(doc, type = "paragraph")` can let you read these styles. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`pre` | `tab.cap.pre` | Prefix for numbering chunk (default to "Table "). |
+|&nbsp;&nbsp;&nbsp;&nbsp;`sep` | `tab.cap.sep` | Suffix for numbering chunk (default to ": "). |
+| `conditional` |  |  |
+|&nbsp;&nbsp;&nbsp;&nbsp;`first_row` | `first_row` | apply or remove formatting from the first row in the table. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`first_column` | `first_column` | apply or remove formatting from the first column in the table. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`last_row` | `last_row` | apply or remove formatting from the last row in the table. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`last_column` | `last_column` | apply or remove formatting from the last column in the table. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`no_hband` | `no_hband` | don't display odd and even rows. |
+|&nbsp;&nbsp;&nbsp;&nbsp;`no_vband` | `no_vband` | don't display odd and even columns. |
+
+## Table captions
+
+Table captions (and references) have to be specified in the knitr chunk options 
+(as there should only be distinct values, it does not make sense to 
+provide a default value).
+
+| chunk option | details |
+|--------------|---------|
+| `tab.cap` | Caption label |
+| `tab.id` | Caption reference unique identifier |
+
+### How to use these arguments
+
+The minimal set of options to get a table caption is to provide a value 
+to argument `tab.cap`. This will add a caption before the table, label is the 
+value of `tab.cap`: `{r tab.cap='caption label'}`. No reference 
+is provided and the table can not be cross-referenced.
+
+If providing a reference, it will add a caption to the table with a reference: 
+
+![](../man/figures/TABLES-r-chunk.png)
+
+### Overwritting global settings
+
+Global options can be overwritten at any moment with chunk options or 
+with function `knitr::opts_chunk$set()`: 
+
+`{r tab.cap='caption label', tab.id='my_ref', tab.style='another table style'}`. 
+
+You can change table style for a specific table or caption style.
+
+
+## Create your table Word style
+
+
+To create a table style in your `reference_docx` corresponding to your needs,
+edit the document with MS Word and add a new style of type "table" then configure
+it. The style name must be used as the value of the "tab.style" argument.
+
+
+You should see a window that looks like the one below:
+
+![](../man/figures/TABLES-new-style.png)
+
+In the Define New Table Style window, start give your new style a name.
+There are a many formatting options available in this window.
+For example, you can change the font and font style, change the border
+and cell colors, and change the text alignment.
+
+Once you are happy with the style, save the document - the style is stored within 
+the word document. 
+
+The package is only using these styles and is not able to create them with
+R code.

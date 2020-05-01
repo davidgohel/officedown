@@ -1,0 +1,36 @@
+#' @importFrom knitr opts_chunk
+#' @title knitr hook for figure caption autonumbering
+#' @description The function allows you to add a hook when executing
+#' knitr to allow to turn figure captions into auto numbered figure
+#' captions.
+#' @noRd
+plot_word_fig_caption <- function(x, options) {
+
+  if(!is.character(options$fig.cap)) options$fig.cap <- NULL
+  if(!is.character(options$fig.id)) options$fig.id <- NULL
+
+  cap_str <- pandoc_wml_caption(cap = options$fig.cap, cap.style = options$fig.cap.style,
+                                cap.pre = options$fig.cap.pre, cap.sep = options$fig.cap.sep,
+                                id = options$fig.id, seq_id = "fig")
+
+  fig.width <- opts_current$get("fig.width")
+  if(is.null(fig.width)) fig.width <- 5
+  fig.height <- opts_current$get("fig.height")
+  if(is.null(fig.height)) fig.height <- 5
+
+  img <- external_img(src = x[1], width = fig.width, height = fig.height)
+
+  doc <- get_reference_rdocx()
+  si <- styles_info(doc)
+  fig.style_id <- style_id(opts_current$get("fig.style"), type = "paragraph", si)
+
+  ooxml <- paste0("<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>",
+         to_wml(img),
+         "</w:p>"
+         )
+  ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
+
+  img_wml <- paste("```{=openxml}", ooxml, "```", sep = "\n")
+
+  paste("", img_wml, cap_str, sep = "\n\n")
+}

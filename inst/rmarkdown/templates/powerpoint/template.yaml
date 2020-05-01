@@ -1,2 +1,3 @@
 name: Pimp my PowerPoint presentation
 description: add vector graphics with package rvg into your PowerPoint presentation
+create_dir: false

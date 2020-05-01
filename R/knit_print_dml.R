@@ -2,7 +2,7 @@
 #' @description Function used to render DrawingML in knitr/rmarkdown documents.
 #' Only Powerpoint outputs currently supported
 #'
-#' @param x a \code{dml} object
+#' @param x a `dml` object
 #' @param ... further arguments, not used.
 #' @author Noam Ross
 #' @importFrom knitr knit_print asis_output opts_knit opts_current
@@ -11,7 +11,7 @@
 #' @importFrom rvg dml dml_pptx
 #' @importFrom grDevices dev.off
 #' @importFrom rlang eval_tidy
-#' @export
+#' @noRd
 knit_print.dml <- function(x, ...) {
   if (pandoc_version() < 2.4) {
     stop("pandoc version >= 2.4 required for DrawingML output in pptx")
@@ -21,6 +21,7 @@ knit_print.dml <- function(x, ...) {
       opts_knit$get("rmarkdown.pandoc.to") != "pptx") {
     stop("DrawingML currently only supported for pptx output")
   }
+
   if(is.null( layout <- knitr::opts_current$get("layout") )){
     layout <- officer::ph_location_type()
   }
@@ -70,8 +71,7 @@ knit_print.dml <- function(x, ...) {
 #' @noRd
 #' @importFrom officer fortify_location
 get_content_layout_uncached <- function(layout) {
-  ref_pptx <- read_pptx(get_reference_pptx())
-  fortify_location(layout, ref_pptx)
+  fortify_location(layout, get_reference_pptx())
 }
 
 #' @importFrom memoise memoise

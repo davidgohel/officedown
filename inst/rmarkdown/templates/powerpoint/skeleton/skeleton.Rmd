@@ -7,10 +7,16 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
 library(officedown)
 library(ggplot2)
 library(rvg)
+```
+
+## Table
+
+```{r layout=officer::ph_location_type()}
+mtcars
 ```
 
 ## Slide with Plot
@@ -88,5 +94,7 @@ dml(plot(pressure))
 ```{r}
 dml(plot(pressure), editable = FALSE)
 ```
+
+
 
 
