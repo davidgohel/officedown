@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 The package facilitates the formatting of Microsoft Word documents produced by R
 Markdown documents by providing a range of features:
 
-<a href="https://github.com/davidgohel/officedown"><img src="man/figures/officedown.png" alt="officedown logo" align="right" /></a>
+<a href="https://github.com/davidgohel/officedown"><img src="man/figures/logo.png" alt="officedown logo" align="right" /></a>
 
 * Compatibility with the functions of the package `officer` for the 
 production of "runs" and "blocks" of content (text formatting, landscape mode, 

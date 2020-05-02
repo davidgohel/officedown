@@ -104,8 +104,7 @@ list.files(dir_src, pattern = "^officer_", full.names = TRUE) %>%
 
 # logos -----
 
-rsvg_png("inst/medias-src/logo-src.svg", file = "inst/medias-src/figures/officedown.png", width = 200, height = 231)
-rsvg_png("inst/medias-src/logo-src-inv.svg", file = "inst/medias-src/figures/logo.png", width = 200, height = 231)
+rsvg_png("inst/medias-src/logo-src.svg", file = "inst/medias-src/figures/logo.png", width = 200, height = 231)
 
 # compression -----
 imgpress::img_compress(dir_input = "inst/medias-src/figures",
