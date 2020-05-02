@@ -84,24 +84,32 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @param tables a list that can contain few items to style tables and table captions.
 #' Missing items will be replaced by default values. Possible items are the following:
 #'
-#' * `style`: the Word stylename to use for tables. This is
-#' a __table style__. You can access them in the Word template used. Function
-#' [styles_info(doc, type = "table")][officer::styles_info] can let you read these
-#' styles.
+#' * `style`: the Word stylename to use for tables.
 #' * `layout`: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
 #' * `width`: value of the preferred width of the table in percent (base 1).
-#' * `caption`; default values `list(style = "Table Caption", pre = "Table ", sep = ": ")`
-#' are producing a numbering chunk of the form "Table 2: ":
-#'   * `style`: Word stylename to use for table captions.You
-#' can access them in the Word template used. Function
-#' [styles_info(doc, type = "paragraph")][officer::styles_info] can let you read these
-#' styles.
+#' * `caption`; caption options, i.e.:
+#'   * `style`: Word stylename to use for table captions.
 #'   * `pre`: prefix for numbering chunk (default to "Table ").
 #'   * `sep`: suffix for numbering chunk (default to ": ").
+#' * `conditional`: a list of named logical values:
+#'   * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
+#'   * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
+#'   * `no_hband` and `no_vband`: don't display odd and even rows or columns with alternating shading for ease of reading.
 #'
-#' Default value is `list(style = "Table", layout = "autofit", width = 1,
-#' caption = list(style = "Table Caption", pre = "Table ", sep = ": "))`:
+#' Default value is (in R format):
+#' ```
+#' list(
+#'    style = "Table", layout = "autofit", width = 1,
+#'    caption = list(
+#'      style = "Table Caption", pre = "Table ", sep = ": "),
+#'    conditional = list(
+#'      first_row = TRUE, first_column = FALSE, last_row = FALSE,
+#'      last_column = FALSE, no_hband = FALSE, no_vband = TRUE
+#'    )
+#' )
+#' ```
 #'
+#' Default value is (in YAML format):
 #' ```
 #' style: Table
 #' layout: autofit
@@ -110,29 +118,39 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   style: Table Caption
 #'   pre: 'Table '
 #'   sep: ': '
+#' conditional:
+#'   first_row: true
+#'   first_column: false
+#'   last_row: false
+#'   last_column: false
+#'   no_hband: false
+#'   no_vband: true
 #' ```
 #'
 #' @param plots a list that can contain few items to style figures and figure captions.
 #' Missing items will be replaced by default values. Possible items are the following:
 #'
-#' * `style`: the Word stylename to use for plots. This is a __paragraph style__.
-#' You can access them in the Word template used. Function
-#' [styles_info(doc, type = "paragraph")][officer::styles_info] can let you read these
-#' styles.
+#' * `style`: the Word stylename to use for plots.
 #' * `align`: alignment of figures in the output document (possible values are 'left',
 #' 'right' and 'center').
-#' * `caption`; default values `list(style = "Figure Caption", pre = "Figure ", sep = ": ")`
-#' are producing a numbering chunk of the form "Figure 2: ":
-#'   * `style`: Word stylename to use for figure captions.You
-#' can access them in the Word template used. Function
-#' [styles_info(doc, type = "paragraph")][officer::styles_info] can let you read these
-#' styles.
+#' * `caption`; caption options, i.e.:
+#'   * `style`: Word stylename to use for figure captions.
 #'   * `pre`: prefix for numbering chunk (default to "Figure ").
 #'   * `sep`: suffix for numbering chunk (default to ": ").
 #'
-#' Default value is `list(style = "Normal", align = "center",
-#' caption = list(style = "Image Caption", pre = "Figure ", sep = ": "))`:
+#' Default value is (in R format):
+#' ```
+#' list(
+#'   style = "Normal", align = "center",
+#'   caption = list(
+#'     style = "Image Caption",
+#'     pre = "Figure ",
+#'     sep = ": "
+#'    )
+#'  )
+#'  ```
 #'
+#' Default value is (in YAML format):
 #' ```
 #' style: Normal
 #' align: center
@@ -152,98 +170,38 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ul.style: null
 #' ```
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
+#' @section Finding stylenames:
+#'
+#' You can access them in the Word template used. Function
+#' [styles_info()][officer::styles_info] can let you read these
+#' styles.
+#'
+#' You need officer to read the stylenames (to get information
+#' from a specific "reference_docx", change `ref_docx_default`
+#' in the example below.
+#'
+#' ```
+#' library(officer)
+#' docx_file <- system.file(package = "officer", "template", "template.docx")
+#' doc <- read_docx(docx_file)
+#' ```
+#'
+#' To read `paragraph` stylenames:
+#' ```
+#' styles_info(doc, type = "paragraph")
+#' ```
+#'
+#' To read `table` stylenames:
+#' ```
+#' styles_info(doc, type = "table")
+#' ```
+#'
+#' To read `list` stylenames:
+#' ```
+#' styles_info(doc, type = "numbering")
+#' ```
 #'
 #'
-#'
-#'
-#' @section table style:
-#'
-#' Pandoc does not allow usage of Word table style. This option
-#' allows you to define which Word table style is the default.
-#' These table styles must be present in the `reference_docx` document.
-#' It can be read with [styles_info(doc, type = "table")][officer::styles_info]
-#' or within Word table styles view.
-#'
-#' To create a table style in your `reference_docx` corresponding to your needs,
-#' edit the document with MS Word and add a new style of type "table" then configure
-#' it. The style name must be used as the value of the "tab.style" argument.
-#'
-#' \if{html}{
-#'
-#' You should see a window that looks like the one below:
-#'
-#' \figure{TABLES-new-style.png}{options: width=400px}
-#'
-#' In the Define New Table Style window, start give your new style a name.
-#' There are a many formatting options available in this window.
-#' For example, you can change the font and font style, change the border
-#' and cell colors, and change the text alignment.
-#'
-#' }
-#'
-#' The package is only using these styles and is not able to create them with
-#' R code.
-#' @section lists:
-#' Pandoc does not allow easy customization of ordered or unordered lists. This option
-#' allows you to apply a list style for ordered lists and a list style for unordered
-#' lists. These list styles must be present in the `reference_docx` document.
-#'
-#' To create a list style in your `reference_docx` corresponding to your needs,
-#' edit the document with MS Word and add a new style of type "list" then configure
-#' it. The style name must be used as the value of the "ol.style" argument if you
-#' configure an ordered list (i.e. with numbers corresponding to each level) or
-#' as the value of the "ul.style" argument if you configure an unordered list
-#' (i.e. with bullets corresponding to each level).
-#'
-#' \if{html}{
-#'
-#' You should see a window that looks like the one below:
-#'
-#' \figure{LISTS-new_style.png}{options: width=400px}
-#'
-#' In the Define New List Style window, start give your new style a name.
-#' There are a many formatting options available in this window. You can
-#' change the font, define the character formatting and choose the
-#' type (number or bullet).
-#'
-#' }
-#'
-#' The package is only using these styles and is not able to create them with
-#' R code.
-#' @examples
-#' library(rmarkdown)
-#'
-#' # official template -----
-#' skeleton <- system.file(package = "officedown",
-#'   "rmarkdown/templates/word/skeleton/skeleton.Rmd")
-#' rmd_file <- tempfile(fileext = ".Rmd")
-#' file.copy(skeleton, to = rmd_file)
-#'
-#' docx_file_1 <- tempfile(fileext = ".docx")
-#' render(rmd_file, output_file = docx_file_1, quiet = TRUE)
-#'
-#' # bookdown example -----
-#'
-#' # All above is only to make sure we do not write in your wd
-#' bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
-#' temp_dir <- tempfile()
-#' dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
-#' file.copy(
-#'   from = list.files(bookdown_loc, full.names = TRUE),
-#'   to = temp_dir,
-#'   overwrite = TRUE, recursive = TRUE)
-#'
-#' render_site(
-#'   input = temp_dir, encoding = 'UTF-8',
-#'   envir = new.env(), quiet = TRUE)
-#'
-#' docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
-#'
-#' if(file.exists(docx_file_2)){
-#'   message("file ", docx_file_2, " has been written.")
-#' }
-#' @importFrom officer change_styles
-#' @importFrom utils modifyList
 #' @section R Markdown yaml:
 #' The following demonstrates how to pass arguments in the R Markdown yaml:
 #'
@@ -279,6 +237,40 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'       ul.style: null
 #' ---
 #' ```
+#' @examples
+#' library(rmarkdown)
+#'
+#' # official template -----
+#' skeleton <- system.file(package = "officedown",
+#'   "rmarkdown/templates/word/skeleton/skeleton.Rmd")
+#' rmd_file <- tempfile(fileext = ".Rmd")
+#' file.copy(skeleton, to = rmd_file)
+#'
+#' docx_file_1 <- tempfile(fileext = ".docx")
+#' render(rmd_file, output_file = docx_file_1, quiet = TRUE)
+#'
+#' # bookdown example -----
+#'
+#' # All above is only to make sure we do not write in your wd
+#' bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
+#' temp_dir <- tempfile()
+#' dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
+#' file.copy(
+#'   from = list.files(bookdown_loc, full.names = TRUE),
+#'   to = temp_dir,
+#'   overwrite = TRUE, recursive = TRUE)
+#'
+#' render_site(
+#'   input = temp_dir, encoding = 'UTF-8',
+#'   envir = new.env(), quiet = TRUE)
+#'
+#' docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
+#'
+#' if(file.exists(docx_file_2)){
+#'   message("file ", docx_file_2, " has been written.")
+#' }
+#' @importFrom officer change_styles
+#' @importFrom utils modifyList
 rdocx_document <- function(mapstyles,
                            base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),

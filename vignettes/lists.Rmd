@@ -1,0 +1,61 @@
+---
+title: "Lists"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Lists}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{css, echo = FALSE}
+img {
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+```
+
+Pandoc does not allow easy customization of ordered or unordered lists. This
+option allows you to apply a list style for ordered lists and a list style for
+unordered lists. These list styles must be present in the `reference_docx`
+document.
+
+## How it works
+
+It will be necessary to create or re-use a Microsoft Word document that will be
+used as template (ex: “template.docx”) that contains the lists definitions. In
+this document, you have to create two new list styles, one for ordered lists and
+one for unordered lists. This template will be used as a reference document for
+the customization of your list style with R Markdown. In the YAML header of your
+R Markdown document, this corresponds to `reference_docx: template.docx`.
+
+## Usage
+
+To use the style definition located in `reference_docx`, specify `ol.style` and
+or `ul.style` in the yaml header of you R Markdown document:
+
+``` yaml
+# officedown yaml header
+output: 
+  officedown::rdocx_document:
+    reference_docx: template.docx
+    lists:
+      ol.style: 'Default ol'
+      ul.style: 'Default ul'
+```
+
+## Global
+
+These parameters are global to the R Markdown document. They override the styles
+of all ordered and unordered lists. They cannot be used for a single particular
+list in the document.

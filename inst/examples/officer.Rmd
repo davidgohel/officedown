@@ -1,0 +1,61 @@
+---
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(officedown)
+library(officer)
+fp <- fp_par(text.align = "center", padding.top = 120)
+ft <- fp_text(font.size = 12, bold = TRUE, color = "#C32900", font.family = "Cambria")
+```
+
+## Chunk outputs
+
+The package `r ftext("officedown", ft)` is great. 
+
+This is a Word field, the file size is `r run_seqfield("FILESIZE \\k \\* MERGEFORMAT")` Kb. 
+
+## Paragraph settings
+
+This text is centered `r fp_par(text.align = "center")`.
+
+## Section definitions
+
+<!---BLOCK_MULTICOL_START--->
+
+This text is on column 1. This text is on column 1.
+This text is on column 1. This text is on column 1.
+This text is on column 1. This text is on column 1.
+This text is on column 1. This text is on column 1.
+This text is on column 1. This text is on column 1.`r fp_par(text.align = "justify")`
+`r run_columnbreak()`
+
+This text is on column 2.
+This text is on column 2.
+This text is on column 2.
+This text is on column 2.
+This text is on column 2.
+This text is on column 2.`r fp_par(text.align = "justify")`
+
+<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
+
+
+<!---BLOCK_LANDSCAPE_START--->
+
+This is a landscape section.`r fp`
+
+<!---BLOCK_LANDSCAPE_STOP--->
+
+
+This is a custom section using `block_section`.`r fp`
+
+```{r}
+ps <- prop_section(
+  page_margins = page_mar(bottom = 1, top = 2, left = 1.5),
+  type = "oddPage"
+)
+block_section(ps)
+```
+
+We are back on default section.`r fp`

@@ -18,6 +18,17 @@ taghl <- function(x){
 }
 ```
 
+```{css, echo = FALSE}
+img {
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+```
+
 ```{r setup}
 library(officedown)
 library(officer)
@@ -25,14 +36,26 @@ library(officer)
 
 ## Introduction
 
-Package `officer` provides functions to produce document *blocks* and *runs* 
-elements. They can be used in the R Markdown document to produce elements with formatting not available by default with R Markdown and pandoc: 
+Package `officer` provides functions to produce document *blocks* and *runs*
+elements. They can be used in the R Markdown document to produce elements with
+formatting not available by default with R Markdown and pandoc:
 
 * add content in a multi-columns section
 * add a column break in a multi-columns section
 * color a chunk of text
 * insert a table of contents at any place in the document (or 
 a list of figures or a list of tables)
+
+## Features
+
+```{r echo=FALSE, comment=""}
+rmd <- system.file(package = "officedown", "examples", "officer.Rmd")
+rmd <- readLines(rmd)
+cat(rmd, sep = "\n")
+```
+
+![](../man/figures/OFFICER-example.png)
+
 
 ## Tags
 
