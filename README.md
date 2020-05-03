@@ -105,7 +105,7 @@ loaded in the Rmd.
 
 ![](man/figures/README-minimal-rmd.png)
 
-## Features illustration
+## Word Features illustration
 
 A bookdown is available in the package and can be used as a demo.
 

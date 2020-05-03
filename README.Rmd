@@ -70,7 +70,7 @@ by Word. The syntax conforms to the bookdown cross-reference definition.
 
 The package also enhances PowerPoint productions with R Markdown by providing a
 mechanism for placing results according to the slide template contained in the
-PowerPoint document used as "reference\_doc". It becomes easy to add several
+PowerPoint document used as "reference_doc". It becomes easy to add several
 contents in the same slide.
 
 The package also offers the possibility to transform your graphic instructions
@@ -110,7 +110,7 @@ to be loaded in the Rmd.
 
 ![](man/figures/README-minimal-rmd.png)
 
-## Features illustration
+## Word Features illustration
 
 A bookdown is available in the package and can be used as a demo.
 

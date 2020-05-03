@@ -1,0 +1,22 @@
+---
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+fp <- fp_par(text.align = "center")
+```
+
+```{r results='asis', echo=FALSE}
+for(i in 1:4){
+  knit_print_block(
+    fpar(
+      ftext("this is text ", fp_text(font.size = 12)),
+      ftext(i, fp_text(font.size = 12, color = "red", bold = TRUE)),
+      fp_p = fp
+    ))
+}
+```
+
