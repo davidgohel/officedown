@@ -112,11 +112,12 @@ ul.style: null
 
 \item{...}{arguments used by \link[rmarkdown:word_document]{word_document}}
 }
+\value{
+R Markdown output format to pass to \link[rmarkdown:render]{render}
+}
 \description{
 Format for converting from R Markdown to an MS Word
 document. The function comes also with improved output options.
-\code{rdocx_document2} also supports cross reference based on the syntax of
-the bookdown package.
 }
 \section{Finding stylenames}{
 

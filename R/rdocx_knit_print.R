@@ -51,6 +51,7 @@ knit_print.block <- function(x, ...){
 #' @section Word example:
 #' Copy example located here:
 #' `system.file(package = "officedown", "examples", "word_loop.Rmd")`
+#' @return None. the function only print XML code.
 knit_print_block <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     cat(paste("```{=openxml}", to_wml(x), "```\n\n", sep = "\n"))
@@ -65,6 +66,7 @@ knit_print_block <- function(x, ...){
 #' to use results 'as-is' (by adding `results='asis'` to your chunk header).
 #' @param x a run object, result of a run function from officer package
 #' @param ... unused arguments
+#' @return None. the function only print XML code.
 knit_print_run <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     cat(paste("`", to_wml(x), "`{=openxml}", sep = ""))

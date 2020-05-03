@@ -11,6 +11,9 @@ knit_print_run(x, ...)
 
 \item{...}{unused arguments}
 }
+\value{
+None. the function only print XML code.
+}
 \description{
 When used in a loop, runs output anything
 because \code{knit_print} method is not called. In that situation,

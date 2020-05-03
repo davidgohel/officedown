@@ -20,6 +20,7 @@
 #' @param tcf default conditional formatting settings
 #' defined by [officer::table_conditional_formatting()]
 #' @param ... arguments used by [powerpoint_presentation][rmarkdown::powerpoint_presentation]
+#' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @examples
 #' library(rmarkdown)
 #' if(require("ggplot2")){

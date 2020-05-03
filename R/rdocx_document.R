@@ -72,8 +72,6 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @title Advanced R Markdown Word Format
 #' @description Format for converting from R Markdown to an MS Word
 #' document. The function comes also with improved output options.
-#' \code{rdocx_document2} also supports cross reference based on the syntax of
-#' the bookdown package.
 #' @param mapstyles a named list of style to be replaced in the generated
 #' document. `list("Date"="Author")` will result in a document where
 #' all paragraphs styled with stylename "Date" will be styled with
@@ -170,6 +168,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ul.style: null
 #' ```
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
+#' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @section Finding stylenames:
 #'
 #' You can access them in the Word template used. Function

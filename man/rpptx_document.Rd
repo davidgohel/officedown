@@ -26,6 +26,9 @@ defined by \code{\link[officer:table_conditional_formatting]{officer::table_cond
 
 \item{...}{arguments used by \link[rmarkdown:powerpoint_presentation]{powerpoint_presentation}}
 }
+\value{
+R Markdown output format to pass to \link[rmarkdown:render]{render}
+}
 \description{
 Format for converting from R Markdown to an MS PowerPoint
 document. \code{rpptx_document2} also supports cross reference based on the
