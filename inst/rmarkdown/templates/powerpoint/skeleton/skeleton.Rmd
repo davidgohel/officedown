@@ -15,8 +15,12 @@ library(rvg)
 
 ## Table
 
-```{r layout=officer::ph_location_type()}
-mtcars
+```{r layout='Two Content', ph=officer::ph_location_left()}
+head(cars)
+```
+
+```{r layout='Two Content', ph=officer::ph_location_right()}
+head(iris)
 ```
 
 ## Slide with Plot
@@ -27,7 +31,7 @@ dml(plot(pressure))
 
 ## Slide with ggplot
 
-```{r ggplot1}
+```{r layout='Title and Content', ph=officer::ph_location_type(type="body")}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
 dml(ggobj = mygg)
@@ -35,15 +39,15 @@ dml(ggobj = mygg)
 
 ## Slide with ggplot
 
-```{r layout=officer::ph_location_fullsize()}
+```{r ph=officer::ph_location_fullsize()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
-dml(ggobj = mygg, layout = "full_slide")
+dml(ggobj = mygg)
 ``` 
 
 ## ggplot in left column
 
-```{r layout=officer::ph_location_left()}
+```{r ph=officer::ph_location_left()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
 dml(ggobj = mygg)
@@ -55,7 +59,7 @@ dml(ggobj = mygg)
 - Some
 - Bullets
 
-```{r layout=officer::ph_location_right()}
+```{r ph=officer::ph_location_right()}
 mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
   geom_point()
 dml(ggobj = mygg)
@@ -64,15 +68,11 @@ dml(ggobj = mygg)
 ## ggplot in both columns
 
 
-```{r layout=officer::ph_location_left()}
-mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
-  geom_point()
+```{r ph=officer::ph_location_left()}
 dml(ggobj = mygg)
 ``` 
 
-```{r layout=officer::ph_location_right()}
-mygg <- ggplot(pressure, aes(x = temperature, y = pressure)) +
-  geom_point()
+```{r ph=officer::ph_location_right()}
 dml(ggobj = mygg)
 ``` 
 
@@ -80,11 +80,11 @@ dml(ggobj = mygg)
 ## custom plot locations
 
 
-```{r layout=officer::ph_location(width = 2, height = 2, left = 2, top = 2)}
+```{r ph=officer::ph_location(width = 2, height = 2, left = 2, top = 2)}
 dml(plot(pressure))
 ```
 
-```{r layout=officer::ph_location(width = 3, height = 3, left = 4, top = 4)}
+```{r ph=officer::ph_location(width = 3, height = 3, left = 4, top = 4)}
 dml(plot(pressure))
 ```
 

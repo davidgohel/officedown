@@ -5,7 +5,13 @@
 \alias{rpptx_document2}
 \title{Advanced R Markdown PowerPoint Format}
 \usage{
-rpptx_document(base_format = "rmarkdown::powerpoint_presentation", ...)
+rpptx_document(
+  base_format = "rmarkdown::powerpoint_presentation",
+  layout = "Title and Content",
+  master = "Office Theme",
+  tcf = list(),
+  ...
+)
 
 rpptx_document2(...)
 }
@@ -14,12 +20,28 @@ rpptx_document2(...)
 officedown. default to \link[rmarkdown:powerpoint_presentation]{powerpoint_presentation} but
 can also be powerpoint_presentation2 from bookdown}
 
+\item{layout}{default slide layout name to use}
+
+\item{master}{default master layout name where \code{layout} is located}
+
+\item{tcf}{default conditional formatting settings
+defined by \code{\link[officer:table_conditional_formatting]{officer::table_conditional_formatting()}}}
+
 \item{...}{arguments used by \link[rmarkdown:powerpoint_presentation]{powerpoint_presentation}}
 }
 \description{
 Format for converting from R Markdown to an MS PowerPoint
 document. \code{rpptx_document2} also supports cross reference based on the
 syntax of the bookdown package.
+
+The function will allow you to specify the destination of your chunks in the output
+PowerPoint file. In this case, you must specify the \code{layout} and \code{master} for the
+layout you want to use, as well as the \code{ph} argument, which will allow you to specify
+the placeholder to be generated to place the result. Use the officer package to help
+you choose the identfiers to use.
+
+This function also support Vector graphics output in an editable format (using package
+\code{rvg}). Wrap you R plot commands with function \code{dml} to use this graphic capability.
 }
 \examples{
 library(rmarkdown)

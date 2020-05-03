@@ -130,13 +130,40 @@ knit_print.data.frame <- function(x, ...) {
                  sep = "\n")
     asis_output(res)
   } else if( grepl( "pptx", opts_knit$get("rmarkdown.pandoc.to") ) ){
-    if(is.null( layout <- knitr::opts_current$get("layout") )){
-      layout <- officer::ph_location_type()
-    }
-    location <- get_content_layout(layout)
 
-    tab_props <- opts_current_table()
-    bt <- block_table(x)
+    layout <- knitr::opts_current$get("layout")
+    master <- knitr::opts_current$get("master")
+    doc <- get_reference_pptx()
+
+    if(is.null( ph <- knitr::opts_current$get("ph") )){
+      ph <- officer::ph_location_type(type = "body")
+    }
+    if(!inherits(ph, "location_str")){
+      stop("ph should be a placeholder location; ",
+           "see officer::placeholder location for an example.",
+           call. = FALSE)
+    }
+
+    location <- get_content_ph(ph, layout, master, doc)
+
+    first_row <- get_table_design_opt("first_row")
+    first_column <- get_table_design_opt("first_column")
+    last_row <- get_table_design_opt("last_row")
+    last_column <- get_table_design_opt("last_column")
+    no_hband <- get_table_design_opt("no_hband")
+    no_vband <- get_table_design_opt("no_vband")
+
+    pt <- prop_table(style = doc$table_styles$def[1],
+      tcf = table_conditional_formatting(
+        first_row = first_row,
+        first_column = first_column,
+        last_row = last_row,
+        last_column = last_column,
+        no_hband = no_hband,
+        no_vband = no_vband))
+    bt <- block_table(x,
+                      header = get_table_design_opt("header", default = TRUE),
+                      properties = pt)
     res <- paste("```{=openxml}",
                  officer::to_pml(bt, left = location$left, top = location$top,
                                  width = location$width, height = location$height,

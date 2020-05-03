@@ -15,10 +15,12 @@ status](https://www.r-pkg.org/badges/version/officedown)](https://cran.r-project
 
 ## Overview
 
+### Word
+
 The package facilitates the formatting of Microsoft Word documents
 produced by R Markdown documents by providing a range of features:
 
-<a href="https://github.com/davidgohel/officedown"><img src="man/figures/officedown.png" alt="officedown logo" align="right" /></a>
+<a href="https://github.com/davidgohel/officedown"><img src="man/figures/logo.png" alt="officedown logo" align="right" /></a>
 
   - Compatibility with the functions of the package `officer` for the
     production of “runs” and “blocks” of content (text formatting,
@@ -61,6 +63,17 @@ produced by R Markdown documents by providing a range of features:
     > It is then easy to copy and paste the content into another
     > document without losing the reference numbers. Captions are also
     > auto-numbered by Word.
+
+### PowerPoint
+
+The package also enhances PowerPoint productions with R Markdown by
+providing a mechanism for placing results according to the slide
+template contained in the PowerPoint document used as “reference\_doc”.
+It becomes easy to add several contents in the same slide.
+
+The package also offers the possibility to transform your graphic
+instructions into editable vector graphics (with the rvg package) by
+simply wrapping your call into a call to function `dml`.
 
 ## Installation
 

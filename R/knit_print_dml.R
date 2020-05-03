@@ -22,10 +22,19 @@ knit_print.dml <- function(x, ...) {
     stop("DrawingML currently only supported for pptx output")
   }
 
-  if(is.null( layout <- knitr::opts_current$get("layout") )){
-    layout <- officer::ph_location_type()
+  layout <- knitr::opts_current$get("layout")
+  master <- knitr::opts_current$get("master")
+  doc <- get_reference_pptx()
+  if(is.null( ph <- knitr::opts_current$get("ph") )){
+    ph <- officer::ph_location_type(type = "body")
   }
-  id_xfrm <- get_content_layout(layout)
+  if(!inherits(ph, "location_str")){
+    stop("ph should be a placeholder location; ",
+         "see officer::placeholder location for an example.",
+         call. = FALSE)
+  }
+
+  id_xfrm <- get_content_ph(ph, layout, master, doc)
 
   dml_file <- tempfile(fileext = ".dml")
   img_directory = get_img_dir()
@@ -70,13 +79,26 @@ knit_print.dml <- function(x, ...) {
 #' If size is not provided, get the size of the main content area of the slide
 #' @noRd
 #' @importFrom officer fortify_location
-get_content_layout_uncached <- function(layout) {
-  fortify_location(layout, get_reference_pptx())
+get_ph_uncached <- function(ph, layout, master, doc) {
+  ls <- layout_summary(doc)
+
+  if(!master %in% ls$master){
+    stop("could not find master ", master, call. = FALSE)
+  }
+
+  slide_index <- which(ls$layout %in% layout & ls$master %in% master)
+  if(length(slide_index)<1){
+    stop("could not find layout ", layout, " and master ", master, call. = FALSE)
+  }
+
+  doc <- on_slide(doc, index = slide_index)
+
+  fortify_location(ph, doc)
 }
 
 #' @importFrom memoise memoise
 #' @noRd
-get_content_layout <- memoise(get_content_layout_uncached)
+get_content_ph <- memoise(get_ph_uncached)
 
 
 

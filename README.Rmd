@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 
 ## Overview
 
+### Word 
+
 The package facilitates the formatting of Microsoft Word documents produced by R
 Markdown documents by providing a range of features:
 
@@ -63,6 +65,18 @@ by Word. The syntax conforms to the bookdown cross-reference definition.
     
     > It is then easy to copy and paste the content into another document 
     without losing the reference numbers. Captions are also auto-numbered by Word.
+
+### PowerPoint 
+
+The package also enhances PowerPoint productions with R Markdown by providing a
+mechanism for placing results according to the slide template contained in the
+PowerPoint document used as "reference\_doc". It becomes easy to add several
+contents in the same slide.
+
+The package also offers the possibility to transform your graphic instructions
+into editable vector graphics (with the rvg package) by simply wrapping your
+call into a call to function `dml`.
+
 
 ## Installation
 
