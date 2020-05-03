@@ -346,8 +346,11 @@ rdocx_document <- function(mapstyles,
 
 }
 
-#' @rdname rdocx_document
 #' @importFrom bookdown markdown_document2
+#' @title Wrapper for 'bookdown' documents
+#' @description This is a simple 'bookdown' wrapper of the output format
+#' [rdocx_document]
+#' @param ... Arguments to be passed to [rdocx_document] output format function.
 #' @export
 rdocx_document2 <- function(...) {
   markdown_document2(..., base_format = rdocx_document)

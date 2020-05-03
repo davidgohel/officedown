@@ -2,7 +2,6 @@
 % Please edit documentation in R/rpptx_document.R
 \name{rpptx_document}
 \alias{rpptx_document}
-\alias{rpptx_document2}
 \title{Advanced R Markdown PowerPoint Format}
 \usage{
 rpptx_document(
@@ -12,8 +11,6 @@ rpptx_document(
   tcf = list(),
   ...
 )
-
-rpptx_document2(...)
 }
 \arguments{
 \item{base_format}{a scalar character, format to be used as a base document for

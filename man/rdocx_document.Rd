@@ -2,7 +2,6 @@
 % Please edit documentation in R/rdocx_document.R
 \name{rdocx_document}
 \alias{rdocx_document}
-\alias{rdocx_document2}
 \title{Advanced R Markdown Word Format}
 \usage{
 rdocx_document(
@@ -13,8 +12,6 @@ rdocx_document(
   lists = list(),
   ...
 )
-
-rdocx_document2(...)
 }
 \arguments{
 \item{mapstyles}{a named list of style to be replaced in the generated

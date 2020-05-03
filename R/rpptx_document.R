@@ -94,14 +94,6 @@ rpptx_document <- function(base_format = "rmarkdown::powerpoint_presentation",
   output_formats
 }
 
-
-#' @rdname rpptx_document
-#' @importFrom bookdown markdown_document2
-#' @export
-rpptx_document2 <- function(...) {
-  rpptx_document(..., base_format = rpptx_document)
-}
-
 #' @importFrom officer get_reference_value read_pptx
 get_pptx_uncached <- function() {
   ref_pptx <- read_pptx(get_reference_value(format = "pptx"))
