@@ -7,3 +7,4 @@
 ^docs$
 ^_pkgdown\.yml$
 ^inst/medias-src$
+^pkgdown$
