@@ -24,12 +24,19 @@ plot_word_fig_caption <- function(x, options) {
   si <- styles_info(doc)
   fig.style_id <- style_id(opts_current$get("fig.style"), type = "paragraph", si)
 
+  if(length(fig.style_id) != 1 ){
+    warning("paragraph style for plots ", shQuote(opts_current$get("fig.style")),
+            " has not been found in the reference_docx document.",
+            " Style 'Normal' will be used instead.",
+            call. = FALSE)
+    fig.style_id <- style_id("Normal", type = "paragraph", si)
+
+  }
   ooxml <- paste0("<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>",
          to_wml(img),
          "</w:p>"
          )
   ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
-
   img_wml <- paste("```{=openxml}", ooxml, "```", sep = "\n")
 
   paste("", img_wml, cap_str, sep = "\n\n")
