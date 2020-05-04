@@ -5,20 +5,15 @@
 \title{Advanced R Markdown Word Format}
 \usage{
 rdocx_document(
-  mapstyles,
   base_format = "rmarkdown::word_document",
   tables = list(),
   plots = list(),
   lists = list(),
+  mapstyles = list(),
   ...
 )
 }
 \arguments{
-\item{mapstyles}{a named list of style to be replaced in the generated
-document. \code{list("Date"="Author")} will result in a document where
-all paragraphs styled with stylename "Date" will be styled with
-stylename "Author".}
-
 \item{base_format}{a scalar character, format to be used as a base document for
 officedown. default to \link[rmarkdown:word_document]{word_document} but
 can also be word_document2 from bookdown}
@@ -110,6 +105,11 @@ Default value is \code{list(ol.style = NULL, ul.style = NULL)}:\preformatted{ol.
 ul.style: null
 }}
 
+\item{mapstyles}{a named list of style to be replaced in the generated
+document. \code{list("Normal" = c("Author", "Date"))} will result in a document where
+all paragraphs styled with stylename "Date" and "Author" will be then styled with
+stylename "Normal".}
+
 \item{...}{arguments used by \link[rmarkdown:word_document]{word_document}}
 }
 \value{
@@ -174,6 +174,8 @@ output:
     lists:
       ol.style: null
       ul.style: null
+    mapstyles:
+      Normal: ['First Paragraph', 'Author', 'Date']
 ---
 }
 }

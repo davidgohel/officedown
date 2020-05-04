@@ -72,10 +72,6 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @title Advanced R Markdown Word Format
 #' @description Format for converting from R Markdown to an MS Word
 #' document. The function comes also with improved output options.
-#' @param mapstyles a named list of style to be replaced in the generated
-#' document. `list("Date"="Author")` will result in a document where
-#' all paragraphs styled with stylename "Date" will be styled with
-#' stylename "Author".
 #' @param base_format a scalar character, format to be used as a base document for
 #' officedown. default to [word_document][rmarkdown::word_document] but
 #' can also be word_document2 from bookdown
@@ -167,6 +163,10 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ol.style: null
 #' ul.style: null
 #' ```
+#' @param mapstyles a named list of style to be replaced in the generated
+#' document. `list("Normal" = c("Author", "Date"))` will result in a document where
+#' all paragraphs styled with stylename "Date" and "Author" will be then styled with
+#' stylename "Normal".
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @section Finding stylenames:
@@ -234,6 +234,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'     lists:
 #'       ol.style: null
 #'       ul.style: null
+#'     mapstyles:
+#'       Normal: ['First Paragraph', 'Author', 'Date']
 #' ---
 #' ```
 #' @examples
@@ -270,9 +272,9 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' }
 #' @importFrom officer change_styles
 #' @importFrom utils modifyList
-rdocx_document <- function(mapstyles,
-                           base_format = "rmarkdown::word_document",
+rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
+                           mapstyles = list(),
                            ...) {
 
   base_format_fun <- get_fun(base_format)
@@ -311,9 +313,6 @@ rdocx_document <- function(mapstyles,
     output_formats$knitr$knit_hooks <- list()
   }
   output_formats$knitr$knit_hooks$plot <- plot_word_fig_caption
-
-  if( missing(mapstyles) )
-    mapstyles <- list()
 
   output_formats$post_knit <- function(metadata, input_file, runtime, ...){
     output_file <- file_with_meta_ext(input_file, "knit", "md")
