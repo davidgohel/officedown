@@ -251,7 +251,7 @@ You should see a window that looks like the one below:
 In the Define New Table Style window, start give your new style a name. There
 are a many formatting options available in this window. For example, you can
 change the font and font style, change the border and cell colors, and change
-the text alignment. Note there's no opption to apply a style to individual
+the text alignment. Note there's no option to apply a style to individual
 cells, this is a Word limit, [Package
 flextable](https://davidgohel.github.io/flextable) is to be used if this is what
 you need.
