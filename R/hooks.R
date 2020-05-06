@@ -11,7 +11,7 @@ plot_word_fig_caption <- function(x, options) {
 
   cap_str <- pandoc_wml_caption(cap = options$fig.cap, cap.style = options$fig.cap.style,
                                 cap.pre = options$fig.cap.pre, cap.sep = options$fig.cap.sep,
-                                id = options$fig.id, seq_id = "fig")
+                                id = options$fig.id, seq_id = options$fig.lp)
 
   fig.width <- opts_current$get("fig.width")
   if(is.null(fig.width)) fig.width <- 5

@@ -318,8 +318,9 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     content <- readLines(output_file)
 
-    content <- post_knit_table_captions( content,
-      tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep)
+    content <- post_knit_table_captions(content,
+      tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep,
+      style = tables$caption$style)
     content <- post_knit_references(content, lp = "tab:")
     content <- post_knit_references(content, lp = "fig:")
     content <- post_knit_references(content)

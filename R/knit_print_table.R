@@ -41,6 +41,7 @@ opts_current_table <- function(){
   tab.cap.sep <- get_table_design_opt("tab.cap.sep", default = ":")
   tab.cap <- opts_current$get("tab.cap")
   tab.id <- opts_current$get("tab.id")
+  tab.lp <- opts_current$get("tab.lp")
   tab.style <- opts_current$get("tab.style")
   tab.layout <- get_table_design_opt("tab.layout", default = "autofit")
   tab.width <- get_table_design_opt("tab.width", default = 1)
@@ -85,7 +86,7 @@ opts_current_table <- function(){
   list(cap.style = tab.cap.style, cap.style_id = tab.cap.style_id,
        cap.pre = tab.cap.pre, cap.sep = tab.cap.sep,
        id = tab.id, cap = tab.cap,
-       style = tab.style, seq_id = "tab",
+       style = tab.style, seq_id = tab.lp,
        table_layout = table_layout(type = tab.layout),
        table_width = table_width(width = tab.width, unit = "pct"),
        first_row = first_row,

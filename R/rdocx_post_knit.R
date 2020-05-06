@@ -4,17 +4,19 @@ as_reference <- function(z){
   paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
 }
 
-post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep){
-
+post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style) {
   is_captions <- grepl("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", content)
-  if(any(is_captions)){
+  if (any(is_captions)) {
+    browser()
     captions <- content[is_captions]
     ids <- gsub("<caption>\\(\\\\#tab:([-[:alnum:]]+)\\)(.*)</caption>", "\\1", captions)
     labels <- gsub("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", "\\1", captions)
-    str <- mapply(function(label, id){
-      pandoc_wml_caption(cap = label, cap.style = options$fig.cap.style,
-                                    cap.pre = tab.cap.pre, cap.sep = tab.cap.sep,
-                                    id = id, seq_id = "tab")
+    str <- mapply(function(label, id) {
+      pandoc_wml_caption(
+        cap = label, cap.style = style,
+        cap.pre = tab.cap.pre, cap.sep = tab.cap.sep,
+        id = id, seq_id = "tab:"
+      )
     }, label = labels, id = ids, SIMPLIFY = FALSE)
     content[is_captions] <- unlist(str)
   }
