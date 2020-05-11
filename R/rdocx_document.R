@@ -277,8 +277,16 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
                            mapstyles = list(),
                            ...) {
 
+  args <- list(...)
+  if(is.null(args$reference_docx)){
+    args$reference_docx <- system.file(
+      package = "officedown", "examples",
+      "bookdown", "template.docx"
+    )
+  }
+
   base_format_fun <- get_fun(base_format)
-  output_formats <- base_format_fun(...)
+  output_formats <- do.call(base_format_fun, args)
 
 
   tables <- modifyList(tables_default_values, tables)
