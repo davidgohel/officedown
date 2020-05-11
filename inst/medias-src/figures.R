@@ -88,7 +88,6 @@ img_list <- list.files(dir_src, pattern = "^officer_", full.names = TRUE) %>%
 
 geom <-  "1674x"
 geom <-  "1250x"
-browser()
 
 img_stack <- list()
 img_stack[[1]] <- img_list[[1]] %>% image_extent(geometry = geom)

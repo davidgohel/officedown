@@ -215,4 +215,61 @@ process_embedded_docx <- function( rdoc ){
   rdoc
 }
 
+process_sections <- function( x ){
+
+  all_nodes <- xml_find_all(x$doc_obj$get(), "//w:pPr/w:sectPr")
+  main_sect <- xml_find_first(x$doc_obj$get(), "w:body/w:sectPr")
+
+  for(node_id in seq_along(all_nodes) ){
+    current_node <- as_xml_document(all_nodes[[node_id]])
+    new_node <- as_xml_document(main_sect)
+
+    # correct type ---
+    type <- xml_child(current_node, "w:type")
+    type_ref <- xml_child(new_node, "w:type")
+    if( !inherits(type, "xml_missing") ){
+      if( !inherits(type_ref, "xml_missing") )
+        type_ref <- xml_replace(type_ref, type)
+      else xml_add_child(new_node, type)
+    }
+
+    # correct cols ---
+    cols <- xml_child(current_node, "w:cols")
+    cols_ref <- xml_child(new_node, "w:cols")
+    if( !inherits(cols, "xml_missing") ){
+      if( !inherits(cols_ref, "xml_missing") )
+        cols_ref <- xml_replace(cols_ref, cols)
+      else xml_add_child(new_node, cols)
+    }
+
+    # correct pgSz ---
+    pgSz <- xml_child(current_node, "w:pgSz")
+    pgSz_ref <- xml_child(new_node, "w:pgSz")
+    if( !inherits(pgSz, "xml_missing") ){
+
+      if( !inherits(pgSz_ref, "xml_missing") ){
+        xml_attr(pgSz_ref, "w:orient") <- xml_attr(pgSz, "orient")
+
+        wref <- as.integer( xml_attr(pgSz_ref, "w") )
+        href <- as.integer( xml_attr(pgSz_ref, "h") )
+
+        if( xml_attr(pgSz, "orient") %in% "portrait" ){
+          h <- ifelse( wref < href, href, wref )
+          w <- ifelse( wref < href, wref, href )
+        } else if( xml_attr(pgSz, "orient") %in% "landscape" ){
+          w <- ifelse( wref < href, href, wref )
+          h <- ifelse( wref < href, wref, href )
+        }
+        xml_attr(pgSz_ref, "w:w") <- w
+        xml_attr(pgSz_ref, "w:h") <- h
+      } else {
+        xml_add_child(new_node, pgSz)
+      }
+    }
+
+    node <- xml_replace(all_nodes[[node_id]], new_node)
+  }
+  x
+}
+
 
