@@ -65,13 +65,9 @@ pandoc_wml_caption <- function(cap = NULL, cap.style = NULL, cap.pre = NULL, cap
     seq_id <- gsub(":$", "", seq_id)
     autonum <- run_autonum(seq_id = seq_id,
                            pre_label = cap.pre,
-                           post_label = cap.sep)
+                           post_label = cap.sep, bkm = id, bkm_all = TRUE)
     autonum <- paste("`", to_wml(autonum), "`{=openxml}", sep = "")
     run_str <- paste0(autonum, run_str)
-  }
-
-  if(!is.null(id)) {
-    run_str <- as_bookmark_md(id, run_str)
   }
 
   paste0(if(!is.null(cap.style)) paste0("\n\n::: {custom-style=\"", cap.style, "\"}"),

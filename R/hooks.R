@@ -7,11 +7,18 @@
 plot_word_fig_caption <- function(x, options) {
 
   if(!is.character(options$fig.cap)) options$fig.cap <- NULL
-  if(!is.character(options$fig.id)) options$fig.id <- NULL
+  if(is.null(options$fig.id))
+    fig.id <- options$label
+  else fig.id <- options$fig.id
 
-  cap_str <- pandoc_wml_caption(cap = options$fig.cap, cap.style = options$fig.cap.style,
-                                cap.pre = options$fig.cap.pre, cap.sep = options$fig.cap.sep,
-                                id = options$fig.id, seq_id = options$fig.lp)
+  bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,
+                      autonum = run_autonum(
+                        seq_id = options$fig.lp,
+                        pre_label = options$fig.cap.pre,
+                        post_label = options$fig.cap.sep,
+                        bkm = fig.id, bkm_all = FALSE
+                      ))
+  cap_str <- to_wml(bc, knitting = TRUE)
 
   fig.width <- opts_current$get("fig.width")
   if(is.null(fig.width)) fig.width <- 5

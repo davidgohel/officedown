@@ -7,7 +7,6 @@ as_reference <- function(z){
 post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style) {
   is_captions <- grepl("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", content)
   if (any(is_captions)) {
-    browser()
     captions <- content[is_captions]
     ids <- gsub("<caption>\\(\\\\#tab:([-[:alnum:]]+)\\)(.*)</caption>", "\\1", captions)
     labels <- gsub("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", "\\1", captions)

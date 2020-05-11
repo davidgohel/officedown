@@ -78,7 +78,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
 ### Tableau 1
 
 
-```{r tab.cap="caption 1", tab.id="mtcars", tab.style = "table_template"}
+```{r tab.cap="caption 1", tab.id="mtcars"}
 head(mtcars)
 ```
 
