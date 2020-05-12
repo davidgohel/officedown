@@ -65,7 +65,8 @@ knit_print.data.frame <- function(x, ...) {
                   autonum = run_autonum(
                     seq_id = gsub(":$", "", tab_props$tab.lp),
                     pre_label = tab_props$cap.pre,
-                    post_label = tab_props$cap.sep
+                    post_label = tab_props$cap.sep,
+                    bkm = tab_props$id
                   ))
 
     cap_str <- to_wml(bc, knitting = TRUE)

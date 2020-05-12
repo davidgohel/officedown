@@ -13,7 +13,7 @@ plot_word_fig_caption <- function(x, options) {
 
   bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,
                       autonum = run_autonum(
-                        seq_id = options$fig.lp,
+                        seq_id = gsub(":$", "", options$fig.lp),
                         pre_label = options$fig.cap.pre,
                         post_label = options$fig.cap.sep,
                         bkm = fig.id, bkm_all = FALSE
