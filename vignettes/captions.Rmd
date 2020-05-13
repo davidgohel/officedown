@@ -64,8 +64,8 @@ You might have to (or want to) use only one single style for table and
 graphic captions and need to generate one table of contents for tables and 
 one for charts. 
 
-In that case use `block_toc` with argument `seq_id` set to `tab` for table captions
-and `fig` for figure captions. 
+In that case use `block_toc` with argument `seq_id` set by default to `tab` for 
+table captions and `fig` for figure captions. 
 
 ```{r eval=FALSE}
 block_toc(seq_id = "tab")
@@ -74,6 +74,16 @@ block_toc(seq_id = "tab")
 OR
 
 `<!---BLOCK_TOC{seq_id: "fig"}--->` 
+
+#### What is that sequence id?
+
+When using Word, you can add a list of figures or tables (go to the "References"
+tab and select "Insert Table of Figures"). By default, you won't see you
+sequence in the menu because Word is storing locally 3 sequence names in your
+profile (for tables, figures and eequation). Although not recommended, you can
+change `tab.lp` to `Tabelle` (or `Tableau`) and benefit from the feature
+manually from Word. Again, this is not recommended as it will force you to
+update that value for little gain.
 
 ## Sequence options
 
