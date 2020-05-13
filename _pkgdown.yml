@@ -13,6 +13,19 @@ home:
 navbar:
   title: officedown
   type: default
+  left:
+  - text: YAML header
+    href: articles/yaml.html
+  - text: Captions and references
+    href: articles/captions.html
+  - text: officer support
+    href: articles/officer.html
+  - text: data.frame printing
+    href: articles/tables.html
+  - text: Lists
+    href: articles/lists.html
   right:
+  - text: Function reference
+    href: reference/index.html
   - icon: fa-github fa-lg
     href: https://github.com/davidgohel/officedown

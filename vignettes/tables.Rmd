@@ -1,8 +1,8 @@
 ---
-title: "Tables"
+title: "data.frame printing"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Tables}
+  %\VignetteIndexEntry{data.frame printing}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
