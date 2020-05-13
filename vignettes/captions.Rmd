@@ -1,0 +1,129 @@
+---
+title: "Captions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Captions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Set caption label
+
+> Use knitr chunk options `fig.cap` or `tab.cap` to specify the label of the
+> caption. If a table, caption will be added before the table, if a graphic,
+> caption will be added after the graphic. 
+
+```{r comment="", echo=FALSE}
+cat('```{r fig.cap="figure caption"}\nplot(1:12)\n```\n\n```{r tab.cap="table caption"}\nhead(iris)\n```')
+```
+
+
+## Lists of Figures and Tables
+
+You can list and organize the figures or tables in a Word document by creating a table of 
+figures, much like a table of contents. 
+
+### Using stylename
+
+R Markdown uses the Word paragraph style "Image Caption" for graphic captions.
+To my knowledge, there is no official feature for table captions and therefore no
+style associated with table captions. Word, on the other hand, only uses a
+paragraph style called "Caption" whether the caption is relative to a graph, a
+table or an equation. Note that this style name is specific to each country.
+
+The choice that has been made with `officedown` is to let you apply 
+one or different styles for table and graph captions. Default style for graph 
+captions is "Image Caption" and default style for table captions is "Table Caption" 
+(which is also available in R Markdown (and pandoc) Word template.
+
+
+Create a list of figures with function `block_toc` or by using 
+officedown chunk `<!---BLOCK_TOC{...}--->` 
+
+If you used two different styles for table and figures captions, use `block_toc` with 
+argument `style` set to the caption style name.
+
+```{r eval=FALSE}
+block_toc(style = "Table Caption")
+```
+
+OR
+
+`<!---BLOCK_TOC{style: "Table Caption"}--->` 
+
+### Using sequence identifier 
+
+You might have to (or want to) use only one single style for table and 
+graphic captions and need to generate one table of contents for tables and 
+one for charts. 
+
+In that case use `block_toc` with argument `seq_id` set to `tab` for table captions
+and `fig` for figure captions. 
+
+```{r eval=FALSE}
+block_toc(seq_id = "tab")
+```
+
+OR
+
+`<!---BLOCK_TOC{seq_id: "fig"}--->` 
+
+## Sequence options
+
+Legends for tables and figures can be configured as required. We have chosen default values for the options that are classic in terms of usage but these values correspond to the English language. If you are writing in Spanish, German, or another language, you probably want to change these values to match your language.
+
+
+The values to be configured for the tables are the following:
+
+```yaml
+tables:
+  caption:
+    style: Table Caption
+    pre: 'Table '
+    sep: ': '
+```
+
+These values can also be altered via the function `knitr::opts_chunk$set()`.
+
+```{r eval=FALSE}
+knitr::opts_chunk$set(
+  tab.cap.style = "Table Caption",
+  tab.cap.pre = "Table ",
+  tab.cap.sep = ": ",
+  )
+```
+
+
+The values to be configured for the figures are the following:
+
+```yaml
+plots:
+  caption:
+    style: Image Caption
+    pre: 'Figure '
+    sep: ': '
+```
+
+
+These values can also be altered via the function `knitr::opts_chunk$set()`.
+
+```{r eval=FALSE}
+knitr::opts_chunk$set(
+  fig.cap.style = "Image Caption",
+  fig.cap.pre = "Figure ",
+  fig.cap.sep = ": ",
+  )
+```
+
+You can also use at any moment knitr chunk options: 
+
+```{r comment="", echo=FALSE}
+cat('```{r fig.cap="figure caption", fig.cap.style=\"Image Caption\"}\nplot(1:12)\n```\n\n```{r tab.cap="table caption", tab.cap.style=\"Table Caption\"}\nhead(iris)\n```')
+```
