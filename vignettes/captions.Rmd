@@ -1,8 +1,8 @@
 ---
-title: "Captions"
+title: "Captions and references"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Captions}
+  %\VignetteIndexEntry{Captions and references}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -12,6 +12,23 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+```
+
+```{css, echo = FALSE}
+img {
+  width: 85%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.medium > p > img {
+  width: 50%;
+}
+.small > p > img {
+  width: 30%;
+}
 ```
 
 ## Set caption label
@@ -24,6 +41,41 @@ knitr::opts_chunk$set(
 cat('```{r fig.cap="figure caption"}\nplot(1:12)\n```\n\n```{r tab.cap="table caption"}\nhead(iris)\n```')
 ```
 
+![](../man/figures/CR-r-chunk.png)
+
+It will produce an auto-numbered caption associated with a bookmark:
+
+::: medium
+
+![](../man/figures/CR-caption-bookmark.png)
+:::
+
+
+
+
+## Cross-references
+
+Cross-referencing is particularly interesting when using `{bookdown}`. Bookdown
+references and captions are not always satisfying some organizations
+requirements that impose usage of computed numbered captions and references to
+them for Word documents. `{officedown}` bring this feature: caption are autonumbered 
+and a bookmark is set on the chunk containing the number; cross-references are Word 
+references hyperlinked to the captions they are related to. 
+
+The functionality will allow the editing of Word documents produced with respect of different
+references or numbered captions. This is particulary useful when the document is
+modified in its structure (chapters moved, graphics added manually) or
+integrated into another Word document.
+
+```
+This is a linked reference to a figure: \@ref(fig:tsplot)
+```
+
+
+![](../man/figures/CR-reference_hover.png)
+
+
+To refer to simple document id, use syntax `\@ref(an_id)`:
 
 ## Lists of Figures and Tables
 
@@ -137,3 +189,4 @@ You can also use at any moment knitr chunk options:
 ```{r comment="", echo=FALSE}
 cat('```{r fig.cap="figure caption", fig.cap.style=\"Image Caption\"}\nplot(1:12)\n```\n\n```{r tab.cap="table caption", tab.cap.style=\"Table Caption\"}\nhead(iris)\n```')
 ```
+

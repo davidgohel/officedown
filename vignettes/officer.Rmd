@@ -117,3 +117,13 @@ Blah blah blah on column 2.
 
 `r taghl("<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->")`
 </pre>
+
+
+## Illustrations
+
+
+### Caption from scratch
+
+![](../man/figures/OFFICER_caption-scratch-code.png)
+
+![](../man/figures/OFFICER_caption-scratch-res.png)

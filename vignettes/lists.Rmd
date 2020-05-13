@@ -54,8 +54,46 @@ output:
       ul.style: 'Default ul'
 ```
 
-## Global
+## Global settings
 
 These parameters are global to the R Markdown document. They override the styles
 of all ordered and unordered lists. They cannot be used for a single particular
 list in the document.
+
+
+
+## How to create a Word list style
+
+> For a much more detailled explanation, read this article:
+> <https://www.howtogeek.com/355561/how-to-create-and-work-with-multilevel-lists-in-microsoft-word/>
+
+To create a list style in your `reference_docx` corresponding to your needs,
+edit the document with MS Word and add a new style of type "list".
+
+The style name will be set to "ol.style" argument if you configure an ordered
+list (i.e. with numbers corresponding to each level) or to "ul.style" argument
+if you configure an unordered list (i.e. with bullets corresponding to each
+level).
+
+You should see a window that looks like one of the two below:
+
+
+::::: row
+
+::: column2
+
+![](../man/figures/LISTS-new_style.png)
+
+:::
+
+::: column2
+
+![](../man/figures/LISTS-word-lists.png)
+:::
+
+:::::
+
+In the Define New List Style window, start give your new style a name ("Default
+ol" in the example). There are a many formatting options available in this
+window. You can change the font, define the character formatting and choose the
+type (number or bullet).
