@@ -59,6 +59,7 @@ knit_print.data.frame <- function(x, ...) {
 
     bt <- block_table(x,
                       header = get_table_design_opt("header", default = TRUE),
+                      alignment = get_table_design_opt("alignment", default = NULL),
                       properties = pt
                       )
     bc <- block_caption(label = tab_props$cap, style = tab_props$cap.style,

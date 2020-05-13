@@ -135,4 +135,16 @@ with function `knitr::opts_chunk$set()`:
 
 You can change table style for a specific table or caption style.
 
+## Column alignment
+
+Column alignment can be modified by using a chunk option named `alignment`. 
+It expects a character vector of values for each columns. Values can be:
+
+* "l" for left alignment
+* "r" for right alignment
+* "c" for center alignment
+
+<pre><code>&#96;&#96;&#96;{r alignment=c("l", "l", "r", "r", "c")} 
+iris
+&#96;&#96;&#96;</code></pre>
 
