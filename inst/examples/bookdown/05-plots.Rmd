@@ -1,7 +1,7 @@
 # Graphics {#graphics}
 
 
-```{r fig.cap="economics plot", fig.id = "tsplot", fig.cap.style="Image Caption"}
+```{r fig.cap="economics plot", fig.id = "ts-plot", fig.cap.style="Image Caption"}
 year <- function(x) as.POSIXlt(x)$year + 1900
 ggplot(economics, aes(date, unemploy / pop)) +
   geom_line() + theme_minimal()
