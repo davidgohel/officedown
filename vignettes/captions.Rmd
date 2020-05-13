@@ -15,19 +15,11 @@ knitr::opts_chunk$set(
 ```
 
 ```{css, echo = FALSE}
-img {
-  width: 85%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 .medium > p > img {
   width: 50%;
 }
-.small > p > img {
-  width: 30%;
+.unpeugrand > p > img {
+  width: 85%;
 }
 ```
 
@@ -41,7 +33,11 @@ img {
 cat('```{r fig.cap="figure caption"}\nplot(1:12)\n```\n\n```{r tab.cap="table caption"}\nhead(iris)\n```')
 ```
 
+::: unpeugrand
+
 ![](../man/figures/CR-r-chunk.png)
+:::
+
 
 It will produce an auto-numbered caption associated with a bookmark:
 
