@@ -89,54 +89,33 @@ rvg). Wrap you R plot commands with function dml to use this graphic capability.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6.021</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
+  <a href="../articles/yaml.html">YAML header</a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
-</li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Articles
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../articles/captions.html">Captions</a>
-    </li>
-    <li>
-      <a href="../articles/cross_references.html">Cross references</a>
-    </li>
-    <li>
-      <a href="../articles/lists.html">Lists</a>
-    </li>
-    <li>
-      <a href="../articles/officer.html">officer support</a>
-    </li>
-    <li>
-      <a href="../articles/tables.html">Tables</a>
-    </li>
-    <li>
-      <a href="../articles/yaml.html">YAML header</a>
-    </li>
-  </ul>
+  <a href="../articles/captions.html">Captions and references</a>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="../articles/officer.html">officer support</a>
+</li>
+<li>
+  <a href="../articles/tables.html">data.frame printing</a>
+</li>
+<li>
+  <a href="../articles/lists.html">Lists</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
+  <a href="../reference/index.html">Function reference</a>
+</li>
+<li>
   <a href="https://github.com/davidgohel/officedown">
     <span class="fa fa-github fa-lg"></span>
      
@@ -156,7 +135,7 @@ rvg). Wrap you R plot commands with function dml to use this graphic capability.
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Advanced R Markdown PowerPoint Format</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/davidgohel/officedown/blob/master/R/rpptx_document.R'><code>R/rpptx_document.R</code></a></small>
     <div class="hidden name"><code>rpptx_document.Rd</code></div>
     </div>
 
@@ -225,7 +204,7 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
   <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>render</a></span>(<span class='no'>rmd_file</span>, <span class='kw'>output_file</span> <span class='kw'>=</span> <span class='no'>pptx_file_1</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>processing file: file563e81aea63.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
+#&gt; <span class='message'>processing file: file18001b03c6ac.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
 #&gt;    inline R code fragments
 #&gt; 
 #&gt;   |                                                                              |.....                                                                 |   7%
@@ -319,8 +298,8 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
 #&gt; label: unnamed-chunk-11</div><div class='output co'>#&gt;   |                                                                              |......................................................................| 100%
 #&gt;   ordinary text without R code
 #&gt; 
-#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: file563e81aea63.knit.md</span></div><div class='output co'>#&gt; /usr/local/bin/pandoc +RTS -K512m -RTS file563e81aea63.utf8.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpqKnhCO/file563e1f120dbd.pptx --reference-doc /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpqKnhCO/file563e27300322.pptx </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Output created: /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpqKnhCO/file563e1f120dbd.pptx</span></div></pre>
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: file18001b03c6ac.knit.md</span></div><div class='output co'>#&gt; /usr/local/bin/pandoc +RTS -K512m -RTS file18001b03c6ac.utf8.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp1VY0nm/file180014e8540f.pptx --reference-doc /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp1VY0nm/file180090c90ae.pptx </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp1VY0nm/file180014e8540f.pptx</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -333,7 +312,7 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
       <footer>
       <link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version&nbsp;0.0.6.021 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
+  <p>Version&nbsp;0.0.7 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
   </p>
 </div>
 <div class="pkgdown">

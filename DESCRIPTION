@@ -1,12 +1,12 @@
 Package: officedown
 Type: Package
 Title: 'R Markdown' Format for 'Microsoft Word' and 'Microsoft PowerPoint' Documents
-Version: 0.0.6.021
+Version: 0.0.7
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
     person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 
-    comment = "rvg for rmarkdown implementation"))
+    comment = "rmarkdown implementation for rvg"))
 Description: It allows production of corporate documents from 'R Markdown' by 
  reusing formatting defined in 'Microsoft Word' documents. You can reuse table styles, 
  list styles but also add column sections, landscape oriented pages. Table and image 
@@ -28,6 +28,8 @@ Imports: knitr,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
 Suggests: ggplot2, flextable
+URL: https://davidgohel.github.io/officedown
+BugReports: https://github.com/davidgohel/officedown/issues
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
 Remotes: davidgohel/officer

@@ -29,3 +29,15 @@ navbar:
     href: reference/index.html
   - icon: fa-github fa-lg
     href: https://github.com/davidgohel/officedown
+
+
+reference:
+  - title: R Markdown output formats
+    contents:
+    - rdocx_document
+    - rdocx_document2
+    - rpptx_document
+  - title: Utils
+    contents:
+    - knit_print_block
+    - knit_print_run
