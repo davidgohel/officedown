@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6.018</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.6.021</span>
       </span>
     </div>
 
@@ -61,6 +61,9 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/captions.html">Captions</a>
+    </li>
+    <li>
       <a href="../articles/cross_references.html">Cross references</a>
     </li>
     <li>
@@ -291,6 +294,19 @@ img {
 <p>You can change table style for a specific table or caption style.</p>
 </div>
 </div>
+<div id="column-alignment" class="section level2">
+<h2 class="hasAnchor">
+<a href="#column-alignment" class="anchor"></a>Column alignment</h2>
+<p>Column alignment can be modified by using a chunk option named <code>alignment</code>. It expects a character vector of values for each columns. Values can be:</p>
+<ul>
+<li>“l” for left alignment</li>
+<li>“r” for right alignment</li>
+<li>“c” for center alignment</li>
+</ul>
+<pre><code>```{r alignment=c("l", "l", "r", "r", "c")} 
+iris
+```</code></pre>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -305,7 +321,7 @@ img {
 
       <footer><link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.0.6.018 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.0.6.021 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
