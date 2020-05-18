@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="R Markdown Format for Microsoft Word and Microsoft PowerPoint Documents">
-<meta property="og:description" content="It allows production of corporate documents from R Markdown by 
+<meta property="og:description" content="Allows production of Microsoft corporate documents from R Markdown by 
  reusing formatting defined in Microsoft Word documents. You can reuse table styles, 
  list styles but also add column sections, landscape oriented pages. Table and image 
  captions as well as cross-references are transformed into Microsoft Word fields, 
@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@
 
 
 <blockquote>
-<p><code>officedown</code> is bringing some <a href="https://cran.r-project.org/package=officer">officer</a> features into R markdown documents.</p>
+<p><code>{officedown}</code> is bringing some <a href="https://cran.r-project.org/package=officer">officer</a> features into R markdown documents.</p>
 </blockquote>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -111,7 +111,7 @@
 </li>
 <li>
 <p>Ability to use the table styles and list styles defined in the “reference_docx” which serves as a template for the pandoc document.</p>
-<p>With rmarkdown, you can reuse all paragraph styles. With officedown, you can also reuse table and list styles. These features are based on the use of Word templates (<code>reference_docx</code>). It is recommended to learn how “Word styles” work for paragraphs, tables and lists if you never really used Word styles.</p>
+<p>With rmarkdown, you can reuse all paragraph styles. With <code>{officedown}</code>, you can also reuse table and list styles. These features are based on the use of Word templates (<code>reference_docx</code>). It is recommended to learn how “Word styles” work for paragraphs, tables and lists if you never really used Word styles.</p>
 <blockquote>
 <p>These styles are to be defined in a Word document that serves as a template. You must first create a Word document (or edit an existing Word document), adjust the styles and save it. This document which serves as a vehicle for the defined styles will be used by R Markdown, the argument <code>reference_docx</code> must be filled in with the file path.</p>
 </blockquote>
@@ -128,6 +128,10 @@
 <p>It is then easy to copy and paste the content into another document without losing the reference numbers. Captions are also auto-numbered by Word.</p>
 </blockquote>
 </li>
+<li>
+<p>Full support for flextable output, including with outputs containing images and links.</p>
+<p>The package enable knitting flextable outputs with images or plots in cells without using <code>{officer}</code>. Insertion of images in <code>{flextable}</code> is not supported with <code><a href="https://rdrr.io/pkg/rmarkdown/man/word_document.html">rmarkdown::word_document</a></code> but is possible by using <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>.</p>
+</li>
 </ul>
 </div>
 <div id="powerpoint" class="section level3">
@@ -140,7 +144,7 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install officedown from github with:</p>
+<p>You can install <code>{officedown}</code> from github with:</p>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"davidgohel/officedown"</span>)</pre></div>
 <p>Supported formats require some minimum <a href="https://pandoc.org/installing.html">pandoc</a> versions:</p>
 <table class="table">
@@ -166,9 +170,9 @@
 <div id="rdocx_document" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rdocx_document" class="anchor"></a>rdocx_document</h3>
-<p>use RStudio Menu to create a document from <code>officedown</code> template.</p>
+<p>use RStudio Menu to create a document from <code>{officedown}</code> template.</p>
 <p><img src="reference/figures/README-rstudio-new.png"></p>
-<p>It creates an R markdown document, parameter <code>output</code> is set to <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>. Note that package <code>officedown</code> need to be loaded in the Rmd.</p>
+<p>It creates an R markdown document, parameter <code>output</code> is set to <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>. Note that package <code>{officedown}</code> need to be loaded in the Rmd.</p>
 <p><img src="reference/figures/README-minimal-rmd.png"></p>
 </div>
 </div>
@@ -212,6 +216,7 @@
 <li>David Gohel <br><small class="roles"> Author, maintainer </small>  </li>
 <li>Noam Ross <br><small class="roles"> Author </small>  <br><small>(rmarkdown implementation for rvg)</small>
 </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 
@@ -221,7 +226,7 @@
 
       <footer><link href="ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.0.7 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
