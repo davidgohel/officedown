@@ -188,6 +188,7 @@ output:
 
 \examples{
 library(rmarkdown)
+if(pandoc_available()){
 
 # official template -----
 skeleton <- system.file(package = "officedown",
@@ -223,6 +224,7 @@ docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
 
 if(file.exists(docx_file_2)){
   message("file ", docx_file_2, " has been written.")
+}
 }
 }
 }

@@ -23,7 +23,7 @@
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @examples
 #' library(rmarkdown)
-#' if(require("ggplot2")){
+#' if(pandoc_available() && require("ggplot2")){
 #'   skeleton <- system.file(package = "officedown",
 #'     "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
 #'   rmd_file <- tempfile(fileext = ".Rmd")

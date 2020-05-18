@@ -2,7 +2,7 @@
 % Please edit documentation in R/rdocx_knit_print.R
 \name{knit_print_run}
 \alias{knit_print_run}
-\title{Force run printing while knitting}
+\title{Force Run Printing while Knitting}
 \usage{
 knit_print_run(x, ...)
 }
@@ -15,8 +15,29 @@ knit_print_run(x, ...)
 None. the function only print XML code.
 }
 \description{
-When used in a loop, runs output anything
-because \code{knit_print} method is not called. In that situation,
-use the function to force printing. Also you should tell the chunk
+When used in a loop, runs do not outputs
+because \code{knit_print} method is not called.
+Use the function to force printing. Also you should tell the chunk
 to use results 'as-is' (by adding \code{results='asis'} to your chunk header).
 }
+\examples{
+library(rmarkdown)
+rmd_file_src <- system.file(
+  package = "officedown", "examples", "word_loop.Rmd")
+rmd_file_des <- tempfile(fileext = ".Rmd")
+if(pandoc_available()){
+
+  file.copy(rmd_file_src, to = rmd_file_des)
+  docx_file_1 <- tempfile(fileext = ".docx")
+  render(rmd_file_des, output_file = docx_file_1, quiet = TRUE)
+
+  if(file.exists(docx_file_1)){
+    message("file ", docx_file_1, " has been written.")
+  }
+}
+}
+\seealso{
+Other functions that force printing: 
+\code{\link{knit_print_block}()}
+}
+\concept{functions that force printing}

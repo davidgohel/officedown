@@ -41,17 +41,30 @@ knit_print.block <- function(x, ...){
 }
 
 #' @export
-#' @title Force block printing while knitting
-#' @description When used in a loop, blocks output anything
-#' because `knit_print` method is not called. In that situation,
-#' use the function to force printing. Also you should tell the chunk
+#' @title Force Block Printing while Knitting
+#' @description When used in a loop, calls to blocks do not generate
+#' output because `knit_print` method is not called.
+#' Use the function to force printing. Also you should tell the chunk
 #' to use results 'as-is' (by adding `results='asis'` to your chunk header).
 #' @param x a block object, result of a block function from officer package
 #' @param ... unused arguments
-#' @section Word example:
-#' Copy example located here:
-#' `system.file(package = "officedown", "examples", "word_loop.Rmd")`
 #' @return None. the function only print XML code.
+#' @family functions that force printing
+#' @examples
+#' library(rmarkdown)
+#' rmd_file_src <- system.file(
+#'   package = "officedown", "examples", "word_loop.Rmd")
+#' rmd_file_des <- tempfile(fileext = ".Rmd")
+#' if(pandoc_available()){
+#'
+#'   file.copy(rmd_file_src, to = rmd_file_des)
+#'   docx_file_1 <- tempfile(fileext = ".docx")
+#'   render(rmd_file_des, output_file = docx_file_1, quiet = TRUE)
+#'
+#'   if(file.exists(docx_file_1)){
+#'     message("file ", docx_file_1, " has been written.")
+#'   }
+#' }
 knit_print_block <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     cat(paste("```{=openxml}", to_wml(x), "```\n\n", sep = "\n"))
@@ -59,14 +72,30 @@ knit_print_block <- function(x, ...){
 }
 
 #' @export
-#' @title Force run printing while knitting
-#' @description When used in a loop, runs output anything
-#' because `knit_print` method is not called. In that situation,
-#' use the function to force printing. Also you should tell the chunk
+#' @title Force Run Printing while Knitting
+#' @description When used in a loop, runs do not outputs
+#' because `knit_print` method is not called.
+#' Use the function to force printing. Also you should tell the chunk
 #' to use results 'as-is' (by adding `results='asis'` to your chunk header).
 #' @param x a run object, result of a run function from officer package
 #' @param ... unused arguments
+#' @family functions that force printing
 #' @return None. the function only print XML code.
+#' @examples
+#' library(rmarkdown)
+#' rmd_file_src <- system.file(
+#'   package = "officedown", "examples", "word_loop.Rmd")
+#' rmd_file_des <- tempfile(fileext = ".Rmd")
+#' if(pandoc_available()){
+#'
+#'   file.copy(rmd_file_src, to = rmd_file_des)
+#'   docx_file_1 <- tempfile(fileext = ".docx")
+#'   render(rmd_file_des, output_file = docx_file_1, quiet = TRUE)
+#'
+#'   if(file.exists(docx_file_1)){
+#'     message("file ", docx_file_1, " has been written.")
+#'   }
+#' }
 knit_print_run <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     cat(paste("`", to_wml(x), "`{=openxml}", sep = ""))

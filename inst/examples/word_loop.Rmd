@@ -20,3 +20,12 @@ for(i in 1:4){
 }
 ```
 
+
+```{r results='asis', echo=FALSE}
+for(i in 1:4){
+  knit_print_run(
+      ftext("This is a text. ", fp_text(font.size = 10 + i*4)),
+    )
+}
+```
+

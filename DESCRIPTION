@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: 'R Markdown' Format for 'Microsoft Word' and 'Microsoft PowerPoint' Documents
-Version: 0.0.8.002
+Version: 0.0.8.003
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
@@ -32,5 +32,5 @@ URL: https://davidgohel.github.io/officedown
 BugReports: https://github.com/davidgohel/officedown/issues
 RoxygenNote: 7.1.0
 Roxygen: list(markdown = TRUE)
-Remotes: davidgohel/officer
+SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
 VignetteBuilder: knitr

@@ -244,6 +244,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ```
 #' @examples
 #' library(rmarkdown)
+#' if(pandoc_available()){
 #'
 #' # official template -----
 #' skeleton <- system.file(package = "officedown",
@@ -279,6 +280,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'
 #' if(file.exists(docx_file_2)){
 #'   message("file ", docx_file_2, " has been written.")
+#' }
 #' }
 #' }
 #' @importFrom officer change_styles
