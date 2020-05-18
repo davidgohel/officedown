@@ -181,6 +181,7 @@ output:
       ul.style: null
     mapstyles:
       Normal: ['First Paragraph', 'Author', 'Date']
+    reference_num: true
 ---
 }
 }
@@ -197,11 +198,17 @@ file.copy(skeleton, to = rmd_file)
 docx_file_1 <- tempfile(fileext = ".docx")
 render(rmd_file, output_file = docx_file_1, quiet = TRUE)
 
+\donttest{
 # bookdown example -----
 
 # All above is only to make sure we do not write in your wd
 bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
+
+
 temp_dir <- tempfile()
+# uncomment next line to get the result in your working directory
+# temp_dir <- getwd()
+
 dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
 file.copy(
   from = list.files(bookdown_loc, full.names = TRUE),
@@ -216,5 +223,6 @@ docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
 
 if(file.exists(docx_file_2)){
   message("file ", docx_file_2, " has been written.")
+}
 }
 }

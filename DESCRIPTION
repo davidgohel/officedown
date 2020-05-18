@@ -1,13 +1,13 @@
 Package: officedown
 Type: Package
 Title: 'R Markdown' Format for 'Microsoft Word' and 'Microsoft PowerPoint' Documents
-Version: 0.0.7.001
+Version: 0.0.8.002
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
     person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 
     comment = "rmarkdown implementation for rvg"))
-Description: It allows production of corporate documents from 'R Markdown' by 
+Description: Allows production of 'Microsoft' corporate documents from 'R Markdown' by 
  reusing formatting defined in 'Microsoft Word' documents. You can reuse table styles, 
  list styles but also add column sections, landscape oriented pages. Table and image 
  captions as well as cross-references are transformed into 'Microsoft Word' fields, 

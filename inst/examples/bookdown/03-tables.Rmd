@@ -20,3 +20,27 @@ This is famous `iris` dataset:
 head(iris)
 ```
 
+
+This a flextable:
+
+```{r tab.cap='flextable', tab.id='flextable'}
+if(require("flextable")){
+  ft <- flextable(head(mtcars, n = 10))
+  ft <- fontsize(ft, size = 9, part = "all")
+  ft <- compose(x = ft, j = "mpg",
+    value = as_paragraph(
+      value = lollipop(value = mpg, min = 0, max = 30, positivecol = "#DD2233", rangecol = "#DD2233")
+      ))
+  ft <- compose(x = ft, j = "drat",
+    value = as_paragraph(
+      value = minibar(value = drat, max = 6, barcol = "#DD3322")
+      ))
+  ft <- compose(x = ft, j = "qsec",
+    value = as_paragraph(
+      value = linerange(value = qsec)
+      ))
+  ft <- set_table_properties(ft, layout = "autofit")
+  ft
+  }
+```
+

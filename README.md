@@ -9,7 +9,7 @@ status](https://ci.appveyor.com/api/projects/status/github/davidgohel/officedown
 [![CRAN
 status](https://www.r-pkg.org/badges/version/officedown)](https://cran.r-project.org/package=officedown)
 
-> `officedown` is bringing some
+> `{officedown}` is bringing some
 > [officer](https://cran.r-project.org/package=officer) features into R
 > markdown documents.
 
@@ -34,11 +34,11 @@ produced by R Markdown documents by providing a range of features:
     “reference\_docx” which serves as a template for the pandoc
     document.
     
-    With rmarkdown, you can reuse all paragraph styles. With officedown,
-    you can also reuse table and list styles. These features are based
-    on the use of Word templates (`reference_docx`). It is recommended
-    to learn how “Word styles” work for paragraphs, tables and lists if
-    you never really used Word styles.
+    With rmarkdown, you can reuse all paragraph styles. With
+    `{officedown}`, you can also reuse table and list styles. These
+    features are based on the use of Word templates (`reference_docx`).
+    It is recommended to learn how “Word styles” work for paragraphs,
+    tables and lists if you never really used Word styles.
     
     > These styles are to be defined in a Word document that serves as a
     > template. You must first create a Word document (or edit an
@@ -64,6 +64,14 @@ produced by R Markdown documents by providing a range of features:
     > document without losing the reference numbers. Captions are also
     > auto-numbered by Word.
 
+  - Full support for flextable output, including with outputs containing
+    images and links.
+    
+    The package enable knitting flextable outputs with images or plots
+    in cells without using `{officer}`. Insertion of images in
+    `{flextable}` is not supported with `rmarkdown::word_document` but
+    is possible by using `officedown::rdocx_document`.
+
 ### PowerPoint
 
 The package also enhances PowerPoint productions with R Markdown by
@@ -77,7 +85,7 @@ simply wrapping your call into a call to function `dml`.
 
 ## Installation
 
-You can install officedown from github with:
+You can install `{officedown}` from github with:
 
 ``` r
 remotes::install_github("davidgohel/officedown")
@@ -95,13 +103,13 @@ Supported formats require some minimum
 
 ### rdocx\_document
 
-use RStudio Menu to create a document from `officedown` template.
+use RStudio Menu to create a document from `{officedown}` template.
 
 ![](man/figures/README-rstudio-new.png)
 
 It creates an R markdown document, parameter `output` is set to
-`officedown::rdocx_document`. Note that package `officedown` need to be
-loaded in the Rmd.
+`officedown::rdocx_document`. Note that package `{officedown}` need to
+be loaded in the Rmd.
 
 ![](man/figures/README-minimal-rmd.png)
 

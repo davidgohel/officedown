@@ -1,34 +1,46 @@
 ---
 date: "`r Sys.Date()`"
 author: "Your Name"
-title: "Untitled"
+title: "officedown template"
 output: 
-  officedown::rdocx_document
+  officedown::rdocx_document:
+    mapstyles:
+      Normal: ['First Paragraph']
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
 library(officedown)
 library(officer)
+
 fp <- fp_par(
   text.align = "center", 
   padding.bottom = 20, padding.top = 120, 
   border.bottom = fp_border())
+
 ft <- fp_text(shading.color='#EFEFEF', bold = TRUE)
 ```
 
 
-<!---CHUNK_PAGEBREAK--->
+\newpage
 
-Ce document présente la plupart des fonctionnalités du package `r ftext("officedown", ft)`. 
+This document presents most of the features of the package `r ftext("officedown", ft)`. 
 `r fp`
 
 ## Table of content
 
 <!---BLOCK_TOC--->
 
+## List of figures
 
-> Et maintenant un saut de page.\newpage
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+## List of tables
+
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+
+\newpage
 
 ## Sections
 
@@ -70,25 +82,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu,
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu pulvinar arcu, quis aliquam dui. In at cursus ante. Vestibulum non sagittis lacus. Duis vitae iaculis dui. Vivamus tempor, nibh ut pretium tempus, enim lorem dignissim quam, at euismod massa magna at magna. Sed facilisis dapibus diam nec volutpat. Maecenas facilisis dapibus egestas. Curabitur dignissim pharetra pulvinar. Nunc bibendum elit sed cursus congue. Curabitur ligula quam, iaculis faucibus orci quis, vestibulum lobortis lectus. Suspendisse fringilla nisl pulvinar, laoreet tellus sed, sollicitudin tortor. Donec consequat congue erat in iaculis. Curabitur luctus tellus ut turpis iaculis, nec laoreet ligula scelerisque.
 
 
+## Tables
 
-
-
-## Tableaux 
-
-### Tableau 1
+### Table 1
 
 
 ```{r tab.cap="caption 1", tab.id="mtcars"}
 head(mtcars)
 ```
 
-### Tableau 2
+### Table 2
 
 ```{r tab.cap="iris"}
 head(iris)
 ```
 
-### Tableau 3
+### Table 3
 
 ```{r tab.cap="cars", tab.id="cars"}
 head(cars)
@@ -98,15 +107,15 @@ head(cars)
 ## figures 
 
 
-### un graph
+### A boxplot
 
 ```{r fig.cap="A boxplot", fig.id = "boxplot"}
 boxplot(1:8)
 ```
 
-### un autre graph
+### A barplot
 
-```{r}
+```{r fig.cap="What a barplot", fig.id = "barplot"}
 barplot(1:8)
 ```
 
@@ -150,5 +159,5 @@ Tincidunt habitant sit.
 
 ## Reference
 
-see \@ref(fig:boxplot) and \@ref(tab:mtcars)!
+see figure \@ref(fig:boxplot) and table \@ref(tab:mtcars)!
 

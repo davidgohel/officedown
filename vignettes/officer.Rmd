@@ -36,7 +36,7 @@ library(officer)
 
 ## Introduction
 
-Package `officer` provides functions to produce document *blocks* and *runs*
+Package `{officer}` provides functions to produce document *blocks* and *runs*
 elements. They can be used in the R Markdown document to produce elements with
 formatting not available by default with R Markdown and pandoc:
 
