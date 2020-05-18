@@ -23,12 +23,26 @@ img {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.column2 {
+  float: left;
+  width: 49%;
+  margin: 2px;;
+}
+.medium > p > img {
+  width: 50%;
+}
 ```
 
 Pandoc does not allow easy customization of ordered or unordered lists. This
 option allows you to apply a list style for ordered lists and a list style for
 unordered lists. These list styles must be present in the `reference_docx`
 document.
+
+::: medium
+
+![](../man/figures/LISTS-example.png)
+
+:::
 
 ## How it works
 
@@ -82,13 +96,14 @@ You should see a window that looks like one of the two below:
 
 ::: column2
 
-![](../man/figures/LISTS-new_style.png)
-
+![](../man/figures/LISTS-word-lists.png)
 :::
+
 
 ::: column2
 
-![](../man/figures/LISTS-word-lists.png)
+![](../man/figures/LISTS-new_style.png)
+
 :::
 
 :::::

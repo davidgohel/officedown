@@ -7,7 +7,6 @@
 #' @author Noam Ross
 #' @importFrom knitr knit_print asis_output opts_knit opts_current
 #' @importFrom rmarkdown pandoc_version
-#' @importFrom xml2 xml_find_first
 #' @importFrom rvg dml dml_pptx
 #' @importFrom grDevices dev.off
 #' @importFrom rlang eval_tidy
