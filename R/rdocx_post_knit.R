@@ -1,6 +1,16 @@
 #' @importFrom officer run_reference to_wml
-as_reference <- function(z){
-  str <- to_wml(run_reference(z))
+as_reference_caption <- function(z){
+  sf <- run_seqfield(seqfield = paste0(" REF ", z, " \\h"))
+  str <- to_wml(sf)
+  paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
+}
+as_reference_standard <- function(z, numbered = FALSE){
+  str <- paste0(" REF ", z, " \\h")
+  if(numbered)
+    str <- paste0(str, " \\r")
+
+  sf <- run_seqfield(seqfield = str)
+  str <- to_wml(sf)
   paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
 }
 
@@ -22,10 +32,10 @@ post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style) {
   content
 }
 
-post_knit_references <- function(content, lp = ""){
+post_knit_caption_references <- function(content, lp = ""){
 
-  if(!lp %in% c("tab:", "fig:", "")){
-    stop("lp must be one of `tab:`, `fig:` or empty ``.")
+  if(!lp %in% c("tab:", "fig:")){
+    stop("lp must be one of `tab:`, `fig:`.")
   }
   regexpr_str <- paste0('\\\\@ref\\(', lp, '([-[:alnum:]]+)\\)')
 
@@ -35,7 +45,24 @@ post_knit_references <- function(content, lp = ""){
   result <- lapply(result, function(z){
     if(length(z) > 0){
       ids <- gsub(regexpr_str, '\\1', z)
-      as_reference(ids)
+      as_reference_caption(ids)
+    } else z
+  })
+  regmatches(content,gmatch) <- result
+  content
+}
+
+post_knit_std_references <- function(content, numbered = FALSE){
+
+  regexpr_str <- paste0('\\\\@ref\\(([-[:alnum:]]+)\\)')
+
+  gmatch <- gregexpr(regexpr_str, content)
+  result <- regmatches(content,gmatch)
+
+  result <- lapply(result, function(z){
+    if(length(z) > 0){
+      ids <- gsub(regexpr_str, '\\1', z)
+      as_reference_standard(ids, numbered = numbered)
     } else z
   })
   regmatches(content,gmatch) <- result

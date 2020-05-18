@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: 'R Markdown' Format for 'Microsoft Word' and 'Microsoft PowerPoint' Documents
-Version: 0.0.7
+Version: 0.0.7.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre"),
     email = "david.gohel@ardata.fr"),
@@ -23,7 +23,7 @@ LazyData: true
 Imports: knitr, 
  rmarkdown, 
  bookdown (>= 0.13),
- officer (>= 0.3.9), 
+ officer (>= 0.3.11), 
  xml2, rlang, uuid,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)

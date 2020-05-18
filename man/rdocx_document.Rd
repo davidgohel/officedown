@@ -10,6 +10,7 @@ rdocx_document(
   plots = list(),
   lists = list(),
   mapstyles = list(),
+  reference_num = TRUE,
   ...
 )
 }
@@ -109,6 +110,10 @@ ul.style: null
 document. \code{list("Normal" = c("Author", "Date"))} will result in a document where
 all paragraphs styled with stylename "Date" and "Author" will be then styled with
 stylename "Normal".}
+
+\item{reference_num}{if TRUE, text for references to sections will be
+the section number (e.g. '3.2'). If FALSE, text for references to sections
+will be the text (e.g. 'section title').}
 
 \item{...}{arguments used by \link[rmarkdown:word_document]{word_document}}
 }

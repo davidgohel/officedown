@@ -167,6 +167,9 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' document. `list("Normal" = c("Author", "Date"))` will result in a document where
 #' all paragraphs styled with stylename "Date" and "Author" will be then styled with
 #' stylename "Normal".
+#' @param reference_num if TRUE, text for references to sections will be
+#' the section number (e.g. '3.2'). If FALSE, text for references to sections
+#' will be the text (e.g. 'section title').
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @section Finding stylenames:
@@ -275,6 +278,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
                            mapstyles = list(),
+                           reference_num = TRUE,
                            ...) {
 
   args <- list(...)
@@ -329,9 +333,9 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     content <- post_knit_table_captions(content,
       tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep,
       style = tables$caption$style)
-    content <- post_knit_references(content, lp = "tab:")
-    content <- post_knit_references(content, lp = "fig:")
-    content <- post_knit_references(content)
+    content <- post_knit_caption_references(content, lp = "tab:")
+    content <- post_knit_caption_references(content, lp = "fig:")
+    content <- post_knit_std_references(content, numbered = reference_num)
     content <- block_macro(content)
     writeLines(content, output_file)
   }
