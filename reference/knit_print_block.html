@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Force block printing while knitting — knit_print_block • officedown</title>
+<title>Force Block Printing while Knitting — knit_print_block • officedown</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,10 @@
 
 
 
-<meta property="og:title" content="Force block printing while knitting — knit_print_block" />
-<meta property="og:description" content="When used in a loop, blocks output anything
-because knit_print method is not called. In that situation,
-use the function to force printing. Also you should tell the chunk
+<meta property="og:title" content="Force Block Printing while Knitting — knit_print_block" />
+<meta property="og:description" content="When used in a loop, calls to blocks do not generate
+output because knit_print method is not called.
+Use the function to force printing. Also you should tell the chunk
 to use results 'as-is' (by adding results='asis' to your chunk header)." />
 <meta property="og:image" content="/logo.png" />
 
@@ -83,7 +83,7 @@ to use results 'as-is' (by adding results='asis' to your chunk header)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
       </span>
     </div>
 
@@ -128,15 +128,15 @@ to use results 'as-is' (by adding results='asis' to your chunk header)." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Force block printing while knitting</h1>
+    <h1>Force Block Printing while Knitting</h1>
     <small class="dont-index">Source: <a href='https://github.com/davidgohel/officedown/blob/master/R/rdocx_knit_print.R'><code>R/rdocx_knit_print.R</code></a></small>
     <div class="hidden name"><code>knit_print_block.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>When used in a loop, blocks output anything
-because <code>knit_print</code> method is not called. In that situation,
-use the function to force printing. Also you should tell the chunk
+    <p>When used in a loop, calls to blocks do not generate
+output because <code>knit_print</code> method is not called.
+Use the function to force printing. Also you should tell the chunk
 to use results 'as-is' (by adding <code>results='asis'</code> to your chunk header).</p>
     </div>
 
@@ -158,13 +158,26 @@ to use results 'as-is' (by adding <code>results='asis'</code> to your chunk head
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>None. the function only print XML code.</p>
-    <h2 class="hasAnchor" id="word-example"><a class="anchor" href="#word-example"></a>Word example</h2>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    
+    <div class='dont-index'><p>Other functions that force printing: 
+<code><a href='knit_print_run.html'>knit_print_run</a>()</code></p></div>
 
-<p>Copy example located here:
-<code><a href='https://rdrr.io/r/base/system.file.html'>system.file(package = "officedown", "examples", "word_loop.Rmd")</a></code></p>
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rmarkdown</span>)
+<span class='no'>rmd_file_src</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(
+  <span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>, <span class='st'>"examples"</span>, <span class='st'>"word_loop.Rmd"</span>)
+<span class='no'>rmd_file_des</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>)
+<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_available</a></span>()){
 
+  <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>rmd_file_src</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file_des</span>)
+  <span class='no'>docx_file_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".docx"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>render</a></span>(<span class='no'>rmd_file_des</span>, <span class='kw'>output_file</span> <span class='kw'>=</span> <span class='no'>docx_file_1</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+
+  <span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='no'>docx_file_1</span>)){
+    <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"file "</span>, <span class='no'>docx_file_1</span>, <span class='st'>" has been written."</span>)
+  }
+}</div><div class='output co'>#&gt; <span class='message'>file /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp2dza2W/filea4585f82a882.docx has been written.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -177,7 +190,7 @@ to use results 'as-is' (by adding <code>results='asis'</code> to your chunk head
       <footer>
       <link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version&nbsp;0.0.7 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
+  <p>Version&nbsp;0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
   </p>
 </div>
 <div class="pkgdown">
