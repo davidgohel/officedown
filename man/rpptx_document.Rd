@@ -45,7 +45,8 @@ This function also support Vector graphics output in an editable format (using p
 }
 \examples{
 library(rmarkdown)
-if(pandoc_available() && require("ggplot2")){
+run_ok <- pandoc_available() && pandoc_version() > numeric_version("2.4")
+if(run_ok && require("ggplot2")){
   skeleton <- system.file(package = "officedown",
     "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
   rmd_file <- tempfile(fileext = ".Rmd")

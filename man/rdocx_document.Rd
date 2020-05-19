@@ -188,7 +188,9 @@ output:
 
 \examples{
 library(rmarkdown)
-if(pandoc_available()){
+run_ok <- pandoc_available() &&
+  pandoc_version() >= numeric_version("2.0")
+if(run_ok){
 
 # official template -----
 skeleton <- system.file(package = "officedown",

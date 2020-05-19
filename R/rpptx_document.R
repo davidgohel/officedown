@@ -23,7 +23,8 @@
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @examples
 #' library(rmarkdown)
-#' if(pandoc_available() && require("ggplot2")){
+#' run_ok <- pandoc_available() && pandoc_version() > numeric_version("2.4")
+#' if(run_ok && require("ggplot2")){
 #'   skeleton <- system.file(package = "officedown",
 #'     "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
 #'   rmd_file <- tempfile(fileext = ".Rmd")
@@ -105,12 +106,20 @@ get_pptx_uncached <- function() {
 #' @importFrom memoise memoise
 get_reference_pptx <- memoise(get_pptx_uncached)
 
+#' @importFrom rmarkdown pandoc_available pandoc_exec
 get_default_pandoc_data_file <- function(format = "pptx") {
   outfile <- tempfile(fileext = paste0(".", format))
 
-  ref_doc <- paste0("reference.", format)
-  system2(rmarkdown::pandoc_exec(),
-          args = c("--print-default-data-file", ref_doc),
-          stdout = outfile)
+  pandoc_exec <- pandoc_exec()
+  if(!pandoc_available() || !file.exists(pandoc_exec)){
+    file.copy(system.file(package = "officer", "template", paste0("template.", format)),
+              to = outfile)
+  } else {
+    ref_doc <- paste0("reference.", format)
+    system2(pandoc_exec,
+            args = c("--print-default-data-file", ref_doc),
+            stdout = outfile)
+  }
+
   return(outfile)
 }
