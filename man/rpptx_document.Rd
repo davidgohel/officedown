@@ -46,13 +46,24 @@ This function also support Vector graphics output in an editable format (using p
 \examples{
 library(rmarkdown)
 run_ok <- pandoc_available() && pandoc_version() > numeric_version("2.4")
+
+if(run_ok){
+  example <- system.file(package = "officedown",
+    "examples/minimal_powerpoint.Rmd")
+  rmd_file <- tempfile(fileext = ".Rmd")
+  file.copy(example, to = rmd_file)
+
+  pptx_file_1 <- tempfile(fileext = ".pptx")
+  render(rmd_file, output_file = pptx_file_1)
+}
+
 if(run_ok && require("ggplot2")){
   skeleton <- system.file(package = "officedown",
     "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
   rmd_file <- tempfile(fileext = ".Rmd")
   file.copy(skeleton, to = rmd_file)
 
-  pptx_file_1 <- tempfile(fileext = ".pptx")
-  render(rmd_file, output_file = pptx_file_1)
+  pptx_file_2 <- tempfile(fileext = ".pptx")
+  render(rmd_file, output_file = pptx_file_2)
 }
 }

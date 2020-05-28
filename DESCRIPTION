@@ -1,9 +1,9 @@
 Package: officedown
 Type: Package
-Title: 'R Markdown' Format for 'Microsoft Word' and 'Microsoft PowerPoint' Documents
+Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
 Version: 0.1.0
 Authors@R: c(
-    person("David", "Gohel", role = c("aut", "cre"),
+    person("David", "Gohel", role = c("aut", "cre", "cph"),
     email = "david.gohel@ardata.fr"),
     person(given = "Institut für Qualitätssicherung und Transparenz im Gesundheitswesen", role = c("fnd")),
     person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 

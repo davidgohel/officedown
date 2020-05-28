@@ -103,7 +103,7 @@ get_content_ph <- memoise(get_ph_uncached)
 
 get_img_dir <- function(){
   uid <- basename(tempfile(pattern = ""))
-  img_directory = file.path(getwd(), uid )
+  img_directory = file.path(tempdir(), uid )
   img_directory
 }
 list_raster_files <- function(img_dir){

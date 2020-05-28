@@ -43,8 +43,9 @@ img_stack <- list()
 img_stack[[1]] <- image_append( c(img_list[[1]], img_list[[2]]) ) %>% image_extent(geometry = "1674x")
 img_stack[[2]] <- image_append( c(img_list[[3]], img_list[[4]]) )  %>% image_extent(geometry = "1674x")
 img_stack[[3]] <- img_list[[5]] %>% image_extent(geometry = "1674x")
-img_stack[[4]] <- image_append( c(img_list[[7]], img_list[[8]]) )  %>% image_extent(geometry = "1674x")
-img_stack[[5]] <- img_list[[9]] %>% image_extent(geometry = "1674x")
+img_stack[[4]] <- img_list[[7]] %>% image_extent(geometry = "1674x")
+img_stack[[5]] <- image_append( c(img_list[[9]], img_list[[10]]) )  %>% image_extent(geometry = "1674x")
+img_stack[[6]] <- img_list[[11]] %>% image_extent(geometry = "1674x")
 
 do.call(c, img_stack) %>%
   image_append(stack = TRUE) %>%

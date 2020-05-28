@@ -190,27 +190,25 @@ output:
 library(rmarkdown)
 run_ok <- pandoc_available() &&
   pandoc_version() >= numeric_version("2.0")
+
 if(run_ok){
 
-# official template -----
-skeleton <- system.file(package = "officedown",
-  "rmarkdown/templates/word/skeleton/skeleton.Rmd")
+# minimal example -----
+example <- system.file(package = "officedown",
+  "examples/minimal_word.Rmd")
 rmd_file <- tempfile(fileext = ".Rmd")
-file.copy(skeleton, to = rmd_file)
+file.copy(example, to = rmd_file)
 
 docx_file_1 <- tempfile(fileext = ".docx")
 render(rmd_file, output_file = docx_file_1, quiet = TRUE)
 
-\donttest{
 # bookdown example -----
 
-# All above is only to make sure we do not write in your wd
 bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
-
 
 temp_dir <- tempfile()
 # uncomment next line to get the result in your working directory
-# temp_dir <- getwd()
+# temp_dir <- "./bd_example"
 
 dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
 file.copy(
@@ -226,7 +224,6 @@ docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
 
 if(file.exists(docx_file_2)){
   message("file ", docx_file_2, " has been written.")
-}
 }
 }
 }

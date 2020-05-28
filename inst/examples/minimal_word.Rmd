@@ -1,0 +1,67 @@
+---
+title: "officedown example"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.cap = TRUE)
+library(officedown)
+```
+
+\@ref(id-dash)
+
+## Table of content {#id-dash}
+
+<!---BLOCK_TOC--->
+
+## List of figures
+
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+## List of tables
+
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+## A two columns section
+
+<!---BLOCK_MULTICOL_START--->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu 
+pulvinar arcu, quis aliquam dui. 
+
+In at cursus ante.
+
+Curabitur ligula quam, iaculis faucibus orci quis, vestibulum lobortis lectus. 
+
+Suspendisse fringilla nisl pulvinar, laoreet tellus sed.
+
+<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
+
+## Tables
+
+```{r tab.cap="caption 1", tab.id="mtcars"}
+head(mtcars)
+```
+
+## Reference
+
+see figure \@ref(fig:boxplot) and table \@ref(tab:mtcars)!
+
+## figures 
+
+### A boxplot
+
+```{r fig.cap="A boxplot", fig.id = "boxplot"}
+boxplot(1:8)
+```
+
+<!---BLOCK_LANDSCAPE_START--->
+
+## Landscape section
+
+```{r, echo=FALSE}
+barplot(1:5, col=1:5)
+```
+
+<!---BLOCK_LANDSCAPE_STOP--->
+

@@ -1,0 +1,45 @@
+---
+title: "officedown example"
+output: 
+  officedown::rpptx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(rvg)
+```
+
+## Table
+
+```{r layout='Two Content', ph=officer::ph_location_left()}
+head(cars)
+```
+
+```{r layout='Two Content', ph=officer::ph_location_right()}
+head(iris)
+```
+
+## Slide with Plot
+
+```{r plot1}
+dml(plot(pressure))
+```
+
+## custom plot locations
+
+
+```{r ph=officer::ph_location(width = 2, height = 2, left = 2, top = 2)}
+dml(plot(pressure))
+```
+
+```{r ph=officer::ph_location(width = 3, height = 3, left = 4, top = 4)}
+dml(plot(pressure))
+```
+
+## Non-editable plot
+
+
+```{r}
+dml(plot(pressure), editable = FALSE)
+```
