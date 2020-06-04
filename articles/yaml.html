@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -138,7 +138,7 @@ img {
 <p>This template will be used as a reference document for the customization of your list style with R Markdown. To use this feature, specify the <code>reference_docx</code> option in <code>YAML</code>.</p>
 <p>By default, your YAML header looks like this:</p>
 <pre><code>---
-date: "2020-05-19"
+date: "2020-06-04"
 author: "superman"
 title: "Document title"
 output: 
@@ -148,7 +148,7 @@ output:
 <div class="column2">
 <p>Add <code>reference_docx</code> argument to the <code>YAML</code>:</p>
 <pre><code>---
-date: "2020-05-19"
+date: "2020-06-04"
 author: "superman"
 title: "Document title"
 output: 
@@ -159,7 +159,7 @@ output:
 <div class="column2">
 <p>When using <code>bookdown</code>, it should be:</p>
 <pre><code>---
-date: "2020-05-19"
+date: "2020-06-04"
 author: "superman"
 title: "Document title"
 output: 
@@ -175,46 +175,46 @@ output:
 <h2 class="hasAnchor">
 <a href="#settings-and-default-values" class="anchor"></a>Settings and default values</h2>
 <p>There is a mechanism to overwrite the defaults with the specified values. This makes it possible not to fill in all the arguments. Thus, a header like the following one is valid:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># officedown yaml header</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="fu">output:</span><span class="at"> </span></a>
-<a class="sourceLine" id="cb4-3" title="3">  officedown:<span class="fu">:rdocx_document:</span></a>
-<a class="sourceLine" id="cb4-4" title="4">    <span class="fu">tables:</span></a>
-<a class="sourceLine" id="cb4-5" title="5">      <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb4-6" title="6">        <span class="fu">pre:</span><span class="at"> </span><span class="st">'tab. '</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># officedown yaml header</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="at">  officedown:</span><span class="fu">:rdocx_document</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="at">    </span><span class="fu">tables</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="at">      </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="at">        </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'tab. '</span></span></code></pre></div>
 </div>
 <div id="default-settings" class="section level2">
 <h2 class="hasAnchor">
 <a href="#default-settings" class="anchor"></a>Default settings</h2>
 <p>The package is using global settings, used for customization of tables, lists, plots and captions.</p>
 <p>Default values are presented below in their YAML format.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># full default yaml header</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="fu">output:</span><span class="at"> </span></a>
-<a class="sourceLine" id="cb5-3" title="3">  officedown:<span class="fu">:rdocx_document:</span></a>
-<a class="sourceLine" id="cb5-4" title="4">    <span class="fu">tables:</span></a>
-<a class="sourceLine" id="cb5-5" title="5">      <span class="fu">style:</span><span class="at"> Table</span></a>
-<a class="sourceLine" id="cb5-6" title="6">      <span class="fu">layout:</span><span class="at"> autofit</span></a>
-<a class="sourceLine" id="cb5-7" title="7">      <span class="fu">width:</span><span class="at"> </span><span class="fl">1.0</span></a>
-<a class="sourceLine" id="cb5-8" title="8">      <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb5-9" title="9">        <span class="fu">style:</span><span class="at"> Table Caption</span></a>
-<a class="sourceLine" id="cb5-10" title="10">        <span class="fu">pre:</span><span class="at"> </span><span class="st">'Table '</span></a>
-<a class="sourceLine" id="cb5-11" title="11">        <span class="fu">sep:</span><span class="at"> </span><span class="st">': '</span></a>
-<a class="sourceLine" id="cb5-12" title="12">      <span class="fu">conditional:</span></a>
-<a class="sourceLine" id="cb5-13" title="13">        <span class="fu">first_row:</span><span class="at"> </span><span class="ch">true</span></a>
-<a class="sourceLine" id="cb5-14" title="14">        <span class="fu">first_column:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb5-15" title="15">        <span class="fu">last_row:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb5-16" title="16">        <span class="fu">last_column:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb5-17" title="17">        <span class="fu">no_hband:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb5-18" title="18">        <span class="fu">no_vband:</span><span class="at"> </span><span class="ch">true</span></a>
-<a class="sourceLine" id="cb5-19" title="19">    <span class="fu">plots:</span></a>
-<a class="sourceLine" id="cb5-20" title="20">      <span class="fu">style:</span><span class="at"> Normal</span></a>
-<a class="sourceLine" id="cb5-21" title="21">      <span class="fu">align:</span><span class="at"> center</span></a>
-<a class="sourceLine" id="cb5-22" title="22">      <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb5-23" title="23">        <span class="fu">style:</span><span class="at"> Image Caption</span></a>
-<a class="sourceLine" id="cb5-24" title="24">        <span class="fu">pre:</span><span class="at"> </span><span class="st">'Figure '</span></a>
-<a class="sourceLine" id="cb5-25" title="25">        <span class="fu">sep:</span><span class="at"> </span><span class="st">': '</span></a>
-<a class="sourceLine" id="cb5-26" title="26">    <span class="fu">lists:</span></a>
-<a class="sourceLine" id="cb5-27" title="27">      <span class="fu">ol.style:</span><span class="at"> </span><span class="ch">null</span></a>
-<a class="sourceLine" id="cb5-28" title="28">      <span class="fu">ul.style:</span><span class="at"> </span><span class="ch">null</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># full default yaml header</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="at">  officedown:</span><span class="fu">:rdocx_document</span><span class="kw">:</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="at">    </span><span class="fu">tables</span><span class="kw">:</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="at">      </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Table</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="at">      </span><span class="fu">layout</span><span class="kw">:</span><span class="at"> autofit</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="at">      </span><span class="fu">width</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="at">      </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="at">        </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Table Caption</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="at">        </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'Table '</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="at">        </span><span class="fu">sep</span><span class="kw">:</span><span class="at"> </span><span class="st">': '</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="at">      </span><span class="fu">conditional</span><span class="kw">:</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="at">        </span><span class="fu">first_row</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="at">        </span><span class="fu">first_column</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="at">        </span><span class="fu">last_row</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a><span class="at">        </span><span class="fu">last_column</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="at">        </span><span class="fu">no_hband</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="at">        </span><span class="fu">no_vband</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="at">    </span><span class="fu">plots</span><span class="kw">:</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="at">      </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Normal</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="at">      </span><span class="fu">align</span><span class="kw">:</span><span class="at"> center</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a><span class="at">      </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="at">        </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Image Caption</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a><span class="at">        </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'Figure '</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a><span class="at">        </span><span class="fu">sep</span><span class="kw">:</span><span class="at"> </span><span class="st">': '</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a><span class="at">    </span><span class="fu">lists</span><span class="kw">:</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a><span class="at">      </span><span class="fu">ol.style</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a><span class="at">      </span><span class="fu">ul.style</span><span class="kw">:</span><span class="at"> </span><span class="ch">null</span></span></code></pre></div>
 <p>Default values are detailled in the help page of <code>rdocx_document</code>, see details with command:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r">?<span class="kw pkg">officedown</span><span class="kw ns">::</span><span class="no"><a href="../reference/rdocx_document.html">rdocx_document</a></span></pre></body></html></div>
 </div>
@@ -232,7 +232,7 @@ output:
 
       <footer><link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">

@@ -89,7 +89,7 @@ rvg). Wrap you R plot commands with function dml to use this graphic capability.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -194,17 +194,79 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rmarkdown</span>)
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_available</a></span>() <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"ggplot2"</span>)){
-  <span class='no'>skeleton</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>,
-    <span class='st'>"rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd"</span>)
+<span class='no'>run_ok</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_available</a></span>() <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_version</a></span>() <span class='kw'>&gt;</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>numeric_version</a></span>(<span class='st'>"2.4"</span>)
+
+<span class='kw'>if</span>(<span class='no'>run_ok</span>){
+  <span class='no'>example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>,
+    <span class='st'>"examples/minimal_powerpoint.Rmd"</span>)
   <span class='no'>rmd_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>)
-  <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>skeleton</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>example</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file</span>)
 
   <span class='no'>pptx_file_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".pptx"</span>)
   <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>render</a></span>(<span class='no'>rmd_file</span>, <span class='kw'>output_file</span> <span class='kw'>=</span> <span class='no'>pptx_file_1</span>)
 }</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>processing file: filea4586bb8ec00.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
+#&gt; <span class='message'>processing file: filee2838657e2e.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |.....                                                                 |   7%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |..........                                                            |  14%
+#&gt; label: setup (with options) 
+#&gt; List of 1
+#&gt;  $ include: logi FALSE
+#&gt; 
+#&gt;   |                                                                              |...............                                                       |  21%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |....................                                                  |  29%
+#&gt; label: unnamed-chunk-1 (with options) 
+#&gt; List of 2
+#&gt;  $ layout: chr "Two Content"
+#&gt;  $ ph    : language officer::ph_location_left()
+#&gt; 
+#&gt;   |                                                                              |.........................                                             |  36%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |..............................                                        |  43%
+#&gt; label: unnamed-chunk-2 (with options) 
+#&gt; List of 2
+#&gt;  $ layout: chr "Two Content"
+#&gt;  $ ph    : language officer::ph_location_right()
+#&gt; 
+#&gt;   |                                                                              |...................................                                   |  50%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |........................................                              |  57%
+#&gt; label: plot1</div><div class='output co'>#&gt;   |                                                                              |.............................................                         |  64%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |..................................................                    |  71%
+#&gt; label: unnamed-chunk-3 (with options) 
+#&gt; List of 1
+#&gt;  $ ph: language officer::ph_location(width = 2, height = 2, left = 2, top = 2)
+#&gt; </div><div class='output co'>#&gt;   |                                                                              |.......................................................               |  79%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |............................................................          |  86%
+#&gt; label: unnamed-chunk-4 (with options) 
+#&gt; List of 1
+#&gt;  $ ph: language officer::ph_location(width = 3, height = 3, left = 4, top = 4)
+#&gt; </div><div class='output co'>#&gt;   |                                                                              |.................................................................     |  93%
+#&gt;   ordinary text without R code
+#&gt; 
+#&gt;   |                                                                              |......................................................................| 100%
+#&gt; label: unnamed-chunk-5</div><div class='output co'>#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: filee2838657e2e.knit.md</span></div><div class='output co'>#&gt; /Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS filee2838657e2e.utf8.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee2833f3f0250.pptx --reference-doc /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee28348090811.pptx </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee2833f3f0250.pptx</span></div><div class='input'>
+<span class='kw'>if</span>(<span class='no'>run_ok</span> <span class='kw'>&amp;&amp;</span> <span class='fu'><a href='https://rdrr.io/r/base/library.html'>require</a></span>(<span class='st'>"ggplot2"</span>)){
+  <span class='no'>skeleton</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>,
+    <span class='st'>"rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd"</span>)
+  <span class='no'>rmd_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>skeleton</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file</span>)
+
+  <span class='no'>pptx_file_2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".pptx"</span>)
+  <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>render</a></span>(<span class='no'>rmd_file</span>, <span class='kw'>output_file</span> <span class='kw'>=</span> <span class='no'>pptx_file_2</span>)
+}</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>processing file: filee2833c82225e.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
 #&gt;    inline R code fragments
 #&gt; 
 #&gt;   |                                                                              |.....                                                                 |   7%
@@ -298,8 +360,8 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
 #&gt; label: unnamed-chunk-11</div><div class='output co'>#&gt;   |                                                                              |......................................................................| 100%
 #&gt;   ordinary text without R code
 #&gt; 
-#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: filea4586bb8ec00.knit.md</span></div><div class='output co'>#&gt; /usr/local/bin/pandoc +RTS -K512m -RTS filea4586bb8ec00.utf8.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp2dza2W/filea458398e2b40.pptx --reference-doc /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp2dza2W/filea45813b550d9.pptx </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Output created: /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp2dza2W/filea458398e2b40.pptx</span></div></pre>
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: filee2833c82225e.knit.md</span></div><div class='output co'>#&gt; /Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS filee2833c82225e.utf8.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee28339e685b.pptx --reference-doc /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee2833850b737.pptx </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee28339e685b.pptx</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -312,7 +374,7 @@ defined by <code><a href='https://rdrr.io/pkg/officer/man/table_conditional_form
       <footer>
       <link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version&nbsp;0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
+  <p>Version&nbsp;0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
   </p>
 </div>
 <div class="pkgdown">

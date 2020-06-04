@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -133,22 +133,22 @@ img {
 <a href="#global-settings" class="anchor"></a>Global settings</h2>
 <p>These formatting settings can be defined globally, in the YAML header or per output chunks (in the knitr chunk options).</p>
 <p>This corresponds to argument <code>tables</code> in output_format function <code><a href="../reference/rdocx_document.html">rdocx_document()</a></code>. Default value is shown below:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># sample of R markdown yaml header</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="fu">tables:</span><span class="at"> </span></a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="fu">style:</span><span class="at"> Table</span></a>
-<a class="sourceLine" id="cb1-4" title="4">  <span class="fu">layout:</span><span class="at"> autofit</span></a>
-<a class="sourceLine" id="cb1-5" title="5">  <span class="fu">width:</span><span class="at"> </span><span class="fl">1.0</span></a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb1-7" title="7">    <span class="fu">style:</span><span class="at"> Table Caption</span></a>
-<a class="sourceLine" id="cb1-8" title="8">    <span class="fu">pre:</span><span class="at"> </span><span class="st">'Table '</span></a>
-<a class="sourceLine" id="cb1-9" title="9">    <span class="fu">sep:</span><span class="at"> </span><span class="st">': '</span></a>
-<a class="sourceLine" id="cb1-10" title="10">  <span class="fu">conditional:</span></a>
-<a class="sourceLine" id="cb1-11" title="11">    <span class="fu">first_row:</span><span class="at"> </span><span class="ch">true</span></a>
-<a class="sourceLine" id="cb1-12" title="12">    <span class="fu">first_column:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb1-13" title="13">    <span class="fu">last_row:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb1-14" title="14">    <span class="fu">last_column:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb1-15" title="15">    <span class="fu">no_hband:</span><span class="at"> </span><span class="ch">false</span></a>
-<a class="sourceLine" id="cb1-16" title="16">    <span class="fu">no_vband:</span><span class="at"> </span><span class="ch">true</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># sample of R markdown yaml header</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="fu">tables</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="at">  </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Table</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="at">  </span><span class="fu">layout</span><span class="kw">:</span><span class="at"> autofit</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="at">  </span><span class="fu">width</span><span class="kw">:</span><span class="at"> </span><span class="fl">1.0</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="at">  </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="at">    </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Table Caption</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="at">    </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'Table '</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="at">    </span><span class="fu">sep</span><span class="kw">:</span><span class="at"> </span><span class="st">': '</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="at">  </span><span class="fu">conditional</span><span class="kw">:</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a><span class="at">    </span><span class="fu">first_row</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a><span class="at">    </span><span class="fu">first_column</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a><span class="at">    </span><span class="fu">last_row</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="at">    </span><span class="fu">last_column</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a><span class="at">    </span><span class="fu">no_hband</span><span class="kw">:</span><span class="at"> </span><span class="ch">false</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a><span class="at">    </span><span class="fu">no_vband</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div>
 <p>We have chosen the default values and argument names by trying to get identical or close to the standards bookdown and R Markdown.</p>
 <table class="table">
 <colgroup>
@@ -317,7 +317,7 @@ iris
 
       <footer><link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
