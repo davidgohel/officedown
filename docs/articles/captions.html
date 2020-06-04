@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -166,11 +166,11 @@ head(iris)
 <a href="#sequence-options" class="anchor"></a>Sequence options</h2>
 <p>Legends for tables and figures can be configured as required. We have chosen default values for the options that are classic in terms of usage but these values correspond to the English language. If you are writing in Spanish, German, or another language, you probably want to change these values to match your language.</p>
 <p>The values to be configured for the tables are the following:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb5-1" title="1"><span class="fu">tables:</span></a>
-<a class="sourceLine" id="cb5-2" title="2">  <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb5-3" title="3">    <span class="fu">style:</span><span class="at"> Table Caption</span></a>
-<a class="sourceLine" id="cb5-4" title="4">    <span class="fu">pre:</span><span class="at"> </span><span class="st">'Table '</span></a>
-<a class="sourceLine" id="cb5-5" title="5">    <span class="fu">sep:</span><span class="at"> </span><span class="st">': '</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">tables</span><span class="kw">:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="at">  </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="at">    </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Table Caption</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="at">    </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'Table '</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="at">    </span><span class="fu">sep</span><span class="kw">:</span><span class="at"> </span><span class="st">': '</span></span></code></pre></div>
 <p>These values can also be altered via the function <code>knitr::opts_chunk$set()</code>.</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(
   <span class="kw">tab.cap.style</span> <span class="kw">=</span> <span class="st">"Table Caption"</span>,
@@ -178,11 +178,11 @@ head(iris)
   <span class="kw">tab.cap.sep</span> <span class="kw">=</span> <span class="st">": "</span>,
   )</pre></body></html></div>
 <p>The values to be configured for the figures are the following:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><a class="sourceLine" id="cb7-1" title="1"><span class="fu">plots:</span></a>
-<a class="sourceLine" id="cb7-2" title="2">  <span class="fu">caption:</span></a>
-<a class="sourceLine" id="cb7-3" title="3">    <span class="fu">style:</span><span class="at"> Image Caption</span></a>
-<a class="sourceLine" id="cb7-4" title="4">    <span class="fu">pre:</span><span class="at"> </span><span class="st">'Figure '</span></a>
-<a class="sourceLine" id="cb7-5" title="5">    <span class="fu">sep:</span><span class="at"> </span><span class="st">': '</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb7-1"><a href="#cb7-1"></a><span class="fu">plots</span><span class="kw">:</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="at">  </span><span class="fu">caption</span><span class="kw">:</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="at">    </span><span class="fu">style</span><span class="kw">:</span><span class="at"> Image Caption</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="at">    </span><span class="fu">pre</span><span class="kw">:</span><span class="at"> </span><span class="st">'Figure '</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="at">    </span><span class="fu">sep</span><span class="kw">:</span><span class="at"> </span><span class="st">': '</span></span></code></pre></div>
 <p>These values can also be altered via the function <code>knitr::opts_chunk$set()</code>.</p>
 <div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="kw pkg">knitr</span><span class="kw ns">::</span><span class="no"><a href="https://rdrr.io/pkg/knitr/man/opts_chunk.html">opts_chunk</a></span>$<span class="fu">set</span>(
   <span class="kw">fig.cap.style</span> <span class="kw">=</span> <span class="st">"Image Caption"</span>,
@@ -212,7 +212,7 @@ head(iris)
 
       <footer><link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">

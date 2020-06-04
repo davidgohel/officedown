@@ -81,7 +81,7 @@ document. The function comes also with improved output options." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -323,27 +323,27 @@ output:
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>rmarkdown</span>)
-<span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_available</a></span>()){
+<span class='no'>run_ok</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_available</a></span>() <span class='kw'>&amp;&amp;</span>
+  <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/pandoc_available.html'>pandoc_version</a></span>() <span class='kw'>&gt;=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric_version.html'>numeric_version</a></span>(<span class='st'>"2.0"</span>)
 
-<span class='co'># official template -----</span>
-<span class='no'>skeleton</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>,
-  <span class='st'>"rmarkdown/templates/word/skeleton/skeleton.Rmd"</span>)
+<span class='kw'>if</span>(<span class='no'>run_ok</span>){
+
+<span class='co'># minimal example -----</span>
+<span class='no'>example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>,
+  <span class='st'>"examples/minimal_word.Rmd"</span>)
 <span class='no'>rmd_file</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".Rmd"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>skeleton</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(<span class='no'>example</span>, <span class='kw'>to</span> <span class='kw'>=</span> <span class='no'>rmd_file</span>)
 
 <span class='no'>docx_file_1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>(<span class='kw'>fileext</span> <span class='kw'>=</span> <span class='st'>".docx"</span>)
 <span class='fu'><a href='https://rdrr.io/pkg/rmarkdown/man/render.html'>render</a></span>(<span class='no'>rmd_file</span>, <span class='kw'>output_file</span> <span class='kw'>=</span> <span class='no'>docx_file_1</span>, <span class='kw'>quiet</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 
-<span class='co'># \donttest{</span>
 <span class='co'># bookdown example -----</span>
 
-<span class='co'># All above is only to make sure we do not write in your wd</span>
 <span class='no'>bookdown_loc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"officedown"</span>, <span class='st'>"examples/bookdown"</span>)
-
 
 <span class='no'>temp_dir</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/tempfile.html'>tempfile</a></span>()
 <span class='co'># uncomment next line to get the result in your working directory</span>
-<span class='co'># temp_dir &lt;- getwd()</span>
+<span class='co'># temp_dir &lt;- "./bd_example"</span>
 
 <span class='fu'><a href='https://rdrr.io/r/base/files2.html'>dir.create</a></span>(<span class='no'>temp_dir</span>, <span class='kw'>showWarnings</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>recursive</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.copy</a></span>(
@@ -360,7 +360,6 @@ output:
 <span class='kw'>if</span>(<span class='fu'><a href='https://rdrr.io/r/base/files.html'>file.exists</a></span>(<span class='no'>docx_file_2</span>)){
   <span class='fu'><a href='https://rdrr.io/r/base/message.html'>message</a></span>(<span class='st'>"file "</span>, <span class='no'>docx_file_2</span>, <span class='st'>" has been written."</span>)
 }
-<span class='co'># }</span>
 }</div><div class='output co'>#&gt; <span class='message'></span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>processing file: bookdown.Rmd</span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |...                                                                   |   4%
@@ -469,8 +468,8 @@ output:
 #&gt; </div><div class='output co'>#&gt;   |                                                                              |......................................................................| 100%
 #&gt;   ordinary text without R code
 #&gt; 
-#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: bookdown.knit.md</span></div><div class='output co'>#&gt; /usr/local/bin/pandoc +RTS -K512m -RTS bookdown.utf8.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output bookdown.docx --highlight-style tango --reference-doc template.docx --lua-filter /Library/Frameworks/R.framework/Versions/3.6/Resources/library/rmarkdown/rmd/lua/pagebreak.lua </div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Output created: _book/bookdown.docx</span></div><div class='output co'>#&gt; <span class='message'>file /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//Rtmp2dza2W/filea4584d549969/_book/bookdown.docx has been written.</span></div></pre>
+#&gt; </div><div class='output co'>#&gt; <span class='message'>output file: bookdown.knit.md</span></div><div class='output co'>#&gt; /Applications/RStudio.app/Contents/MacOS/pandoc/pandoc +RTS -K512m -RTS bookdown.utf8.md --to docx --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output bookdown.docx --highlight-style tango --reference-doc template.docx --lua-filter /Library/Frameworks/R.framework/Versions/3.6/Resources/library/rmarkdown/rmd/lua/pagebreak.lua </div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Output created: _book/bookdown.docx</span></div><div class='output co'>#&gt; <span class='message'>file /var/folders/08/2qdvv0q95wn52xy6mxgj340r0000gn/T//RtmpJknhf5/filee28336485f26/_book/bookdown.docx has been written.</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -483,7 +482,7 @@ output:
       <footer>
       <link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version&nbsp;0.0.8 - Developed by David Gohel, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
+  <p>Version&nbsp;0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src='../ardata-logo.svg' style="vertical-align:middle;height:24px;"/></a>
   </p>
 </div>
 <div class="pkgdown">
