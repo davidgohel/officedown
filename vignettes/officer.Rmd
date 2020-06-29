@@ -62,31 +62,37 @@ cat(rmd, sep = "\n")
 Tags (as HTML comments) have been designed to be less verbose and easier to use;
 for landscape pages, for multi-columns sections and for tables of contents.
 
+### Tables of content
+
 <pre>The following will be transformed as a table of content:
 
 `r taghl("<!---BLOCK_TOC--->")`
 
-And the following will pour the content of an external docx file into the produced document:
+`BLOCK_TOC` tag is using R function `officer::block_toc`. You can use its arguments.
 
-`r taghl("<!---BLOCK_POUR_DOCX{file: 'path/to/docx'}--->")`</pre>
+`r taghl("<!---BLOCK_TOC{level: 2}--->")`
 
 > The parameters are defined in a yaml string. Each item in the list is a list
 > of key/value pairs defined with `key: value` form (the colon must be followed
 > by a space).
 
+`r taghl("<!---BLOCK_TOC{style: 'Table Caption'}--->")`
 
+### Add external docx
+
+The following will pour the content of an external docx file into the 
+produced document:
+
+`r taghl("<!---BLOCK_POUR_DOCX{file: 'path/to/docx'}--->")`</pre>
+
+`BLOCK_POUR_DOCX` tag is using R function `officer::block_pour_docx`. 
 
 ### Sections blocks
 
-Section blocks need to be used in pairs:
 
+Tags for section blocks need to be used in pairs, `BLOCK_LANDSCAPE_START` and `BLOCK_LANDSCAPE_STOP`, `BLOCK_MULTICOL_START` and `BLOCK_MULTICOL_STOP`.
 
 **landscape orientation**
-
-| Tag name              | R function               | Has args |
-|-----------------------|--------------------------|----------|
-| BLOCK_LANDSCAPE_START | block_section_continuous | no       |
-| BLOCK_LANDSCAPE_STOP  | block_section_landscape  | no       |
 
 <pre>The following will be in a separated section with landscape orientation
 
@@ -99,11 +105,6 @@ Blah blah blah.
 
 
 **section with columns**
-
-| Tag name              | R function               | Has args |
-|-----------------------|--------------------------|----------|
-| BLOCK_MULTICOL_START  | block_section_continuous | no       |
-| BLOCK_MULTICOL_STOP   | block_section_columns    | yes      |
 
 <pre>
 The following will be in a separated section with 2 columns:
@@ -118,6 +119,15 @@ Blah blah blah on column 2.
 
 `r taghl("<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->")`
 </pre>
+
+
+These are the only tags implemented for sections. If these do not satisfy your needs, 
+define any section by using `officer::block_section` in knitr code chunks.
+Remember a section affects preceding paragraphs or tables; i.e.
+a section starts at the end of the previous section (or the beginning of
+the document if no preceding section exists), and stops where the
+section is declared. Usually, starting with a continous section and ending 
+with the section you defined is enough.
 
 
 ## Illustrations

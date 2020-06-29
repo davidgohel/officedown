@@ -126,7 +126,7 @@ OR
 #### What is that sequence id?
 
 When using Word, you can add a list of figures or tables (go to the "References"
-tab and select "Insert Table of Figures"). By default, you won't see you
+tab and select "Insert Table of Figures"). By default, you won't see your 
 sequence in the menu because Word is storing locally 3 sequence names in your
 profile (for tables, figures and eequation). Although not recommended, you can
 change `tab.lp` to `Tabelle` (or `Tableau`) and benefit from the feature

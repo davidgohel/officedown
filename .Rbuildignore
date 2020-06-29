@@ -8,3 +8,4 @@
 ^_pkgdown\.yml$
 ^inst/medias-src$
 ^pkgdown$
+^cran-comments\.md$
