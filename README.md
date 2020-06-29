@@ -8,6 +8,7 @@ status](https://ci.appveyor.com/api/projects/status/github/davidgohel/officedown
 [![lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/officedown)](https://cran.r-project.org/package=officedown)
+![cranlogs](https://cranlogs.r-pkg.org/badges/officedown)
 
 > `{officedown}` is bringing some
 > [officer](https://cran.r-project.org/package=officer) features into R

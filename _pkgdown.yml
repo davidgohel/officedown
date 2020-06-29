@@ -35,7 +35,6 @@ reference:
   - title: R Markdown output formats
     contents:
     - rdocx_document
-    - rdocx_document2
     - rpptx_document
   - title: Utils
     contents:
