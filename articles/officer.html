@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
       </span>
     </div>
 
@@ -80,7 +80,7 @@
 
       
 
-      </header><div class="row">
+      </header><script src="officer_files/header-attrs-2.3/header-attrs.js"></script><script src="officer_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>officer support</h1>
@@ -191,40 +191,36 @@ We are back on default section.`r fp`</code></pre>
 <h2 class="hasAnchor">
 <a href="#tags" class="anchor"></a>Tags</h2>
 <p>Tags (as HTML comments) have been designed to be less verbose and easier to use; for landscape pages, for multi-columns sections and for tables of contents.</p>
+<div id="tables-of-content" class="section level3">
+<h3 class="hasAnchor">
+<a href="#tables-of-content" class="anchor"></a>Tables of content</h3>
 <pre>The following will be transformed as a table of content:
 
 <span style="color:#7b1b47;">&lt;!---BLOCK_TOC---&gt;</span>
 
-And the following will pour the content of an external docx file into the produced document:
+`BLOCK_TOC` tag is using R function `officer::block_toc`. You can use its arguments.
 
-<span style="color:#7b1b47;">&lt;!---BLOCK_POUR_DOCX{docx_file: 'path/to/docx'}---&gt;</span></pre>
-<blockquote>
-<p>The parameters are defined in a yaml string. Each item in the list is a list of key/value pairs defined with <code>key: value</code> form (the colon must be followed by a space).</p>
-</blockquote>
+<span style="color:#7b1b47;">&lt;!---BLOCK_TOC{level: 2}---&gt;</span>
+
+&gt; The parameters are defined in a yaml string. Each item in the list is a list
+&gt; of key/value pairs defined with `key: value` form (the colon must be followed
+&gt; by a space).
+
+<span style="color:#7b1b47;">&lt;!---BLOCK_TOC{style: 'Table Caption'}---&gt;</span>
+
+### Add external docx
+
+The following will pour the content of an external docx file into the 
+produced document:
+
+<span style="color:#7b1b47;">&lt;!---BLOCK_POUR_DOCX{file: 'path/to/docx'}---&gt;</span></pre>
+<p><code>BLOCK_POUR_DOCX</code> tag is using R function <code><a href="https://rdrr.io/pkg/officer/man/block_pour_docx.html">officer::block_pour_docx</a></code>.</p>
+</div>
 <div id="sections-blocks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#sections-blocks" class="anchor"></a>Sections blocks</h3>
-<p>Section blocks need to be used in pairs:</p>
+<p>Tags for section blocks need to be used in pairs, <code>BLOCK_LANDSCAPE_START</code> and <code>BLOCK_LANDSCAPE_STOP</code>, <code>BLOCK_MULTICOL_START</code> and <code>BLOCK_MULTICOL_STOP</code>.</p>
 <p><strong>landscape orientation</strong></p>
-<table class="table">
-<thead><tr class="header">
-<th>Tag name</th>
-<th>R function</th>
-<th>Has args</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>BLOCK_LANDSCAPE_START</td>
-<td>block_section_continuous</td>
-<td>no</td>
-</tr>
-<tr class="even">
-<td>BLOCK_LANDSCAPE_STOP</td>
-<td>block_section_landscape</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
 <pre>The following will be in a separated section with landscape orientation
 
 <span style="color:#7b1b47;">&lt;!---BLOCK_LANDSCAPE_START---&gt;</span>
@@ -233,25 +229,6 @@ Blah blah blah.
 
 <span style="color:#7b1b47;">&lt;!---BLOCK_LANDSCAPE_STOP---&gt;</span></pre>
 <p><strong>section with columns</strong></p>
-<table class="table">
-<thead><tr class="header">
-<th>Tag name</th>
-<th>R function</th>
-<th>Has args</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td>BLOCK_MULTICOL_START</td>
-<td>block_section_continuous</td>
-<td>no</td>
-</tr>
-<tr class="even">
-<td>BLOCK_MULTICOL_STOP</td>
-<td>block_section_columns</td>
-<td>yes</td>
-</tr>
-</tbody>
-</table>
 <pre>
 The following will be in a separated section with 2 columns:
 
@@ -265,6 +242,7 @@ Blah blah blah on column 2.
 
 <span style="color:#7b1b47;">&lt;!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}---&gt;</span>
 </pre>
+<p>These are the only tags implemented for sections. If these do not satisfy your needs, define any section by using <code><a href="https://rdrr.io/pkg/officer/man/block_section.html">officer::block_section</a></code> in knitr code chunks. Remember a section affects preceding paragraphs or tables; i.e. a section starts at the end of the previous section (or the beginning of the document if no preceding section exists), and stops where the section is declared. Usually, starting with a continous section and ending with the section you defined is enough.</p>
 </div>
 </div>
 <div id="illustrations" class="section level2">
@@ -291,7 +269,7 @@ Blah blah blah on column 2.
 
       <footer><link href="../ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.1.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.2.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
