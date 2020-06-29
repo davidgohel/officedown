@@ -203,6 +203,7 @@ docx_file_1 <- tempfile(fileext = ".docx")
 render(rmd_file, output_file = docx_file_1, quiet = TRUE)
 
 # bookdown example -----
+if(require("bookdown")){
 
 bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
 
@@ -225,5 +226,7 @@ docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
 if(file.exists(docx_file_2)){
   message("file ", docx_file_2, " has been written.")
 }
+}
+
 }
 }

@@ -259,6 +259,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' render(rmd_file, output_file = docx_file_1, quiet = TRUE)
 #'
 #' # bookdown example -----
+#' if(require("bookdown")){
 #'
 #' bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
 #'
@@ -281,6 +282,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' if(file.exists(docx_file_2)){
 #'   message("file ", docx_file_2, " has been written.")
 #' }
+#' }
+#'
 #' }
 #' @importFrom officer change_styles
 #' @importFrom utils modifyList
