@@ -59,8 +59,8 @@ cat(rmd, sep = "\n")
 
 ## Tags
 
-Tags (as HTML comments) have been designed to be less verbose and easier to use; for landscape pages, 
-for multi-columns sections and for tables of contents.
+Tags (as HTML comments) have been designed to be less verbose and easier to use;
+for landscape pages, for multi-columns sections and for tables of contents.
 
 <pre>The following will be transformed as a table of content:
 
@@ -70,8 +70,9 @@ And the following will pour the content of an external docx file into the produc
 
 `r taghl("<!---BLOCK_POUR_DOCX{file: 'path/to/docx'}--->")`</pre>
 
-> The parameters are defined in a yaml string. Each item in the list is a list of 
-key/value pairs defined with `key: value` form (the colon must be followed by a space).
+> The parameters are defined in a yaml string. Each item in the list is a list
+> of key/value pairs defined with `key: value` form (the colon must be followed
+> by a space).
 
 
 
