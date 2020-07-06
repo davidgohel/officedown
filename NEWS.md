@@ -1,3 +1,10 @@
+# officedown 0.2.1
+
+## Issues
+
+* fix section issue with margin sizes (now totally handled by officer)
+
+
 # officedown 0.2.0
 
 ## Changes 

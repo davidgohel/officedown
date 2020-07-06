@@ -359,7 +359,6 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     x <- process_embedded_docx(x)
     x <- process_par_settings(x)
     x <- process_list_settings(x, ul_style = lists$ul.style, ol_style = lists$ol.style)
-    x <- process_sections(x)
     x <- change_styles(x, mapstyles = mapstyles)
     forget(get_reference_rdocx)
     print(x, target = output_file)
