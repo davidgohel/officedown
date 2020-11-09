@@ -338,8 +338,10 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   }
   output_formats$knitr$knit_hooks$plot <- plot_word_fig_caption
 
-  output_formats$post_knit <- function(metadata, input_file, runtime, ...){
-    output_file <- file_with_meta_ext(input_file, "knit", "md")
+  temp_pre_processor <- output_formats$pre_processor
+  output_formats$pre_processor <- function (metadata, input_file, runtime, knit_meta, files_dir,
+            output_dir){
+    output_file <- input_file
     content <- readLines(output_file)
 
     content <- post_knit_table_captions(content,
@@ -350,6 +352,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     content <- post_knit_std_references(content, numbered = reference_num)
     content <- block_macro(content)
     writeLines(content, output_file)
+    temp_pre_processor(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
   }
 
   output_formats$post_processor <- function(metadata, input_file, output_file, clean, verbose) {

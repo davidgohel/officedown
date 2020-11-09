@@ -3,7 +3,7 @@
 ## Issues
 
 * fix section issue with margin sizes (now totally handled by officer)
-
+* fix rendering with writing to intermediates_dir
 
 # officedown 0.2.0
 
