@@ -31,8 +31,7 @@ R Markdown output format to pass to \link[rmarkdown:render]{render}
 }
 \description{
 Format for converting from R Markdown to an MS PowerPoint
-document. \code{rpptx_document2} also supports cross reference based on the
-syntax of the bookdown package.
+document.
 
 The function will allow you to specify the destination of your chunks in the output
 PowerPoint file. In this case, you must specify the \code{layout} and \code{master} for the
