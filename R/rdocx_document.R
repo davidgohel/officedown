@@ -257,6 +257,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'
 #' docx_file_1 <- tempfile(fileext = ".docx")
 #' render(rmd_file, output_file = docx_file_1, quiet = TRUE)
+#' render(rmd_file, output_file = docx_file_1, quiet = TRUE,
+#'   intermediates_dir = tempfile())
 #'
 #' # bookdown example -----
 #' if(require("bookdown")){
@@ -338,22 +340,31 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   }
   output_formats$knitr$knit_hooks$plot <- plot_word_fig_caption
 
-  temp_pre_processor <- output_formats$pre_processor
-  output_formats$pre_processor <- function (metadata, input_file, runtime, knit_meta, files_dir,
-            output_dir){
-    output_file <- input_file
+  # This is the intermediate_dir and wll be updated if `intermediates_generator` is called
+  intermediate_dir <- "."
+
+  temp_intermediates_generator <- output_formats$intermediates_generator
+  output_formats$intermediates_generator <- function(...){
+    intermediate_dir <<- list(...)[[2]]
+    temp_intermediates_generator(...)
+  }
+
+  output_formats$post_knit <- function(
+    metadata, input_file, runtime, ...){
+    output_file <- file_with_meta_ext(input_file, "knit", "md")
+    output_file <- file.path(intermediate_dir, output_file)
     content <- readLines(output_file)
 
     content <- post_knit_table_captions(content,
-      tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep,
-      style = tables$caption$style)
+                                        tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep,
+                                        style = tables$caption$style)
     content <- post_knit_caption_references(content, lp = "tab:")
     content <- post_knit_caption_references(content, lp = "fig:")
     content <- post_knit_std_references(content, numbered = reference_num)
     content <- block_macro(content)
     writeLines(content, output_file)
-    temp_pre_processor(metadata, input_file, runtime, knit_meta, files_dir, output_dir)
   }
+
 
   output_formats$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     x <- officer::read_docx(output_file)

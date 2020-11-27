@@ -201,6 +201,8 @@ file.copy(example, to = rmd_file)
 
 docx_file_1 <- tempfile(fileext = ".docx")
 render(rmd_file, output_file = docx_file_1, quiet = TRUE)
+render(rmd_file, output_file = docx_file_1, quiet = TRUE,
+  intermediates_dir = tempfile())
 
 # bookdown example -----
 if(require("bookdown")){
