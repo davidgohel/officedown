@@ -1,0 +1,12 @@
+---
+title: "Using officedown"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using officedown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The documentation is available here: 
+
+https://ardata-fr.github.io/officeverse/

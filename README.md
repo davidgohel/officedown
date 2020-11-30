@@ -84,6 +84,16 @@ The package also offers the possibility to transform your graphic
 instructions into editable vector graphics (with the rvg package) by
 simply wrapping your call into a call to function `dml`.
 
+## Ressources
+
+The help pages are in a bookdown located at:
+
+<https://ardata-fr.github.io/officeverse/>
+
+Manuals are available at:
+
+<https://davidgohel.github.io/officedown/>.
+
 ## Installation
 
 You can install `{officedown}` from github with:
