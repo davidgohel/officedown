@@ -20,6 +20,23 @@ file_with_meta_ext <- function(file, meta_ext, ext = tools::file_ext(file)) {
   )
 }
 
+absolute_path <- function(x){
+  if (length(x) != 1L)
+    stop("'x' must be a single character string")
+  epath <- path.expand(x)
+  if( file.exists(epath)){
+    epath <- normalizePath(epath, "/", mustWork = TRUE)
+  } else {
+    if( !dir.exists(dirname(epath)) ){
+      stop("directory of ", x, " does not exist.", call. = FALSE)
+    }
+    cat("", file = epath)
+    epath <- normalizePath(epath, "/", mustWork = TRUE)
+    unlink(epath)
+  }
+  epath
+}
+
 # tables_default_values ----
 tables_default_values <- list(
   style = "Table",
@@ -302,6 +319,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
       "bookdown", "template.docx"
     )
   }
+  args$reference_docx <- absolute_path(args$reference_docx)
 
   base_format_fun <- get_fun(base_format)
   output_formats <- do.call(base_format_fun, args)
