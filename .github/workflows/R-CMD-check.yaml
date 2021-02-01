@@ -78,6 +78,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          install.packages("crayon", type = "source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
