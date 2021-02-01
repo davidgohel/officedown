@@ -30,7 +30,7 @@ Imports: knitr,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
 Suggests: ggplot2, flextable, bookdown (>= 0.13)
-URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown
+URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown/
 BugReports: https://github.com/davidgohel/officedown/issues
 RoxygenNote: 7.1.1
 Roxygen: list(markdown = TRUE)
