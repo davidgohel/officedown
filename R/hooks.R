@@ -7,7 +7,6 @@
 plot_word_fig_caption <- function(x, options) {
 
   if(!is.character(options$fig.cap)) options$fig.cap <- NULL
-  if(!is.character(options$fig.alt)) options$fig.alt <- NULL
   if(is.null(options$fig.id))
     fig.id <- options$label
   else fig.id <- options$fig.id
@@ -40,15 +39,8 @@ plot_word_fig_caption <- function(x, options) {
     fig.style_id <- style_id("Normal", type = "paragraph", si)
 
   }
-
-  ooxml <- to_wml(img)
-  if(!is.null(options$fig.alt)) {
-    ooxml <- gsub('(<wp:docPr.*?)/>','\\1 descr="%s"/>', ooxml)
-    ooxml <- sprintf(ooxml, options$fig.alt)
-  }
-
   ooxml <- paste0("<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>",
-         ooxml,
+         to_wml(img),
          "</w:p>"
          )
   ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
