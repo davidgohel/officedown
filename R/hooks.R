@@ -7,6 +7,7 @@
 plot_word_fig_caption <- function(x, options) {
 
   if(!is.character(options$fig.cap)) options$fig.cap <- NULL
+  if(!is.character(options$fig.alt)) options$fig.alt <- NULL
   if(is.null(options$fig.id))
     fig.id <- options$label
   else fig.id <- options$fig.id
@@ -25,7 +26,7 @@ plot_word_fig_caption <- function(x, options) {
   fig.height <- opts_current$get("fig.height")
   if(is.null(fig.height)) fig.height <- 5
 
-  img <- external_img(src = x[1], width = fig.width, height = fig.height)
+  img <- external_img(src = x[1], width = fig.width, height = fig.height, alt = options$fig.alt)
 
   doc <- get_reference_rdocx()
   si <- styles_info(doc)
