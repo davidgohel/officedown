@@ -51,7 +51,7 @@ see figure \@ref(fig:boxplot) and table \@ref(tab:mtcars)!
 
 ### A boxplot
 
-```{r fig.cap="A boxplot", fig.id = "boxplot"}
+```{r fig.cap="A boxplot", fig.id = "boxplot", fig.alt="Alternative text for screen readers"}
 boxplot(1:8)
 ```
 

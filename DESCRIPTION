@@ -8,7 +8,8 @@ Authors@R: c(
     person(given = "Institut für Qualitätssicherung und Transparenz im Gesundheitswesen", role = c("fnd")),
     person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 
     comment = "rmarkdown implementation for rvg"),
-    person(given = "ArData", role = "cph")
+    person(given = "ArData", role = "cph"),
+    person("Martin", "Camitz", role = c("ctb"), email = 'martin.camitz@gmail.com') 
     )
 Description: Allows production of 'Microsoft' corporate documents from 'R Markdown' by 
  reusing formatting defined in 'Microsoft Word' documents. You can reuse table styles, 
@@ -25,10 +26,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
- officer (>= 0.3.15), 
+ officer (>= 0.3.16), 
  xml2, rlang, uuid,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
+Remotes: davidgohel/officer
 Suggests: ggplot2, flextable, bookdown (>= 0.13)
 URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown/
 BugReports: https://github.com/davidgohel/officedown/issues
