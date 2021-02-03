@@ -8,7 +8,8 @@ Authors@R: c(
     person(given = "Institut für Qualitätssicherung und Transparenz im Gesundheitswesen", role = c("fnd")),
     person("Noam", "Ross", role = c("aut"), email = 'noam.ross@gmail.com', 
     comment = "rmarkdown implementation for rvg"),
-    person(given = "ArData", role = "cph")
+    person(given = "ArData", role = "cph"),
+    person("Martin", "Camitz", role = c("ctb"), email = 'martin.camitz@gmail.com') 
     )
 Description: Allows production of 'Microsoft' corporate documents from 'R Markdown' by 
  reusing formatting defined in 'Microsoft Word' documents. You can reuse table styles, 
