@@ -25,10 +25,11 @@ Encoding: UTF-8
 LazyData: true
 Imports: knitr, 
  rmarkdown, 
- officer (>= 0.3.17), 
+ officer (>= 0.3.16), 
  xml2, rlang, uuid,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
+Remotes: davidgohel/officer
 Suggests: ggplot2, flextable, bookdown (>= 0.13)
 URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown
 BugReports: https://github.com/davidgohel/officedown/issues
