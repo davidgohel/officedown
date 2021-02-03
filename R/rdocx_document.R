@@ -60,6 +60,7 @@ tables_default_values <- list(
 plots_default_values <- list(
   style = "Figure",
   align = "center",
+  topcaption = FALSE,
   caption = list(
     style = "Image Caption",
     pre = "Figure ", sep = ": "
@@ -144,6 +145,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' * `style`: the Word stylename to use for plots.
 #' * `align`: alignment of figures in the output document (possible values are 'left',
 #' 'right' and 'center').
+#' * `topcaption`: caption will appear before (on top of) the figure,
 #' * `caption`; caption options, i.e.:
 #'   * `style`: Word stylename to use for figure captions.
 #'   * `pre`: prefix for numbering chunk (default to "Figure ").
@@ -152,7 +154,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' Default value is (in R format):
 #' ```
 #' list(
-#'   style = "Normal", align = "center",
+#'   style = "Normal", align = "center", topcaption = FALSE,
 #'   caption = list(
 #'     style = "Image Caption",
 #'     pre = "Figure ",
@@ -165,6 +167,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ```
 #' style: Normal
 #' align: center
+#' topcaption: false
 #' caption:
 #'   style: Image Caption
 #'   pre: 'Figure '
@@ -350,7 +353,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.cap.sep = plots$caption$sep,
          fig.align = plots$align,
          fig.style = plots$style,
-         fig.lp = "fig:"
+         fig.lp = "fig:",
+         fig.topcaption = plots$topcaption
          )
     )
   if(is.null(output_formats$knitr$knit_hooks)){

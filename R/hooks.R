@@ -10,7 +10,8 @@ plot_word_fig_caption <- function(x, options) {
   if(is.null(options$fig.id))
     fig.id <- options$label
   else fig.id <- options$fig.id
-
+  if(!is.logical(options$fig.topcaption)) options$fig.topcaption <- FALSE
+  
   bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,
                       autonum = run_autonum(
                         seq_id = gsub(":$", "", options$fig.lp),
@@ -46,5 +47,8 @@ plot_word_fig_caption <- function(x, options) {
   ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
   img_wml <- paste("```{=openxml}", ooxml, "```", sep = "\n")
 
-  paste("", img_wml, cap_str, sep = "\n\n")
+  if (options$fig.topcaption)
+    paste("", cap_str, img_wml, sep = "\n\n")
+  else
+    paste("", img_wml, cap_str, sep = "\n\n")
 }
