@@ -72,6 +72,7 @@ Missing items will be replaced by default values. Possible items are the followi
 \item \code{style}: the Word stylename to use for plots.
 \item \code{align}: alignment of figures in the output document (possible values are 'left',
 'right' and 'center').
+\item \code{topcaption}: caption will appear before (on top of) the figure,
 \item \code{caption}; caption options, i.e.:
 \itemize{
 \item \code{style}: Word stylename to use for figure captions.
@@ -81,7 +82,7 @@ Missing items will be replaced by default values. Possible items are the followi
 }
 
 Default value is (in R format):\preformatted{list(
-  style = "Normal", align = "center",
+  style = "Normal", align = "center", topcaption = FALSE,
   caption = list(
     style = "Image Caption",
     pre = "Figure ",
@@ -92,6 +93,7 @@ Default value is (in R format):\preformatted{list(
 
 Default value is (in YAML format):\preformatted{style: Normal
 align: center
+topcaption: false
 caption:
   style: Image Caption
   pre: 'Figure '
