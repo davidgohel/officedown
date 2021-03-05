@@ -1,3 +1,14 @@
+# officedown 0.2.2
+
+## Issues
+
+* set `number_sections` to FALSE when `bookdown::markdown_document2` is 
+used to avoid sections numbered twice.
+
+## new feature
+
+* support for knitr chunk option `fig.alt`.
+
 # officedown 0.2.1
 
 ## Issues

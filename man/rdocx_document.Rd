@@ -17,7 +17,12 @@ rdocx_document(
 \arguments{
 \item{base_format}{a scalar character, format to be used as a base document for
 officedown. default to \link[rmarkdown:word_document]{word_document} but
-can also be word_document2 from bookdown}
+can also be word_document2 from bookdown.
+
+When the \code{base_format} used is \code{bookdown::word_document2}, the \code{number_sections}
+parameter is automatically set to \code{FALSE}. Indeed, if you want numbered titles,
+you are asked to use a Word document template with auto-numbered titles (the title
+styles of the default `rdocx_document' template are already set to FALSE).}
 
 \item{tables}{a list that can contain few items to style tables and table captions.
 Missing items will be replaced by default values. Possible items are the following:

@@ -92,7 +92,13 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' document. The function comes also with improved output options.
 #' @param base_format a scalar character, format to be used as a base document for
 #' officedown. default to [word_document][rmarkdown::word_document] but
-#' can also be word_document2 from bookdown
+#' can also be word_document2 from bookdown.
+#'
+#' When the `base_format` used is `bookdown::word_document2`, the `number_sections`
+#' parameter is automatically set to `FALSE`. Indeed, if you want numbered titles,
+#' you are asked to use a Word document template with auto-numbered titles (the title
+#' styles of the default `rdocx_document' template are already set to FALSE).
+#'
 #' @param tables a list that can contain few items to style tables and table captions.
 #' Missing items will be replaced by default values. Possible items are the following:
 #'
@@ -322,6 +328,10 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
       "bookdown", "template.docx"
     )
   }
+  if(!is.null(args$number_sections) && isTRUE(args$number_sections)){
+    args$number_sections <- FALSE
+  }
+
   args$reference_docx <- absolute_path(args$reference_docx)
 
   base_format_fun <- get_fun(base_format)
