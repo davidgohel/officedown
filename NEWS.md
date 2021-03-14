@@ -7,7 +7,7 @@ used to avoid sections numbered twice.
 
 ## new feature
 
-* support for knitr chunk option `fig.alt`.
+* support for knitr chunk option `fig.alt` and `fig.topcaption`.
 
 # officedown 0.2.1
 

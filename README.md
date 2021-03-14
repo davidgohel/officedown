@@ -128,8 +128,20 @@ A bookdown is available in the package and can be used as a demo.
 ``` r
 dir <- system.file(package = "officedown", "examples", "bookdown")
 file.copy(dir, getwd(), recursive = TRUE, overwrite = TRUE)
-rmarkdown::render_site("bookdown")
-browseURL("bookdown/_book/bookdown.docx")
+#> [1] TRUE
+# rmarkdown::render_site("bookdown")
+fs::dir_tree("bookdown", recurse = TRUE)
+#> bookdown
+#> ├── 01-intro.Rmd
+#> ├── 02-toc.Rmd
+#> ├── 03-tables.Rmd
+#> ├── 04-sections.Rmd
+#> ├── 05-plots.Rmd
+#> ├── _bookdown.yml
+#> ├── _output.yml
+#> ├── bookdown.Rproj
+#> ├── index.Rmd
+#> └── template.docx
 ```
 
 You should see the following document:

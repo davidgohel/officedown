@@ -132,11 +132,21 @@ to be loaded in the Rmd.
 
 A bookdown is available in the package and can be used as a demo.
 
-```{r eval=FALSE}
+```{r}
 dir <- system.file(package = "officedown", "examples", "bookdown")
 file.copy(dir, getwd(), recursive = TRUE, overwrite = TRUE)
+# rmarkdown::render_site("bookdown")
+fs::dir_tree("bookdown", recurse = TRUE)
+```
+
+
+```{r include=FALSE}
+# remotes::install_github("ardata-fr/doconv")
 rmarkdown::render_site("bookdown")
-browseURL("bookdown/_book/bookdown.docx")
+z <- doconv::to_miniature("bookdown/_book/bookdown.docx", use_docx2pdf = TRUE,
+                     row = c(1, 1, 2, 2, 3, 0, 4, 0, 5, 5, 6), width = 850,
+                     fileout = "man/figures/README-bookdown.png")
+unlink("bookdown", recursive = TRUE, force = TRUE)
 ```
 
 You should see the following document:
