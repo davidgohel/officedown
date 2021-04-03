@@ -1,5 +1,10 @@
 # officedown 0.2.2
 
+## new feature
+
+* Added the control of page dimensions; it is now possible to define the default 
+section of a document. 
+
 ## Issues
 
 * set `number_sections` to FALSE when `bookdown::markdown_document2` is 

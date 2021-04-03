@@ -73,6 +73,23 @@ lists_default_values <- list(
   ul.style = NULL
 )
 
+# page_size_default_values ----
+page_size_default_values <- list(
+  width = 8.3,
+  height = 11.7,
+  orient = "portrait"
+)
+# page_mar_default_values ----
+page_mar_default_values <- list(
+  bottom = 1.25,
+  top = 1.25,
+  right = 0.5,
+  left = .5,
+  header = 0.5,
+  footer = 0.5,
+  gutter = 0.5
+)
+
 # memoise reference_docx ----
 
 #' @importFrom officer get_reference_value
@@ -196,6 +213,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @param reference_num if TRUE, text for references to sections will be
 #' the section number (e.g. '3.2'). If FALSE, text for references to sections
 #' will be the text (e.g. 'section title').
+#' @param page_size,page_margins default page and margins dimensions, these values are used to define the default Word section.
+#' See [page_size()] and [page_mar()].
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
 #' @section Finding stylenames:
@@ -265,6 +284,18 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'       ul.style: null
 #'     mapstyles:
 #'       Normal: ['First Paragraph', 'Author', 'Date']
+#'     page_size:
+#'       width: 8.3
+#'       height: 11.7
+#'       orient: "portrait"
+#'     page_margins:
+#'       bottom: 1
+#'       top: 1
+#'       right: 1.25
+#'       left: 1.25
+#'       header: 0.5
+#'       footer: 0.5
+#'       gutter: 0.5
 #'     reference_num: true
 #' ---
 #' ```
@@ -317,9 +348,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @importFrom utils modifyList
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
-                           mapstyles = list(),
-                           reference_num = TRUE,
-                           ...) {
+                           mapstyles = list(), page_size = list(), page_margins = list(),
+                           reference_num = TRUE, ...) {
 
   args <- list(...)
   if(is.null(args$reference_docx)){
@@ -341,6 +371,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   tables <- modifyList(tables_default_values, tables)
   plots <- modifyList(plots_default_values, plots)
   lists <- modifyList(lists_default_values, lists)
+  page_size <- modifyList(page_size_default_values, page_size)
+  page_margins <- modifyList(page_mar_default_values, page_margins)
 
   output_formats$knitr$opts_chunk <- append(
     output_formats$knitr$opts_chunk,
@@ -406,6 +438,25 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     x <- process_par_settings(x)
     x <- process_list_settings(x, ul_style = lists$ul.style, ol_style = lists$ol.style)
     x <- change_styles(x, mapstyles = mapstyles)
+
+    # default section
+    default_sect_properties <- prop_section(
+      page_size = page_size(
+        orient = page_size$orient,
+        width = page_size$width,
+        height = page_size$height),
+      type = "continuous",
+      page_margins = page_mar(
+        bottom = page_margins$bottom,
+        top = page_margins$top,
+        right = page_margins$right,
+        left = page_margins$left,
+        header = page_margins$header,
+        footer = page_margins$footer,
+        gutter = page_margins$gutter)
+    )
+    x <- body_set_default_section(x, default_sect_properties)
+
     forget(get_reference_rdocx)
     print(x, target = output_file)
     output_file

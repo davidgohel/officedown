@@ -10,6 +10,8 @@ rdocx_document(
   plots = list(),
   lists = list(),
   mapstyles = list(),
+  page_size = list(),
+  page_margins = list(),
   reference_num = TRUE,
   ...
 )
@@ -118,6 +120,9 @@ document. \code{list("Normal" = c("Author", "Date"))} will result in a document 
 all paragraphs styled with stylename "Date" and "Author" will be then styled with
 stylename "Normal".}
 
+\item{page_size, page_margins}{default page and margins dimensions, these values are used to define the default Word section.
+See \code{\link[=page_size]{page_size()}} and \code{\link[=page_mar]{page_mar()}}.}
+
 \item{reference_num}{if TRUE, text for references to sections will be
 the section number (e.g. '3.2'). If FALSE, text for references to sections
 will be the text (e.g. 'section title').}
@@ -188,6 +193,18 @@ output:
       ul.style: null
     mapstyles:
       Normal: ['First Paragraph', 'Author', 'Date']
+    page_size:
+      width: 8.3
+      height: 11.7
+      orient: "portrait"
+    page_margins:
+      bottom: 1
+      top: 1
+      right: 1.25
+      left: 1.25
+      header: 0.5
+      footer: 0.5
+      gutter: 0.5
     reference_num: true
 ---
 }
