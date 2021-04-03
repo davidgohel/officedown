@@ -47,35 +47,23 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.2.002</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="articles/yaml.html">YAML header</a>
+  <a href="reference/index.html">Function reference</a>
 </li>
 <li>
-  <a href="articles/captions.html">Captions and references</a>
-</li>
-<li>
-  <a href="articles/officer.html">officer support</a>
-</li>
-<li>
-  <a href="articles/tables.html">data.frame printing</a>
-</li>
-<li>
-  <a href="articles/lists.html">Lists</a>
+  <a href="https://ardata-fr.github.io/officeverse/">User Documentation</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="reference/index.html">Function reference</a>
-</li>
-<li>
-  <a href="https://github.com/davidgohel/officedown">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/davidgohel/officedown/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,7 +82,7 @@
 
 
 <blockquote>
-<p><code>{officedown}</code> is bringing some <a href="https://cran.r-project.org/package=officer">officer</a> features into R markdown documents.</p>
+<p><a href="https://ardata-fr.github.io/officeverse/">officedown</a> is bringing some <a href="https://cran.r-project.org/package=officer">officer</a> features into R markdown documents.</p>
 </blockquote>
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -111,7 +99,7 @@
 </li>
 <li>
 <p>Ability to use the table styles and list styles defined in the “reference_docx” which serves as a template for the pandoc document.</p>
-<p>With rmarkdown, you can reuse all paragraph styles. With <code>{officedown}</code>, you can also reuse table and list styles. These features are based on the use of Word templates (<code>reference_docx</code>). It is recommended to learn how “Word styles” work for paragraphs, tables and lists if you never really used Word styles.</p>
+<p>With rmarkdown, you can reuse all paragraph styles. With <a href="https://ardata-fr.github.io/officeverse/">officedown</a>, you can also reuse table and list styles. These features are based on the use of Word templates (<code>reference_docx</code>). It is recommended to learn how “Word styles” work for paragraphs, tables and lists if you never really used Word styles.</p>
 <blockquote>
 <p>These styles are to be defined in a Word document that serves as a template. You must first create a Word document (or edit an existing Word document), adjust the styles and save it. This document which serves as a vehicle for the defined styles will be used by R Markdown, the argument <code>reference_docx</code> must be filled in with the file path.</p>
 </blockquote>
@@ -130,7 +118,7 @@
 </li>
 <li>
 <p>Full support for flextable output, including with outputs containing images and links.</p>
-<p>The package enable knitting flextable outputs with images or plots in cells without using <code>{officer}</code>. Insertion of images in <code>{flextable}</code> is not supported with <code><a href="https://rdrr.io/pkg/rmarkdown/man/word_document.html">rmarkdown::word_document</a></code> but is possible by using <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>.</p>
+<p>The package enable knitting flextable outputs with images or plots in cells without using <a href="https://ardata-fr.github.io/officeverse/">officer</a>. Insertion of images in <a href="https://ardata-fr.github.io/flextable-book/">flextable</a> is not supported with <code><a href="https://pkgs.rstudio.com/rmarkdown/reference/word_document.html">rmarkdown::word_document</a></code> but is possible by using <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>.</p>
 </li>
 </ul>
 </div>
@@ -141,11 +129,20 @@
 <p>The package also offers the possibility to transform your graphic instructions into editable vector graphics (with the rvg package) by simply wrapping your call into a call to function <code>dml</code>.</p>
 </div>
 </div>
+<div id="ressources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ressources" class="anchor"></a>Ressources</h2>
+<p>The help pages are in a bookdown located at:</p>
+<p><a href="https://ardata-fr.github.io/officeverse/" class="uri">https://ardata-fr.github.io/officeverse/</a></p>
+<p>Manuals are available at:</p>
+<p><a href="https://davidgohel.github.io/officedown/" class="uri">https://davidgohel.github.io/officedown/</a>.</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install <code>{officedown}</code> from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"davidgohel/officedown"</span>)</pre></div>
+<p>You can install <a href="https://ardata-fr.github.io/officeverse/">officedown</a> from github with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"davidgohel/officedown"</span><span class="op">)</span></code></pre></div>
 <p>Supported formats require some minimum <a href="https://pandoc.org/installing.html">pandoc</a> versions:</p>
 <table class="table">
 <thead><tr class="header">
@@ -170,9 +167,9 @@
 <div id="rdocx_document" class="section level3">
 <h3 class="hasAnchor">
 <a href="#rdocx_document" class="anchor"></a>rdocx_document</h3>
-<p>use RStudio Menu to create a document from <code>{officedown}</code> template.</p>
+<p>use RStudio Menu to create a document from <a href="https://ardata-fr.github.io/officeverse/">officedown</a> template.</p>
 <p><img src="reference/figures/README-rstudio-new.png"></p>
-<p>It creates an R markdown document, parameter <code>output</code> is set to <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>. Note that package <code>{officedown}</code> need to be loaded in the Rmd.</p>
+<p>It creates an R markdown document, parameter <code>output</code> is set to <code><a href="reference/rdocx_document.html">officedown::rdocx_document</a></code>. Note that package <a href="https://ardata-fr.github.io/officeverse/">officedown</a> need to be loaded in the Rmd.</p>
 <p><img src="reference/figures/README-minimal-rmd.png"></p>
 </div>
 </div>
@@ -180,10 +177,23 @@
 <h2 class="hasAnchor">
 <a href="#word-features-illustration" class="anchor"></a>Word Features illustration</h2>
 <p>A bookdown is available in the package and can be used as a demo.</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="no">dir</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"officedown"</span>, <span class="st">"examples"</span>, <span class="st">"bookdown"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span>(<span class="no">dir</span>, <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span>(), <span class="kw">recursive</span> <span class="kw">=</span> <span class="fl">TRUE</span>, <span class="kw">overwrite</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
-<span class="kw pkg">rmarkdown</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/rmarkdown/man/render_site.html">render_site</a></span>(<span class="st">"bookdown"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/browseURL.html">browseURL</a></span>(<span class="st">"bookdown/_book/bookdown.docx"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"officedown"</span>, <span class="st">"examples"</span>, <span class="st">"bookdown"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span><span class="va">dir</span>, <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; [1] TRUE</span>
+<span class="co"># rmarkdown::render_site("bookdown")</span>
+<span class="fu">fs</span><span class="fu">::</span><span class="fu"><a href="http://fs.r-lib.org/reference/dir_tree.html">dir_tree</a></span><span class="op">(</span><span class="st">"bookdown"</span>, recurse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="co">#&gt; bookdown</span>
+<span class="co">#&gt; ├── 01-intro.Rmd</span>
+<span class="co">#&gt; ├── 02-toc.Rmd</span>
+<span class="co">#&gt; ├── 03-tables.Rmd</span>
+<span class="co">#&gt; ├── 04-sections.Rmd</span>
+<span class="co">#&gt; ├── 05-plots.Rmd</span>
+<span class="co">#&gt; ├── _bookdown.yml</span>
+<span class="co">#&gt; ├── _output.yml</span>
+<span class="co">#&gt; ├── bookdown.Rproj</span>
+<span class="co">#&gt; ├── index.Rmd</span>
+<span class="co">#&gt; └── template.docx</span></code></pre></div>
 <p>You should see the following document:</p>
 <p><img src="reference/figures/README-bookdown.png"></p>
 </div>
@@ -229,11 +239,11 @@
 
       <footer><link href="ardata.css" rel="stylesheet">
 <div class="author">
-  <p>Version 0.2.0 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.2.2.002 - Developed by David Gohel, Institut für Qualitätssicherung und Transparenz im Gesundheitswesen, Noam Ross - proudly brought to you by <a href="http://www.ardata.fr"><img alt="ardata" src="ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
 <script>

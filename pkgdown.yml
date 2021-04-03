@@ -1,11 +1,7 @@
-pandoc: 2.9.2.1
-pkgdown: 1.5.1
+pandoc: 2.7.3
+pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  captions: captions.html
-  lists: lists.html
-  officer: officer.html
-  tables: tables.html
-  yaml: yaml.html
-last_built: 2020-06-29T17:51Z
+  overview: overview.html
+last_built: 2021-04-03T09:03Z
 
