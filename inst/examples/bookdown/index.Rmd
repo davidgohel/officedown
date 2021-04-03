@@ -13,8 +13,6 @@ description: "This is a minimal example of using the officedown package to write
 library(knitr)
 library(officedown)
 library(officer)
-library(magrittr)
-library(ggplot2)
 opts_chunk$set(echo = TRUE, tab.lp="Table:", fig.lp="Figure:")
 fp <- fp_par(text.align = "center", padding = 20, border.bottom = fp_border())
 ft <- fp_text(font.size = 12, bold = TRUE, color = "#C32900", font.family = "Cambria")

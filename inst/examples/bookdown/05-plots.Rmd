@@ -1,18 +1,16 @@
 # Graphics {#graphics}
 
 
-```{r fig.cap="economics plot", fig.id = "ts-plot", fig.cap.style="Image Caption"}
-year <- function(x) as.POSIXlt(x)$year + 1900
-ggplot(economics, aes(date, unemploy / pop)) +
-  geom_line() + theme_minimal()
+```{r fig.cap="Sunspot plot", fig.id = "ts-plot", fig.cap.style="Image Caption"}
+plot(sunspot.year)
 ```
 
 \newpage
 
 Math latex in captions is supported:
 
-```{r fig.cap="$\\sum_{i=1}^n X_i$", fig.id = "dotplot"}
-ggplot(mpg, aes(displ, cty, color = trans)) + geom_point() + theme_minimal()
+```{r fig.cap="$\\sum_{i=1}^n X_i$", fig.id = "lynx"}
+plot(lynx)
 ```
 
 
