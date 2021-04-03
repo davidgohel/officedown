@@ -1,7 +1,7 @@
 title: officedown
 
 template:
-  package: ardown
+  package: pkgardata
   bootswatch: simplex
 
 home:
