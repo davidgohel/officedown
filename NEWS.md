@@ -1,3 +1,9 @@
+# officedown 0.2.3
+
+## Issues
+
+* fix issue missing Word headers and footers.
+
 # officedown 0.2.2
 
 ## new feature
