@@ -32,6 +32,13 @@ Missing items will be replaced by default values. Possible items are the followi
 \item \code{style}: the Word stylename to use for tables.
 \item \code{layout}: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
 \item \code{width}: value of the preferred width of the table in percent (base 1).
+\item \code{tab.lp}: caption table sequence identifier. All table captions are supposed
+to have the same identifier. It makes possible to insert list of tables. It is
+also used to prefix your 'bookdown' cross-reference call; if \code{tab.lp} is set to
+"tab:", a cross-reference to table with id "xxxxx" is written as \verb{\\@ref(tab:xxxxx)}.
+It is possible to set the value to your default Word value (in French for example it
+is "Tableau", in German it is "Tabelle"), you can then add manually a list of
+tables (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{caption}; caption options, i.e.:
 \itemize{
 \item \code{style}: Word stylename to use for table captions.
@@ -48,6 +55,7 @@ Missing items will be replaced by default values. Possible items are the followi
 
 Default value is (in R format):\preformatted{list(
    style = "Table", layout = "autofit", width = 1,
+   topcaption = TRUE, tab.lp = 'tab:,
    caption = list(
      style = "Table Caption", pre = "Table ", sep = ": "),
    conditional = list(
@@ -60,6 +68,8 @@ Default value is (in R format):\preformatted{list(
 Default value is (in YAML format):\preformatted{style: Table
 layout: autofit
 width: 1.0
+topcaption: true
+tab.lp: 'tab:'
 caption:
   style: Table Caption
   pre: 'Table '
@@ -80,6 +90,13 @@ Missing items will be replaced by default values. Possible items are the followi
 \item \code{align}: alignment of figures in the output document (possible values are 'left',
 'right' and 'center').
 \item \code{topcaption}: caption will appear before (on top of) the figure,
+\item \code{fig.lp}: caption figure sequence identifier. All figure captions are supposed
+to have the same identifier. It makes possible to insert list of figures. It is
+also used to prefix your 'bookdown' cross-reference call; if \code{fig.lp} is set to
+"fig:", a cross-reference to figure with id "xxxxx" is written as \verb{\\@ref(fig:xxxxx)}.
+It is possible to set the value to your default Word value (in French for example it
+is "Figure"), you can then add manually a list of
+figures (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{caption}; caption options, i.e.:
 \itemize{
 \item \code{style}: Word stylename to use for figure captions.
@@ -90,6 +107,7 @@ Missing items will be replaced by default values. Possible items are the followi
 
 Default value is (in R format):\preformatted{list(
   style = "Normal", align = "center", topcaption = FALSE,
+  topcaption = FALSE, fig.lp = "fig:",
   caption = list(
     style = "Image Caption",
     pre = "Figure ",
@@ -101,6 +119,7 @@ Default value is (in R format):\preformatted{list(
 Default value is (in YAML format):\preformatted{style: Normal
 align: center
 topcaption: false
+fig.lp: 'fig:'
 caption:
   style: Image Caption
   pre: 'Figure '
@@ -170,6 +189,8 @@ output:
       style: Table
       layout: autofit
       width: 1.0
+      topcaption: true
+      tab.lp: 'tab:'
       caption:
         style: Table Caption
         pre: 'Table '
@@ -184,6 +205,8 @@ output:
     plots:
       style: Normal
       align: center
+      fig.lp: 'fig:'
+      topcaption: false
       caption:
         style: Image Caption
         pre: 'Figure '

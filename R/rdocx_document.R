@@ -42,6 +42,8 @@ tables_default_values <- list(
   style = "Table",
   layout = "autofit",
   width = 1,
+  tab.lp = "tab:",
+  topcaption = FALSE,
   caption = list(
     style = "Table Caption",
     pre = "Table ", sep = ": "
@@ -60,6 +62,7 @@ tables_default_values <- list(
 plots_default_values <- list(
   style = "Figure",
   align = "center",
+  fig.lp = "fig:",
   topcaption = FALSE,
   caption = list(
     style = "Image Caption",
@@ -122,6 +125,13 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' * `style`: the Word stylename to use for tables.
 #' * `layout`: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
 #' * `width`: value of the preferred width of the table in percent (base 1).
+#' * `tab.lp`: caption table sequence identifier. All table captions are supposed
+#' to have the same identifier. It makes possible to insert list of tables. It is
+#' also used to prefix your 'bookdown' cross-reference call; if `tab.lp` is set to
+#' "tab:", a cross-reference to table with id "xxxxx" is written as `\@ref(tab:xxxxx)`.
+#' It is possible to set the value to your default Word value (in French for example it
+#' is "Tableau", in German it is "Tabelle"), you can then add manually a list of
+#' tables (go to the "References" tab and select menu "Insert Table of Figures").
 #' * `caption`; caption options, i.e.:
 #'   * `style`: Word stylename to use for table captions.
 #'   * `pre`: prefix for numbering chunk (default to "Table ").
@@ -135,6 +145,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ```
 #' list(
 #'    style = "Table", layout = "autofit", width = 1,
+#'    topcaption = TRUE, tab.lp = 'tab:,
 #'    caption = list(
 #'      style = "Table Caption", pre = "Table ", sep = ": "),
 #'    conditional = list(
@@ -149,6 +160,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' style: Table
 #' layout: autofit
 #' width: 1.0
+#' topcaption: true
+#' tab.lp: 'tab:'
 #' caption:
 #'   style: Table Caption
 #'   pre: 'Table '
@@ -169,6 +182,13 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' * `align`: alignment of figures in the output document (possible values are 'left',
 #' 'right' and 'center').
 #' * `topcaption`: caption will appear before (on top of) the figure,
+#' * `fig.lp`: caption figure sequence identifier. All figure captions are supposed
+#' to have the same identifier. It makes possible to insert list of figures. It is
+#' also used to prefix your 'bookdown' cross-reference call; if `fig.lp` is set to
+#' "fig:", a cross-reference to figure with id "xxxxx" is written as `\@ref(fig:xxxxx)`.
+#' It is possible to set the value to your default Word value (in French for example it
+#' is "Figure"), you can then add manually a list of
+#' figures (go to the "References" tab and select menu "Insert Table of Figures").
 #' * `caption`; caption options, i.e.:
 #'   * `style`: Word stylename to use for figure captions.
 #'   * `pre`: prefix for numbering chunk (default to "Figure ").
@@ -178,6 +198,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' ```
 #' list(
 #'   style = "Normal", align = "center", topcaption = FALSE,
+#'   topcaption = FALSE, fig.lp = "fig:",
 #'   caption = list(
 #'     style = "Image Caption",
 #'     pre = "Figure ",
@@ -191,6 +212,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' style: Normal
 #' align: center
 #' topcaption: false
+#' fig.lp: 'fig:'
 #' caption:
 #'   style: Image Caption
 #'   pre: 'Figure '
@@ -261,6 +283,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'       style: Table
 #'       layout: autofit
 #'       width: 1.0
+#'       topcaption: true
+#'       tab.lp: 'tab:'
 #'       caption:
 #'         style: Table Caption
 #'         pre: 'Table '
@@ -275,6 +299,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'     plots:
 #'       style: Normal
 #'       align: center
+#'       fig.lp: 'fig:'
+#'       topcaption: false
 #'       caption:
 #'         style: Image Caption
 #'         pre: 'Figure '
@@ -379,7 +405,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     list(tab.cap.style = tables$caption$style,
          tab.cap.pre = tables$caption$pre,
          tab.cap.sep = tables$caption$sep,
-         tab.lp = "tab:",
+         tab.lp = tables$tab.lp,
+         tab.topcaption = tables$topcaption,
          tab.style = tables$style,
          tab.width = tables$width,
 
@@ -395,7 +422,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.cap.sep = plots$caption$sep,
          fig.align = plots$align,
          fig.style = plots$style,
-         fig.lp = "fig:",
+         fig.lp = plots$fig.lp,
          fig.topcaption = plots$topcaption
          )
     )
@@ -418,12 +445,15 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
     content <- readLines(output_file)
-
     content <- post_knit_table_captions(content,
-                                        tab.cap.pre = tables$caption$pre, tab.cap.sep = tables$caption$sep,
-                                        style = tables$caption$style)
-    content <- post_knit_caption_references(content, lp = "tab:")
-    content <- post_knit_caption_references(content, lp = "fig:")
+                                        tab.cap.pre = tables$caption$pre,
+                                        tab.cap.sep = tables$caption$sep,
+                                        style = tables$caption$style,
+                                        tab.lp = tables$tab.lp
+                                        )
+
+    content <- post_knit_caption_references(content, lp = tables$tab.lp)
+    content <- post_knit_caption_references(content, lp = plots$fig.lp)
     content <- post_knit_std_references(content, numbered = reference_num)
     content <- block_macro(content)
     writeLines(content, output_file)
