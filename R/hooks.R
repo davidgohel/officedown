@@ -41,11 +41,12 @@ plot_word_fig_caption <- function(x, options) {
     fig.style_id <- style_id("Normal", type = "paragraph", si)
 
   }
-  ooxml <- paste0("<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>",
+  ooxml <- "<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>"
+  ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
+  ooxml <- paste0(ooxml,
          to_wml(img),
          "</w:p>"
          )
-  ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
   img_wml <- paste("```{=openxml}", ooxml, "```", sep = "\n")
 
   if (options$fig.topcaption)
