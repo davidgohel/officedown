@@ -1,5 +1,9 @@
 # officedown 0.2.3
 
+## new feature
+
+* support for knitr chunk options `tab.topcaption` and `tab.lp`.
+
 ## Issues
 
 * fix issue missing Word headers and footers.

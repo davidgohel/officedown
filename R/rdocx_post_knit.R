@@ -14,17 +14,21 @@ as_reference_standard <- function(z, numbered = FALSE){
   paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
 }
 
-post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style) {
-  is_captions <- grepl("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", content)
+post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style, tab.lp) {
+
+  pattern1 <- paste0("<caption>\\(\\\\#", tab.lp, "[-[:alnum:]]+\\)(.*)</caption>")
+  pattern2 <- paste0("<caption>\\(\\\\#", tab.lp, "([-[:alnum:]]+)\\)(.*)</caption>")
+
+  is_captions <- grepl(pattern1, content)
   if (any(is_captions)) {
     captions <- content[is_captions]
-    ids <- gsub("<caption>\\(\\\\#tab:([-[:alnum:]]+)\\)(.*)</caption>", "\\1", captions)
-    labels <- gsub("<caption>\\(\\\\#tab:[-[:alnum:]]+\\)(.*)</caption>", "\\1", captions)
+    ids <- gsub(pattern2, "\\1", captions)
+    labels <- gsub(pattern1, "\\1", captions)
     str <- mapply(function(label, id) {
       pandoc_wml_caption(
         cap = label, cap.style = style,
         cap.pre = tab.cap.pre, cap.sep = tab.cap.sep,
-        id = id, seq_id = "tab:"
+        id = id, seq_id = tab.lp
       )
     }, label = labels, id = ids, SIMPLIFY = FALSE)
     content[is_captions] <- unlist(str)
@@ -34,8 +38,8 @@ post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style) {
 
 post_knit_caption_references <- function(content, lp = ""){
 
-  if(!lp %in% c("tab:", "fig:")){
-    stop("lp must be one of `tab:`, `fig:`.")
+  if(!grepl(":$", lp)){
+    stop("lp must end with `:`")
   }
   regexpr_str <- paste0('\\\\@ref\\(', lp, '([-[:alnum:]]+)\\)')
 
