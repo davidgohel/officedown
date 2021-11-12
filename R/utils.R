@@ -56,7 +56,8 @@ as_bookmark_md <- function(id, str) {
   paste0(bm_start_str, str, bm_start_end)
 }
 
-pandoc_wml_caption <- function(cap = NULL, cap.style = NULL, cap.pre = NULL, cap.sep = NULL, id = NULL, seq_id = NULL, ...){
+pandoc_wml_caption <- function(cap = NULL, cap.style = NULL, cap.pre = NULL, cap.sep = NULL, id = NULL, seq_id = NULL,
+                               tnd = 0, tns = "-", ...){
 
   if( is.null(cap)) return("")
 
@@ -65,7 +66,8 @@ pandoc_wml_caption <- function(cap = NULL, cap.style = NULL, cap.pre = NULL, cap
     seq_id <- gsub(":$", "", seq_id)
     autonum <- run_autonum(seq_id = seq_id,
                            pre_label = cap.pre,
-                           post_label = cap.sep, bkm = id, bkm_all = TRUE)
+                           post_label = cap.sep, bkm = id, bkm_all = TRUE,
+                           tnd = tnd, tns = tns)
     autonum <- paste("`", to_wml(autonum), "`{=openxml}", sep = "")
     run_str <- paste0(autonum, run_str)
   }

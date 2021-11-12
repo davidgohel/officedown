@@ -1,3 +1,9 @@
+knitr_opts_current <- function(x, default = FALSE){
+  x <- knitr::opts_current$get(x)
+  if(is.null(x)) x <- default
+  x
+}
+
 #' @importFrom knitr opts_chunk
 #' @title knitr hook for figure caption autonumbering
 #' @description The function allows you to add a hook when executing
@@ -12,13 +18,18 @@ plot_word_fig_caption <- function(x, options) {
     fig.id <- options$label
   else fig.id <- options$fig.id
   if(!is.logical(options$fig.topcaption)) options$fig.topcaption <- FALSE
-  
+
+  tnd <- knitr_opts_current("fig.cap.tnd", default = 0)
+  tns <- knitr_opts_current("fig.cap.tns", default = "-")
+
+
   bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,
                       autonum = run_autonum(
                         seq_id = gsub(":$", "", options$fig.lp),
                         pre_label = options$fig.cap.pre,
                         post_label = options$fig.cap.sep,
-                        bkm = fig.id, bkm_all = FALSE
+                        bkm = fig.id, bkm_all = FALSE,
+                        tnd = tnd, tns = tns
                       ))
   cap_str <- to_wml(bc, knitting = TRUE)
 

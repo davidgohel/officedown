@@ -62,12 +62,15 @@ knit_print.data.frame <- function(x, ...) {
                       alignment = get_table_design_opt("alignment", default = NULL),
                       properties = pt
                       )
+
     bc <- block_caption(label = tab_props$cap, style = tab_props$cap.style,
                   autonum = run_autonum(
                     seq_id = gsub(":$", "", tab_props$tab.lp),
                     pre_label = tab_props$cap.pre,
                     post_label = tab_props$cap.sep,
-                    bkm = tab_props$id
+                    bkm = tab_props$id,
+                    tnd = tab_props$cap.tnd,
+                    tns = tab_props$cap.tns
                   ))
 
     cap_str <- to_wml(bc, knitting = TRUE)

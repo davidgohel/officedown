@@ -44,6 +44,8 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{style}: Word stylename to use for table captions.
 \item \code{pre}: prefix for numbering chunk (default to "Table ").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
+\item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
+\item \code{tns}: separator to use between title number and table number. Default is "-".
 }
 \item \code{conditional}: a list of named logical values:
 \itemize{
@@ -51,18 +53,6 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{first_column}  and \code{last_column}: apply or remove formatting from the first or last column in the table
 \item \code{no_hband} and \code{no_vband}: don't display odd and even rows or columns with alternating shading for ease of reading.
 }
-}
-
-Default value is (in R format):\preformatted{list(
-   style = "Table", layout = "autofit", width = 1,
-   topcaption = TRUE, tab.lp = 'tab:,
-   caption = list(
-     style = "Table Caption", pre = "Table ", sep = ": "),
-   conditional = list(
-     first_row = TRUE, first_column = FALSE, last_row = FALSE,
-     last_column = FALSE, no_hband = FALSE, no_vband = TRUE
-   )
-)
 }
 
 Default value is (in YAML format):\preformatted{style: Table
@@ -74,6 +64,8 @@ caption:
   style: Table Caption
   pre: 'Table '
   sep: ': '
+  tnd: 0
+  tns: '-'
 conditional:
   first_row: true
   first_column: false
@@ -102,18 +94,9 @@ figures (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{style}: Word stylename to use for figure captions.
 \item \code{pre}: prefix for numbering chunk (default to "Figure ").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
+\item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
+\item \code{tns}: separator to use between title number and figure number. Default is "-".
 }
-}
-
-Default value is (in R format):\preformatted{list(
-  style = "Normal", align = "center", topcaption = FALSE,
-  topcaption = FALSE, fig.lp = "fig:",
-  caption = list(
-    style = "Image Caption",
-    pre = "Figure ",
-    sep = ": "
-   )
- )
 }
 
 Default value is (in YAML format):\preformatted{style: Normal
@@ -124,6 +107,8 @@ caption:
   style: Image Caption
   pre: 'Figure '
   sep: ': '
+  tnd: 0
+  tns: '-'
 }}
 
 \item{lists}{a list containing two named items \code{ol.style} and
@@ -195,6 +180,8 @@ output:
         style: Table Caption
         pre: 'Table '
         sep: ': '
+        tnd: 0
+        tns: '-'
       conditional:
         first_row: true
         first_column: false
@@ -211,6 +198,8 @@ output:
         style: Image Caption
         pre: 'Figure '
         sep: ': '
+        tnd: 0
+        tns: '-'
     lists:
       ol.style: null
       ul.style: null

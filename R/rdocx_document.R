@@ -46,7 +46,9 @@ tables_default_values <- list(
   topcaption = FALSE,
   caption = list(
     style = "Table Caption",
-    pre = "Table ", sep = ": "
+    pre = "Table ", sep = ": ",
+    tnd = 0,
+    tns = "-"
   ),
   conditional = list(
     first_row = TRUE,
@@ -66,7 +68,9 @@ plots_default_values <- list(
   topcaption = FALSE,
   caption = list(
     style = "Image Caption",
-    pre = "Figure ", sep = ": "
+    pre = "Figure ", sep = ": ",
+    tnd = 0,
+    tns = "-"
   )
 )
 
@@ -136,24 +140,13 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   * `style`: Word stylename to use for table captions.
 #'   * `pre`: prefix for numbering chunk (default to "Table ").
 #'   * `sep`: suffix for numbering chunk (default to ": ").
+#'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
+#'   * `tns`: separator to use between title number and table number. Default is "-".
 #' * `conditional`: a list of named logical values:
 #'   * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
 #'   * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
 #'   * `no_hband` and `no_vband`: don't display odd and even rows or columns with alternating shading for ease of reading.
 #'
-#' Default value is (in R format):
-#' ```
-#' list(
-#'    style = "Table", layout = "autofit", width = 1,
-#'    topcaption = TRUE, tab.lp = 'tab:,
-#'    caption = list(
-#'      style = "Table Caption", pre = "Table ", sep = ": "),
-#'    conditional = list(
-#'      first_row = TRUE, first_column = FALSE, last_row = FALSE,
-#'      last_column = FALSE, no_hband = FALSE, no_vband = TRUE
-#'    )
-#' )
-#' ```
 #'
 #' Default value is (in YAML format):
 #' ```
@@ -166,6 +159,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   style: Table Caption
 #'   pre: 'Table '
 #'   sep: ': '
+#'   tnd: 0
+#'   tns: '-'
 #' conditional:
 #'   first_row: true
 #'   first_column: false
@@ -193,19 +188,9 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   * `style`: Word stylename to use for figure captions.
 #'   * `pre`: prefix for numbering chunk (default to "Figure ").
 #'   * `sep`: suffix for numbering chunk (default to ": ").
+#'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
+#'   * `tns`: separator to use between title number and figure number. Default is "-".
 #'
-#' Default value is (in R format):
-#' ```
-#' list(
-#'   style = "Normal", align = "center", topcaption = FALSE,
-#'   topcaption = FALSE, fig.lp = "fig:",
-#'   caption = list(
-#'     style = "Image Caption",
-#'     pre = "Figure ",
-#'     sep = ": "
-#'    )
-#'  )
-#'  ```
 #'
 #' Default value is (in YAML format):
 #' ```
@@ -217,6 +202,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   style: Image Caption
 #'   pre: 'Figure '
 #'   sep: ': '
+#'   tnd: 0
+#'   tns: '-'
 #' ```
 #' @param lists a list containing two named items `ol.style` and
 #' `ul.style`, values are the stylenames to be used to replace the style of ordered
@@ -289,6 +276,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'         style: Table Caption
 #'         pre: 'Table '
 #'         sep: ': '
+#'         tnd: 0
+#'         tns: '-'
 #'       conditional:
 #'         first_row: true
 #'         first_column: false
@@ -305,6 +294,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'         style: Image Caption
 #'         pre: 'Figure '
 #'         sep: ': '
+#'         tnd: 0
+#'         tns: '-'
 #'     lists:
 #'       ol.style: null
 #'       ul.style: null
@@ -405,6 +396,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     list(tab.cap.style = tables$caption$style,
          tab.cap.pre = tables$caption$pre,
          tab.cap.sep = tables$caption$sep,
+         tab.cap.tnd = tables$caption$tnd,
+         tab.cap.tns = tables$caption$tns,
          tab.lp = tables$tab.lp,
          tab.topcaption = tables$topcaption,
          tab.style = tables$style,
@@ -420,6 +413,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.cap.style = plots$caption$style,
          fig.cap.pre = plots$caption$pre,
          fig.cap.sep = plots$caption$sep,
+         fig.cap.tnd = plots$caption$tnd,
+         fig.cap.tns = plots$caption$tns,
          fig.align = plots$align,
          fig.style = plots$style,
          fig.lp = plots$fig.lp,
@@ -449,7 +444,9 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
                                         tab.cap.pre = tables$caption$pre,
                                         tab.cap.sep = tables$caption$sep,
                                         style = tables$caption$style,
-                                        tab.lp = tables$tab.lp
+                                        tab.lp = tables$tab.lp,
+                                        tnd = tables$caption$tnd,
+                                        tns = tables$caption$tns
                                         )
 
     content <- post_knit_caption_references(content, lp = tables$tab.lp)
