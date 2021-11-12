@@ -21,11 +21,12 @@ jobs:
           - {os: windows-latest, r: 'release'}
           - {os: macOS-latest, r: 'release'}
           - {os: macOS-latest, r: 'devel'}
-          - {os: ubuntu-16.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/xenial/latest"}
+          - {os: ubuntu-20.04, r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/focal/latest"}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v2
@@ -35,11 +36,6 @@ jobs:
           r-version: ${{ matrix.config.r }}
 
       - uses: r-lib/actions/setup-pandoc@master
-
-      - name: install gdtools dep
-        if: matrix.config.os == 'macOS-latest'
-        run: |
-           brew install cairo freetype2 imagemagick ghostscript
 
       - name: Query dependencies
         run: |
@@ -64,10 +60,11 @@ jobs:
           Rscript -e "remotes::install_github('r-hub/sysreqs')"
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
+          sudo apt-get install -y libcurl4-openssl-dev
 
       - name: Install dependencies
         run: |
-          install.packages("crayon", type = "source")
+          install.packages("stringi", type="source")
           remotes::install_deps(dependencies = TRUE)
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
@@ -75,6 +72,7 @@ jobs:
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
+          _R_CHECK_FORCE_SUGGESTS_: false
         run: rcmdcheck::rcmdcheck(args = c("--no-manual", "--as-cran"), error_on = "warning", check_dir = "check")
         shell: Rscript {0}
 

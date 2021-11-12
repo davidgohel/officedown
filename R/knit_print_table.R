@@ -70,7 +70,8 @@ knit_print.data.frame <- function(x, ...) {
                     post_label = tab_props$cap.sep,
                     bkm = tab_props$id,
                     tnd = tab_props$cap.tnd,
-                    tns = tab_props$cap.tns
+                    tns = tab_props$cap.tns,
+                    prop = tab_props$cap.fp_text
                   ))
 
     cap_str <- to_wml(bc, knitting = TRUE)

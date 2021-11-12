@@ -48,7 +48,8 @@ tables_default_values <- list(
     style = "Table Caption",
     pre = "Table ", sep = ": ",
     tnd = 0,
-    tns = "-"
+    tns = "-",
+    fp_text = fp_text_lite(bold = TRUE)
   ),
   conditional = list(
     first_row = TRUE,
@@ -70,7 +71,8 @@ plots_default_values <- list(
     style = "Image Caption",
     pre = "Figure ", sep = ": ",
     tnd = 0,
-    tns = "-"
+    tns = "-",
+    fp_text = fp_text_lite(bold = TRUE)
   )
 )
 
@@ -142,6 +144,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   * `sep`: suffix for numbering chunk (default to ": ").
 #'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
 #'   * `tns`: separator to use between title number and table number. Default is "-".
+#'   * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
 #' * `conditional`: a list of named logical values:
 #'   * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
 #'   * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
@@ -161,6 +164,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   sep: ': '
 #'   tnd: 0
 #'   tns: '-'
+#'   fp_text: !expr officer::fp_text_lite(bold = TRUE)
 #' conditional:
 #'   first_row: true
 #'   first_column: false
@@ -190,6 +194,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   * `sep`: suffix for numbering chunk (default to ": ").
 #'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
 #'   * `tns`: separator to use between title number and figure number. Default is "-".
+#'   * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
 #'
 #'
 #' Default value is (in YAML format):
@@ -204,6 +209,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'   sep: ': '
 #'   tnd: 0
 #'   tns: '-'
+#'   fp_text: !expr officer::fp_text_lite(bold = TRUE)
 #' ```
 #' @param lists a list containing two named items `ol.style` and
 #' `ul.style`, values are the stylenames to be used to replace the style of ordered
@@ -278,6 +284,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'         sep: ': '
 #'         tnd: 0
 #'         tns: '-'
+#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
 #'       conditional:
 #'         first_row: true
 #'         first_column: false
@@ -296,6 +303,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'         sep: ': '
 #'         tnd: 0
 #'         tns: '-'
+#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
 #'     lists:
 #'       ol.style: null
 #'       ul.style: null
@@ -398,6 +406,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          tab.cap.sep = tables$caption$sep,
          tab.cap.tnd = tables$caption$tnd,
          tab.cap.tns = tables$caption$tns,
+         tab.cap.fp_text = tables$caption$fp_text,
          tab.lp = tables$tab.lp,
          tab.topcaption = tables$topcaption,
          tab.style = tables$style,
@@ -415,6 +424,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.cap.sep = plots$caption$sep,
          fig.cap.tnd = plots$caption$tnd,
          fig.cap.tns = plots$caption$tns,
+         fig.cap.fp_text = plots$caption$fp_text,
          fig.align = plots$align,
          fig.style = plots$style,
          fig.lp = plots$fig.lp,
@@ -440,14 +450,17 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
     content <- readLines(output_file)
-    content <- post_knit_table_captions(content,
-                                        tab.cap.pre = tables$caption$pre,
-                                        tab.cap.sep = tables$caption$sep,
-                                        style = tables$caption$style,
-                                        tab.lp = tables$tab.lp,
-                                        tnd = tables$caption$tnd,
-                                        tns = tables$caption$tns
-                                        )
+
+    # content <- post_knit_table_captions(
+    #   content = content,
+    #   tab.cap.pre = tables$caption$pre,
+    #   tab.cap.sep = tables$caption$sep,
+    #   style = tables$caption$style,
+    #   tab.lp = tables$tab.lp,
+    #   tnd = tables$caption$tnd,
+    #   tns = tables$caption$tns,
+    #   prop = tables$caption$fp_text
+    # )
 
     content <- post_knit_caption_references(content, lp = tables$tab.lp)
     content <- post_knit_caption_references(content, lp = plots$fig.lp)

@@ -1,6 +1,6 @@
-#' @importFrom officer run_reference to_wml
+#' @importFrom officer run_reference to_wml run_word_field
 as_reference_caption <- function(z){
-  sf <- run_seqfield(seqfield = paste0(" REF ", z, " \\h"))
+  sf <- run_word_field(field = paste0(" REF ", z, " \\h"))
   str <- to_wml(sf)
   paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
 }
@@ -9,12 +9,13 @@ as_reference_standard <- function(z, numbered = FALSE){
   if(numbered)
     str <- paste0(str, " \\r")
 
-  sf <- run_seqfield(seqfield = str)
+  sf <- run_word_field(field = str)
   str <- to_wml(sf)
   paste0("`<w:hyperlink w:anchor=\"", z, "\">", str, "</w:hyperlink>`{=openxml}")
 }
 
-post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style, tab.lp, tnd, tns) {
+post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style, tab.lp, tnd, tns,
+                                     prop = NULL) {
   pattern1 <- paste0("\\(\\\\#", tab.lp, "[-[:alnum:]]+\\)(.*)")
   pattern2 <- paste0("\\(\\\\#", tab.lp, "([-[:alnum:]]+)\\)(.*)")
 
@@ -28,7 +29,8 @@ post_knit_table_captions <- function(content, tab.cap.pre, tab.cap.sep, style, t
         cap = label, cap.style = style,
         cap.pre = tab.cap.pre, cap.sep = tab.cap.sep,
         id = id, seq_id = tab.lp,
-        tnd = tnd, tns = tns
+        tnd = tnd, tns = tns,
+        prop = prop
       )
     }, label = labels, id = ids, SIMPLIFY = FALSE)
     content[is_captions] <- unlist(str)

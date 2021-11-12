@@ -3,10 +3,9 @@
 ## new feature
 
 * support for knitr chunk options `tab.topcaption` and `tab.lp`.
-* support for knitr chunk options `tab.cap.tnd` and `tab.cap.tns` that let 
-define prefix for auto-number table captions.
-* support for knitr chunk options `fig.cap.tnd` and `fig.cap.tns` that let 
-define prefix for auto-number figure captions.
+* support for knitr chunk options `tab.cap.tnd`, `tab.cap.tns` and `tab.cap.fp_text` 
+that let define prefix for auto-number table captions. Same with 
+`fig.cap.tnd`, `fig.cap.tns` and `fig.cap.fp_text` for plots.
 
 ## Issues
 

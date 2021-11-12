@@ -19,7 +19,7 @@ ft <- fp_text(font.size = 12, bold = TRUE, color = "#C32900", font.family = "Cam
 
 The package `r ftext("officedown", ft)` is great. 
 
-This is a Word field, the file size is `r run_seqfield("FILESIZE \\k \\* MERGEFORMAT")` Kb. 
+This is a Word field, the file size is `r run_word_field("FILESIZE \\k \\* MERGEFORMAT")` Kb. 
 
 ## Paragraph settings
 

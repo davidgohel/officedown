@@ -4,7 +4,12 @@ bookdown::markdown_document2:
   lists:
     ol.style: Default ol
     ul.style: Default ul
+  plots:
+    caption:
+      tnd: 1
   tables:
+    caption:
+      tnd: 1
     conditional:
       first_row: true
       first_column: true

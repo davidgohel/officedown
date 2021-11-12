@@ -46,6 +46,7 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
 \item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
 \item \code{tns}: separator to use between title number and table number. Default is "-".
+\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[=fp_text_lite]{fp_text_lite()}}.
 }
 \item \code{conditional}: a list of named logical values:
 \itemize{
@@ -66,6 +67,7 @@ caption:
   sep: ': '
   tnd: 0
   tns: '-'
+  fp_text: !expr officer::fp_text_lite(bold = TRUE)
 conditional:
   first_row: true
   first_column: false
@@ -96,6 +98,7 @@ figures (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
 \item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
 \item \code{tns}: separator to use between title number and figure number. Default is "-".
+\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[=fp_text_lite]{fp_text_lite()}}.
 }
 }
 
@@ -109,6 +112,7 @@ caption:
   sep: ': '
   tnd: 0
   tns: '-'
+  fp_text: !expr officer::fp_text_lite(bold = TRUE)
 }}
 
 \item{lists}{a list containing two named items \code{ol.style} and
@@ -182,6 +186,7 @@ output:
         sep: ': '
         tnd: 0
         tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = TRUE)
       conditional:
         first_row: true
         first_column: false
@@ -200,6 +205,7 @@ output:
         sep: ': '
         tnd: 0
         tns: '-'
+        fp_text: !expr officer::fp_text_lite(bold = TRUE)
     lists:
       ol.style: null
       ul.style: null
