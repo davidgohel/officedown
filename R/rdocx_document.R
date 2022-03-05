@@ -131,6 +131,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' * `style`: the Word stylename to use for tables.
 #' * `layout`: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
 #' * `width`: value of the preferred width of the table in percent (base 1).
+#' * `topcaption`: caption will appear before (on top of) the table,
 #' * `tab.lp`: caption table sequence identifier. All table captions are supposed
 #' to have the same identifier. It makes possible to insert list of tables. It is
 #' also used to prefix your 'bookdown' cross-reference call; if `tab.lp` is set to
@@ -156,7 +157,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' style: Table
 #' layout: autofit
 #' width: 1.0
-#' topcaption: true
+#' topcaption: false
 #' tab.lp: 'tab:'
 #' caption:
 #'   style: Table Caption
