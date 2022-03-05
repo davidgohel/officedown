@@ -1,3 +1,13 @@
+# officedown 0.2.4
+
+## issues
+
+* bookmark only numbers
+* capture `fig.cap.fp_text` and not `fig.fp_text`
+* `topcaption` is now set to TRUE by default for tables as it is 
+set by default in officer.
+
+
 # officedown 0.2.3
 
 ## new feature

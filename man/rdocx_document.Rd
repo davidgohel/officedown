@@ -32,6 +32,7 @@ Missing items will be replaced by default values. Possible items are the followi
 \item \code{style}: the Word stylename to use for tables.
 \item \code{layout}: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
 \item \code{width}: value of the preferred width of the table in percent (base 1).
+\item \code{topcaption}: caption will appear before (on top of) the table,
 \item \code{tab.lp}: caption table sequence identifier. All table captions are supposed
 to have the same identifier. It makes possible to insert list of tables. It is
 also used to prefix your 'bookdown' cross-reference call; if \code{tab.lp} is set to
