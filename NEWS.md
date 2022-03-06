@@ -1,5 +1,11 @@
 # officedown 0.2.4
 
+## new feature
+
+* emit a knitr chunk option `is_rdocx_document` set to `TRUE` when starting 
+an `rdocx_document`. This will help with programing as it can be used to 
+detect if in an `rdocx_document` context or not.
+
 ## issues
 
 * bookmark only numbers

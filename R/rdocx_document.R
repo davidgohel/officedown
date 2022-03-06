@@ -429,7 +429,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.align = plots$align,
          fig.style = plots$style,
          fig.lp = plots$fig.lp,
-         fig.topcaption = plots$topcaption
+         fig.topcaption = plots$topcaption,
+         is_rdocx_document = TRUE
          )
     )
   if(is.null(output_formats$knitr$knit_hooks)){
