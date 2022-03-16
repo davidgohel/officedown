@@ -1,3 +1,9 @@
+# officedown 0.2.5
+
+## issues
+
+* fix usage of bookmark id containing underscore
+
 # officedown 0.2.4
 
 ## new feature
