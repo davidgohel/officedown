@@ -21,7 +21,7 @@ plot_word_fig_caption <- function(x, options) {
 
   tnd <- knitr_opts_current("fig.cap.tnd", default = 0)
   tns <- knitr_opts_current("fig.cap.tns", default = "-")
-  fig.fp_text <- knitr_opts_current("fig.fp_text", default = fp_text_lite(bold = TRUE))
+  fig.fp_text <- knitr_opts_current("fig.cap.fp_text", default = fp_text_lite(bold = TRUE))
 
 
   bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,

@@ -43,7 +43,7 @@ tables_default_values <- list(
   layout = "autofit",
   width = 1,
   tab.lp = "tab:",
-  topcaption = FALSE,
+  topcaption = TRUE,
   caption = list(
     style = "Table Caption",
     pre = "Table ", sep = ": ",
@@ -157,7 +157,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' style: Table
 #' layout: autofit
 #' width: 1.0
-#' topcaption: false
+#' topcaption: true
 #' tab.lp: 'tab:'
 #' caption:
 #'   style: Table Caption
@@ -435,7 +435,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
          fig.align = plots$align,
          fig.style = plots$style,
          fig.lp = plots$fig.lp,
-         fig.topcaption = plots$topcaption
+         fig.topcaption = plots$topcaption,
+         is_rdocx_document = TRUE
          )
     )
   if(is.null(output_formats$knitr$knit_hooks)){

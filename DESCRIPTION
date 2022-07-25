@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.2.3
+Version: 0.2.5.001
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre", "cph"),
     email = "david.gohel@ardata.fr"),
@@ -29,9 +29,9 @@ Imports: knitr,
  xml2, rlang, uuid,
  grDevices, yaml, utils, memoise, 
  rvg (>= 0.2.2)
-Suggests: ggplot2, flextable (>= 0.6.10), bookdown (>= 0.13)
+Suggests: ggplot2, flextable (>= 0.7.0), bookdown (>= 0.13)
 URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown/
-BugReports: https://github.com/davidgohel/officedown/issues
+BugReports: https://github.com/davidgohel/officedown/discussions
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
 SystemRequirements: pandoc (>= 2.0) - http://pandoc.org

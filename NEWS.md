@@ -1,3 +1,25 @@
+# officedown 0.2.5
+
+## issues
+
+* fix usage of bookmark id containing underscore
+
+# officedown 0.2.4
+
+## new feature
+
+* emit a knitr chunk option `is_rdocx_document` set to `TRUE` when starting 
+an `rdocx_document`. This will help with programing as it can be used to 
+detect if in an `rdocx_document` context or not.
+
+## issues
+
+* bookmark only numbers
+* capture `fig.cap.fp_text` and not `fig.fp_text`
+* `topcaption` is now set to TRUE by default for tables as it is 
+set by default in officer.
+
+
 # officedown 0.2.3
 
 ## new feature

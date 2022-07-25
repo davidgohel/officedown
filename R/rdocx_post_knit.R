@@ -43,7 +43,7 @@ post_knit_caption_references <- function(content, lp = ""){
   if(!grepl(":$", lp)){
     stop("lp must end with `:`")
   }
-  regexpr_str <- paste0('\\\\@ref\\(', lp, '([-[:alnum:]]+)\\)')
+  regexpr_str <- paste0('\\\\@ref\\(', lp, '([-[:alnum:]_]+)\\)')
 
   gmatch <- gregexpr(regexpr_str, content)
   result <- regmatches(content,gmatch)
