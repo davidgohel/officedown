@@ -57,15 +57,17 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 }
 }
 
-Default value is (in YAML format):\preformatted{style: Table
+Default value is (in YAML format):
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{style: Table
 layout: autofit
 width: 1.0
 topcaption: true
 tab.lp: 'tab:'
 caption:
   style: Table Caption
-  pre: 'Table '
-  sep: ': '
+  pre: 'Table'
+  sep: ':'
   tnd: 0
   tns: '-'
   fp_text: !expr officer::fp_text_lite(bold = TRUE)
@@ -76,7 +78,7 @@ conditional:
   last_column: false
   no_hband: false
   no_vband: true
-}}
+}\if{html}{\out{</div>}}}
 
 \item{plots}{a list that can contain few items to style figures and figure captions.
 Missing items will be replaced by default values. Possible items are the following:
@@ -103,7 +105,9 @@ figures (go to the "References" tab and select menu "Insert Table of Figures").
 }
 }
 
-Default value is (in YAML format):\preformatted{style: Normal
+Default value is (in YAML format):
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{style: Normal
 align: center
 topcaption: false
 fig.lp: 'fig:'
@@ -114,15 +118,17 @@ caption:
   tnd: 0
   tns: '-'
   fp_text: !expr officer::fp_text_lite(bold = TRUE)
-}}
+}\if{html}{\out{</div>}}}
 
 \item{lists}{a list containing two named items \code{ol.style} and
 \code{ul.style}, values are the stylenames to be used to replace the style of ordered
 and unordered lists created by pandoc. If NULL, no replacement is made.
 
-Default value is \code{list(ol.style = NULL, ul.style = NULL)}:\preformatted{ol.style: null
+Default value is \code{list(ol.style = NULL, ul.style = NULL)}:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ol.style: null
 ul.style: null
-}}
+}\if{html}{\out{</div>}}}
 
 \item{mapstyles}{a named list of style to be replaced in the generated
 document. \code{list("Normal" = c("Author", "Date"))} will result in a document where
@@ -154,24 +160,34 @@ styles.
 
 You need officer to read the stylenames (to get information
 from a specific "reference_docx", change \code{ref_docx_default}
-in the example below.\preformatted{library(officer)
+in the example below.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{library(officer)
 docx_file <- system.file(package = "officer", "template", "template.docx")
 doc <- read_docx(docx_file)
-}
+}\if{html}{\out{</div>}}
 
-To read \code{paragraph} stylenames:\preformatted{styles_info(doc, type = "paragraph")
-}
+To read \code{paragraph} stylenames:
 
-To read \code{table} stylenames:\preformatted{styles_info(doc, type = "table")
-}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{styles_info(doc, type = "paragraph")
+}\if{html}{\out{</div>}}
 
-To read \code{list} stylenames:\preformatted{styles_info(doc, type = "numbering")
-}
+To read \code{table} stylenames:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{styles_info(doc, type = "table")
+}\if{html}{\out{</div>}}
+
+To read \code{list} stylenames:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{styles_info(doc, type = "numbering")
+}\if{html}{\out{</div>}}
 }
 
 \section{R Markdown yaml}{
 
-The following demonstrates how to pass arguments in the R Markdown yaml:\preformatted{---
+The following demonstrates how to pass arguments in the R Markdown yaml:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{---
 output:
   officedown::rdocx_document:
     reference_docx: pandoc_template.docx
@@ -226,7 +242,7 @@ output:
       gutter: 0.5
     reference_num: true
 ---
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{

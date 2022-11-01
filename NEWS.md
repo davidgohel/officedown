@@ -3,6 +3,7 @@
 ## issues
 
 * fix usage of bookmark id containing underscore
+* update default values according to new default values of `officer::opts_current_table()`.
 
 # officedown 0.2.4
 

@@ -46,7 +46,7 @@ tables_default_values <- list(
   topcaption = TRUE,
   caption = list(
     style = "Table Caption",
-    pre = "Table ", sep = ": ",
+    pre = "Table", sep = ":",
     tnd = 0,
     tns = "-",
     fp_text = fp_text_lite(bold = TRUE)
@@ -161,8 +161,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' tab.lp: 'tab:'
 #' caption:
 #'   style: Table Caption
-#'   pre: 'Table '
-#'   sep: ': '
+#'   pre: 'Table'
+#'   sep: ':'
 #'   tnd: 0
 #'   tns: '-'
 #'   fp_text: !expr officer::fp_text_lite(bold = TRUE)
