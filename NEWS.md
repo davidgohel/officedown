@@ -1,5 +1,10 @@
 # officedown 0.2.5
 
+## new feature
+
+* data.frame in Word now support chunk options `tab.alt.title` and `tab.alt.description`,
+used as alternative text for tables.
+
 ## issues
 
 * fix usage of bookmark id containing underscore

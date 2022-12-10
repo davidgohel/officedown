@@ -49,6 +49,8 @@ knit_print.data.frame <- function(x, ...) {
     pt <- prop_table(
       style = tab_props$style, layout = tab_props$table_layout,
       width = tab_props$table_width,
+      word_title = tab_props$alt.title,
+      word_description = tab_props$alt.description,
       tcf = table_conditional_formatting(
         first_row = tab_props$first_row,
         first_column = tab_props$first_column,
