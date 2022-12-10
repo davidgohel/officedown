@@ -4,6 +4,7 @@
 
 * fix usage of bookmark id containing underscore
 * update default values according to new default values of `officer::opts_current_table()`.
+* dml background color `bg` is now read in R Markdown.
 
 # officedown 0.2.4
 
