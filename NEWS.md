@@ -2,14 +2,18 @@
 
 ## new feature
 
-* data.frame in Word now support chunk options `tab.alt.title` and `tab.alt.description`,
+- data.frame in Word now support chunk options `tab.alt.title` and `tab.alt.description`,
 used as alternative text for tables.
 
 ## issues
 
-* fix usage of bookmark id containing underscore
-* update default values according to new default values of `officer::opts_current_table()`.
-* dml background color `bg` is now read in R Markdown.
+- fix usage of bookmark id containing underscore
+- update default values according to new default values of `officer::opts_current_table()`.
+- dml background color `bg` is now read in R Markdown.
+
+## Internals
+
+- simplify/drop code with officer 0.4.5
 
 # officedown 0.2.4
 

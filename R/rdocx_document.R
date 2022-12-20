@@ -474,12 +474,6 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
 
   output_formats$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     x <- officer::read_docx(output_file)
-    x <- process_images(x)
-    x <- process_links(x)
-    x <- process_embedded_docx(x)
-    x <- process_par_settings(x)
-    x <- process_list_settings(x, ul_style = lists$ul.style, ol_style = lists$ol.style)
-    x <- change_styles(x, mapstyles = mapstyles)
 
     # default section
     default_sect_properties <- prop_section(
@@ -497,21 +491,21 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
         footer = page_margins$footer,
         gutter = page_margins$gutter)
     )
-    defaut_sect_headers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:headerReference")
-    defaut_sect_headers <- lapply(defaut_sect_headers, as_xml_document)
-    defaut_sect_footers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:footerReference")
-    defaut_sect_footers <- lapply(defaut_sect_footers, as_xml_document)
+    # defaut_sect_headers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:headerReference")
+    # defaut_sect_headers <- lapply(defaut_sect_headers, as_xml_document)
+    # defaut_sect_footers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:footerReference")
+    # defaut_sect_footers <- lapply(defaut_sect_footers, as_xml_document)
 
-    x <- body_set_default_section(x, default_sect_properties)
-    defaut_sect <- xml_find_first(docx_body_xml(x), "w:body/w:sectPr")
-
-    for(i in rev(seq_len(length(defaut_sect_footers)))){
-      xml_add_child(defaut_sect, defaut_sect_footers[[i]])
-    }
-
-    for(i in seq_len(length(defaut_sect_headers))){
-      xml_add_child(defaut_sect, defaut_sect_headers[[i]])
-    }
+    # x <- body_set_default_section(x, default_sect_properties)
+    # defaut_sect <- xml_find_first(docx_body_xml(x), "w:body/w:sectPr")
+    #
+    # for(i in rev(seq_len(length(defaut_sect_footers)))){
+    #   xml_add_child(defaut_sect, defaut_sect_footers[[i]])
+    # }
+    #
+    # for(i in seq_len(length(defaut_sect_headers))){
+    #   xml_add_child(defaut_sect, defaut_sect_headers[[i]])
+    # }
 
     forget(get_reference_rdocx)
     print(x, target = output_file)
