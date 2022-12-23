@@ -1,0 +1,20 @@
+---
+title: "paragraph settings test"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+fp <- fp_par(
+  text.align = "center", 
+  padding.bottom = 20, padding.top = 120, 
+  border.bottom = fp_border(),
+  word_style = "Normal")
+```
+
+A paragraph with a call to `fp` in an R inline chunk is
+inheriting the defined properties. `r fp`
+
+That's it.

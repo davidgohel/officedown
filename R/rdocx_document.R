@@ -449,21 +449,10 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
 
   output_formats$post_knit <- function(
     metadata, input_file, runtime, ...){
+
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
     content <- readLines(output_file)
-
-    # content <- post_knit_table_captions(
-    #   content = content,
-    #   tab.cap.pre = tables$caption$pre,
-    #   tab.cap.sep = tables$caption$sep,
-    #   style = tables$caption$style,
-    #   tab.lp = tables$tab.lp,
-    #   tnd = tables$caption$tnd,
-    #   tns = tables$caption$tns,
-    #   prop = tables$caption$fp_text
-    # )
-
     content <- post_knit_caption_references(content, lp = tables$tab.lp)
     content <- post_knit_caption_references(content, lp = plots$fig.lp)
     content <- post_knit_std_references(content, numbered = reference_num)
@@ -474,6 +463,9 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
 
   output_formats$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
     x <- officer::read_docx(output_file)
+    x <- process_par_settings(x)
+    x <- process_list_settings(x, ul_style = lists$ul.style, ol_style = lists$ol.style)
+    x <- change_styles(x, mapstyles = mapstyles)
 
     # default section
     default_sect_properties <- prop_section(

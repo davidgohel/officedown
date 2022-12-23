@@ -14,6 +14,7 @@ used as alternative text for tables.
 ## Internals
 
 - simplify/drop code with officer 0.4.5
+- add tests
 
 # officedown 0.2.4
 

@@ -1,0 +1,43 @@
+---
+title: "section test"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+bl_template <- function(txt) {
+  block_list(
+    fpar(values = txt, fp_t = fp_text_lite(color = "orange", bold = TRUE))
+  )
+}
+sec_pr <- prop_section(
+  header_default = bl_template("hello default header"),
+  footer_default = bl_template("hello default footer"),
+  header_even = bl_template("hello even header"),
+  footer_even = bl_template("hello even footer"),
+  header_first = bl_template("hello first header"),
+  footer_first = bl_template("hello first footer")
+)
+```
+
+<!---BLOCK_MULTICOL_START--->
+
+`r officedown:::str_lorem`
+
+`r run_columnbreak()``r officedown:::str_lorem`
+
+<!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
+
+```{r results='asis'}
+for(i in 1:15) cat(officedown:::str_lorem, "\n\n", sep = "")
+```
+
+```{r}
+block_section(sec_pr)
+```
+
+```{r results='asis'}
+for(i in 1:2) cat(officedown:::str_lorem, "\n\n", sep = "")
+```

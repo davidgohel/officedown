@@ -116,7 +116,6 @@ process_list_settings <- function(rdoc, ul_style = NULL, ol_style = NULL){
 
 #' @importFrom officer docx_body_xml
 process_par_settings <- function( rdoc ){
-
   all_nodes <- xml_find_all(docx_body_xml(rdoc), "//w:p/w:pPr[position()>1]")
   for(node_id in seq_along(all_nodes) ){
     pr <- all_nodes[[node_id]]
@@ -124,6 +123,7 @@ process_par_settings <- function( rdoc ){
     pr1 <- xml_child(par, 1)
     if( xml_name(pr1) %in% "pPr" ){
 
+      merge_pPr(pr, pr1, "w:pStyle")
       merge_pPr(pr, pr1, "w:jc")
       merge_pPr(pr, pr1, "w:spacing")
       merge_pPr(pr, pr1, "w:ind")
