@@ -229,7 +229,8 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @param reference_num if TRUE, text for references to sections will be
 #' the section number (e.g. '3.2'). If FALSE, text for references to sections
 #' will be the text (e.g. 'section title').
-#' @param page_size,page_margins default page and margins dimensions, these values are used to define the default Word section.
+#' @param page_size,page_margins default page and margins dimensions. If
+#' not null (the default), these values are used to define the default Word section.
 #' See [page_size()] and [page_mar()].
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
 #' @return R Markdown output format to pass to [render][rmarkdown::render]
@@ -374,7 +375,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @importFrom utils modifyList
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
-                           mapstyles = list(), page_size = list(), page_margins = list(),
+                           mapstyles = list(), page_size = NULL, page_margins = NULL,
                            reference_num = TRUE, ...) {
 
   args <- list(...)
@@ -397,8 +398,13 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   tables <- modifyList(tables_default_values, tables)
   plots <- modifyList(plots_default_values, plots)
   lists <- modifyList(lists_default_values, lists)
-  page_size <- modifyList(page_size_default_values, page_size)
-  page_margins <- modifyList(page_mar_default_values, page_margins)
+
+  if (!is.null(page_size)) {
+    page_size <- modifyList(page_size_default_values, page_size)
+  }
+  if (!is.null(page_margins)) {
+    page_margins <- modifyList(page_mar_default_values, page_margins)
+  }
 
   output_formats$knitr$opts_chunk <- append(
     output_formats$knitr$opts_chunk,
@@ -467,37 +473,36 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     x <- process_list_settings(x, ul_style = lists$ul.style, ol_style = lists$ol.style)
     x <- change_styles(x, mapstyles = mapstyles)
 
-    # default section
-    default_sect_properties <- prop_section(
-      page_size = page_size(
-        orient = page_size$orient,
-        width = page_size$width,
-        height = page_size$height),
-      type = "continuous",
-      page_margins = page_mar(
-        bottom = page_margins$bottom,
-        top = page_margins$top,
-        right = page_margins$right,
-        left = page_margins$left,
-        header = page_margins$header,
-        footer = page_margins$footer,
-        gutter = page_margins$gutter)
-    )
-    # defaut_sect_headers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:headerReference")
-    # defaut_sect_headers <- lapply(defaut_sect_headers, as_xml_document)
-    # defaut_sect_footers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:footerReference")
-    # defaut_sect_footers <- lapply(defaut_sect_footers, as_xml_document)
-
-    # x <- body_set_default_section(x, default_sect_properties)
-    # defaut_sect <- xml_find_first(docx_body_xml(x), "w:body/w:sectPr")
-    #
-    # for(i in rev(seq_len(length(defaut_sect_footers)))){
-    #   xml_add_child(defaut_sect, defaut_sect_footers[[i]])
-    # }
-    #
-    # for(i in seq_len(length(defaut_sect_headers))){
-    #   xml_add_child(defaut_sect, defaut_sect_headers[[i]])
-    # }
+    if (!is.null(page_size) && !is.null(page_margins)) {
+      # default section
+      default_sect_properties <- prop_section(
+        page_size = page_size(
+          orient = page_size$orient,
+          width = page_size$width,
+          height = page_size$height),
+        type = "continuous",
+        page_margins = page_mar(
+          bottom = page_margins$bottom,
+          top = page_margins$top,
+          right = page_margins$right,
+          left = page_margins$left,
+          header = page_margins$header,
+          footer = page_margins$footer,
+          gutter = page_margins$gutter)
+      )
+      defaut_sect_headers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:headerReference")
+      defaut_sect_headers <- lapply(defaut_sect_headers, as_xml_document)
+      defaut_sect_footers <- xml_find_all(docx_body_xml(x), "w:body/w:sectPr/w:footerReference")
+      defaut_sect_footers <- lapply(defaut_sect_footers, as_xml_document)
+      x <- body_set_default_section(x, default_sect_properties)
+      defaut_sect <- xml_find_first(docx_body_xml(x), "w:body/w:sectPr")
+      for(i in rev(seq_len(length(defaut_sect_footers)))){
+        xml_add_child(defaut_sect, defaut_sect_footers[[i]])
+      }
+      for(i in seq_len(length(defaut_sect_headers))){
+        xml_add_child(defaut_sect, defaut_sect_headers[[i]])
+      }
+    }
 
     forget(get_reference_rdocx)
     print(x, target = output_file)
@@ -505,5 +510,4 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   }
   output_formats$bookdown_output_format = 'docx'
   output_formats
-
 }

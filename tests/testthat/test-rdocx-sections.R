@@ -51,3 +51,13 @@ test_that("visual testing sections properties", {
   expect_snapshot_doc(x = docx_file, name = "docx-sections", engine = "testthat")
 })
 
+
+docx_file <- tempfile(fileext = ".docx")
+render_rmd("rmd/long-text.Rmd", output_file = docx_file)
+
+test_that("visual testing sections inheritance", {
+  testthat::skip_if_not_installed("doconv")
+  testthat::skip_if_not(doconv::msoffice_available())
+  library(doconv)
+  expect_snapshot_doc(x = docx_file, name = "all-sections", engine = "testthat")
+})
