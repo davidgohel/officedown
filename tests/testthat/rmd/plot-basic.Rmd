@@ -1,0 +1,34 @@
+---
+title: "officedown test"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+```
+
+## List of plots
+
+<!---BLOCK_TOC{seq_id: 'fig'}--->
+
+\newpage
+
+## A boxplot
+
+```{r fig.cap="A boxplot", fig.id = "boxplot"}
+boxplot(1:8)
+```
+
+## A barplot
+
+```{r fig.cap="What a barplot", fig.id = "barplot"}
+barplot(1:8)
+```
+
+## A second barplot
+
+```{r fig.cap="What a second plot"}
+barplot(1:8)
+```
