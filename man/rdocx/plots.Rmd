@@ -1,0 +1,50 @@
+```{r, child = "./setup.Rmd", include = FALSE}
+```
+
+Argument plot is expected to be a list. It can contain few items to style
+figures and figure captions.
+
+
+You don't have to provide values for each items of the list, missing items are
+replaced by default values. Possible items are:
+
+* `style`: the name of the "Word" paragraph style to use for the paragraphs that will contain a graphic.
+* `align`: alignment of paragraphs containing graphics (possible values are 'left', 'right' and 'center').
+* `topcaption`: specify whether the legend should appear above the graphic (`TRUE`) or below the graphic (`FALSE`).
+* `fig.lp`: Sequence identifier for figure legends. All graphics' captions are supposed to
+have the same identifier. This value is used for different features:
+
+  - It is used to insert a table of figures.
+  - It is also used to prefix your 'bookdown' cross-reference call; if `fig.lp`
+    is set to "fig:", a cross-reference to the figure with id "xxxxx" is written
+    as `\@ref(fig:xxxxx)`. 
+
+  It is possible to set the Word default value (in
+  French for example, it is "Figure"), you can then manually add a list of
+  figures (go to the "References" tab and select the "Insert a table of
+  figures" menu).
+
+* `caption`: a list for captions' options, i.e.
+  * `style`: the name of the "Word" paragraph style to use for the paragraphs that will contain figures' captions.
+  * `pre`: prefix for numbering chunk (default to "Figure ").
+  * `sep`: suffix for numbering chunk (default to ": ").
+  * `tnd`: (only applies if positive). Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
+  * `tns`: separator to use between title number and figure number. Default is "-".
+  * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
+
+
+Default value is (in YAML format):
+
+```yaml
+style: Normal
+align: center
+topcaption: false
+fig.lp: 'fig:'
+caption:
+  style: Image Caption
+  pre: 'Figure '
+  sep: ': '
+  tnd: 0
+  tns: '-'
+  fp_text: !expr officer::fp_text_lite(bold = TRUE)
+```

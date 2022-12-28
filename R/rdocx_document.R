@@ -114,263 +114,60 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 # main ----
 #' @export
 #' @title Advanced R Markdown Word Format
-#' @description Format for converting from R Markdown to an MS Word
-#' document. The function comes also with improved output options.
-#' @param base_format a scalar character, format to be used as a base document for
-#' officedown. default to [word_document][rmarkdown::word_document] but
-#' can also be word_document2 from bookdown.
+#' @description 'R Markdown' Format for converting from 'R Markdown'
+#' document to an MS Word document.
+#'
+#' The function enhances the output offered by [rmarkdown::word_document()] with
+#' advanced formatting features.
+#' @param base_format a scalar character, the format to be used as a
+#' base document for 'officedown'. Default to [word_document][rmarkdown::word_document] but
+#' can also be `word_document2()` from bookdown.
 #'
 #' When the `base_format` used is `bookdown::word_document2`, the `number_sections`
 #' parameter is automatically set to `FALSE`. Indeed, if you want numbered titles,
 #' you are asked to use a Word document template with auto-numbered titles (the title
 #' styles of the default `rdocx_document' template are already set to FALSE).
 #'
-#' @param tables a list that can contain few items to style tables and table captions.
-#' Missing items will be replaced by default values. Possible items are the following:
-#'
-#' * `style`: the Word stylename to use for tables.
-#' * `layout`: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
-#' * `width`: value of the preferred width of the table in percent (base 1).
-#' * `topcaption`: caption will appear before (on top of) the table,
-#' * `tab.lp`: caption table sequence identifier. All table captions are supposed
-#' to have the same identifier. It makes possible to insert list of tables. It is
-#' also used to prefix your 'bookdown' cross-reference call; if `tab.lp` is set to
-#' "tab:", a cross-reference to table with id "xxxxx" is written as `\@ref(tab:xxxxx)`.
-#' It is possible to set the value to your default Word value (in French for example it
-#' is "Tableau", in German it is "Tabelle"), you can then add manually a list of
-#' tables (go to the "References" tab and select menu "Insert Table of Figures").
-#' * `caption`; caption options, i.e.:
-#'   * `style`: Word stylename to use for table captions.
-#'   * `pre`: prefix for numbering chunk (default to "Table ").
-#'   * `sep`: suffix for numbering chunk (default to ": ").
-#'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
-#'   * `tns`: separator to use between title number and table number. Default is "-".
-#'   * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
-#' * `conditional`: a list of named logical values:
-#'   * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
-#'   * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
-#'   * `no_hband` and `no_vband`: don't display odd and even rows or columns with alternating shading for ease of reading.
-#'
-#'
-#' Default value is (in YAML format):
-#' ```
-#' style: Table
-#' layout: autofit
-#' width: 1.0
-#' topcaption: true
-#' tab.lp: 'tab:'
-#' caption:
-#'   style: Table Caption
-#'   pre: 'Table'
-#'   sep: ':'
-#'   tnd: 0
-#'   tns: '-'
-#'   fp_text: !expr officer::fp_text_lite(bold = TRUE)
-#' conditional:
-#'   first_row: true
-#'   first_column: false
-#'   last_row: false
-#'   last_column: false
-#'   no_hband: false
-#'   no_vband: true
-#' ```
-#'
-#' @param plots a list that can contain few items to style figures and figure captions.
-#' Missing items will be replaced by default values. Possible items are the following:
-#'
-#' * `style`: the Word stylename to use for plots.
-#' * `align`: alignment of figures in the output document (possible values are 'left',
-#' 'right' and 'center').
-#' * `topcaption`: caption will appear before (on top of) the figure,
-#' * `fig.lp`: caption figure sequence identifier. All figure captions are supposed
-#' to have the same identifier. It makes possible to insert list of figures. It is
-#' also used to prefix your 'bookdown' cross-reference call; if `fig.lp` is set to
-#' "fig:", a cross-reference to figure with id "xxxxx" is written as `\@ref(fig:xxxxx)`.
-#' It is possible to set the value to your default Word value (in French for example it
-#' is "Figure"), you can then add manually a list of
-#' figures (go to the "References" tab and select menu "Insert Table of Figures").
-#' * `caption`; caption options, i.e.:
-#'   * `style`: Word stylename to use for figure captions.
-#'   * `pre`: prefix for numbering chunk (default to "Figure ").
-#'   * `sep`: suffix for numbering chunk (default to ": ").
-#'   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
-#'   * `tns`: separator to use between title number and figure number. Default is "-".
-#'   * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
-#'
-#'
-#' Default value is (in YAML format):
-#' ```
-#' style: Normal
-#' align: center
-#' topcaption: false
-#' fig.lp: 'fig:'
-#' caption:
-#'   style: Image Caption
-#'   pre: 'Figure '
-#'   sep: ': '
-#'   tnd: 0
-#'   tns: '-'
-#'   fp_text: !expr officer::fp_text_lite(bold = TRUE)
-#' ```
-#' @param lists a list containing two named items `ol.style` and
-#' `ul.style`, values are the stylenames to be used to replace the style of ordered
-#' and unordered lists created by pandoc. If NULL, no replacement is made.
-#'
-#' Default value is `list(ol.style = NULL, ul.style = NULL)`:
-#'
-#' ```
-#' ol.style: null
-#' ul.style: null
-#' ```
+#' @param tables see section 'Tables' below.
+#' @param plots see section 'Plots' below.
+#' @param lists see section 'Lists' below.
 #' @param mapstyles a named list of style to be replaced in the generated
 #' document. `list("Normal" = c("Author", "Date"))` will result in a document where
 #' all paragraphs styled with stylename "Date" and "Author" will be then styled with
 #' stylename "Normal".
-#' @param reference_num if TRUE, text for references to sections will be
+#' @param reference_num if `TRUE`, text for references to sections will be
 #' the section number (e.g. '3.2'). If FALSE, text for references to sections
 #' will be the text (e.g. 'section title').
 #' @param page_size,page_margins default page and margins dimensions. If
 #' not null (the default), these values are used to define the default Word section.
 #' See [page_size()] and [page_mar()].
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
-#' @return R Markdown output format to pass to [render][rmarkdown::render]
+#' @return R Markdown *output format* to pass to [render][rmarkdown::render].
+#' @section Tables:
+#'
+#' ```{r child = "man/rdocx/tables.Rmd"}
+#' ```
+#' @section Plots:
+#'
+#' ```{r child = "man/rdocx/plots.Rmd"}
+#' ```
+#' @section Lists:
+#'
+#' ```{r child = "man/rdocx/lists.Rmd"}
+#' ```
 #' @section Finding stylenames:
 #'
-#' You can access them in the Word template used. Function
-#' [styles_info()][officer::styles_info] can let you read these
-#' styles.
-#'
-#' You need officer to read the stylenames (to get information
-#' from a specific "reference_docx", change `ref_docx_default`
-#' in the example below.
-#'
+#' ```{r child = "man/rdocx/stylenames.Rmd"}
 #' ```
-#' library(officer)
-#' docx_file <- system.file(package = "officer", "template", "template.docx")
-#' doc <- read_docx(docx_file)
-#' ```
-#'
-#' To read `paragraph` stylenames:
-#' ```
-#' styles_info(doc, type = "paragraph")
-#' ```
-#'
-#' To read `table` stylenames:
-#' ```
-#' styles_info(doc, type = "table")
-#' ```
-#'
-#' To read `list` stylenames:
-#' ```
-#' styles_info(doc, type = "numbering")
-#' ```
-#'
 #'
 #' @section R Markdown yaml:
-#' The following demonstrates how to pass arguments in the R Markdown yaml:
 #'
+#' ```{r child = "man/rdocx/rmarkdown-yaml.Rmd"}
 #' ```
-#' ---
-#' output:
-#'   officedown::rdocx_document:
-#'     reference_docx: pandoc_template.docx
-#'     tables:
-#'       style: Table
-#'       layout: autofit
-#'       width: 1.0
-#'       topcaption: true
-#'       tab.lp: 'tab:'
-#'       caption:
-#'         style: Table Caption
-#'         pre: 'Table '
-#'         sep: ': '
-#'         tnd: 0
-#'         tns: '-'
-#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
-#'       conditional:
-#'         first_row: true
-#'         first_column: false
-#'         last_row: false
-#'         last_column: false
-#'         no_hband: false
-#'         no_vband: true
-#'     plots:
-#'       style: Normal
-#'       align: center
-#'       fig.lp: 'fig:'
-#'       topcaption: false
-#'       caption:
-#'         style: Image Caption
-#'         pre: 'Figure '
-#'         sep: ': '
-#'         tnd: 0
-#'         tns: '-'
-#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
-#'     lists:
-#'       ol.style: null
-#'       ul.style: null
-#'     mapstyles:
-#'       Normal: ['First Paragraph', 'Author', 'Date']
-#'     page_size:
-#'       width: 8.3
-#'       height: 11.7
-#'       orient: "portrait"
-#'     page_margins:
-#'       bottom: 1
-#'       top: 1
-#'       right: 1.25
-#'       left: 1.25
-#'       header: 0.5
-#'       footer: 0.5
-#'       gutter: 0.5
-#'     reference_num: true
-#' ---
-#' ```
+#'
 #' @examples
-#' library(rmarkdown)
-#' run_ok <- pandoc_available() &&
-#'   pandoc_version() >= numeric_version("2.0")
-#'
-#' if(run_ok){
-#'
-#' # minimal example -----
-#' example <- system.file(package = "officedown",
-#'   "examples/minimal_word.Rmd")
-#' rmd_file <- tempfile(fileext = ".Rmd")
-#' file.copy(example, to = rmd_file)
-#'
-#' docx_file_1 <- tempfile(fileext = ".docx")
-#' render(rmd_file, output_file = docx_file_1, quiet = TRUE)
-#' render(rmd_file, output_file = docx_file_1, quiet = TRUE,
-#'   intermediates_dir = tempfile())
-#'
-#' # bookdown example -----
-#' if(require("bookdown")){
-#'
-#' bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
-#'
-#' temp_dir <- tempfile()
-#' # uncomment next line to get the result in your working directory
-#' # temp_dir <- "./bd_example"
-#'
-#' dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
-#' file.copy(
-#'   from = list.files(bookdown_loc, full.names = TRUE),
-#'   to = temp_dir,
-#'   overwrite = TRUE, recursive = TRUE)
-#'
-#' render_site(
-#'   input = temp_dir, encoding = 'UTF-8',
-#'   envir = new.env(), quiet = TRUE)
-#'
-#' docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
-#'
-#' if(file.exists(docx_file_2)){
-#'   message("file ", docx_file_2, " has been written.")
-#' }
-#' }
-#'
-#' }
+#' # rdocx_document basic example -----
+#' @example examples/rdocx_document.R
 #' @importFrom officer change_styles
 #' @importFrom utils modifyList
 rdocx_document <- function(base_format = "rmarkdown::word_document",

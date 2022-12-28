@@ -1,0 +1,53 @@
+```{r, child = "./setup.Rmd", include = FALSE}
+```
+
+a list that can contain few items to style tables and table captions.
+Missing items will be replaced by default values. Possible items are the following:
+
+* `style`: the Word stylename to use for tables.
+* `layout`: 'autofit' or 'fixed' algorithm. See \code{\link[officer]{table_layout}}.
+* `width`: value of the preferred width of the table in percent (base 1).
+* `topcaption`: caption will appear before (on top of) the table,
+* `tab.lp`: caption table sequence identifier. All table captions are supposed
+to have the same identifier. It makes possible to insert list of tables. It is
+also used to prefix your 'bookdown' cross-reference call; if `tab.lp` is set to
+"tab:", a cross-reference to table with id "xxxxx" is written as `\@ref(tab:xxxxx)`.
+It is possible to set the value to your default Word value (in French for example it
+is "Tableau", in German it is "Tabelle"), you can then add manually a list of
+tables (go to the "References" tab and select menu "Insert Table of Figures").
+* `caption`; caption options, i.e.:
+  * `style`: Word stylename to use for table captions.
+  * `pre`: prefix for numbering chunk (default to "Table ").
+  * `sep`: suffix for numbering chunk (default to ": ").
+  * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
+  * `tns`: separator to use between title number and table number. Default is "-".
+  * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
+* `conditional`: a list of named logical values:
+  * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
+  * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
+  * `no_hband` and `no_vband`: don't display odd and even rows or columns with alternating shading for ease of reading.
+
+
+Default value is (in YAML format):
+
+```yaml
+style: Table
+layout: autofit
+width: 1.0
+topcaption: true
+tab.lp: 'tab:'
+caption:
+  style: Table Caption
+  pre: 'Table'
+  sep: ':'
+  tnd: 0
+  tns: '-'
+  fp_text: !expr officer::fp_text_lite(bold = TRUE)
+conditional:
+  first_row: true
+  first_column: false
+  last_row: false
+  last_column: false
+  no_hband: false
+  no_vband: true
+```
