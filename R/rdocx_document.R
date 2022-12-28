@@ -458,6 +458,14 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
 
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
+    if (!file.exists(output_file)) {
+      output_file <- gsub("\\.spin\\.Rmd$", ".knit.md", input_file)
+      output_file <- file.path(intermediate_dir, output_file)
+    }
+    if (!file.exists(output_file)) {
+      stop("can not find md file for 'post-knit' treatment.")
+    }
+
     content <- readLines(output_file)
     content <- post_knit_caption_references(content, lp = tables$tab.lp)
     content <- post_knit_caption_references(content, lp = plots$fig.lp)
