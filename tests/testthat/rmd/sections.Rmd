@@ -31,6 +31,14 @@ sec_pr <- prop_section(
 <!---BLOCK_MULTICOL_STOP{widths: [3,3], space: 0.2, sep: true}--->
 
 ```{r results='asis'}
+for(i in 1:2) cat(officedown:::str_lorem, "\n\n", sep = "")
+```
+
+```{r}
+block_section(prop_section(type = "continuous"))
+```
+
+```{r results='asis'}
 for(i in 1:15) cat(officedown:::str_lorem, "\n\n", sep = "")
 ```
 
