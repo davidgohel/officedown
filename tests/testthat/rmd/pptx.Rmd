@@ -1,0 +1,53 @@
+---
+date: "`r Sys.Date()`"
+author: "Your Name"
+title: "Untitled"
+output: 
+  officedown::rpptx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+library(rvg)
+fpt_blue_bold <- fp_text(color = "#006699", bold = TRUE)
+fpt_red_italic <- fp_text(color = "#C32900", italic = TRUE)
+
+value <- block_list(
+  fpar(ftext("hello world", fpt_blue_bold)),
+  fpar(ftext("hello", fpt_blue_bold), " ",
+       ftext("world", fpt_red_italic)),
+  fpar(
+    ftext("hello world ", fpt_red_italic),
+          hyperlink_ftext(
+  href = "https://cran.r-project.org/index.html",
+  text = "some text", prop = fpt_red_italic)))
+value
+```
+
+## block_list and fpar
+
+```{r layout='Two Content', ph=officer::ph_location_left()}
+value
+```
+
+```{r layout='Two Content', ph=officer::ph_location_right()}
+fpar(
+    ftext("hello world ", fpt_red_italic),
+          hyperlink_ftext(
+  href = "https://cran.r-project.org/index.html",
+  text = "some text", prop = fpt_red_italic))
+```
+
+## Slide with Plot
+
+```{r plot1}
+dml(plot(pressure))
+```
+
+## Slide with DF
+
+```{r}
+head(pressure)
+```
