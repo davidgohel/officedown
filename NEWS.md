@@ -5,6 +5,7 @@
 - data.frame in Word now support chunk options `tab.alt.title` 
 and `tab.alt.description`, used as alternative text for tables.
 - Document sections are set to NULL by default.
+- PowerPoint support for `fpar()` and `block_list()`.
 
 ## issues
 
