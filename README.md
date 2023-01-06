@@ -20,54 +20,54 @@ produced by R Markdown documents by providing a range of features:
 
 <a href="https://github.com/davidgohel/officedown"><img src="man/figures/logo.png" alt="officedown logo" align="right" /></a>
 
--   Compatibility with the functions of the package `officer` for the
-    production of “runs” and “blocks” of content (text formatting,
-    landscape mode, tables of contents, etc.).
+- Compatibility with the functions of the package `officer` for the
+  production of “runs” and “blocks” of content (text formatting,
+  landscape mode, tables of contents, etc.).
 
-    You can add a column break in a two-column section, you can easily
-    color a chunk of text, you can add tables of contents at any place
-    in the document and also add a list of figures or list of tables.
+  You can add a column break in a two-column section, you can easily
+  color a chunk of text, you can add tables of contents at any place in
+  the document and also add a list of figures or list of tables.
 
--   Ability to use the table styles and list styles defined in the
-    “reference_docx” which serves as a template for the pandoc document.
+- Ability to use the table styles and list styles defined in the
+  “reference_docx” which serves as a template for the pandoc document.
 
-    With rmarkdown, you can reuse all paragraph styles. With
-    `{officedown}`, you can also reuse table and list styles. These
-    features are based on the use of Word templates (`reference_docx`).
-    It is recommended to learn how “Word styles” work for paragraphs,
-    tables and lists if you never really used Word styles.
+  With rmarkdown, you can reuse all paragraph styles. With
+  `{officedown}`, you can also reuse table and list styles. These
+  features are based on the use of Word templates (`reference_docx`). It
+  is recommended to learn how “Word styles” work for paragraphs, tables
+  and lists if you never really used Word styles.
 
-    > These styles are to be defined in a Word document that serves as a
-    > template. You must first create a Word document (or edit an
-    > existing Word document), adjust the styles and save it. This
-    > document which serves as a vehicle for the defined styles will be
-    > used by R Markdown, the argument `reference_docx` must be filled
-    > in with the file path.
+  > These styles are to be defined in a Word document that serves as a
+  > template. You must first create a Word document (or edit an existing
+  > Word document), adjust the styles and save it. This document which
+  > serves as a vehicle for the defined styles will be used by R
+  > Markdown, the argument `reference_docx` must be filled in with the
+  > file path.
 
--   The replacement of captions (tables, figures and standard
-    identifiers) by captions containing a Word bookmark that can be used
-    for cross-referencing. Also the replacement of cross-references by
-    cross-references using fields calculated by Word. The syntax
-    conforms to the bookdown cross-reference definition.
+- The replacement of captions (tables, figures and standard identifiers)
+  by captions containing a Word bookmark that can be used for
+  cross-referencing. Also the replacement of cross-references by
+  cross-references using fields calculated by Word. The syntax conforms
+  to the bookdown cross-reference definition.
 
-    The package transforms some specific knitr codes into references
-    calculated by Word, it applies to:
+  The package transforms some specific knitr codes into references
+  calculated by Word, it applies to:
 
-    -   cross-references with bookdown syntax
-    -   table and image captions
-    -   title identifiers
+  - cross-references with bookdown syntax
+  - table and image captions
+  - title identifiers
 
-    > It is then easy to copy and paste the content into another
-    > document without losing the reference numbers. Captions are also
-    > auto-numbered by Word.
+  > It is then easy to copy and paste the content into another document
+  > without losing the reference numbers. Captions are also
+  > auto-numbered by Word.
 
--   Full support for flextable output, including with outputs containing
-    images and links.
+- Full support for flextable output, including with outputs containing
+  images and links.
 
-    The package enable knitting flextable outputs with images or plots
-    in cells without using `{officer}`. Insertion of images in
-    `{flextable}` is not supported with `rmarkdown::word_document` but
-    is possible by using `officedown::rdocx_document`.
+  The package enable knitting flextable outputs with images or plots in
+  cells without using `{officer}`. Insertion of images in `{flextable}`
+  is not supported with `rmarkdown::word_document` but is possible by
+  using `officedown::rdocx_document`.
 
 ### PowerPoint
 
@@ -98,17 +98,17 @@ Github issues are closed, instead use
 PLEASE, read the help pages before asking questions or declaring issues.
 If you do post:
 
--   Provide the code that is producing the error, it has to be a minimal
-    reproducible example. Stackoverflow is providing good explanations
-    about it: <https://stackoverflow.com/help/mcve>. You can use package
-    `reprex` to help you: <http://reprex.tidyverse.org/>. The most
-    popular R stackoverflow question is about the subject:
-    <https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example>.
--   Provide the results of R command `sessionInfo()`. It had to be
-    executed after you loaded the packages used by your example. This
-    will let me know what is your version of R and what are the versions
-    of the packages you used in your example.
--   Do not cross post
+- Provide the code that is producing the error, it has to be a minimal
+  reproducible example. Stackoverflow is providing good explanations
+  about it: <https://stackoverflow.com/help/mcve>. You can use package
+  `reprex` to help you: <https://reprex.tidyverse.org/>. The most
+  popular R stackoverflow question is about the subject:
+  <https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example>.
+- Provide the results of R command `sessionInfo()`. It had to be
+  executed after you loaded the packages used by your example. This will
+  let me know what is your version of R and what are the versions of the
+  packages you used in your example.
+- Do not cross post
 
 ## Installation
 
