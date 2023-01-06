@@ -12,3 +12,4 @@
 ^\.github$
 ^LICENSE\.md$
 ^examples$
+^revdep$

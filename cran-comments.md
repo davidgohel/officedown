@@ -8,3 +8,7 @@
 ## R CMD check results
 
 There were no ERROR, WARNING or NOTE.
+
+## Reverse dependencies
+
+There were no error or warning related to officedown.
