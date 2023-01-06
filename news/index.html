@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">officedown</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.5.005</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.3.0</span>
       </span>
     </div>
 
@@ -48,20 +48,24 @@
     </div>
 
     <div class="section level2">
-<h2 class="page-header" data-toc-text="0.2.5" id="officedown-025">officedown 0.2.5<a class="anchor" aria-label="anchor" href="#officedown-025"></a></h2>
+<h2 class="page-header" data-toc-text="0.3.0" id="officedown-030">officedown 0.3.0<a class="anchor" aria-label="anchor" href="#officedown-030"></a></h2>
 <div class="section level3">
-<h3 id="new-feature-0-2-5">new feature<a class="anchor" aria-label="anchor" href="#new-feature-0-2-5"></a></h3>
+<h3 id="new-feature-0-3-0">new feature<a class="anchor" aria-label="anchor" href="#new-feature-0-3-0"></a></h3>
 <ul><li>data.frame in Word now support chunk options <code>tab.alt.title</code> and <code>tab.alt.description</code>, used as alternative text for tables.</li>
+<li>Document sections are set to NULL by default.</li>
+<li>PowerPoint support for <code><a href="https://davidgohel.github.io/officer/reference/fpar.html" class="external-link">fpar()</a></code> and <code><a href="https://davidgohel.github.io/officer/reference/block_list.html" class="external-link">block_list()</a></code>.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="issues-0-2-5">issues<a class="anchor" aria-label="anchor" href="#issues-0-2-5"></a></h3>
+<h3 id="issues-0-3-0">issues<a class="anchor" aria-label="anchor" href="#issues-0-3-0"></a></h3>
 <ul><li>fix usage of bookmark id containing underscore</li>
 <li>update default values according to new default values of <code><a href="https://davidgohel.github.io/officer/reference/opts_current_table.html" class="external-link">officer::opts_current_table()</a></code>.</li>
 <li>dml background color <code>bg</code> is now read in R Markdown.</li>
+<li>require officer <code>&gt;= 0.5.1</code> to avoid page breaking between sections</li>
 </ul></div>
 <div class="section level3">
-<h3 id="internals-0-2-5">Internals<a class="anchor" aria-label="anchor" href="#internals-0-2-5"></a></h3>
+<h3 id="internals-0-3-0">Internals<a class="anchor" aria-label="anchor" href="#internals-0-3-0"></a></h3>
 <ul><li>simplify/drop code with officer 0.4.5</li>
+<li>add tests</li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -141,7 +145,7 @@
 
 
       <footer><link href="../ardata.css" rel="stylesheet"><div class="author">
-  <p>Version 0.2.5.005 - Developed by  - proudly brought to you by <a href="http://www.ardata.fr" class="external-link"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
+  <p>Version 0.3.0 - Developed by  - proudly brought to you by <a href="http://www.ardata.fr" class="external-link"><img alt="ardata" src="../ardata-logo.svg" style="vertical-align:middle;height:24px;"></a>
   </p>
 </div>
 <div class="pkgdown">
