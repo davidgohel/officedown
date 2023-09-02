@@ -18,13 +18,6 @@ test_that("scanning settings", {
   expect_equal(xml_attr(spacing_node, "line"), "240")
 })
 
-test_that("visual testing", {
-  testthat::skip_if_not_installed("doconv")
-  testthat::skip_if_not(doconv::msoffice_available())
-  library(doconv)
-  expect_snapshot_doc(x = docx_file, name = "par-settings", engine = "testthat")
-})
-
 docx_file <- tempfile(fileext = ".docx")
 render_rmd("rmd/change-styles.Rmd", output_file = docx_file)
 

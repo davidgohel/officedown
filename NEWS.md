@@ -1,3 +1,10 @@
+# officedown 0.3.1
+
+## issues
+
+- Compliance of pandoc version comparison in `knit_print.dml()` function 
+following CRAN e-mail.
+
 # officedown 0.3.0
 
 ## new feature

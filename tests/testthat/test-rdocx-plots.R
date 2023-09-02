@@ -7,10 +7,12 @@ skip_if_not(pandoc_version() >= numeric_version("2"))
 
 source("utils.R")
 
-docx_file <- tempfile(fileext = ".docx")
-render_rmd("rmd/plot-basic.Rmd", output_file = docx_file)
 
 test_that("reading captions", {
+
+  docx_file <- tempfile(fileext = ".docx")
+  render_rmd("rmd/plot-basic.Rmd", output_file = docx_file)
+
   node_body <- get_docx_xml(docx_file)
 
   expect_equal(
@@ -27,5 +29,8 @@ test_that("visual testing plots", {
   testthat::skip_if_not_installed("doconv")
   testthat::skip_if_not(doconv::msoffice_available())
   library(doconv)
+  docx_file <- tempfile(fileext = ".docx")
+  render_rmd("rmd/plot-basic.Rmd", output_file = docx_file)
+
   expect_snapshot_doc(x = docx_file, name = "plot-basic", engine = "testthat")
 })
