@@ -13,3 +13,4 @@
 ^LICENSE\.md$
 ^examples$
 ^revdep$
+^tests/testthat/_snaps$
