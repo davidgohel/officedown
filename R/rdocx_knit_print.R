@@ -28,17 +28,48 @@ knit_print.fp_par <- function(x, ...){
 }
 
 #' @export
+#' @importFrom officer shape_properties_tags
 knit_print.block <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     knit_print( asis_output(
       paste("```{=openxml}", to_wml(x), "```", sep = "\n")
     ) )
   } else if(grepl( "pptx", opts_knit$get("rmarkdown.pandoc.to"))){
+    layout <- knitr::opts_current$get("layout")
+    master <- knitr::opts_current$get("master")
+    doc <- get_reference_pptx()
+    ph <- knitr::opts_current$get("ph")
+    if(is.null(ph)){
+      ph <- officer::ph_location_type(type = "body")
+    }
+    bg <- knitr::opts_current$get("bg")
+    if(is.null(bg)){
+      bg <- "transparent"
+    }
+    if(!inherits(ph, "location_str")){
+      stop("ph should be a placeholder location; ",
+           "see officer::placeholder location for an example.",
+           call. = FALSE)
+    }
+
+    id_xfrm <- get_content_ph(ph, layout, master, doc)
+    new_ph <- shape_properties_tags(left = id_xfrm$left,
+                           top = id_xfrm$top,
+                           width = id_xfrm$width,
+                           height = id_xfrm$height,
+                           rot = id_xfrm$rotation,
+                           label = id_xfrm$ph_label,
+                           ph = id_xfrm$ph,
+                           ln = sp_line(lwd = 0, linecmpd = "sng", lineend = "rnd"))
+    xml_elt <- paste0( "<p:sp>", new_ph,
+                       "<p:txBody><a:bodyPr/><a:lstStyle/>",
+                       to_pml(x), "</p:txBody></p:sp>" )
     knit_print( asis_output(
-      paste("```{=openxml}", to_pml(x), "```", sep = "\n")
+      paste("```{=openxml}", xml_elt, "```", sep = "\n")
     ) )
   } else knit_print( asis_output("") )
 }
+
 
 #' @export
 #' @title Force Block Printing while Knitting
@@ -68,6 +99,8 @@ knit_print.block <- function(x, ...){
 knit_print_block <- function(x, ...){
   if(grepl( "docx", opts_knit$get("rmarkdown.pandoc.to"))){
     cat(paste("```{=openxml}", to_wml(x), "```\n\n", sep = "\n"))
+  } else if(grepl( "pptx", opts_knit$get("rmarkdown.pandoc.to"))){
+    cat(paste("```{=openxml}", to_pml(x), "```\n\n", sep = "\n"))
   } else cat("")
 }
 

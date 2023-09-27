@@ -1,0 +1,35 @@
+---
+title: "officedown test"
+output: officedown::rdocx_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+```
+
+## List of tables
+
+<!---BLOCK_TOC{seq_id: 'tab'}--->
+
+\newpage
+
+## Table 1
+
+```{r tab.cap="caption 1", tab.id="mtcars"}
+head(mtcars)
+```
+
+## Table 2
+
+```{r tab.cap="iris"}
+head(iris)
+```
+
+## Table 3
+
+```{r tab.cap="cars", tab.id="cars"}
+head(cars)
+```
+

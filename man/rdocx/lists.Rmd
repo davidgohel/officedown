@@ -1,0 +1,46 @@
+```{r, child = "./setup.Rmd", include = FALSE}
+```
+
+The parameter lists is a list that can contain two named items:
+
+- `ol.style`: style to use for ordered lists.
+- `ul.style`: style to use for unordered lists.
+
+Default values are `list(ol.style = NULL, ul.style = NULL)`.
+
+Expected values are the stylenames to be used to replace the style of ordered and unordered lists created by pandoc. If NULL, no replacement is made.
+
+These values in YAML format are:
+
+```markdown
+output: 
+  officedown::rdocx_document:
+    lists:
+      ol.style: null
+      ul.style: null
+```
+
+They can have values corresponding to existing stylenames
+(of type 'numbering'). With package 'officer', we can 
+read these values with [styles_info()][officer::styles_info].
+
+```{r}
+library(officer)
+docx_file <- system.file(
+  package = "officedown", "examples",
+  "bookdown", "template.docx"
+)
+doc <- read_docx(docx_file)
+styles_info(doc, type = "numbering")[, 1:6]
+```
+
+From the above available values, the possible configuration
+is possible:
+
+```markdown
+output: 
+  officedown::rdocx_document:
+    lists:
+      ol.style: 'Default ol'
+      ul.style: 'Default ul'
+```
