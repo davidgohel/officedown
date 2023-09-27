@@ -1,0 +1,16 @@
+---
+title: "change style"
+output:
+  officedown::rdocx_document:
+    mapstyles:
+      Normal: ['First Paragraph', 'Body Text']
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+```
+
+`r officedown:::str_lorem`
+
+`r officedown:::str_lorem`

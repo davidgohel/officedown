@@ -1,8 +1,31 @@
-# officedown 0.2.5
+# officedown 0.3.1
 
 ## issues
 
-* fix usage of bookmark id containing underscore
+- Compliance of pandoc version comparison in `knit_print.dml()` function 
+following CRAN e-mail.
+
+# officedown 0.3.0
+
+## new feature
+
+- data.frame in Word now support chunk options `tab.alt.title` 
+and `tab.alt.description`, used as alternative text for tables.
+- Document sections are set to NULL by default.
+- PowerPoint support for `fpar()` and `block_list()`.
+
+## issues
+
+- fix usage of bookmark id containing underscore
+- update default values according to new default values of 
+`officer::opts_current_table()`.
+- dml background color `bg` is now read in R Markdown.
+- require officer `>= 0.5.1` to avoid page breaking between sections
+
+## Internals
+
+- simplify/drop code with officer 0.4.5
+- add tests
 
 # officedown 0.2.4
 

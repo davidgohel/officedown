@@ -95,6 +95,16 @@ dml(plot(pressure))
 dml(plot(pressure), editable = FALSE)
 ```
 
+## officer block list
 
-
-
+```{r}
+library(officer)
+fpt_blue_bold <- fp_text_lite(color = "#006699", bold = TRUE)
+fpt_red_italic <- fp_text_lite(color = "#C32900", italic = TRUE)
+value <- block_list(
+  fpar(ftext("hello world", fpt_blue_bold)),
+  fpar(ftext("hello", fpt_blue_bold), " ",
+       ftext("world", fpt_red_italic))
+)
+value
+```

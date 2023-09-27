@@ -1,0 +1,35 @@
+---
+title: "section test"
+output: 
+  officedown::rdocx_document:
+    reference_docx: template.docx
+    lists:
+      ol.style: 'new-ol'
+      ul.style: 'new-ul'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.cap = TRUE)
+library(officedown)
+library(officer)
+```
+
+## UL
+
+- Erat mauris egestas finibus tincidunt sed in rhoncus a tellus etiam. 
+  - A adipiscing per ultricies justo tellus lorem. 
+    - Imperdiet ut dui primis, sed gravida, at sed nulla. 
+    - Sem posuere lacus consequat inceptos dapibus duis malesuada finibus. 
+  - Urna sed dui, ornare, eu turpis mus pellentesque amet amet bibendum. 
+- Himenaeos tincidunt, auctor dapibus scelerisque, montes nunc faucibus sodales malesuada ridiculus sed cubilia ligula.
+
+## OL
+
+1. Erat mauris egestas finibus tincidunt sed in rhoncus a tellus etiam. 
+    1. A adipiscing per ultricies justo tellus lorem. 
+        1. Imperdiet ut dui primis, sed gravida, at sed nulla. 
+        2. Sem posuere lacus consequat inceptos dapibus duis malesuada finibus. 
+    3. Urna sed dui, ornare, eu turpis mus pellentesque amet amet bibendum. 
+2. Himenaeos tincidunt, auctor dapibus scelerisque, montes nunc faucibus 
+sodales malesuada ridiculus sed cubilia ligula.
+

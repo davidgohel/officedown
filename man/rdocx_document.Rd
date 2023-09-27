@@ -10,23 +10,57 @@ rdocx_document(
   plots = list(),
   lists = list(),
   mapstyles = list(),
-  page_size = list(),
-  page_margins = list(),
+  page_size = NULL,
+  page_margins = NULL,
   reference_num = TRUE,
   ...
 )
 }
 \arguments{
-\item{base_format}{a scalar character, format to be used as a base document for
-officedown. default to \link[rmarkdown:word_document]{word_document} but
-can also be word_document2 from bookdown.
+\item{base_format}{a scalar character, the format to be used as a
+base document for 'officedown'. Default to \link[rmarkdown:word_document]{word_document} but
+can also be \code{word_document2()} from bookdown.
 
 When the \code{base_format} used is \code{bookdown::word_document2}, the \code{number_sections}
 parameter is automatically set to \code{FALSE}. Indeed, if you want numbered titles,
 you are asked to use a Word document template with auto-numbered titles (the title
 styles of the default `rdocx_document' template are already set to FALSE).}
 
-\item{tables}{a list that can contain few items to style tables and table captions.
+\item{tables}{see section 'Tables' below.}
+
+\item{plots}{see section 'Plots' below.}
+
+\item{lists}{see section 'Lists' below.}
+
+\item{mapstyles}{a named list of style to be replaced in the generated
+document. \code{list("Normal" = c("Author", "Date"))} will result in a document where
+all paragraphs styled with stylename "Date" and "Author" will be then styled with
+stylename "Normal".}
+
+\item{page_size, page_margins}{default page and margins dimensions. If
+not null (the default), these values are used to define the default Word section.
+See \code{\link[=page_size]{page_size()}} and \code{\link[=page_mar]{page_mar()}}.}
+
+\item{reference_num}{if \code{TRUE}, text for references to sections will be
+the section number (e.g. '3.2'). If FALSE, text for references to sections
+will be the text (e.g. 'section title').}
+
+\item{...}{arguments used by \link[rmarkdown:word_document]{word_document}}
+}
+\value{
+R Markdown \emph{output format} to pass to \link[rmarkdown:render]{render}.
+}
+\description{
+'R Markdown' Format for converting from 'R Markdown'
+document to an MS Word document.
+
+The function enhances the output offered by \code{\link[rmarkdown:word_document]{rmarkdown::word_document()}} with
+advanced formatting features.
+}
+\section{Tables}{
+
+
+a list that can contain few items to style tables and table captions.
 Missing items will be replaced by default values. Possible items are the following:
 \itemize{
 \item \code{style}: the Word stylename to use for tables.
@@ -57,15 +91,17 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 }
 }
 
-Default value is (in YAML format):\preformatted{style: Table
+Default value is (in YAML format):
+
+\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{style: Table
 layout: autofit
 width: 1.0
 topcaption: true
 tab.lp: 'tab:'
 caption:
   style: Table Caption
-  pre: 'Table '
-  sep: ': '
+  pre: 'Table'
+  sep: ':'
   tnd: 0
   tns: '-'
   fp_text: !expr officer::fp_text_lite(bold = TRUE)
@@ -76,34 +112,48 @@ conditional:
   last_column: false
   no_hband: false
   no_vband: true
-}}
+}\if{html}{\out{</div>}}
+}
 
-\item{plots}{a list that can contain few items to style figures and figure captions.
-Missing items will be replaced by default values. Possible items are the following:
+\section{Plots}{
+
+
+Argument plot is expected to be a list. It can contain few items to style
+figures and figure captions.
+
+You don't have to provide values for each items of the list, missing items are
+replaced by default values. Possible items are:
 \itemize{
-\item \code{style}: the Word stylename to use for plots.
-\item \code{align}: alignment of figures in the output document (possible values are 'left',
-'right' and 'center').
-\item \code{topcaption}: caption will appear before (on top of) the figure,
-\item \code{fig.lp}: caption figure sequence identifier. All figure captions are supposed
-to have the same identifier. It makes possible to insert list of figures. It is
-also used to prefix your 'bookdown' cross-reference call; if \code{fig.lp} is set to
-"fig:", a cross-reference to figure with id "xxxxx" is written as \verb{\\@ref(fig:xxxxx)}.
-It is possible to set the value to your default Word value (in French for example it
-is "Figure"), you can then add manually a list of
-figures (go to the "References" tab and select menu "Insert Table of Figures").
-\item \code{caption}; caption options, i.e.:
+\item \code{style}: the name of the "Word" paragraph style to use for the paragraphs that will contain a graphic.
+\item \code{align}: alignment of paragraphs containing graphics (possible values are 'left', 'right' and 'center').
+\item \code{topcaption}: specify whether the legend should appear above the graphic (\code{TRUE}) or below the graphic (\code{FALSE}).
+\item \code{fig.lp}: Sequence identifier for figure legends. All graphics' captions are supposed to
+have the same identifier. This value is used for different features:
 \itemize{
-\item \code{style}: Word stylename to use for figure captions.
+\item It is used to insert a table of figures.
+\item It is also used to prefix your 'bookdown' cross-reference call; if \code{fig.lp}
+is set to "fig:", a cross-reference to the figure with id "xxxxx" is written
+as \verb{\\@ref(fig:xxxxx)}.
+}
+
+It is possible to set the Word default value (in
+French for example, it is "Figure"), you can then manually add a list of
+figures (go to the "References" tab and select the "Insert a table of
+figures" menu).
+\item \code{caption}: a list for captions' options, i.e.
+\itemize{
+\item \code{style}: the name of the "Word" paragraph style to use for the paragraphs that will contain figures' captions.
 \item \code{pre}: prefix for numbering chunk (default to "Figure ").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
-\item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
+\item \code{tnd}: (only applies if positive). Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
 \item \code{tns}: separator to use between title number and figure number. Default is "-".
 \item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[=fp_text_lite]{fp_text_lite()}}.
 }
 }
 
-Default value is (in YAML format):\preformatted{style: Normal
+Default value is (in YAML format):
+
+\if{html}{\out{<div class="sourceCode yaml">}}\preformatted{style: Normal
 align: center
 topcaption: false
 fig.lp: 'fig:'
@@ -114,37 +164,59 @@ caption:
   tnd: 0
   tns: '-'
   fp_text: !expr officer::fp_text_lite(bold = TRUE)
-}}
-
-\item{lists}{a list containing two named items \code{ol.style} and
-\code{ul.style}, values are the stylenames to be used to replace the style of ordered
-and unordered lists created by pandoc. If NULL, no replacement is made.
-
-Default value is \code{list(ol.style = NULL, ul.style = NULL)}:\preformatted{ol.style: null
-ul.style: null
-}}
-
-\item{mapstyles}{a named list of style to be replaced in the generated
-document. \code{list("Normal" = c("Author", "Date"))} will result in a document where
-all paragraphs styled with stylename "Date" and "Author" will be then styled with
-stylename "Normal".}
-
-\item{page_size, page_margins}{default page and margins dimensions, these values are used to define the default Word section.
-See \code{\link[=page_size]{page_size()}} and \code{\link[=page_mar]{page_mar()}}.}
-
-\item{reference_num}{if TRUE, text for references to sections will be
-the section number (e.g. '3.2'). If FALSE, text for references to sections
-will be the text (e.g. 'section title').}
-
-\item{...}{arguments used by \link[rmarkdown:word_document]{word_document}}
+}\if{html}{\out{</div>}}
 }
-\value{
-R Markdown output format to pass to \link[rmarkdown:render]{render}
+
+\section{Lists}{
+
+
+The parameter lists is a list that can contain two named items:
+\itemize{
+\item \code{ol.style}: style to use for ordered lists.
+\item \code{ul.style}: style to use for unordered lists.
 }
-\description{
-Format for converting from R Markdown to an MS Word
-document. The function comes also with improved output options.
+
+Default values are \code{list(ol.style = NULL, ul.style = NULL)}.
+
+Expected values are the stylenames to be used to replace the style of ordered and unordered lists created by pandoc. If NULL, no replacement is made.
+
+These values in YAML format are:
+
+\if{html}{\out{<div class="sourceCode markdown">}}\preformatted{output: 
+  officedown::rdocx_document:
+    lists:
+      ol.style: null
+      ul.style: null
+}\if{html}{\out{</div>}}
+
+They can have values corresponding to existing stylenames
+(of type 'numbering'). With package 'officer', we can
+read these values with \link[officer:styles_info]{styles_info()}.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(officer)
+docx_file <- system.file(
+  package = "officedown", "examples",
+  "bookdown", "template.docx"
+)
+doc <- read_docx(docx_file)
+styles_info(doc, type = "numbering")[, 1:6]
+#>    style_type    style_id style_name     base_on is_custom is_default
+#> 13  numbering Aucuneliste    No List        <NA>     FALSE       TRUE
+#> 40  numbering   Defaultul Default ul Aucuneliste      TRUE      FALSE
+#> 41  numbering   Defaultol Default ol Aucuneliste      TRUE      FALSE
+}\if{html}{\out{</div>}}
+
+From the above available values, the possible configuration
+is possible:
+
+\if{html}{\out{<div class="sourceCode markdown">}}\preformatted{output: 
+  officedown::rdocx_document:
+    lists:
+      ol.style: 'Default ol'
+      ul.style: 'Default ul'
+}\if{html}{\out{</div>}}
 }
+
 \section{Finding stylenames}{
 
 
@@ -152,26 +224,62 @@ You can access them in the Word template used. Function
 \link[officer:styles_info]{styles_info()} can let you read these
 styles.
 
-You need officer to read the stylenames (to get information
+You need 'officer' to read the stylenames (to get information
 from a specific "reference_docx", change \code{ref_docx_default}
-in the example below.\preformatted{library(officer)
+in the example below.
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(officer)
 docx_file <- system.file(package = "officer", "template", "template.docx")
 doc <- read_docx(docx_file)
-}
+}\if{html}{\out{</div>}}
 
-To read \code{paragraph} stylenames:\preformatted{styles_info(doc, type = "paragraph")
-}
+To read \code{paragraph} stylenames:
 
-To read \code{table} stylenames:\preformatted{styles_info(doc, type = "table")
-}
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{styles_info(doc, type = "paragraph")[, 1:6]
+#>    style_type      style_id    style_name      base_on is_custom is_default
+#> 1   paragraph        Normal        Normal         <NA>     FALSE       TRUE
+#> 2   paragraph        Titre1     heading 1       Normal     FALSE      FALSE
+#> 3   paragraph        Titre2     heading 2       Normal     FALSE      FALSE
+#> 4   paragraph        Titre3     heading 3       Normal     FALSE      FALSE
+#> 9   paragraph      centered      centered       Normal      TRUE      FALSE
+#> 15  paragraph  ImageCaption Image Caption       Normal      TRUE      FALSE
+#> 16  paragraph  TableCaption Table Caption ImageCaption      TRUE      FALSE
+#> 18  paragraph           TM1         toc 1       Normal     FALSE      FALSE
+#> 19  paragraph           TM2         toc 2       Normal     FALSE      FALSE
+#> 20  paragraph Textedebulles  Balloon Text       Normal     FALSE      FALSE
+#> 23  paragraph  graphictitle graphic title ImageCaption      TRUE      FALSE
+#> 24  paragraph    tabletitle   table title TableCaption      TRUE      FALSE
+}\if{html}{\out{</div>}}
 
-To read \code{list} stylenames:\preformatted{styles_info(doc, type = "numbering")
-}
+To read \code{table} stylenames:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{styles_info(doc, type = "table")[, 1:6]
+#>    style_type             style_id          style_name       base_on is_custom
+#> 6       table        TableauNormal        Normal Table          <NA>     FALSE
+#> 10      table        tabletemplate      table_template TableauNormal      TRUE
+#> 11      table  Listeclaire-Accent2 Light List Accent 2 TableauNormal     FALSE
+#> 17      table Tableauprofessionnel  Table Professional TableauNormal     FALSE
+#>    is_default
+#> 6        TRUE
+#> 10      FALSE
+#> 11      FALSE
+#> 17      FALSE
+}\if{html}{\out{</div>}}
+
+To read \code{list} stylenames:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{styles_info(doc, type = "numbering")[, 1:6]
+#>   style_type    style_id style_name base_on is_custom is_default
+#> 7  numbering Aucuneliste    No List    <NA>     FALSE       TRUE
+}\if{html}{\out{</div>}}
 }
 
 \section{R Markdown yaml}{
 
-The following demonstrates how to pass arguments in the R Markdown yaml:\preformatted{---
+
+The following demonstrates how to pass arguments in the R Markdown yaml:
+
+\if{html}{\out{<div class="sourceCode markdown">}}\preformatted{---
 output:
   officedown::rdocx_document:
     reference_docx: pandoc_template.docx
@@ -226,52 +334,24 @@ output:
       gutter: 0.5
     reference_num: true
 ---
-}
+}\if{html}{\out{</div>}}
 }
 
 \examples{
+# rdocx_document basic example -----
 library(rmarkdown)
-run_ok <- pandoc_available() &&
-  pandoc_version() >= numeric_version("2.0")
+library(officedown)
 
-if(run_ok){
+if (pandoc_available() && pandoc_version() >= numeric_version("2.0")) {
+  # minimal example -----
+  example <- system.file(
+    package = "officedown",
+    "examples/minimal_word.Rmd"
+  )
+  rmd_file <- tempfile(fileext = ".Rmd")
+  file.copy(example, to = rmd_file)
 
-# minimal example -----
-example <- system.file(package = "officedown",
-  "examples/minimal_word.Rmd")
-rmd_file <- tempfile(fileext = ".Rmd")
-file.copy(example, to = rmd_file)
-
-docx_file_1 <- tempfile(fileext = ".docx")
-render(rmd_file, output_file = docx_file_1, quiet = TRUE)
-render(rmd_file, output_file = docx_file_1, quiet = TRUE,
-  intermediates_dir = tempfile())
-
-# bookdown example -----
-if(require("bookdown")){
-
-bookdown_loc <- system.file(package = "officedown", "examples/bookdown")
-
-temp_dir <- tempfile()
-# uncomment next line to get the result in your working directory
-# temp_dir <- "./bd_example"
-
-dir.create(temp_dir, showWarnings = FALSE, recursive = TRUE)
-file.copy(
-  from = list.files(bookdown_loc, full.names = TRUE),
-  to = temp_dir,
-  overwrite = TRUE, recursive = TRUE)
-
-render_site(
-  input = temp_dir, encoding = 'UTF-8',
-  envir = new.env(), quiet = TRUE)
-
-docx_file_2 <- file.path(temp_dir, "_book", "bookdown.docx")
-
-if(file.exists(docx_file_2)){
-  message("file ", docx_file_2, " has been written.")
-}
-}
-
+  docx_file <- tempfile(fileext = ".docx")
+  render(rmd_file, output_file = docx_file, quiet = TRUE)
 }
 }

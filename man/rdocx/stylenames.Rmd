@@ -1,0 +1,34 @@
+```{r, child = "./setup.Rmd", include = FALSE}
+```
+
+You can access them in the Word template used. Function
+[styles_info()][officer::styles_info] can let you read these
+styles.
+
+You need 'officer' to read the stylenames (to get information
+from a specific "reference_docx", change `ref_docx_default`
+in the example below.
+
+```{r}
+library(officer)
+docx_file <- system.file(package = "officer", "template", "template.docx")
+doc <- read_docx(docx_file)
+```
+
+To read `paragraph` stylenames:
+
+```{r}
+styles_info(doc, type = "paragraph")[, 1:6]
+```
+
+To read `table` stylenames:
+
+```{r}
+styles_info(doc, type = "table")[, 1:6]
+```
+
+To read `list` stylenames:
+
+```{r}
+styles_info(doc, type = "numbering")[, 1:6]
+```

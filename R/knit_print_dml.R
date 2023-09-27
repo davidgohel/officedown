@@ -12,7 +12,7 @@
 #' @importFrom rlang eval_tidy
 #' @noRd
 knit_print.dml <- function(x, ...) {
-  if (pandoc_version() < 2.4) {
+  if (pandoc_version() < numeric_version("2.4")) {
     stop("pandoc version >= 2.4 required for DrawingML output in pptx")
   }
 
@@ -27,6 +27,9 @@ knit_print.dml <- function(x, ...) {
   if(is.null( ph <- knitr::opts_current$get("ph") )){
     ph <- officer::ph_location_type(type = "body")
   }
+  if(is.null( bg <- knitr::opts_current$get("bg") )){
+    bg <- "transparent"
+  }
   if(!inherits(ph, "location_str")){
     stop("ph should be a placeholder location; ",
          "see officer::placeholder location for an example.",
@@ -40,7 +43,7 @@ knit_print.dml <- function(x, ...) {
 
   dml_pptx(file = dml_file, width = id_xfrm$width, height = id_xfrm$height,
            offx = id_xfrm$left, offy = id_xfrm$top, pointsize = x$pointsize,
-           last_rel_id = 1L,
+           last_rel_id = 1L, bg = bg,
            editable = x$editable, standalone = FALSE, raster_prefix = img_directory)
 
   tryCatch({

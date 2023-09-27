@@ -55,14 +55,4 @@ if(run_ok){
   pptx_file_1 <- tempfile(fileext = ".pptx")
   render(rmd_file, output_file = pptx_file_1)
 }
-
-if(run_ok && require("ggplot2")){
-  skeleton <- system.file(package = "officedown",
-    "rmarkdown/templates/powerpoint/skeleton/skeleton.Rmd")
-  rmd_file <- tempfile(fileext = ".Rmd")
-  file.copy(skeleton, to = rmd_file)
-
-  pptx_file_2 <- tempfile(fileext = ".pptx")
-  render(rmd_file, output_file = pptx_file_2)
-}
 }
