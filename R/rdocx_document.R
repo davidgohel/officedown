@@ -230,7 +230,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
                            mapstyles = list(), page_size = list(), page_margins = list(),
-                           reference_num = TRUE, ...) {
+                           reference_num = TRUE, md2 = TRUE, ...) {
   args <- list(...)
   if (is.null(args$reference_docx)) {
     args$reference_docx <- system.file(
@@ -309,8 +309,7 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     temp_intermediates_generator(...)
   }
 
-  output_formats$post_knit <- function(
-      metadata, input_file, runtime, ...) {
+  output_formats$post_knit <- function(metadata, input_file, runtime, ...) {
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
     if (!file.exists(output_file)) {
