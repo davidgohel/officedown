@@ -80,7 +80,7 @@ The package also offers the possibility to transform your graphic
 instructions into editable vector graphics (with the rvg package) by
 simply wrapping your call into a call to function `dml`.
 
-## Ressources
+## Resources
 
 The help pages are in a bookdown located at:
 
