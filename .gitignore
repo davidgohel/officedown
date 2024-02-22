@@ -3,4 +3,4 @@
 .RData
 .Ruserdata
 inst/doc
-revdep
+.history
