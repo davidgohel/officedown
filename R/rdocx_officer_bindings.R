@@ -51,9 +51,3 @@ block_section_columns <- function(widths = c(2.5,2.5), space = .25, sep = FALSE)
     type = "continuous"))
 }
 
-
-# misc ----
-to_wml.block_pour_docx <- function(x, add_ns = FALSE, base_document = NULL, ...) {
-  paste0("<w:altChunk r:id=\"", x$file, "\"/>")
-}
-
