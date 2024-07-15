@@ -2,6 +2,8 @@ library(xml2)
 library(officer)
 library(rmarkdown)
 
+skip_on_cran()
+
 skip_if_not(rmarkdown::pandoc_available())
 skip_if_not(pandoc_version() >= numeric_version("2"))
 
