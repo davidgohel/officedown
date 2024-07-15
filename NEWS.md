@@ -1,3 +1,9 @@
+# officedown 0.3.2
+
+## issues
+
+- drop unreproducible test failure for CRAN on linux 
+
 # officedown 0.3.1
 
 ## issues

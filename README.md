@@ -90,26 +90,6 @@ Manuals are available at:
 
 <https://davidgohel.github.io/officedown/>.
 
-## Questions and Issues
-
-Github issues are closed, instead use
-<https://github.com/davidgohel/officedown/discussions>
-
-PLEASE, read the help pages before asking questions or declaring issues.
-If you do post:
-
-- Provide the code that is producing the error, it has to be a minimal
-  reproducible example. Stackoverflow is providing good explanations
-  about it: <https://stackoverflow.com/help/mcve>. You can use package
-  `reprex` to help you: <https://reprex.tidyverse.org/>. The most
-  popular R stackoverflow question is about the subject:
-  <https://stackoverflow.com/questions/5963269/how-to-make-a-great-r-reproducible-example>.
-- Provide the results of R command `sessionInfo()`. It had to be
-  executed after you loaded the packages used by your example. This will
-  let me know what is your version of R and what are the versions of the
-  packages you used in your example.
-- Do not cross post
-
 ## Installation
 
 You can install `{officedown}` from github with:
