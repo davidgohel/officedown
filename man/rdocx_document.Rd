@@ -39,7 +39,7 @@ stylename "Normal".}
 
 \item{page_size, page_margins}{default page and margins dimensions. If
 not null (the default), these values are used to define the default Word section.
-See \code{\link[=page_size]{page_size()}} and \code{\link[=page_mar]{page_mar()}}.}
+See \code{\link[officer:page_size]{officer::page_size()}} and \code{\link[officer:page_mar]{officer::page_mar()}}.}
 
 \item{reference_num}{if \code{TRUE}, text for references to sections will be
 the section number (e.g. '3.2'). If FALSE, text for references to sections
@@ -81,7 +81,7 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 \item \code{sep}: suffix for numbering chunk (default to ": ").
 \item \code{tnd}: (only applies if positive. )Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
 \item \code{tns}: separator to use between title number and table number. Default is "-".
-\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[=fp_text_lite]{fp_text_lite()}}.
+\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[officer:fp_text]{officer::fp_text_lite()}}.
 }
 \item \code{conditional}: a list of named logical values:
 \itemize{

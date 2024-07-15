@@ -21,7 +21,7 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
   * `sep`: suffix for numbering chunk (default to ": ").
   * `tnd`: (only applies if positive. )Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
   * `tns`: separator to use between title number and table number. Default is "-".
-  * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
+  * `fp_text`: text formatting properties to apply to caption prefix - see [officer::fp_text_lite()].
 * `conditional`: a list of named logical values:
   * `first_row` and `last_row`: apply or remove formatting from the first or last row in the table
   * `first_column`  and `last_column`: apply or remove formatting from the first or last column in the table
