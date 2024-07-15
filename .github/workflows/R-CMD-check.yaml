@@ -16,13 +16,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-20.04, r: 'release'}
+          - {os: windows-latest, r: 'release', pandoc: '2.19'}
+          - {os: macOS-latest, r: 'release', pandoc: '2.19'}
+          - {os: ubuntu-20.04, r: 'release', pandoc: '2.19'}
+          - {os: ubuntu-20.04, r: 'release', pandoc : '2.9.2.1'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
-      RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -34,6 +34,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: ${{ matrix.config.pandoc }}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
