@@ -1,12 +1,12 @@
 # utils ----
 #' @importFrom utils getAnywhere getFromNamespace
-get_fun <- function(x){
-  if( grepl("::", x, fixed = TRUE) ){
+get_fun <- function(x) {
+  if (grepl("::", x, fixed = TRUE)) {
     coumpounds <- strsplit(x, split = "::", x, fixed = TRUE)[[1]]
-    z <- getFromNamespace(coumpounds[2], ns = coumpounds[1] )
+    z <- getFromNamespace(coumpounds[2], ns = coumpounds[1])
   } else {
     z <- getAnywhere(x)
-    if(length(z$objs) < 1){
+    if (length(z$objs) < 1) {
       stop("could not find any function named ", shQuote(z$name), " in loaded namespaces or in the search path. If the package is installed, specify name with `packagename::function_name`.")
     }
   }
@@ -15,19 +15,20 @@ get_fun <- function(x){
 
 file_with_meta_ext <- function(file, meta_ext, ext = tools::file_ext(file)) {
   paste(tools::file_path_sans_ext(file),
-        ".", meta_ext, ".", ext,
-        sep = ""
+    ".", meta_ext, ".", ext,
+    sep = ""
   )
 }
 
-absolute_path <- function(x){
-  if (length(x) != 1L)
+absolute_path <- function(x) {
+  if (length(x) != 1L) {
     stop("'x' must be a single character string")
+  }
   epath <- path.expand(x)
-  if( file.exists(epath)){
+  if (file.exists(epath)) {
     epath <- normalizePath(epath, "/", mustWork = TRUE)
   } else {
-    if( !dir.exists(dirname(epath)) ){
+    if (!dir.exists(dirname(epath))) {
       stop("directory of ", x, " does not exist.", call. = FALSE)
     }
     cat("", file = epath)
@@ -58,7 +59,7 @@ tables_default_values <- list(
     last_column = FALSE,
     no_hband = FALSE,
     no_vband = TRUE
-    )
+  )
 )
 
 # plots_default_values ----
@@ -135,6 +136,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' document. `list("Normal" = c("Author", "Date"))` will result in a document where
 #' all paragraphs styled with stylename "Date" and "Author" will be then styled with
 #' stylename "Normal".
+#' @param md2 if TRUE sets number_section to true
 #' @param reference_num if `TRUE`, text for references to sections will be
 #' the section number (e.g. '3.2'). If FALSE, text for references to sections
 #' will be the text (e.g. 'section title').
@@ -164,7 +166,62 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'
 #' ```{r child = "man/rdocx/rmarkdown-yaml.Rmd"}
 #' ```
-#'
+#' ---
+#' output:
+#'   officedown::rdocx_document:
+#'     reference_docx: pandoc_template.docx
+#'     tables:
+#'       style: Table
+#'       layout: autofit
+#'       width: 1.0
+#'       topcaption: true
+#'       tab.lp: 'tab:'
+#'       caption:
+#'         style: Table Caption
+#'         pre: 'Table '
+#'         sep: ': '
+#'         tnd: 0
+#'         tns: '-'
+#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
+#'       conditional:
+#'         first_row: true
+#'         first_column: false
+#'         last_row: false
+#'         last_column: false
+#'         no_hband: false
+#'         no_vband: true
+#'     plots:
+#'       style: Normal
+#'       align: center
+#'       fig.lp: 'fig:'
+#'       topcaption: false
+#'       caption:
+#'         style: Image Caption
+#'         pre: 'Figure '
+#'         sep: ': '
+#'         tnd: 0
+#'         tns: '-'
+#'         fp_text: !expr officer::fp_text_lite(bold = TRUE)
+#'     lists:
+#'       ol.style: null
+#'       ul.style: null
+#'     mapstyles:
+#'       Normal: ['First Paragraph', 'Author', 'Date']
+#'     page_size:
+#'       width: 8.3
+#'       height: 11.7
+#'       orient: "portrait"
+#'     page_margins:
+#'       bottom: 1
+#'       top: 1
+#'       right: 1.25
+#'       left: 1.25
+#'       header: 0.5
+#'       footer: 0.5
+#'       gutter: 0.5
+#'     reference_num: true
+#' ---
+#' ```
 #' @examples
 #' # rdocx_document basic example -----
 #' @example examples/rdocx_document.R
@@ -172,18 +229,21 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @importFrom utils modifyList
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),
-                           mapstyles = list(), page_size = NULL, page_margins = NULL,
-                           reference_num = TRUE, ...) {
-
+                           mapstyles = list(), page_size = list(), page_margins = list(),
+                           reference_num = TRUE, md2 = TRUE, ...) {
   args <- list(...)
-  if(is.null(args$reference_docx)){
+  if (is.null(args$reference_docx)) {
     args$reference_docx <- system.file(
       package = "officedown", "examples",
       "bookdown", "template.docx"
     )
   }
-  if(!is.null(args$number_sections) && isTRUE(args$number_sections)){
-    args$number_sections <- FALSE
+  if (!is.null(args$number_sections) && isTRUE(args$number_sections)) {
+    if (isTRUE(md2)) {
+      args$number_sections <- TRUE
+    } else {
+      args$number_sections <- FALSE
+    }
   }
 
   args$reference_docx <- absolute_path(args$reference_docx)
@@ -205,38 +265,37 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
 
   output_formats$knitr$opts_chunk <- append(
     output_formats$knitr$opts_chunk,
-    list(tab.cap.style = tables$caption$style,
-         tab.cap.pre = tables$caption$pre,
-         tab.cap.sep = tables$caption$sep,
-         tab.cap.tnd = tables$caption$tnd,
-         tab.cap.tns = tables$caption$tns,
-         tab.cap.fp_text = tables$caption$fp_text,
-         tab.lp = tables$tab.lp,
-         tab.topcaption = tables$topcaption,
-         tab.style = tables$style,
-         tab.width = tables$width,
-
-         first_row = tables$conditional$first_row,
-         first_column = tables$conditional$first_column,
-         last_row = tables$conditional$last_row,
-         last_column = tables$conditional$last_column,
-         no_hband = tables$conditional$no_hband,
-         no_vband = tables$conditional$no_vband,
-
-         fig.cap.style = plots$caption$style,
-         fig.cap.pre = plots$caption$pre,
-         fig.cap.sep = plots$caption$sep,
-         fig.cap.tnd = plots$caption$tnd,
-         fig.cap.tns = plots$caption$tns,
-         fig.cap.fp_text = plots$caption$fp_text,
-         fig.align = plots$align,
-         fig.style = plots$style,
-         fig.lp = plots$fig.lp,
-         fig.topcaption = plots$topcaption,
-         is_rdocx_document = TRUE
-         )
+    list(
+      tab.cap.style = tables$caption$style,
+      tab.cap.pre = tables$caption$pre,
+      tab.cap.sep = tables$caption$sep,
+      tab.cap.tnd = tables$caption$tnd,
+      tab.cap.tns = tables$caption$tns,
+      tab.cap.fp_text = tables$caption$fp_text,
+      tab.lp = tables$tab.lp,
+      tab.topcaption = tables$topcaption,
+      tab.style = tables$style,
+      tab.width = tables$width,
+      first_row = tables$conditional$first_row,
+      first_column = tables$conditional$first_column,
+      last_row = tables$conditional$last_row,
+      last_column = tables$conditional$last_column,
+      no_hband = tables$conditional$no_hband,
+      no_vband = tables$conditional$no_vband,
+      fig.cap.style = plots$caption$style,
+      fig.cap.pre = plots$caption$pre,
+      fig.cap.sep = plots$caption$sep,
+      fig.cap.tnd = plots$caption$tnd,
+      fig.cap.tns = plots$caption$tns,
+      fig.cap.fp_text = plots$caption$fp_text,
+      fig.align = plots$align,
+      fig.style = plots$style,
+      fig.lp = plots$fig.lp,
+      fig.topcaption = plots$topcaption,
+      is_rdocx_document = TRUE
     )
-  if(is.null(output_formats$knitr$knit_hooks)){
+  )
+  if (is.null(output_formats$knitr$knit_hooks)) {
     output_formats$knitr$knit_hooks <- list()
   }
   output_formats$knitr$knit_hooks$plot <- plot_word_fig_caption
@@ -245,14 +304,12 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   intermediate_dir <- "."
 
   temp_intermediates_generator <- output_formats$intermediates_generator
-  output_formats$intermediates_generator <- function(...){
+  output_formats$intermediates_generator <- function(...) {
     intermediate_dir <<- list(...)[[2]]
     temp_intermediates_generator(...)
   }
 
-  output_formats$post_knit <- function(
-    metadata, input_file, runtime, ...){
-
+  output_formats$post_knit <- function(metadata, input_file, runtime, ...) {
     output_file <- file_with_meta_ext(input_file, "knit", "md")
     output_file <- file.path(intermediate_dir, output_file)
     if (!file.exists(output_file)) {
@@ -284,7 +341,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
         page_size = page_size(
           orient = page_size$orient,
           width = page_size$width,
-          height = page_size$height),
+          height = page_size$height
+        ),
         type = "continuous",
         page_margins = page_mar(
           bottom = page_margins$bottom,
@@ -293,7 +351,8 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
           left = page_margins$left,
           header = page_margins$header,
           footer = page_margins$footer,
-          gutter = page_margins$gutter)
+          gutter = page_margins$gutter
+        )
       )
       x <- body_set_default_section(x, default_sect_properties)
     }
@@ -302,6 +361,6 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
     print(x, target = output_file)
     output_file
   }
-  output_formats$bookdown_output_format = 'docx'
+  output_formats$bookdown_output_format <- "docx"
   output_formats
 }
