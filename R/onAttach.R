@@ -1,7 +1,6 @@
 .onAttach <- function(libname, pkgname){
   register_s3_method("knitr", "knit_print", "data.frame")
   register_s3_method("knitr", "knit_print", "dml")
-  register_s3_method("officer", "to_wml", "block_pour_docx")
 }
 
 register_s3_method <- function(pkg, generic, class, fun = NULL) {

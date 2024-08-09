@@ -142,7 +142,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' will be the text (e.g. 'section title').
 #' @param page_size,page_margins default page and margins dimensions. If
 #' not null (the default), these values are used to define the default Word section.
-#' See [page_size()] and [page_mar()].
+#' See [officer::page_size()] and [officer::page_mar()].
 #' @param ... arguments used by [word_document][rmarkdown::word_document]
 #' @return R Markdown *output format* to pass to [render][rmarkdown::render].
 #' @section Tables:
@@ -225,7 +225,7 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #' @examples
 #' # rdocx_document basic example -----
 #' @example examples/rdocx_document.R
-#' @importFrom officer change_styles
+#' @importFrom officer change_styles block_pour_docx
 #' @importFrom utils modifyList
 rdocx_document <- function(base_format = "rmarkdown::word_document",
                            tables = list(), plots = list(), lists = list(),

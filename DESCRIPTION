@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre", "cph"),
     email = "david.gohel@ardata.fr"),
@@ -38,7 +38,7 @@ Suggests:
     doconv (>= 0.3.0)
 URL: https://ardata-fr.github.io/officeverse/, https://davidgohel.github.io/officedown/
 BugReports: https://github.com/davidgohel/officedown/discussions
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
 VignetteBuilder: knitr
