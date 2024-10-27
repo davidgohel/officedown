@@ -4,9 +4,9 @@ render_rmd <- function(rmd_file, output_file) {
   tryCatch(
     {
       rmarkdown::render(rmd_file,
-             output_file = output_file,
-             envir = new.env(),
-             quiet = TRUE
+        output_file = output_file,
+        envir = new.env(),
+        quiet = TRUE
       )
       sucess <- TRUE
     },

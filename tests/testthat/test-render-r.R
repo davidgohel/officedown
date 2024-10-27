@@ -4,8 +4,6 @@ library(rmarkdown)
 skip_if_not(rmarkdown::pandoc_available())
 skip_if_not(pandoc_version() >= numeric_version("2"))
 
-source("utils.R")
-
 str <- c(
   "#' ---",
   "#' output: officedown::rdocx_document",
