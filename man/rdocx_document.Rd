@@ -147,7 +147,7 @@ figures" menu).
 \item \code{sep}: suffix for numbering chunk (default to ": ").
 \item \code{tnd}: (only applies if positive). Inserts the number of the last title of level \code{tnd} (i.e. 4.3-2 for figure 2 of chapter 4.3).
 \item \code{tns}: separator to use between title number and figure number. Default is "-".
-\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[=fp_text_lite]{fp_text_lite()}}.
+\item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[officer:fp_text]{officer::fp_text_lite()}}.
 }
 }
 

@@ -30,7 +30,7 @@ have the same identifier. This value is used for different features:
   * `sep`: suffix for numbering chunk (default to ": ").
   * `tnd`: (only applies if positive). Inserts the number of the last title of level `tnd` (i.e. 4.3-2 for figure 2 of chapter 4.3).
   * `tns`: separator to use between title number and figure number. Default is "-".
-  * `fp_text`: text formatting properties to apply to caption prefix - see [fp_text_lite()].
+  * `fp_text`: text formatting properties to apply to caption prefix - see [officer::fp_text_lite()].
 
 
 Default value is (in YAML format):
