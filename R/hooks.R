@@ -35,10 +35,38 @@ plot_word_fig_caption <- function(x, options) {
                       ))
   cap_str <- to_wml(bc, knitting = TRUE)
 
+  # physical size of plots
   fig.width <- opts_current$get("fig.width")
   if(is.null(fig.width)) fig.width <- 5
   fig.height <- opts_current$get("fig.height")
   if(is.null(fig.height)) fig.height <- 5
+
+  # out.width and out.height in percent
+  fig.out.width <- opts_current$get("out.width")
+  has_fig_out_width <- !is.null(fig.out.width)
+  is_pct_width <- has_fig_out_width && grepl("%", fig.out.width)
+  if (is_pct_width) {
+    fig.out.width <- gsub("%", "", fig.out.width, fixed = TRUE)
+    fig.out.width <- as.numeric(fig.out.width) / 100
+    fig.out.height <- fig.out.width
+  } else {
+    fig.out.height <- opts_current$get("out.height")
+    has_fig_out_height <- !is.null(fig.out.height)
+    is_pct_height <- !is_pct_width && has_fig_out_height && grepl("%", fig.out.height)
+    if (is_pct_height) {
+      fig.out.height <- gsub("%", "", fig.out.height, fixed = TRUE)
+      fig.out.height <- as.numeric(fig.out.height) / 100
+      fig.out.width <- fig.out.height
+    }
+  }
+
+  if (!has_fig_out_width && !has_fig_out_height) {
+    fig.out.width <- 1
+    fig.out.height <- 1
+  }
+
+  fig.width <- fig.width * fig.out.width
+  fig.height <- fig.height * fig.out.height
 
   img <- external_img(src = x[1], width = fig.width, height = fig.height, alt = options$fig.alt)
 
