@@ -164,7 +164,10 @@ get_reference_rdocx <- memoise(get_docx_uncached)
 #'
 #' ```{r child = "man/rdocx/rmarkdown-yaml.Rmd"}
 #' ```
-#'
+#' @section Known limitations:
+#' When using `knitr::include_graphics()` in 'rdocx_document',
+#' the image must be local, while with standard 'R Markdown'
+#' output documents, images located on Internet are supported.
 #' @examples
 #' # rdocx_document basic example -----
 #' @example examples/rdocx_document.R

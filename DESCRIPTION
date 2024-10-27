@@ -1,7 +1,7 @@
 Package: officedown
 Type: Package
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.4.0.002
+Version: 0.4.0.003
 Authors@R: c(
     person("David", "Gohel", role = c("aut", "cre", "cph"),
     email = "david.gohel@ardata.fr"),
@@ -26,13 +26,13 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: knitr, 
  rmarkdown, 
- officer (>= 0.5.1), 
+ officer (>= 0.6.7), 
  xml2, rlang, uuid,
  grDevices, yaml, utils, memoise, 
- rvg (>= 0.2.2)
+ rvg (>= 0.3.4)
 Suggests: 
     ggplot2,
-    flextable (>= 0.7.0),
+    flextable (>= 0.9.7),
     bookdown (>= 0.13),
     testthat (>= 3.0.0),
     doconv (>= 0.3.0)

@@ -12,6 +12,11 @@ knitr_opts_current <- function(x, default = FALSE){
 #' @noRd
 plot_word_fig_caption <- function(x, options) {
 
+  if (grepl("^(ftp|ftps|http|https)://", x[1])) {
+    stop("Images in 'rdocx_document' must be local files accessible without an internet connection:\n",
+         shQuote(x[1]), call. = FALSE)
+  }
+
   if(!is.character(options$fig.cap)) options$fig.cap <- NULL
   if(!is.character(options$fig.alt)) options$fig.alt <- NULL
   if(is.null(options$fig.id))

@@ -337,6 +337,13 @@ output:
 }\if{html}{\out{</div>}}
 }
 
+\section{Known limitations}{
+
+When using \code{knitr::include_graphics()} in 'rdocx_document',
+the image must be local, while with standard 'R Markdown'
+output documents, images located on Internet are supported.
+}
+
 \examples{
 # rdocx_document basic example -----
 library(rmarkdown)
