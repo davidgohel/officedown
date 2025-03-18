@@ -5,6 +5,11 @@
 - plots now accept chunk options `out.width` and `out.height`
 if expressed in percent. #144
 
+## issues
+
+- fix `get_fun()` function
+- fix BugReports links for CRAN check
+
 # officedown 0.3.3
 
 ## issues

@@ -2,7 +2,7 @@
 #' @importFrom utils getAnywhere getFromNamespace
 get_fun <- function(x){
   if( grepl("::", x, fixed = TRUE) ){
-    coumpounds <- strsplit(x, split = "::", x, fixed = TRUE)[[1]]
+    coumpounds <- strsplit(x, split = "::", fixed = TRUE)[[1]]
     z <- getFromNamespace(coumpounds[2], ns = coumpounds[1] )
   } else {
     z <- getAnywhere(x)
