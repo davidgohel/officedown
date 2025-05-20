@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   overview: overview.html
-last_built: 2025-03-18T12:25Z
+last_built: 2025-05-20T22:32Z
 urls:
   reference: https://davidgohel.github.io/officedown/reference
   article: https://davidgohel.github.io/officedown/articles
