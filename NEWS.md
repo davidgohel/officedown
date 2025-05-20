@@ -1,3 +1,10 @@
+# officedown 0.4.1
+
+## Changes
+
+- Default page size is now set to exact A4 format for Word documents
+- prepare paragraph styles management for officer > 0.6.8
+
 # officedown 0.4.0
 
 ## new feature
