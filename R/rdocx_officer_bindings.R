@@ -26,14 +26,14 @@ block_section_continuous <- function( ){
 #' placed relative to the previous section. Available types are "evenPage"
 #' (begins on the next, "nextPage" (begins on the following page), "oddPage"
 #' (begins on the next odd-numbered page).
-block_section_landscape <- function( w = 21 / 2.54, h = 29.7 / 2.54, break_page = "oddPage" ){
+block_section_landscape <- function( w = 11906 / 1440, h = 16838 / 1440, break_page = "oddPage" ){
   block_section(prop_section(
     page_size = page_size(width = w, height = h, orient = "landscape"),
     type = break_page))
 }
 
 #' @noRd
-block_section_portrait <- function( w = 21 / 2.54, h = 29.7 / 2.54, break_page = "oddPage"){
+block_section_portrait <- function( w = 16838 / 1440, h = 11906 / 1440, break_page = "oddPage"){
   block_section(prop_section(
     page_size = page_size(width = w, height = h, orient = "portrait"),
     type = break_page))

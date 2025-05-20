@@ -46,17 +46,17 @@ output:
     mapstyles:
       Normal: ['First Paragraph', 'Author', 'Date']
     page_size:
-      width: 8.3
-      height: 11.7
+      width: 11906 / 1440
+      height: 16838 / 1440
       orient: "portrait"
     page_margins:
       bottom: 1
       top: 1
-      right: 1.25
-      left: 1.25
-      header: 0.5
-      footer: 0.5
-      gutter: 0.5
+      right: 1417 / 1440
+      left: 1417 / 1440
+      header: 708 / 1440
+      footer: 708 / 1440
+      gutter: 0 / 1440
     reference_num: true
 ---
 ```

@@ -84,19 +84,19 @@ lists_default_values <- list(
 
 # page_size_default_values ----
 page_size_default_values <- list(
-  width = 8.3,
-  height = 11.7,
+  width = 11906 / 1440,
+  height = 16838 / 1440,
   orient = "portrait"
 )
 # page_mar_default_values ----
 page_mar_default_values <- list(
-  bottom = 1.25,
-  top = 1.25,
-  right = 0.5,
-  left = .5,
-  header = 0.5,
-  footer = 0.5,
-  gutter = 0.5
+  bottom = 1417 / 1440,
+  top = 1417 / 1440,
+  right = 1417 / 1440,
+  left = 1417 / 1440,
+  header = 708 / 1440,
+  footer = 708 / 1440,
+  gutter = 0
 )
 
 # memoise reference_docx ----
@@ -198,7 +198,6 @@ rdocx_document <- function(base_format = "rmarkdown::word_document",
   tables <- modifyList(tables_default_values, tables)
   plots <- modifyList(plots_default_values, plots)
   lists <- modifyList(lists_default_values, lists)
-
   if (!is.null(page_size)) {
     page_size <- modifyList(page_size_default_values, page_size)
   }

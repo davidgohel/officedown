@@ -327,8 +327,8 @@ output:
     page_margins:
       bottom: 1
       top: 1
-      right: 1.25
-      left: 1.25
+      right: 1417 / 1440
+      left: 1417 / 1440
       header: 0.5
       footer: 0.5
       gutter: 0.5
