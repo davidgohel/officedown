@@ -12,8 +12,11 @@ render_rmd("rmd/sections.Rmd", output_file = docx_file)
 
 test_that("reading sections properties", {
   node_body <- get_docx_xml(docx_file)
-
-  continuous_sec_node <- xml_find_first(node_body, "w:p[w:pPr/w:pStyle/@w:val='Titre']/following-sibling::w:p")
+  if (packageVersion("officer") > numeric_version("0.6.8")) {
+    continuous_sec_node <- xml_find_first(node_body, "w:p[w:pPr/w:pStyle/@w:val='Title']/following-sibling::w:p")
+  } else {
+    continuous_sec_node <- xml_find_first(node_body, "w:p[w:pPr/w:pStyle/@w:val='Titre']/following-sibling::w:p")
+  }
   expect_false(
     inherits(
       xml_child(continuous_sec_node, "w:pPr/w:sectPr/w:type[@w:val='continuous']"),
