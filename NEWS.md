@@ -1,3 +1,10 @@
+# officedown 0.4.2
+
+## Changes
+
+- Plot hook refactored to use Pandoc image syntax. Now supports `out.width`, 
+`out.height` and `out.extra` for additional attributes.
+
 # officedown 0.4.1
 
 ## Changes

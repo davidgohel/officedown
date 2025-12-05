@@ -4,12 +4,67 @@ knitr_opts_current <- function(x, default = FALSE){
   x
 }
 
-#' @importFrom knitr opts_chunk
+#' @importFrom knitr opts_chunk opts_knit
 #' @title knitr hook for figure caption autonumbering
-#' @description The function allows you to add a hook when executing
-#' knitr to allow to turn figure captions into auto numbered figure
-#' captions.
-#' @noRd
+#' @description
+#' Plot hook for Word documents that generates auto-numbered figure captions
+#' with custom styling. The hook uses Pandoc markdown syntax for images
+#' combined with OOXML for captions and paragraph formatting.
+#'
+#' The hook delegates image rendering to Pandoc while providing enhanced
+#' caption management with auto-numbering, cross-references, and custom
+#' Word paragraph styles.
+#'
+#' @param x Character string containing the path to the saved plot file.
+#' @param options Named list of chunk options.
+#'
+#' @section Supported chunk options:
+#' - `fig.cap`: Figure caption text. Used to generate auto-numbered captions
+#'   with cross-reference support.
+#' - `fig.cap.style`: Paragraph style for the caption (default from options).
+#' - `fig.cap.pre`, `fig.cap.sep`: Caption prefix and separator for
+#'   auto-numbering (e.g., "Figure" and ": ").
+#' - `fig.id`: Cross-reference identifier (defaults to chunk label).
+#' - `fig.topcaption`: Logical; if TRUE, caption appears above the image.
+#' - `out.width`, `out.height`: Output dimensions. Can use units like "5in",
+#'   "80%", "10cm". Passed directly to Pandoc.
+#' - `out.extra`: Additional Pandoc image attributes.
+#' - `fig.alt`: Alternative text for the image.
+#' - `fig.align`: Image alignment. Must be one of "default", "left", "center",
+#'   or "right". Default value "default" is converted to "center".
+#' - `fig.style`: Word paragraph style name for the image paragraph
+#'   (default: "Normal").
+#'
+#' @section Global options:
+#' - `fig.cap.tnd`: Caption numbering depth (default: 0).
+#' - `fig.cap.tns`: Caption numbering separator (default: "-").
+#' - `fig.cap.fp_text`: Text formatting properties for caption numbers.
+#'
+#' @return
+#' A character string containing markdown with embedded OOXML code that
+#' combines the auto-numbered caption and the Pandoc image syntax.
+#'
+#' @examples
+#' \dontrun{
+#' # Chunk with auto-numbered caption and custom size
+#' ```{r, fig.cap="Sales over time", out.width="80%"}
+#' plot(sales_data)
+#' ```
+#'
+#' # Chunk with alignment and custom style
+#' ```{r, fig.cap="Key findings", fig.align="center", fig.style="ImageCenter"}
+#' plot(results)
+#' ```
+#'
+#' # Caption above image with cross-reference
+#' ```{r sales-plot, fig.cap="Q4 Sales", fig.topcaption=TRUE, fig.id="sales"}
+#' plot(sales_data)
+#' ```
+#' }
+#' @rdname hook_plot_officedown
+#' @name hook_plot_officedown
+NULL
+
 plot_word_fig_caption <- function(x, options) {
 
   if (grepl("^(ftp|ftps|http|https)://", x[1])) {
@@ -40,63 +95,51 @@ plot_word_fig_caption <- function(x, options) {
                       ))
   cap_str <- to_wml(bc, knitting = TRUE)
 
-  # physical size of plots
-  fig.width <- opts_current$get("fig.width")
-  if(is.null(fig.width)) fig.width <- 5
-  fig.height <- opts_current$get("fig.height")
-  if(is.null(fig.height)) fig.height <- 5
+  # Build Pandoc markdown image with attributes
+  base <- opts_knit$get('base.url')
+  if (is.null(base)) base <- ''
 
-  # out.width and out.height in percent
-  fig.out.width <- opts_current$get("out.width")
-  has_fig_out_width <- !is.null(fig.out.width)
-  is_pct_width <- has_fig_out_width && grepl("%", fig.out.width)
-  if (is_pct_width) {
-    fig.out.width <- gsub("%", "", fig.out.width, fixed = TRUE)
-    fig.out.width <- as.numeric(fig.out.width) / 100
-    fig.out.height <- fig.out.width
-  } else {
-    fig.out.height <- opts_current$get("out.height")
-    has_fig_out_height <- !is.null(fig.out.height)
-    is_pct_height <- !is_pct_width && has_fig_out_height && grepl("%", fig.out.height)
-    if (is_pct_height) {
-      fig.out.height <- gsub("%", "", fig.out.height, fixed = TRUE)
-      fig.out.height <- as.numeric(fig.out.height) / 100
-      fig.out.width <- fig.out.height
-    }
+  # Collect image attributes (width, height, out.extra)
+  attrs <- c()
+  if (!is.null(options$out.width)) {
+    attrs <- c(attrs, sprintf('width=%s', options$out.width))
+  }
+  if (!is.null(options$out.height)) {
+    attrs <- c(attrs, sprintf('height=%s', options$out.height))
+  }
+  if (!is.null(options$out.extra)) {
+    attrs <- c(attrs, options$out.extra)
   }
 
-  if (!has_fig_out_width && !has_fig_out_height) {
-    fig.out.width <- 1
-    fig.out.height <- 1
+  # Build attribute string
+  attr_str <- ''
+  if (length(attrs) > 0) {
+    attr_str <- paste0('{', paste(attrs, collapse = ' '), '}')
   }
 
-  fig.width <- fig.width * fig.out.width
-  fig.height <- fig.height * fig.out.height
+  # Generate Pandoc markdown: ![alt](path){attributes}
+  alt_text <- if (!is.null(options$fig.alt)) options$fig.alt else ''
+  img_markdown <- sprintf('![%s](%s%s)%s', alt_text, base, x[1], attr_str)
 
-  img <- external_img(src = x[1], width = fig.width, height = fig.height, alt = options$fig.alt)
-
-  doc <- get_reference_rdocx()
-  si <- styles_info(doc)
-  fig.style_id <- style_id(opts_current$get("fig.style"), type = "paragraph", si)
-
-  if(length(fig.style_id) != 1 ){
-    warning("paragraph style for plots ", shQuote(opts_current$get("fig.style")),
-            " has not been found in the reference_docx document.",
-            " Style 'Normal' will be used instead.",
-            call. = FALSE)
-    fig.style_id <- style_id("Normal", type = "paragraph", si)
-
+  # Add fig.align via inline R code with fp_par
+  fig.align <- opts_current$get("fig.align") %||% "center"
+  valid_aligns <- c("default", "left", "right", "center")
+  if (!fig.align %in% valid_aligns) {
+    warning("fig.align must be one of ",
+            paste(shQuote(valid_aligns), collapse = ", "),
+            ". Using 'center' instead.", call. = FALSE)
+    fig.align <- "center"
   }
-  ooxml <- "<w:p><w:pPr><w:jc w:val=\"%s\"/><w:pStyle w:val=\"%s\"/></w:pPr>"
-  ooxml <- sprintf(ooxml, opts_current$get("fig.align"), fig.style_id)
-  ooxml <- paste0(ooxml,
-         to_wml(img),
-         "</w:p>"
-         )
-  img_wml <- paste("```{=openxml}", ooxml, "```", sep = "\n")
+  if (fig.align == "default") {
+    fig.align <- "center"
+  }
+  fig.style <- opts_current$get("fig.style") %||% "Normal"
 
+  par_sty_wml <- to_wml(fp_par_lite(text.align = fig.align, word_style = fig.style))
+  img_markdown <- paste0(img_markdown, " `", par_sty_wml, "`{=openxml}")
+#
   if (options$fig.topcaption)
-    paste("", cap_str, img_wml, sep = "\n\n")
+    paste("", cap_str, img_markdown, sep = "\n\n")
   else
-    paste("", img_wml, cap_str, sep = "\n\n")
+    paste("", img_markdown, cap_str, sep = "\n\n")
 }

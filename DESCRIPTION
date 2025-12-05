@@ -1,7 +1,7 @@
 Type: Package
 Package: officedown
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.4.1
+Version: 0.4.2.001
 Authors@R: c(
     person("David", "Gohel", , "david.gohel@ardata.fr", role = c("aut", "cre", "cph")),
     person("ArData", role = "cph"),
@@ -50,5 +50,5 @@ VignetteBuilder:
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 SystemRequirements: pandoc (>= 2.0) - http://pandoc.org
