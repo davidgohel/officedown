@@ -37,9 +37,10 @@ get_table_design_opt <- function(x, default = FALSE){
 
 # knit_print.data.frame -----
 
-#' @importFrom officer block_table prop_table table_layout table_width table_colwidths table_conditional_formatting
-#'  opts_current_table block_caption styles_info
+#' @importFrom officer block_table prop_table table_layout table_width table_colwidths table_conditional_formatting opts_current_table block_caption styles_info
 #' @importFrom knitr knit_print asis_output opts_current
+#' @export
+#' @method knit_print data.frame
 knit_print.data.frame <- function(x, ...) {
 
   tab_props <- opts_current_table()

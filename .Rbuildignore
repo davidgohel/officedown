@@ -15,3 +15,5 @@
 ^revdep$
 ^tests/testthat/_snaps$
 Dockerfile
+^\.positai$
+^\.claude$

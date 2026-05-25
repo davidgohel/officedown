@@ -37,7 +37,7 @@ if(pandoc_available()){
 }
 }
 \seealso{
-Other functions that force printing: 
-\code{\link{knit_print_block}()}
+Other functions that force printing:
+\code{\link[=knit_print_block]{knit_print_block()}}
 }
 \concept{functions that force printing}
