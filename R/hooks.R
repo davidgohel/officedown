@@ -1,6 +1,8 @@
-knitr_opts_current <- function(x, default = FALSE){
+knitr_opts_current <- function(x, default = FALSE) {
   x <- knitr::opts_current$get(x)
-  if(is.null(x)) x <- default
+  if (is.null(x)) {
+    x <- default
+  }
   x
 }
 
@@ -66,38 +68,57 @@ knitr_opts_current <- function(x, default = FALSE){
 NULL
 
 plot_word_fig_caption <- function(x, options) {
-
   if (grepl("^(ftp|ftps|http|https)://", x[1])) {
-    stop("Images in 'rdocx_document' must be local files accessible without an internet connection:\n",
-         shQuote(x[1]), call. = FALSE)
+    stop(
+      "Images in 'rdocx_document' must be local files accessible without an internet connection:\n",
+      shQuote(x[1]),
+      call. = FALSE
+    )
   }
 
-  if(!is.character(options$fig.cap)) options$fig.cap <- NULL
-  if(!is.character(options$fig.alt)) options$fig.alt <- NULL
-  if(is.null(options$fig.id))
+  if (!is.character(options$fig.cap)) {
+    options$fig.cap <- NULL
+  }
+  if (!is.character(options$fig.alt)) {
+    options$fig.alt <- NULL
+  }
+  if (is.null(options$fig.id)) {
     fig.id <- options$label
-  else fig.id <- options$fig.id
-  if(!is.logical(options$fig.topcaption)) options$fig.topcaption <- FALSE
+  } else {
+    fig.id <- options$fig.id
+  }
+  if (!is.logical(options$fig.topcaption)) {
+    options$fig.topcaption <- FALSE
+  }
 
   tnd <- knitr_opts_current("fig.cap.tnd", default = 0)
   tns <- knitr_opts_current("fig.cap.tns", default = "-")
-  fig.fp_text <- knitr_opts_current("fig.cap.fp_text", default = fp_text_lite(bold = TRUE))
+  fig.fp_text <- knitr_opts_current(
+    "fig.cap.fp_text",
+    default = fp_text_lite(bold = TRUE)
+  )
 
-
-  bc <- block_caption(label =  options$fig.cap, style = options$fig.cap.style,
-                      autonum = run_autonum(
-                        seq_id = gsub(":$", "", options$fig.lp),
-                        pre_label = options$fig.cap.pre,
-                        post_label = options$fig.cap.sep,
-                        bkm = fig.id, bkm_all = FALSE,
-                        tnd = tnd, tns = tns,
-                        prop = fig.fp_text
-                      ))
+  bc <- block_caption(
+    label = options$fig.cap,
+    style = options$fig.cap.style,
+    autonum = run_autonum(
+      seq_id = gsub(":$", "", options$fig.lp),
+      pre_label = options$fig.cap.pre,
+      post_label = options$fig.cap.sep,
+      bkm = fig.id,
+      bkm_all = FALSE,
+      tnd = tnd,
+      tns = tns,
+      prop = fig.fp_text
+    )
+  )
   cap_str <- to_wml(bc, knitting = TRUE)
 
   # Build Pandoc markdown image with attributes
   base <- opts_knit$get('base.url')
-  if (is.null(base)) base <- ''
+  if (is.null(base)) {
+    base <- ''
+  }
 
   # Collect image attributes (width, height, out.extra)
   attrs <- c()
@@ -125,9 +146,12 @@ plot_word_fig_caption <- function(x, options) {
   fig.align <- opts_current$get("fig.align") %||% "center"
   valid_aligns <- c("default", "left", "right", "center")
   if (!fig.align %in% valid_aligns) {
-    warning("fig.align must be one of ",
-            paste(shQuote(valid_aligns), collapse = ", "),
-            ". Using 'center' instead.", call. = FALSE)
+    warning(
+      "fig.align must be one of ",
+      paste(shQuote(valid_aligns), collapse = ", "),
+      ". Using 'center' instead.",
+      call. = FALSE
+    )
     fig.align <- "center"
   }
   if (fig.align == "default") {
@@ -135,11 +159,15 @@ plot_word_fig_caption <- function(x, options) {
   }
   fig.style <- opts_current$get("fig.style") %||% "Normal"
 
-  par_sty_wml <- to_wml(fp_par_lite(text.align = fig.align, word_style = fig.style))
+  par_sty_wml <- to_wml(fp_par_lite(
+    text.align = fig.align,
+    word_style = fig.style
+  ))
   img_markdown <- paste0(img_markdown, " `", par_sty_wml, "`{=openxml}")
-#
-  if (options$fig.topcaption)
+  #
+  if (options$fig.topcaption) {
     paste("", cap_str, img_markdown, sep = "\n\n")
-  else
+  } else {
     paste("", img_markdown, cap_str, sep = "\n\n")
+  }
 }

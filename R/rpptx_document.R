@@ -33,21 +33,22 @@
 #'   pptx_file_1 <- tempfile(fileext = ".pptx")
 #'   render(rmd_file, output_file = pptx_file_1)
 #' }
-rpptx_document <- function(base_format = "rmarkdown::powerpoint_presentation",
-                           layout = "Title and Content",
-                           master = "Office Theme",
-                           tcf = list(),
-                           ...) {
-
-
+rpptx_document <- function(
+  base_format = "rmarkdown::powerpoint_presentation",
+  layout = "Title and Content",
+  master = "Office Theme",
+  tcf = list(),
+  ...
+) {
   args <- list(...)
-  if(is.null(args$reference_doc)){
+  if (is.null(args$reference_doc)) {
     reference_doc <- officer:::get_default_pandoc_data_file(format = "pptx")
-  } else reference_doc <- args$reference_doc
+  } else {
+    reference_doc <- args$reference_doc
+  }
   new_reference_doc <- tempfile(fileext = ".pptx")
   officer::annotate_base(reference_doc, output_file = new_reference_doc)
   args$reference_doc <- new_reference_doc
-
 
   base_format <- get_fun(base_format)
   output_formats <- do.call(base_format, args)
@@ -56,17 +57,25 @@ rpptx_document <- function(base_format = "rmarkdown::powerpoint_presentation",
 
   output_formats$knitr$opts_chunk <- append(
     output_formats$knitr$opts_chunk,
-    list(layout = layout, master = master,
-         first_row = tcf$first_row,
-         first_column = tcf$first_column,
-         last_row = tcf$last_row,
-         last_column = tcf$last_column,
-         no_hband = tcf$no_hband,
-         no_vband = tcf$no_vband
-         )
+    list(
+      layout = layout,
+      master = master,
+      first_row = tcf$first_row,
+      first_column = tcf$first_column,
+      last_row = tcf$last_row,
+      last_column = tcf$last_column,
+      no_hband = tcf$no_hband,
+      no_vband = tcf$no_vband
+    )
   )
 
-  output_formats$post_processor <- function(metadata, input_file, output_file, clean, verbose) {
+  output_formats$post_processor <- function(
+    metadata,
+    input_file,
+    output_file,
+    clean,
+    verbose
+  ) {
     x <- officer::read_pptx(output_file)
     forget(get_reference_pptx)
     print(x, target = output_file)
@@ -85,4 +94,3 @@ get_pptx_uncached <- function() {
 #' @noRd
 #' @importFrom memoise memoise
 get_reference_pptx <- memoise(get_pptx_uncached)
-

@@ -9,7 +9,6 @@ docx_file <- tempfile(fileext = ".docx")
 render_rmd("rmd/plot-basic.Rmd", output_file = docx_file)
 
 test_that("reading captions", {
-
   node_body <- get_docx_xml(docx_file)
 
   expect_equal(

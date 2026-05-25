@@ -16,7 +16,7 @@
 #' @rdname sections
 #' @name sections
 #' @importFrom officer block_section prop_section
-block_section_continuous <- function( ){
+block_section_continuous <- function() {
   block_section(prop_section(type = "continuous"))
 }
 
@@ -26,17 +26,27 @@ block_section_continuous <- function( ){
 #' placed relative to the previous section. Available types are "evenPage"
 #' (begins on the next, "nextPage" (begins on the following page), "oddPage"
 #' (begins on the next odd-numbered page).
-block_section_landscape <- function( w = 11906 / 1440, h = 16838 / 1440, break_page = "oddPage" ){
+block_section_landscape <- function(
+  w = 11906 / 1440,
+  h = 16838 / 1440,
+  break_page = "oddPage"
+) {
   block_section(prop_section(
     page_size = page_size(width = w, height = h, orient = "landscape"),
-    type = break_page))
+    type = break_page
+  ))
 }
 
 #' @noRd
-block_section_portrait <- function( w = 16838 / 1440, h = 11906 / 1440, break_page = "oddPage"){
+block_section_portrait <- function(
+  w = 16838 / 1440,
+  h = 11906 / 1440,
+  break_page = "oddPage"
+) {
   block_section(prop_section(
     page_size = page_size(width = w, height = h, orient = "portrait"),
-    type = break_page))
+    type = break_page
+  ))
 }
 
 #' @noRd
@@ -45,9 +55,17 @@ block_section_portrait <- function( w = 16838 / 1440, h = 11906 / 1440, break_pa
 #' @param space space in inches between columns.
 #' @param sep if TRUE a line is separating columns.
 #' @importFrom officer section_columns
-block_section_columns <- function(widths = c(2.5,2.5), space = .25, sep = FALSE){
+block_section_columns <- function(
+  widths = c(2.5, 2.5),
+  space = .25,
+  sep = FALSE
+) {
   block_section(prop_section(
-    section_columns = section_columns(widths = widths, space = space, sep = sep),
-    type = "continuous"))
+    section_columns = section_columns(
+      widths = widths,
+      space = space,
+      sep = sep
+    ),
+    type = "continuous"
+  ))
 }
-

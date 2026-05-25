@@ -3,17 +3,16 @@ render_rmd <- function(rmd_file, output_file) {
   sucess <- FALSE
   tryCatch(
     {
-      rmarkdown::render(rmd_file,
+      rmarkdown::render(
+        rmd_file,
         output_file = output_file,
         envir = new.env(),
         quiet = TRUE
       )
       sucess <- TRUE
     },
-    warning = function(e) {
-    },
-    error = function(e) {
-    }
+    warning = function(e) {},
+    error = function(e) {}
   )
   sucess
 }

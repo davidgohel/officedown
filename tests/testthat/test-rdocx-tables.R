@@ -26,6 +26,9 @@ test_that("visual testing tables", {
   testthat::skip_if_not_installed("doconv")
   testthat::skip_if_not(doconv::msoffice_available())
   library(doconv)
-  expect_snapshot_doc(x = docx_file, name = "docx-tables-basic", engine = "testthat")
+  expect_snapshot_doc(
+    x = docx_file,
+    name = "docx-tables-basic",
+    engine = "testthat"
+  )
 })
-

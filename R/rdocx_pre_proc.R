@@ -11,10 +11,10 @@ LIST_BLOCK_MACRO <- list(
 # macro regexpr ----
 yaml_pattern <- "\\{[^\\}]+\\}"
 
-chunk_pattern <- function( id ){
+chunk_pattern <- function(id) {
   paste0("(<!---)([ ]*", id, "[ ]*)(", yaml_pattern, "){0,1}([ ]*--->)")
 }
-block_pattern <- function( id ){
+block_pattern <- function(id) {
   paste0("^([ ]*)", chunk_pattern(id), "([ ]*)$")
 }
 
@@ -27,28 +27,44 @@ comment_tag_to_ooxml <- function(text, fname, type) {
   text <- gsub("[ ]*--->$", "", text)
 
   # parse_arguments and call fname, for each call to_wml to get ooxml code
-  sapply( text, function(x, fname, type) {
-    x <- yaml.load(x)
-    if( is.null(x) )
-      x <- list()
-    x <- do.call(fname, x)
-    to_wml(x)
-  }, fname = fname, type = type)
+  sapply(
+    text,
+    function(x, fname, type) {
+      x <- yaml.load(x)
+      if (is.null(x)) {
+        x <- list()
+      }
+      x <- do.call(fname, x)
+      to_wml(x)
+    },
+    fname = fname,
+    type = type
+  )
 }
 
-ooxml_values <- function(txt, regex, fname, type){
+ooxml_values <- function(txt, regex, fname, type) {
   gmatch <- gregexpr(regex, txt)
   all_extracts <- regmatches(txt, gmatch)
-  ooxml_str <- lapply(all_extracts, comment_tag_to_ooxml, fname = fname, type = type)
+  ooxml_str <- lapply(
+    all_extracts,
+    comment_tag_to_ooxml,
+    fname = fname,
+    type = type
+  )
   ooxml_str
 }
 
 
-block_macro <- function(txt, type = "docx"){
-  for( i in names(LIST_BLOCK_MACRO) ){
+block_macro <- function(txt, type = "docx") {
+  for (i in names(LIST_BLOCK_MACRO)) {
     regex <- block_pattern(i)
-    if( any( macro_ <- grepl(regex, txt) ) ){
-      ooxml_str <- ooxml_values(txt[macro_], regex, LIST_BLOCK_MACRO[[i]], type = type)
+    if (any(macro_ <- grepl(regex, txt))) {
+      ooxml_str <- ooxml_values(
+        txt[macro_],
+        regex,
+        LIST_BLOCK_MACRO[[i]],
+        type = type
+      )
       ooxml_str <- paste("```{=openxml}", ooxml_str, "```", sep = "\n")
       txt[macro_] <- ooxml_str
     }
