@@ -1,7 +1,7 @@
 Type: Package
 Package: officedown
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.4.2.004
+Version: 0.4.2.005
 Authors@R: c(
     person("David", "Gohel", , "david.gohel@ardata.fr", role = c("aut", "cre", "cph")),
     person("ArData", role = "cph"),

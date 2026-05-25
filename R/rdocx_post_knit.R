@@ -37,6 +37,9 @@ post_knit_table_captions <- function(
   tns,
   prop = NULL
 ) {
+  # ensure UTF-8 so multibyte captions (e.g. Chinese) are handled correctly
+  # regardless of the native encoding (see #37)
+  content <- enc2utf8(content)
   pattern1 <- paste0("\\(\\\\#", tab.lp, "[-[:alnum:]]+\\)(.*)")
   pattern2 <- paste0("\\(\\\\#", tab.lp, "([-[:alnum:]]+)\\)(.*)")
 
@@ -72,6 +75,9 @@ post_knit_caption_references <- function(content, lp = "") {
   if (!grepl(":$", lp)) {
     stop("lp must end with `:`")
   }
+  # ensure UTF-8 so that gregexpr()/regmatches() handle multibyte content
+  # (e.g. Chinese) correctly regardless of the native encoding (see #37)
+  content <- enc2utf8(content)
   regexpr_str <- paste0('\\\\@ref\\(', lp, '([-[:alnum:]_]+)\\)')
 
   gmatch <- gregexpr(regexpr_str, content)
@@ -90,6 +96,9 @@ post_knit_caption_references <- function(content, lp = "") {
 }
 
 post_knit_std_references <- function(content, numbered = FALSE) {
+  # ensure UTF-8 so that gregexpr()/regmatches() handle multibyte content
+  # (e.g. Chinese) correctly regardless of the native encoding (see #37)
+  content <- enc2utf8(content)
   regexpr_str <- paste0('\\\\@ref\\(([-[:alnum:]]+)\\)')
 
   gmatch <- gregexpr(regexpr_str, content)

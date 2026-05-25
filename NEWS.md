@@ -1,5 +1,11 @@
 # officedown 0.4.2
 
+## Issues
+
+- Cross-references and captions containing multibyte characters (e.g. Chinese) 
+are now processed in UTF-8, fixing `\@ref()` handling under non-UTF-8 native 
+encodings (#37).
+
 ## Changes
 
 - Plot hook refactored to use Pandoc image syntax. Now supports `out.width`, 
