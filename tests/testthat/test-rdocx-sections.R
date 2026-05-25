@@ -12,17 +12,15 @@ render_rmd("rmd/sections.Rmd", output_file = docx_file)
 
 test_that("reading sections properties", {
   node_body <- get_docx_xml(docx_file)
-  if (packageVersion("officer") > numeric_version("0.6.8")) {
-    continuous_sec_node <- xml_find_first(
-      node_body,
-      "w:p[w:pPr/w:pStyle/@w:val='Title']/following-sibling::w:p"
+  sty <- styles_info(read_docx(docx_file), type = "paragraph")
+  title_id <- sty$style_id[sty$style_name == "Title"]
+  continuous_sec_node <- xml_find_first(
+    node_body,
+    sprintf(
+      "w:p[w:pPr/w:pStyle/@w:val='%s']/following-sibling::w:p",
+      title_id
     )
-  } else {
-    continuous_sec_node <- xml_find_first(
-      node_body,
-      "w:p[w:pPr/w:pStyle/@w:val='Titre']/following-sibling::w:p"
-    )
-  }
+  )
   expect_false(
     inherits(
       xml_child(
