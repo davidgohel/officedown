@@ -29,6 +29,10 @@ This document presents most of the features of the package `r ftext("officedown"
 
 ## Table of content
 
+> These tables are Word fields, computed by Word and not by officedown. When the
+> document opens, update the fields to populate them (`Ctrl+A` then `F9`, or
+> right-click > "Update Field"); LibreOffice does not update them.
+
 <!---BLOCK_TOC--->
 
 ## List of figures

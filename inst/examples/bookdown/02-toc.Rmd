@@ -1,5 +1,12 @@
 # Tables of content {#toc}
 
+> Note: tables of content, figures and tables are Word *fields*. They are
+> **computed by Word, not by officedown**. When you first open the generated
+> document, Word shows the placeholder "No table of contents entries found"
+> until the fields are updated: select all (`Ctrl+A`) then press `F9`, or
+> right-click a table and choose "Update Field" (fields are also refreshed when
+> printing). LibreOffice does not update these fields.
+
 ## Table of figures
 
 <!---BLOCK_TOC{style: 'Image Caption'}--->
