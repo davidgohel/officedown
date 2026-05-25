@@ -2,6 +2,8 @@
 
 ## Issues
 
+- `page_size` (e.g. `orient: "landscape"`) is now applied even when 
+`page_margins` is not set in the YAML header (#145).
 - Cross-references and captions containing multibyte characters (e.g. Chinese) 
 are now processed in UTF-8, fixing `\@ref()` handling under non-UTF-8 native 
 encodings (#37).

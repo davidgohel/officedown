@@ -304,7 +304,16 @@ rdocx_document <- function(
     )
     x <- change_styles(x, mapstyles = mapstyles)
 
-    if (!is.null(page_size) && !is.null(page_margins)) {
+    if (!is.null(page_size) || !is.null(page_margins)) {
+      # apply a default section as soon as either page size or margins is set;
+      # fill the missing one with defaults so e.g. orient: "landscape" works
+      # without also requiring page_margins (#145)
+      if (is.null(page_size)) {
+        page_size <- page_size_default_values
+      }
+      if (is.null(page_margins)) {
+        page_margins <- page_mar_default_values
+      }
       # default section
       default_sect_properties <- prop_section(
         page_size = page_size(
