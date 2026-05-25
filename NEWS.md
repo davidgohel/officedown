@@ -2,6 +2,8 @@
 
 ## Issues
 
+- Headers and footers from the `reference_docx` are now kept across all 
+sections, including landscape or multi-column section breaks (#127).
 - `page_size` (e.g. `orient: "landscape"`) is now applied even when 
 `page_margins` is not set in the YAML header (#145).
 - Cross-references and captions containing multibyte characters (e.g. Chinese) 

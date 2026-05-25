@@ -336,7 +336,15 @@ rdocx_document <- function(
     }
 
     forget(get_reference_rdocx)
-    print(x, target = output_file)
+    # copy header/footer references to every section so that the
+    # reference_docx headers and footers are kept across orientation or
+    # column section breaks (#127)
+    print(
+      x,
+      target = output_file,
+      copy_header_refs = TRUE,
+      copy_footer_refs = TRUE
+    )
     output_file
   }
   output_formats$bookdown_output_format = 'docx'
