@@ -29,7 +29,7 @@ if(require("flextable")){
   ft <- fontsize(ft, size = 9, part = "all")
   ft <- compose(x = ft, j = "mpg",
     value = as_paragraph(
-      value = minibar(value = mpg, min = 0, max = 30, barcol = "#DD2233")
+      value = minibar(value = mpg, max = 30, barcol = "#DD2233")
       ))
   ft <- compose(x = ft, j = "drat",
     value = as_paragraph(
