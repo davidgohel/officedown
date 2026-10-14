@@ -2,27 +2,31 @@
 
 ## Issues
 
-- cross-references to sections made with `\@ref()` work again with pandoc
-3.12 and later, which changed the names of section bookmarks. Section
-identifiers containing `_` or `.` are now also supported.
-- data frames are now printed in HTML and other non Office documents when
-officedown is loaded (for example with Quarto), and knitting with knitr only
-no longer fails.
-- lists now use the list style set with `ul.style` or `ol.style`, even when
-the `reference_docx` also contains a list style whose name starts the same
-way (e.g. `new-ul` and `new-ul-old`).
-- Headers and footers from the `reference_docx` are now kept across all 
-sections, including landscape or multi-column section breaks (#127).
-- `page_size` (e.g. `orient: "landscape"`) is now applied even when 
-`page_margins` is not set in the YAML header (#145).
-- Cross-references and captions containing multibyte characters (e.g. Chinese) 
-are now processed in UTF-8, fixing `\@ref()` handling under non-UTF-8 native 
-encodings (#37).
+- Cross-references to sections (`\@ref(section-id)`) work again with pandoc
+3.12 and later, where Word displayed "Error! Reference source not found."
+instead of the section number. Section identifiers can now also contain `_`
+or `.`.
+- Headers and footers of the `reference_docx` now appear on every page,
+including after a landscape or multi-column section (#127), and no longer
+disappear from even pages.
+- Landscape orientation set with `page_size` (e.g. `orient: "landscape"`) is
+now applied even when `page_margins` is not set (#145).
+- Bullet and numbered lists now use the list style set with `ul.style` or
+`ol.style`, even when the `reference_docx` contains another list style with a
+similar name (e.g. `new-ul` and `new-ul-old`).
+- Data frames no longer disappear from HTML documents and other non Word
+outputs when officedown is loaded, for example in a Quarto project.
+- Cross-references and captions written in Chinese or other non Latin scripts
+now work on computers that do not use UTF-8 by default (#37).
 
 ## Changes
 
-- Plot hook refactored to use Pandoc image syntax. Now supports `out.width`, 
-`out.height` and `out.extra` for additional attributes.
+- Figure sizes set with `out.width` and `out.height` can use any unit
+(e.g. `"10cm"`, `"5in"`, `"80%"`), and `out.extra` adds other image
+attributes.
+- The documentation now explains how to cross-reference tables (chunk option
+`tab.id`) and figures (chunk label or `fig.id`).
+- officedown now requires officer 0.7.7.
 
 # officedown 0.4.1
 
