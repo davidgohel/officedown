@@ -12,43 +12,53 @@ export(rpptx_document)
 import(officer)
 import(xml2)
 importFrom(grDevices,dev.off)
-importFrom(knitr,asis_output)
-importFrom(knitr,knit_print)
-importFrom(knitr,opts_chunk)
-importFrom(knitr,opts_current)
-importFrom(knitr,opts_knit)
-importFrom(memoise,forget)
-importFrom(memoise,memoise)
-importFrom(officer,block_caption)
-importFrom(officer,block_pour_docx)
-importFrom(officer,block_section)
-importFrom(officer,block_table)
-importFrom(officer,change_styles)
-importFrom(officer,docx_body_xml)
-importFrom(officer,fortify_location)
-importFrom(officer,get_reference_value)
-importFrom(officer,opts_current_table)
-importFrom(officer,page_size)
-importFrom(officer,prop_section)
-importFrom(officer,prop_table)
-importFrom(officer,read_pptx)
-importFrom(officer,run_reference)
-importFrom(officer,run_word_field)
-importFrom(officer,section_columns)
-importFrom(officer,shape_properties_tags)
-importFrom(officer,styles_info)
-importFrom(officer,table_colwidths)
-importFrom(officer,table_conditional_formatting)
-importFrom(officer,table_layout)
-importFrom(officer,table_width)
-importFrom(officer,to_pml)
-importFrom(officer,to_wml)
+importFrom(knitr,
+  asis_output,
+  knit_print,
+  opts_chunk,
+  opts_current,
+  opts_knit
+)
+importFrom(memoise,
+  forget,
+  memoise
+)
+importFrom(officer,
+  block_caption,
+  block_pour_docx,
+  block_section,
+  block_table,
+  change_styles,
+  docx_body_xml,
+  fortify_location,
+  get_reference_value,
+  opts_current_table,
+  page_size,
+  prop_section,
+  prop_table,
+  read_pptx,
+  run_reference,
+  run_word_field,
+  section_columns,
+  shape_properties_tags,
+  styles_info,
+  table_colwidths,
+  table_conditional_formatting,
+  table_layout,
+  table_width,
+  to_pml,
+  to_wml
+)
 importFrom(rlang,eval_tidy)
 importFrom(rmarkdown,pandoc_version)
-importFrom(rvg,dml)
-importFrom(rvg,dml_pptx)
-importFrom(utils,getAnywhere)
-importFrom(utils,getFromNamespace)
-importFrom(utils,modifyList)
+importFrom(rvg,
+  dml,
+  dml_pptx
+)
+importFrom(utils,
+  getAnywhere,
+  getFromNamespace,
+  modifyList
+)
 importFrom(uuid,UUIDgenerate)
 importFrom(yaml,yaml.load)
