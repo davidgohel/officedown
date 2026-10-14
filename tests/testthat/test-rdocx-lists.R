@@ -8,81 +8,52 @@ skip_if_not(pandoc_version() >= numeric_version("2"))
 docx_file <- tempfile(fileext = ".docx")
 render_rmd("rmd/lists.Rmd", output_file = docx_file)
 
+# Return the `w:abstractNum/w:styleLink` value associated with a list
+# paragraph, by following numId -> abstractNumId in numbering.xml.
+list_style_link <- function(list_par, numbering) {
+  num_id <- xml_attr(xml_child(list_par, "w:pPr/w:numPr/w:numId"), "val")
+  abstract_num_id <- xml_attr(
+    xml_find_first(
+      numbering,
+      sprintf("//w:num[@w:numId='%s']/w:abstractNumId", num_id)
+    ),
+    "val"
+  )
+  xml_attr(
+    xml_find_first(
+      numbering,
+      sprintf(
+        "//w:abstractNum[@w:abstractNumId='%s']/w:styleLink",
+        abstract_num_id
+      )
+    ),
+    "val"
+  )
+}
+
 test_that("reading lists", {
   node_body <- get_docx_xml(docx_file)
 
-  li1 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[2]/w:pPr/w:numPr/w:ilvl"
-  )
-  li2 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[3]/w:pPr/w:numPr/w:ilvl"
-  )
-  li3 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[4]/w:pPr/w:numPr/w:ilvl"
-  )
-  li4 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[5]/w:pPr/w:numPr/w:ilvl"
-  )
-  li5 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[6]/w:pPr/w:numPr/w:ilvl"
-  )
-  li6 <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[7]/w:pPr/w:numPr/w:ilvl"
-  )
+  # list paragraphs are identified by their numbering properties rather
+  # than by the heading bookmarks, whose names and positions depend on the
+  # pandoc version (pandoc >= 3.12 prefixes them with `_`).
+  list_pars <- xml_find_all(node_body, "w:p[w:pPr/w:numPr]")
+  expect_length(list_pars, 12)
 
-  expect_equal(xml_attr(li1, "val"), "0")
-  expect_equal(xml_attr(li2, "val"), "1")
-  expect_equal(xml_attr(li3, "val"), "2")
-  expect_equal(xml_attr(li4, "val"), "2")
-  expect_equal(xml_attr(li5, "val"), "1")
-  expect_equal(xml_attr(li6, "val"), "0")
+  ul_pars <- list_pars[1:6]
+  ol_pars <- list_pars[7:12]
+
+  ilvl <- xml_attr(xml_find_first(ul_pars, "w:pPr/w:numPr/w:ilvl"), "val")
+  expect_equal(ilvl, c("0", "1", "2", "2", "1", "0"))
+  ilvl <- xml_attr(xml_find_first(ol_pars, "w:pPr/w:numPr/w:ilvl"), "val")
+  expect_equal(ilvl, c("0", "1", "2", "2", "1", "0"))
 
   dir_tmp <- tempfile()
   unpack_folder(docx_file, dir_tmp)
-  num_xml <- file.path(dir_tmp, "word", "numbering.xml")
-  x <- read_xml(num_xml)
+  numbering <- read_xml(file.path(dir_tmp, "word", "numbering.xml"))
 
-  num_id <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ul']/following-sibling::w:p[2]/w:pPr/w:numPr/w:numId"
-  )
-  num_id <- xml_attr(num_id, "val")
-
-  abstractnum <- xml_find_first(
-    x,
-    sprintf("//w:num[@w:numId='%s']/w:abstractNumId", num_id)
-  )
-  abstractnum <- xml_attr(abstractnum, "val")
-
-  stylelink <- xml_find_first(
-    x,
-    sprintf("//w:abstractNum[@w:abstractNumId='%s']/w:styleLink", abstractnum)
-  )
-  expect_equal(xml_attr(stylelink, "val"), "new-ul")
-
-  num_id <- xml_child(
-    node_body,
-    "w:bookmarkStart[@w:name='ol']/following-sibling::w:p[2]/w:pPr/w:numPr/w:numId"
-  )
-  num_id <- xml_attr(num_id, "val")
-
-  abstractnum <- xml_find_first(
-    x,
-    sprintf("//w:num[@w:numId='%s']/w:abstractNumId", num_id)
-  )
-  abstractnum <- xml_attr(abstractnum, "val")
-
-  stylelink <- xml_find_first(
-    x,
-    sprintf("//w:abstractNum[@w:abstractNumId='%s']/w:styleLink", abstractnum)
-  )
-  expect_equal(xml_attr(stylelink, "val"), "new-ol")
+  expect_equal(list_style_link(ul_pars[[1]], numbering), "new-ul")
+  expect_equal(list_style_link(ol_pars[[1]], numbering), "new-ol")
 })
 
 
