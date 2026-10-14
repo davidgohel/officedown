@@ -88,3 +88,60 @@ test_that("visual testing sections inheritance", {
   library(doconv)
   expect_snapshot_doc(x = docx_file, name = "all-sections", engine = "testthat")
 })
+
+
+test_that("reference_docx headers and footers are kept across sections (#127)", {
+  ref_docx <- ref_docx_with_hf()
+
+  hf_rmd <- tempfile(fileext = ".Rmd")
+  writeLines(
+    c(
+      "---",
+      "title: hf sections",
+      "output:",
+      "  officedown::rdocx_document:",
+      paste0("    reference_docx: ", ref_docx),
+      "---",
+      "",
+      "Portrait intro paragraph.",
+      "",
+      "<!---BLOCK_LANDSCAPE_START--->",
+      "",
+      "This is a landscape section.",
+      "",
+      "<!---BLOCK_LANDSCAPE_STOP--->",
+      "",
+      "Back to portrait."
+    ),
+    hf_rmd
+  )
+
+  hf_docx <- tempfile(fileext = ".docx")
+  expect_true(render_rmd(hf_rmd, output_file = hf_docx))
+
+  node_body <- get_docx_xml(hf_docx)
+  sects <- xml_find_all(node_body, "//w:sectPr")
+  expect_gt(length(sects), 1L)
+
+  # every intermediate section (a w:sectPr nested in a w:pPr, i.e. not the
+  # default trailing section) must inherit the reference_docx header and
+  # footer references. Without the fix these are empty (#127).
+  intermediate <- Filter(
+    function(s) xml_name(xml_parent(s)) == "pPr",
+    as.list(sects)
+  )
+  expect_gt(length(intermediate), 0L)
+
+  header_refs <- vapply(
+    intermediate,
+    function(s) length(xml_find_all(s, "w:headerReference")),
+    integer(1)
+  )
+  footer_refs <- vapply(
+    intermediate,
+    function(s) length(xml_find_all(s, "w:footerReference")),
+    integer(1)
+  )
+  expect_true(all(header_refs > 0L))
+  expect_true(all(footer_refs > 0L))
+})
