@@ -55,7 +55,7 @@ get_table_design_opt <- function(x, default = FALSE) {
 #' @method knit_print data.frame
 knit_print.data.frame <- function(x, ...) {
   tab_props <- opts_current_table()
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     opts_knit$get("rmarkdown.pandoc.to")
     pt <- prop_table(
       style = tab_props$style,
@@ -103,7 +103,7 @@ knit_print.data.frame <- function(x, ...) {
       sep = "\n"
     )
     asis_output(res)
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     layout <- knitr::opts_current$get("layout")
     master <- knitr::opts_current$get("master")
     doc <- get_reference_pptx()
@@ -156,6 +156,7 @@ knit_print.data.frame <- function(x, ...) {
     )
     asis_output(res)
   } else {
-    knit_print(asis_output(""))
+    # other outputs (e.g. HTML) keep the usual data.frame printing
+    NextMethod()
   }
 }

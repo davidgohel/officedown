@@ -2,6 +2,9 @@
 
 ## Issues
 
+- data frames are now printed in HTML and other non Office documents when
+officedown is loaded (for example with Quarto), and knitting with knitr only
+no longer fails.
 - lists now use the list style set with `ul.style` or `ol.style`, even when
 the `reference_docx` also contains a list style whose name starts the same
 way (e.g. `new-ul` and `new-ul-old`).

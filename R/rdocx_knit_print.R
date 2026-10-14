@@ -2,11 +2,11 @@
 #' @importFrom officer to_wml to_pml
 #' @importFrom knitr knit_print asis_output opts_knit
 knit_print.run <- function(x, ...) {
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     knit_print(asis_output(
       paste("`", to_wml(x), "`{=openxml}", sep = "")
     ))
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     knit_print(asis_output(
       paste("`", to_pml(x), "`{=openxml}", sep = "")
     ))
@@ -18,11 +18,11 @@ knit_print.run <- function(x, ...) {
 
 #' @export
 knit_print.fp_par <- function(x, ...) {
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     knit_print(asis_output(
       paste("`", to_wml(x), "`{=openxml}", sep = "")
     ))
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     knit_print(asis_output(
       paste("`", to_pml(x), "`{=openxml}", sep = "")
     ))
@@ -34,11 +34,11 @@ knit_print.fp_par <- function(x, ...) {
 #' @export
 #' @importFrom officer shape_properties_tags
 knit_print.block <- function(x, ...) {
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     knit_print(asis_output(
       paste("```{=openxml}", to_wml(x), "```", sep = "\n")
     ))
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     layout <- knitr::opts_current$get("layout")
     master <- knitr::opts_current$get("master")
     doc <- get_reference_pptx()
@@ -111,9 +111,9 @@ knit_print.block <- function(x, ...) {
 #'   }
 #' }
 knit_print_block <- function(x, ...) {
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("```{=openxml}", to_wml(x), "```\n\n", sep = "\n"))
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("```{=openxml}", to_pml(x), "```\n\n", sep = "\n"))
   } else {
     cat("")
@@ -146,9 +146,9 @@ knit_print_block <- function(x, ...) {
 #'   }
 #' }
 knit_print_run <- function(x, ...) {
-  if (grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("`", to_wml(x), "`{=openxml}", sep = ""))
-  } else if (grepl("pptx", opts_knit$get("rmarkdown.pandoc.to"))) {
+  } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("`", to_pml(x), "`{=openxml}", sep = ""))
   } else {
     cat("")
