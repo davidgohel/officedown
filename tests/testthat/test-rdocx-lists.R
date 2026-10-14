@@ -57,6 +57,36 @@ test_that("reading lists", {
 })
 
 
+test_that("list styles are matched by their exact name", {
+  # the reference_docx defines a list style named 'new-ul-old' before the
+  # 'new-ul' list style; bullet lists must use 'new-ul'
+  rmd_file <- tempfile(fileext = ".Rmd")
+  rmd <- readLines("rmd/lists.Rmd")
+  rmd <- sub(
+    "reference_docx: template.docx",
+    paste0(
+      "reference_docx: ",
+      normalizePath("rmd/template-similar-list-styles.docx")
+    ),
+    rmd,
+    fixed = TRUE
+  )
+  writeLines(rmd, rmd_file)
+  out_file <- tempfile(fileext = ".docx")
+  expect_true(render_rmd(rmd_file, output_file = out_file))
+
+  node_body <- get_docx_xml(out_file)
+  list_pars <- xml_find_all(node_body, "w:p[w:pPr/w:numPr]")
+
+  dir_tmp <- tempfile()
+  unpack_folder(out_file, dir_tmp)
+  numbering <- read_xml(file.path(dir_tmp, "word", "numbering.xml"))
+
+  expect_equal(list_style_link(list_pars[[1]], numbering), "new-ul")
+  expect_equal(list_style_link(list_pars[[7]], numbering), "new-ol")
+})
+
+
 test_that("visual testing list", {
   testthat::skip_if_not_installed("doconv")
   testthat::skip_if_not(doconv::msoffice_available())

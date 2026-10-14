@@ -14,7 +14,7 @@ pandoc_abstract_num_id <- function(doc, numbering_doc) {
 
   xpath <- paste0(
     "w:num[",
-    paste0(sprintf("contains(@w:numId, '%s')", num_id), collapse = " or "),
+    paste0(sprintf("@w:numId='%s'", num_id), collapse = " or "),
     "]/w:abstractNumId"
   )
   abstract_num <- xml_find_all(numbering_doc, xpath)
@@ -25,7 +25,7 @@ pandoc_abstract_num_id <- function(doc, numbering_doc) {
     "w:abstractNum[",
     "(",
     paste0(
-      sprintf("contains(@w:abstractNumId, '%s')", abstract_num),
+      sprintf("@w:abstractNumId='%s'", abstract_num),
       collapse = " or "
     ),
     ") and (",
@@ -43,7 +43,7 @@ pandoc_abstract_num_id <- function(doc, numbering_doc) {
     "w:abstractNum[",
     "(",
     paste0(
-      sprintf("contains(@w:abstractNumId, '%s')", abstract_num),
+      sprintf("@w:abstractNumId='%s'", abstract_num),
       collapse = " or "
     ),
     ") and (",
@@ -59,7 +59,7 @@ pandoc_abstract_num_id <- function(doc, numbering_doc) {
 
 replace_list_style <- function(style_id, abstract_num_id, numbering_doc) {
   xpath <- sprintf(
-    "w:abstractNum[w:styleLink[contains(@w:val, '%s')]]",
+    "w:abstractNum[w:styleLink[@w:val='%s']]",
     style_id
   )
   abstractnum_node <- xml_find_first(numbering_doc, xpath)
@@ -68,7 +68,7 @@ replace_list_style <- function(style_id, abstract_num_id, numbering_doc) {
   xpath <- paste0(
     "w:num/",
     "w:abstractNumId",
-    sprintf("[contains(@w:val, '%s')]", abstract_num_id)
+    sprintf("[@w:val='%s']", abstract_num_id)
   )
   abstract_num <- xml_find_all(numbering_doc, xpath)
   xml_attr(abstract_num, "w:val") <- new_abstract_num_id

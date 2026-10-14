@@ -2,6 +2,9 @@
 
 ## Issues
 
+- lists now use the list style set with `ul.style` or `ol.style`, even when
+the `reference_docx` also contains a list style whose name starts the same
+way (e.g. `new-ul` and `new-ul-old`).
 - Headers and footers from the `reference_docx` are now kept across all 
 sections, including landscape or multi-column section breaks (#127).
 - `page_size` (e.g. `orient: "landscape"`) is now applied even when 
