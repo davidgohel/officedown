@@ -51,21 +51,26 @@ or "right". Default value "default" is converted to "center".
 }
 }
 
-\examples{
-\dontrun{
-# Chunk with auto-numbered caption and custom size
-```{r, fig.cap="Sales over time", out.width="80\%"}
+\section{Examples of chunks}{
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Chunk with auto-numbered caption and custom size:
+
+```\{r, fig.cap="Sales over time", out.width="80\%"\}
 plot(sales_data)
 ```
 
-# Chunk with alignment and custom style
-```{r, fig.cap="Key findings", fig.align="center", fig.style="ImageCenter"}
+Chunk with alignment and custom style:
+
+```\{r, fig.cap="Key findings", fig.align="center", fig.style="ImageCenter"\}
 plot(results)
 ```
 
-# Caption above image with cross-reference
-```{r sales-plot, fig.cap="Q4 Sales", fig.topcaption=TRUE, fig.id="sales"}
+Caption above image with cross-reference:
+
+```\{r sales-plot, fig.cap="Q4 Sales", fig.topcaption=TRUE, fig.id="sales"\}
 plot(sales_data)
 ```
+}\if{html}{\out{</div>}}
 }
-}
+

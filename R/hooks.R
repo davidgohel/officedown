@@ -46,23 +46,27 @@ knitr_opts_current <- function(x, default = FALSE) {
 #' A character string containing markdown with embedded OOXML code that
 #' combines the auto-numbered caption and the Pandoc image syntax.
 #'
-#' @examples
-#' \dontrun{
-#' # Chunk with auto-numbered caption and custom size
+#' @section Examples of chunks:
+#'
+#' ````
+#' Chunk with auto-numbered caption and custom size:
+#'
 #' ```{r, fig.cap="Sales over time", out.width="80%"}
 #' plot(sales_data)
 #' ```
 #'
-#' # Chunk with alignment and custom style
+#' Chunk with alignment and custom style:
+#'
 #' ```{r, fig.cap="Key findings", fig.align="center", fig.style="ImageCenter"}
 #' plot(results)
 #' ```
 #'
-#' # Caption above image with cross-reference
+#' Caption above image with cross-reference:
+#'
 #' ```{r sales-plot, fig.cap="Q4 Sales", fig.topcaption=TRUE, fig.id="sales"}
 #' plot(sales_data)
 #' ```
-#' }
+#' ````
 #' @rdname hook_plot_officedown
 #' @name hook_plot_officedown
 NULL
