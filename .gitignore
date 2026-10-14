@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-inst/doc
 revdep
-Dockerfile
-.positai
+docs
+.DS_Store
