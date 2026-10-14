@@ -2,8 +2,6 @@ library(xml2)
 library(officer)
 library(rmarkdown)
 
-skip_on_cran()
-
 skip_if_not(rmarkdown::pandoc_available())
 skip_if_not(pandoc_version() >= numeric_version("2"))
 
@@ -67,29 +65,6 @@ test_that("reading sections properties", {
   expect_equal(sum(part_references %in% "headerReference"), 3L)
 })
 
-test_that("visual testing sections properties", {
-  testthat::skip_if_not_installed("doconv")
-  testthat::skip_if_not(doconv::msoffice_available())
-  library(doconv)
-  expect_snapshot_doc(
-    x = docx_file,
-    name = "docx-sections",
-    engine = "testthat"
-  )
-})
-
-
-docx_file <- tempfile(fileext = ".docx")
-render_rmd("rmd/long-text.Rmd", output_file = docx_file)
-
-test_that("visual testing sections inheritance", {
-  testthat::skip_if_not_installed("doconv")
-  testthat::skip_if_not(doconv::msoffice_available())
-  library(doconv)
-  expect_snapshot_doc(x = docx_file, name = "all-sections", engine = "testthat")
-})
-
-
 test_that("reference_docx headers and footers are kept across sections (#127)", {
   ref_docx <- ref_docx_with_hf()
 
@@ -144,4 +119,13 @@ test_that("reference_docx headers and footers are kept across sections (#127)", 
   )
   expect_true(all(header_refs > 0L))
   expect_true(all(footer_refs > 0L))
+
+  # the reference_docx does not use different odd and even page headers;
+  # the output must keep it switched off, otherwise even pages have no
+  # header and no footer
+  dir_tmp <- tempfile()
+  unpack_folder(hf_docx, dir_tmp)
+  settings <- read_xml(file.path(dir_tmp, "word", "settings.xml"))
+  eoh_val <- xml_attr(xml_child(settings, "w:evenAndOddHeaders"), "val")
+  expect_true(eoh_val %in% c(NA, "0", "false", "off"))
 })

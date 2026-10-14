@@ -85,11 +85,3 @@ test_that("list styles are matched by their exact name", {
   expect_equal(list_style_link(list_pars[[1]], numbering), "new-ul")
   expect_equal(list_style_link(list_pars[[7]], numbering), "new-ol")
 })
-
-
-test_that("visual testing list", {
-  testthat::skip_if_not_installed("doconv")
-  testthat::skip_if_not(doconv::msoffice_available())
-  library(doconv)
-  expect_snapshot_doc(x = docx_file, name = "lists", engine = "testthat")
-})

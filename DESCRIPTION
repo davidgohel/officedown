@@ -1,7 +1,7 @@
 Type: Package
 Package: officedown
 Title: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'
-Version: 0.4.2.010
+Version: 0.4.2.011
 Authors@R: c(
     person("David", "Gohel", , "david.gohel@ardata.fr", role = c("aut", "cre", "cph")),
     person("ArData", role = "cph"),
@@ -41,7 +41,6 @@ Imports:
     yaml
 Suggests: 
     bookdown (>= 0.13),
-    doconv (>= 0.3.0),
     flextable (>= 0.9.10),
     ggplot2 (>= 4.0.1),
     testthat (>= 3.0.0)
