@@ -28,6 +28,13 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
   * `no_hband` and `no_vband`: don't display odd and even rows or columns with alternating shading for ease of reading.
 
 
+To cross-reference a table, give it an identifier with the chunk option
+`tab.id`, along with a caption (chunk option `tab.cap`); unless 'bookdown' is
+used, the chunk label is not used for tables. A table with `tab.id = "mtcars"` is then referenced with
+`\@ref(tab:mtcars)`. Without `tab.id`, no bookmark is created and Word displays
+"Error! Reference source not found." in place of the reference. Identifiers can
+contain letters, digits, `-` and `_`.
+
 Default value is (in YAML format):
 
 ```yaml

@@ -91,6 +91,13 @@ tables (go to the "References" tab and select menu "Insert Table of Figures").
 }
 }
 
+To cross-reference a table, give it an identifier with the chunk option
+\code{tab.id}, along with a caption (chunk option \code{tab.cap}); unless 'bookdown' is
+used, the chunk label is not used for tables. A table with \code{tab.id = "mtcars"} is then referenced with
+\verb{\\@ref(tab:mtcars)}. Without \code{tab.id}, no bookmark is created and Word displays
+"Error! Reference source not found." in place of the reference. Identifiers can
+contain letters, digits, \code{-} and \verb{_}.
+
 Default value is (in YAML format):
 
 \if{html}{\out{<div class="sourceCode yaml">}}\preformatted{style: Table
@@ -150,6 +157,13 @@ figures" menu).
 \item \code{fp_text}: text formatting properties to apply to caption prefix - see \code{\link[officer:fp_text_lite]{officer::fp_text_lite()}}.
 }
 }
+
+To cross-reference a figure, give it a caption (chunk option \code{fig.cap}). Its
+identifier is the chunk label, unless the chunk option \code{fig.id} is set. A figure
+produced by a chunk labelled \code{boxplot} is then referenced with
+\verb{\\@ref(fig:boxplot)}. Identifiers can contain letters, digits, \code{-} and \verb{_};
+a chunk label containing \code{.} and a caption makes the rendering fail, use
+\code{fig.id} to provide a valid identifier.
 
 Default value is (in YAML format):
 
