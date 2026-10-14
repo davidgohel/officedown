@@ -10,15 +10,16 @@ jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
     if: "!contains(github.event.head_commit.message, 'ci skip')"
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }})
+    name: ${{ matrix.config.os }} (${{ matrix.config.r }}, pandoc ${{ matrix.config.pandoc }})
 
     strategy:
       fail-fast: false
       matrix:
         config:
-          - {os: windows-latest, r: 'release'}
-          - {os: macOS-latest, r: 'release'}
-          - {os: ubuntu-22.04, r: 'devel'}
+          - {os: windows-latest, r: 'release', pandoc: '3.8.3'}
+          - {os: macOS-latest, r: 'release', pandoc: '3.8.3'}
+          - {os: ubuntu-22.04, r: 'devel', pandoc: '3.8.3'}
+          - {os: ubuntu-latest, r: 'release', pandoc: 'latest'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -40,6 +41,8 @@ jobs:
           use-public-rspm: true
 
       - uses: r-lib/actions/setup-pandoc@v2
+        with:
+          pandoc-version: ${{ matrix.config.pandoc }}
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
