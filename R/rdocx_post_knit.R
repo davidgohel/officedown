@@ -18,13 +18,10 @@ as_reference_standard <- function(z, numbered = FALSE) {
 
   sf <- run_word_field(field = str)
   str <- to_wml(sf)
-  paste0(
-    "`<w:hyperlink w:anchor=\"",
-    z,
-    "\">",
-    str,
-    "</w:hyperlink>`{=openxml}"
-  )
+  # a markdown link lets pandoc write the bookmark name of the section in
+  # `w:anchor` (pandoc >= 3.12 renames section bookmarks), the REF field
+  # target is then updated from it by `process_ref_fields()`
+  paste0("[`", str, "`{=openxml}](#", z, ")")
 }
 
 post_knit_table_captions <- function(
@@ -99,7 +96,7 @@ post_knit_std_references <- function(content, numbered = FALSE) {
   # ensure UTF-8 so that gregexpr()/regmatches() handle multibyte content
   # (e.g. Chinese) correctly regardless of the native encoding (see #37)
   content <- enc2utf8(content)
-  regexpr_str <- paste0('\\\\@ref\\(([-[:alnum:]]+)\\)')
+  regexpr_str <- '\\\\@ref\\(([-[:alnum:]_.]+)\\)'
 
   gmatch <- gregexpr(regexpr_str, content)
   result <- regmatches(content, gmatch)

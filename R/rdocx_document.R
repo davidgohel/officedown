@@ -297,6 +297,7 @@ rdocx_document <- function(
   ) {
     x <- officer::read_docx(output_file)
     x <- process_par_settings(x)
+    x <- process_ref_fields(x)
     x <- process_list_settings(
       x,
       ul_style = lists$ul.style,

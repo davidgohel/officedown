@@ -153,3 +153,25 @@ process_par_settings <- function(rdoc) {
   }
   rdoc
 }
+
+# Section references are REF fields wrapped in a link written by pandoc, its
+# `w:anchor` is the real name of the section bookmark (pandoc >= 3.12 renames
+# them, e.g. `_intro` or a hash). Use it as the REF field target.
+process_ref_fields <- function(rdoc) {
+  instr_nodes <- xml_find_all(
+    docx_body_xml(rdoc),
+    "//w:hyperlink[@w:anchor]//w:instrText[starts-with(normalize-space(.), 'REF ')]"
+  )
+  for (instr in instr_nodes) {
+    anchor <- xml_attr(
+      xml_find_first(instr, "ancestor::w:hyperlink[@w:anchor][1]"),
+      "anchor"
+    )
+    xml_text(instr) <- sub(
+      "^(\\s*REF\\s+)\\S+",
+      paste0("\\1", anchor),
+      xml_text(instr)
+    )
+  }
+  rdoc
+}

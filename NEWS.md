@@ -2,6 +2,9 @@
 
 ## Issues
 
+- cross-references to sections made with `\@ref()` work again with pandoc
+3.12 and later, which changed the names of section bookmarks. Section
+identifiers containing `_` or `.` are now also supported.
 - data frames are now printed in HTML and other non Office documents when
 officedown is loaded (for example with Quarto), and knitting with knitr only
 no longer fails.
