@@ -43,6 +43,10 @@ reference:
     contents:
     - rdocx_document
     - rpptx_document
+  - title: Figures and graphics
+    contents:
+    - hook_plot_officedown
+    - knit_print.dml
   - title: Utils
     contents:
     - knit_print_block
