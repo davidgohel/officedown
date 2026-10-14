@@ -23,7 +23,9 @@ now work on computers that do not use UTF-8 by default (#37).
 
 - Figure sizes set with `out.width` and `out.height` can use any unit
 (e.g. `"10cm"`, `"5in"`, `"80%"`), and `out.extra` adds other image
-attributes.
+attributes. A percentage is now relative to the width of the page text, as in
+other R Markdown formats, and no longer to the figure size. Figures wider than
+the page text are reduced to fit it.
 - The documentation now explains how to cross-reference tables (chunk option
 `tab.id`) and figures (chunk label or `fig.id`).
 - officedown now requires officer 0.7.7.

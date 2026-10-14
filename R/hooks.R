@@ -132,6 +132,25 @@ plot_word_fig_caption <- function(x, options) {
   if (!is.null(options$out.height)) {
     attrs <- c(attrs, sprintf('height=%s', options$out.height))
   }
+  # without out.width and out.height, a plot made by the chunk keeps the size
+  # set with fig.width and fig.height (pandoc would otherwise compute it from
+  # the image resolution); images inserted with include_graphics(), which are
+  # not in fig.path, keep their own size
+  if (
+    is.null(options$out.width) &&
+      is.null(options$out.height) &&
+      !is.null(options$fig.path) &&
+      startsWith(x[1], options$fig.path)
+  ) {
+    fig_index <- options$fig.cur %||% 1L
+    fig_width <- options$fig.width[min(fig_index, length(options$fig.width))]
+    fig_height <- options$fig.height[min(fig_index, length(options$fig.height))]
+    attrs <- c(
+      attrs,
+      sprintf('width=%sin', fig_width),
+      sprintf('height=%sin', fig_height)
+    )
+  }
   if (!is.null(options$out.extra)) {
     attrs <- c(attrs, options$out.extra)
   }
