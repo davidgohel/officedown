@@ -4,6 +4,8 @@
 
 ### Issues
 
+- The new plot hook stays compatible with package accessr, whose
+  `rmd2word()` modifies it.
 - Loading officedown in a document using another Word output format
   (e.g. `word_document`) no longer produces a file that Word can not
   open: data frames are printed as usual, and printing officer objects

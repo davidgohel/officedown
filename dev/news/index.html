@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">officedown</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.2.013</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.2.014</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,8 @@
 <h2 class="pkg-version" data-toc-text="0.4.2" id="officedown-042">officedown 0.4.2<a class="anchor" aria-label="anchor" href="#officedown-042"></a></h2>
 <div class="section level3">
 <h3 id="issues-0-4-2">Issues<a class="anchor" aria-label="anchor" href="#issues-0-4-2"></a></h3>
-<ul><li>Loading officedown in a document using another Word output format (e.g. <code>word_document</code>) no longer produces a file that Word can not open: data frames are printed as usual, and printing officer objects (such as <code><a href="https://davidgohel.github.io/officer/reference/block_caption.html" class="external-link">block_caption()</a></code>) stops with a message asking to use <code><a href="../reference/rdocx_document.html">officedown::rdocx_document</a></code> (<a href="https://github.com/davidgohel/officedown/issues/121" class="external-link">#121</a>).</li>
+<ul><li>The new plot hook stays compatible with package accessr, whose <code>rmd2word()</code> modifies it.</li>
+<li>Loading officedown in a document using another Word output format (e.g. <code>word_document</code>) no longer produces a file that Word can not open: data frames are printed as usual, and printing officer objects (such as <code><a href="https://davidgohel.github.io/officer/reference/block_caption.html" class="external-link">block_caption()</a></code>) stops with a message asking to use <code><a href="../reference/rdocx_document.html">officedown::rdocx_document</a></code> (<a href="https://github.com/davidgohel/officedown/issues/121" class="external-link">#121</a>).</li>
 <li>Cross-references to sections (<code>\@ref(section-id)</code>) work again with pandoc 3.12 and later, where Word displayed “Error! Reference source not found.” instead of the section number. Section identifiers can now also contain <code>_</code> or <code>.</code>.</li>
 <li>Headers and footers of the <code>reference_docx</code> now appear on every page, including after a landscape or multi-column section (<a href="https://github.com/davidgohel/officedown/issues/127" class="external-link">#127</a>), and no longer disappear from even pages.</li>
 <li>Landscape orientation set with <code>page_size</code> (e.g. <code>orient: "landscape"</code>) is now applied even when <code>page_margins</code> is not set (<a href="https://github.com/davidgohel/officedown/issues/145" class="external-link">#145</a>).</li>
