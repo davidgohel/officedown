@@ -17,8 +17,9 @@ knitr_opts_current <- function(x, default = FALSE) {
 #' caption management with auto-numbering, cross-references, and custom
 #' Word paragraph styles.
 #'
-#' @param x Character string containing the path to the saved plot file.
-#' @param options Named list of chunk options.
+#' The hook is called by knitr with the path to the saved plot file and
+#' the chunk options; it is set by [rdocx_document()] and is not meant to
+#' be called directly.
 #'
 #' @section Supported chunk options:
 #' - `fig.cap`: Figure caption text. Used to generate auto-numbered captions

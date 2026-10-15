@@ -3,11 +3,6 @@
 \name{hook_plot_officedown}
 \alias{hook_plot_officedown}
 \title{knitr hook for figure caption autonumbering}
-\arguments{
-\item{x}{Character string containing the path to the saved plot file.}
-
-\item{options}{Named list of chunk options.}
-}
 \value{
 A character string containing markdown with embedded OOXML code that
 combines the auto-numbered caption and the Pandoc image syntax.
@@ -20,6 +15,10 @@ combined with OOXML for captions and paragraph formatting.
 The hook delegates image rendering to Pandoc while providing enhanced
 caption management with auto-numbering, cross-references, and custom
 Word paragraph styles.
+
+The hook is called by knitr with the path to the saved plot file and
+the chunk options; it is set by \code{\link[=rdocx_document]{rdocx_document()}} and is not meant to
+be called directly.
 }
 \section{Supported chunk options}{
 
