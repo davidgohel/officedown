@@ -23,13 +23,13 @@ Source:
 [`DESCRIPTION`](https://github.com/davidgohel/officedown/blob/main/DESCRIPTION)
 
 Gohel D, Ross N (2026). *officedown: Enhanced 'R Markdown' Format for
-'Word' and 'PowerPoint'*. R package version 0.4.2,
+'Word' and 'PowerPoint'*. R package version 0.4.3,
 <https://ardata-fr.github.io/officeverse/>.
 
     @Manual{,
       title = {officedown: Enhanced 'R Markdown' Format for 'Word' and 'PowerPoint'},
       author = {David Gohel and Noam Ross},
       year = {2026},
-      note = {R package version 0.4.2},
+      note = {R package version 0.4.3},
       url = {https://ardata-fr.github.io/officeverse/},
     }

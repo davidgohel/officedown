@@ -1,5 +1,12 @@
 # Changelog
 
+## officedown 0.4.3
+
+### Issues
+
+- `hook_plot_officedown.Rd` has no usage, and a fix was needed to avoid
+  a NOTE (seen in CRAN Debian check).
+
 ## officedown 0.4.2
 
 ### Issues
