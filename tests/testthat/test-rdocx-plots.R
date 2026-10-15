@@ -22,12 +22,13 @@ test_that("reading captions", {
 })
 
 test_that("plot size follows fig.width, fig.height and out options", {
-  ext_png <- tempfile(fileext = ".png")
-  png(ext_png, width = 300, height = 150)
+  rmd_dir <- tempfile()
+  dir.create(rmd_dir)
+  png(file.path(rmd_dir, "ext.png"), width = 300, height = 150)
   plot(1)
   dev.off()
 
-  rmd_file <- tempfile(fileext = ".Rmd")
+  rmd_file <- file.path(rmd_dir, "plots.Rmd")
   writeLines(
     c(
       "---",
@@ -48,7 +49,7 @@ test_that("plot size follows fig.width, fig.height and out options", {
       "```",
       "",
       "```{r ext, fig.width=6, fig.height=4}",
-      sprintf("knitr::include_graphics('%s')", ext_png),
+      "knitr::include_graphics('ext.png')",
       "```"
     ),
     rmd_file
