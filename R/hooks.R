@@ -118,6 +118,20 @@ plot_word_fig_caption <- function(x, options) {
   )
   cap_str <- to_wml(bc, knitting = TRUE)
 
+  # Kept for compatibility, `img` is not used: some packages (e.g. accessr)
+  # modify this hook by replacing the line calling external_img() and expect
+  # `fig.width` and `fig.height` to exist. The image itself is written with
+  # the pandoc syntax below. Do not remove without checking reverse
+  # dependencies.
+  fig.width <- options$fig.width[1] %||% 5
+  fig.height <- options$fig.height[1] %||% 5
+  img <- external_img(
+    src = x[1],
+    width = fig.width,
+    height = fig.height,
+    alt = options$fig.alt
+  )
+
   # Build Pandoc markdown image with attributes
   base <- opts_knit$get('base.url')
   if (is.null(base)) {
