@@ -127,5 +127,12 @@ test_that("reference_docx headers and footers are kept across sections (#127)", 
   unpack_folder(hf_docx, dir_tmp)
   settings <- read_xml(file.path(dir_tmp, "word", "settings.xml"))
   eoh_val <- xml_attr(xml_child(settings, "w:evenAndOddHeaders"), "val")
-  expect_true(eoh_val %in% c(NA, "0", "false", "off"))
+  expect_true(
+    eoh_val %in% c(NA, "0", "false", "off"),
+    info = paste0(
+      "evenAndOddHeaders=", eoh_val,
+      " pandoc=", rmarkdown::pandoc_version(),
+      " officer=", packageVersion("officer")
+    )
+  )
 })
