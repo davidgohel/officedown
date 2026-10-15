@@ -70,11 +70,13 @@ if(run_ok){
   file.copy(example, to = rmd_file)
 
   pptx_file_1 <- tempfile(fileext = ".pptx")
+  # \donttest{
   render(rmd_file, output_file = pptx_file_1)
+  # }
 }
 #> 
 #> 
-#> processing file: file1a574595b536.Rmd
+#> processing file: file191c53ace7ff.Rmd
 #> 1/14                  
 #> 2/14 [setup]          
 #> 3/14                  
@@ -89,8 +91,8 @@ if(run_ok){
 #> 12/14 [unnamed-chunk-4]
 #> 13/14                  
 #> 14/14 [unnamed-chunk-5]
-#> output file: file1a574595b536.knit.md
-#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file1a574595b536.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/Rtmpp27xV1/file1a575c7161ca.pptx --reference-doc /tmp/Rtmpp27xV1/file1a577963c22e.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua 
+#> output file: file191c53ace7ff.knit.md
+#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file191c53ace7ff.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx --reference-doc /tmp/RtmpCyDHp0/file191c669629c.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua 
 #> 
-#> Output created: /tmp/Rtmpp27xV1/file1a575c7161ca.pptx
+#> Output created: /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx
 ```

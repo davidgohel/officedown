@@ -23,7 +23,7 @@ rvg). Wrap you R plot commands with function dml to use this graphic capability.
 
     <a class="navbar-brand me-2" href="../index.html">officedown</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.2.015</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.2.016</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +115,13 @@ defined by <code><a href="https://davidgohel.github.io/officer/reference/table_c
 <span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/files.html" class="external-link">file.copy</a></span><span class="op">(</span><span class="va">example</span>, to <span class="op">=</span> <span class="va">rmd_file</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span>  <span class="va">pptx_file_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/tempfile.html" class="external-link">tempfile</a></span><span class="op">(</span>fileext <span class="op">=</span> <span class="st">".pptx"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://pkgs.rstudio.com/rmarkdown/reference/render.html" class="external-link">render</a></span><span class="op">(</span><span class="va">rmd_file</span>, output_file <span class="op">=</span> <span class="va">pptx_file_1</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  <span class="co"># }</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> processing file: file1a574595b536.Rmd</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> processing file: file191c53ace7ff.Rmd</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1/14                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2/14 [setup]          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3/14                  </span>
@@ -134,10 +136,10 @@ defined by <code><a href="https://davidgohel.github.io/officer/reference/table_c
 <span class="r-out co"><span class="r-pr">#&gt;</span> 12/14 [unnamed-chunk-4]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 13/14                  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 14/14 [unnamed-chunk-5]</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> output file: file1a574595b536.knit.md</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file1a574595b536.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/Rtmpp27xV1/file1a575c7161ca.pptx --reference-doc /tmp/Rtmpp27xV1/file1a577963c22e.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> output file: file191c53ace7ff.knit.md</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file191c53ace7ff.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx --reference-doc /tmp/RtmpCyDHp0/file191c669629c.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/Rtmpp27xV1/file1a575c7161ca.pptx</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Output created: /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
