@@ -2,6 +2,10 @@
 
 ## Issues
 
+- Loading officedown in a document using another Word output format (e.g.
+`word_document`) no longer produces a file that Word can not open: data frames
+are printed as usual, and printing officer objects (such as `block_caption()`)
+stops with a message asking to use `officedown::rdocx_document` (#121).
 - Cross-references to sections (`\@ref(section-id)`) work again with pandoc
 3.12 and later, where Word displayed "Error! Reference source not found."
 instead of the section number. Section identifiers can now also contain `_`

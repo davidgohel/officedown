@@ -1,8 +1,24 @@
+# officer objects are written with a temporary markup (e.g. style names
+# instead of style ids) that only the post-processing of `rdocx_document()`
+# finalises; printed in another Word output format, they produce a file
+# that Word can not open.
+check_rdocx_document <- function() {
+  if (!isTRUE(knitr::opts_current$get("is_rdocx_document"))) {
+    stop(
+      "officer objects can only be printed in Word documents created with ",
+      "the output format `officedown::rdocx_document`.",
+      call. = FALSE
+    )
+  }
+  invisible(TRUE)
+}
+
 #' @export
 #' @importFrom officer to_wml to_pml
 #' @importFrom knitr knit_print asis_output opts_knit
 knit_print.run <- function(x, ...) {
   if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
+    check_rdocx_document()
     knit_print(asis_output(
       paste("`", to_wml(x), "`{=openxml}", sep = "")
     ))
@@ -19,6 +35,7 @@ knit_print.run <- function(x, ...) {
 #' @export
 knit_print.fp_par <- function(x, ...) {
   if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
+    check_rdocx_document()
     knit_print(asis_output(
       paste("`", to_wml(x), "`{=openxml}", sep = "")
     ))
@@ -35,6 +52,7 @@ knit_print.fp_par <- function(x, ...) {
 #' @importFrom officer shape_properties_tags
 knit_print.block <- function(x, ...) {
   if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
+    check_rdocx_document()
     knit_print(asis_output(
       paste("```{=openxml}", to_wml(x), "```", sep = "\n")
     ))
@@ -112,6 +130,7 @@ knit_print.block <- function(x, ...) {
 #' }
 knit_print_block <- function(x, ...) {
   if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
+    check_rdocx_document()
     cat(paste("```{=openxml}", to_wml(x), "```\n\n", sep = "\n"))
   } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("```{=openxml}", to_pml(x), "```\n\n", sep = "\n"))
@@ -147,6 +166,7 @@ knit_print_block <- function(x, ...) {
 #' }
 knit_print_run <- function(x, ...) {
   if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
+    check_rdocx_document()
     cat(paste("`", to_wml(x), "`{=openxml}", sep = ""))
   } else if (isTRUE(grepl("pptx", opts_knit$get("rmarkdown.pandoc.to")))) {
     cat(paste("`", to_pml(x), "`{=openxml}", sep = ""))

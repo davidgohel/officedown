@@ -55,8 +55,12 @@ get_table_design_opt <- function(x, default = FALSE) {
 #' @method knit_print data.frame
 knit_print.data.frame <- function(x, ...) {
   tab_props <- opts_current_table()
-  if (isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to")))) {
-    opts_knit$get("rmarkdown.pandoc.to")
+  # tables are only produced with officer in `rdocx_document()`, whose
+  # post-processing finalises them; other Word formats use the usual printing
+  if (
+    isTRUE(grepl("docx", opts_knit$get("rmarkdown.pandoc.to"))) &&
+      isTRUE(opts_current$get("is_rdocx_document"))
+  ) {
     pt <- prop_table(
       style = tab_props$style,
       layout = tab_props$table_layout,
