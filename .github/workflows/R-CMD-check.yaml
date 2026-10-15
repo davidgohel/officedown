@@ -24,8 +24,6 @@ jobs:
           - {os: ubuntu-latest, r: 'devel', pandoc: '3.8.3'}
           - {os: ubuntu-latest, r: 'release', pandoc: 'latest'}
           - {os: ubuntu-latest, r: 'release', pandoc: '2.19'}
-          # TEMPORARY: reproduce the win-builder failure (evenAndOddHeaders)
-          - {os: windows-latest, r: 'release', pandoc: '3.9.0.2'}
 
     env:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
@@ -51,48 +49,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rcmdcheck, any::pkgload
+          extra-packages: any::rcmdcheck
           needs: check
-
-      # TEMPORARY: diagnostic of the evenAndOddHeaders setting, see the
-      # win-builder failure of test-rdocx-sections.R with pandoc 3.9.0.2
-      - name: Diagnose evenAndOddHeaders
-        if: matrix.config.pandoc == '3.9.0.2'
-        shell: Rscript {0}
-        run: |
-          try({
-            pkgload::load_all(".", quiet = TRUE)
-            source("tests/testthat/helper-utils.R")
-            cat("R", R.version.string, "\n")
-            cat("pandoc", as.character(rmarkdown::pandoc_version()), "\n")
-            cat("officer", as.character(packageVersion("officer")),
-              "| xml2", as.character(packageVersion("xml2")),
-              "| libxml2", as.character(xml2:::libxml2_version()), "\n")
-            raw_eoh <- function(f) {
-              x <- paste(readLines(unz(f, "word/settings.xml"), warn = FALSE), collapse = "")
-              m <- regmatches(x, regexpr("<w:evenAndOddHeaders[^>]*>", x))
-              if (length(m)) m else "(absent)"
-            }
-            xml2_eoh <- function(f) {
-              tmp <- tempfile()
-              officer::unpack_folder(f, tmp)
-              doc <- xml2::read_xml(file.path(tmp, "word", "settings.xml"))
-              node <- xml2::xml_child(doc, "w:evenAndOddHeaders")
-              paste0(
-                "xml_attr(val)=", xml2::xml_attr(node, "val"),
-                " | xml_attrs=", paste(names(xml2::xml_attrs(node)), xml2::xml_attrs(node), sep = "=", collapse = ","),
-                " | officer setting=", officer::read_docx(f)$settings$even_and_odd_headers
-              )
-            }
-            ref <- ref_docx_with_hf()
-            cat("reference_docx :", raw_eoh(ref), "\n  ", xml2_eoh(ref), "\n")
-            body <- c("", "Portrait.", "", "<!---BLOCK_LANDSCAPE_START--->", "", "Landscape.", "", "<!---BLOCK_LANDSCAPE_STOP--->", "", "End.")
-            for (fmt in c("word_document", "officedown::rdocx_document")) {
-              f <- tempfile(fileext = ".Rmd")
-              writeLines(c("---", "output:", paste0("  ", fmt, ":"), paste0("    reference_docx: ", ref), "---", body), f)
-              out <- rmarkdown::render(f, quiet = TRUE)
-              cat(fmt, ":", raw_eoh(out), "\n  ", xml2_eoh(out), "\n")
-            }
-          })
 
       - uses: r-lib/actions/check-r-package@v2

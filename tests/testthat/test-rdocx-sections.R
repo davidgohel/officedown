@@ -127,12 +127,12 @@ test_that("reference_docx headers and footers are kept across sections (#127)", 
   unpack_folder(hf_docx, dir_tmp)
   settings <- read_xml(file.path(dir_tmp, "word", "settings.xml"))
   eoh_val <- xml_attr(xml_child(settings, "w:evenAndOddHeaders"), "val")
-  expect_true(
-    eoh_val %in% c(NA, "0", "false", "off"),
-    info = paste0(
-      "evenAndOddHeaders=", eoh_val,
-      " pandoc=", rmarkdown::pandoc_version(),
-      " officer=", packageVersion("officer")
-    )
+
+  # the check needs an officer that reads this setting correctly; some
+  # pre-release builds of officer 0.7.7 (e.g. on win-builder) do not
+  skip_if(
+    read_docx(ref_docx)$settings$even_and_odd_headers,
+    "officer reads the odd and even headers setting incorrectly (officer < 0.7.7 or a pre-release build)"
   )
+  expect_true(eoh_val %in% c(NA, "0", "false", "off"))
 })

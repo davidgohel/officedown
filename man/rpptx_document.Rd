@@ -53,6 +53,8 @@ if(run_ok){
   file.copy(example, to = rmd_file)
 
   pptx_file_1 <- tempfile(fileext = ".pptx")
+  \donttest{
   render(rmd_file, output_file = pptx_file_1)
+  }
 }
 }
