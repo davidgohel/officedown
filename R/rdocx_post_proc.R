@@ -154,6 +154,26 @@ process_par_settings <- function(rdoc) {
   rdoc
 }
 
+# Some packages, e.g. flextable for table captions, write paragraph styles
+# with an id guessed from the style name without its non alphanumeric
+# characters ('Table Caption' -> 'TableCaption'). The guess fails when the
+# id differs from the name, e.g. the style 'caption' has the id 'Lgende' in
+# the default reference_docx (#112). An unknown id is replaced by the id of
+# the style whose name gives this guess, if there is only one.
+process_style_ids <- function(rdoc) {
+  si <- styles_info(rdoc, type = "paragraph")
+  guessed_ids <- gsub("[^a-zA-Z0-9]", "", si$style_name)
+  nodes <- xml_find_all(docx_body_xml(rdoc), "//w:pPr/w:pStyle")
+  ids <- xml_attr(nodes, "val")
+  for (i in which(!ids %in% si$style_id)) {
+    j <- which(guessed_ids == ids[i])
+    if (length(j) == 1L) {
+      xml_attr(nodes[[i]], "w:val") <- si$style_id[j]
+    }
+  }
+  rdoc
+}
+
 # Section references are REF fields wrapped in a link written by pandoc, its
 # `w:anchor` is the real name of the section bookmark (pandoc >= 3.12 renames
 # them, e.g. `_intro` or a hash). Use it as the REF field target.

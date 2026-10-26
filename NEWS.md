@@ -1,5 +1,14 @@
 # officedown 0.4.4
 
+## Issues
+
+- The style of table captions made by flextable is now applied when its id
+differs from its name, e.g. the style `caption` of the default
+`reference_docx`, whose id is `Lgende` (#112). flextable writes an id
+guessed from the style name; an unknown paragraph style id is now replaced by
+the id of the style whose name gives this guess. Word was using the "Normal"
+style instead.
+
 ## Changes
 
 - The unused `external_img()` call kept in the plot hook for package accessr
