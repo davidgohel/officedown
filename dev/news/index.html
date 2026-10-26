@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">officedown</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.4.001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.4.002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,6 +33,10 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.4" id="officedown-044">officedown 0.4.4<a class="anchor" aria-label="anchor" href="#officedown-044"></a></h2>
+<div class="section level3">
+<h3 id="issues-0-4-4">Issues<a class="anchor" aria-label="anchor" href="#issues-0-4-4"></a></h3>
+<ul><li>The style of table captions made by flextable is now applied when its id differs from its name, e.g. the style <code>caption</code> of the default <code>reference_docx</code>, whose id is <code>Lgende</code> (<a href="https://github.com/davidgohel/officedown/issues/112" class="external-link">#112</a>). flextable writes an id guessed from the style name; an unknown paragraph style id is now replaced by the id of the style whose name gives this guess. Word was using the “Normal” style instead.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="changes-0-4-4">Changes<a class="anchor" aria-label="anchor" href="#changes-0-4-4"></a></h3>
 <ul><li>The unused <code><a href="https://davidgohel.github.io/officer/reference/external_img.html" class="external-link">external_img()</a></code> call kept in the plot hook for package accessr is removed: accessr &gt;= 1.1.4 no longer modifies the hook. Older versions of accessr fail in <code>rmd2word()</code>. The test checking this line was failing under covr (<a href="https://github.com/davidgohel/officedown/issues/154" class="external-link">#154</a>).</li>
