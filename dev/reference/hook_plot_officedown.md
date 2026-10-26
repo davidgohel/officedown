@@ -8,15 +8,10 @@ The hook delegates image rendering to Pandoc while providing enhanced
 caption management with auto-numbering, cross-references, and custom
 Word paragraph styles.
 
-## Arguments
-
-- x:
-
-  Character string containing the path to the saved plot file.
-
-- options:
-
-  Named list of chunk options.
+The hook is called by knitr with the path to the saved plot file and the
+chunk options; it is set by
+[`rdocx_document()`](https://davidgohel.github.io/officedown/dev/reference/rdocx_document.md)
+and is not meant to be called directly.
 
 ## Value
 

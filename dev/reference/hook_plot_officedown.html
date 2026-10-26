@@ -4,12 +4,18 @@ with custom styling. The hook uses Pandoc markdown syntax for images
 combined with OOXML for captions and paragraph formatting.
 The hook delegates image rendering to Pandoc while providing enhanced
 caption management with auto-numbering, cross-references, and custom
-Word paragraph styles."><meta property="og:description" content="Plot hook for Word documents that generates auto-numbered figure captions
+Word paragraph styles.
+The hook is called by knitr with the path to the saved plot file and
+the chunk options; it is set by rdocx_document() and is not meant to
+be called directly."><meta property="og:description" content="Plot hook for Word documents that generates auto-numbered figure captions
 with custom styling. The hook uses Pandoc markdown syntax for images
 combined with OOXML for captions and paragraph formatting.
 The hook delegates image rendering to Pandoc while providing enhanced
 caption management with auto-numbering, cross-references, and custom
-Word paragraph styles."><meta property="og:image" content="https://davidgohel.github.io/officedown/logo.png"><meta name="robots" content="noindex"></head><body>
+Word paragraph styles.
+The hook is called by knitr with the path to the saved plot file and
+the chunk options; it is set by rdocx_document() and is not meant to
+be called directly."><meta property="og:image" content="https://davidgohel.github.io/officedown/logo.png"><meta name="robots" content="noindex"></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -17,7 +23,7 @@ Word paragraph styles."><meta property="og:image" content="https://davidgohel.gi
 
     <a class="navbar-brand me-2" href="../index.html">officedown</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.2.016</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">0.4.4.001</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -49,21 +55,12 @@ combined with OOXML for captions and paragraph formatting.</p>
 <p>The hook delegates image rendering to Pandoc while providing enhanced
 caption management with auto-numbering, cross-references, and custom
 Word paragraph styles.</p>
+<p>The hook is called by knitr with the path to the saved plot file and
+the chunk options; it is set by <code><a href="rdocx_document.html">rdocx_document()</a></code> and is not meant to
+be called directly.</p>
     </div>
 
 
-    <div class="section level2">
-    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-
-
-<dl><dt id="arg-x">x<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>Character string containing the path to the saved plot file.</p></dd>
-
-
-<dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
-<dd><p>Named list of chunk options.</p></dd>
-
-</dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A character string containing markdown with embedded OOXML code that

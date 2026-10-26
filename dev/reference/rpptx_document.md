@@ -76,7 +76,7 @@ if(run_ok){
 }
 #> 
 #> 
-#> processing file: file191c53ace7ff.Rmd
+#> processing file: file1b99114b1c7d.Rmd
 #> 1/14                  
 #> 2/14 [setup]          
 #> 3/14                  
@@ -91,8 +91,8 @@ if(run_ok){
 #> 12/14 [unnamed-chunk-4]
 #> 13/14                  
 #> 14/14 [unnamed-chunk-5]
-#> output file: file191c53ace7ff.knit.md
-#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file191c53ace7ff.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx --reference-doc /tmp/RtmpCyDHp0/file191c669629c.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua 
+#> output file: file1b99114b1c7d.knit.md
+#> /opt/hostedtoolcache/pandoc/3.8.3/x64/pandoc +RTS -K512m -RTS file1b99114b1c7d.knit.md --to pptx --from markdown+autolink_bare_uris+tex_math_single_backslash --output /tmp/RtmpXYFJgF/file1b9916701dfb.pptx --reference-doc /tmp/RtmpXYFJgF/file1b9971ecc868.pptx --lua-filter /home/runner/work/_temp/Library/rmarkdown/rmarkdown/lua/extract-data-uri.lua 
 #> 
-#> Output created: /tmp/RtmpCyDHp0/file191c7eb9f5e0.pptx
+#> Output created: /tmp/RtmpXYFJgF/file1b9916701dfb.pptx
 ```

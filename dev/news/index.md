@@ -1,5 +1,25 @@
 # Changelog
 
+## officedown 0.4.4
+
+### Changes
+
+- The unused
+  [`external_img()`](https://davidgohel.github.io/officer/reference/external_img.html)
+  call kept in the plot hook for package accessr is removed: accessr \>=
+  1.1.4 no longer modifies the hook. Older versions of accessr fail in
+  `rmd2word()`. The test checking this line was failing under covr
+  ([\#154](https://github.com/davidgohel/officedown/issues/154)).
+
+## officedown 0.4.3
+
+CRAN release: 2026-10-15
+
+### Issues
+
+- `hook_plot_officedown.Rd` has no usage, and a fix was needed to avoid
+  a NOTE (seen in CRAN Debian check).
+
 ## officedown 0.4.2
 
 ### Issues
