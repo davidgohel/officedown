@@ -69,15 +69,3 @@ test_that("plot size follows fig.width, fig.height and out options", {
   # an image from include_graphics() keeps its own size, not fig.width
   expect_false(isTRUE(all.equal(width_in[5], 6, tolerance = 0.01)))
 })
-
-test_that("plot hook keeps the external_img() line used by accessr", {
-  # accessr::rmd2word() replaces the top-level line of the plot hook that
-  # calls external_img(); it must exist exactly once
-  plot_body <- body(rdocx_document()$knitr$knit_hooks$plot)
-  found <- vapply(
-    seq_along(plot_body),
-    function(i) !is.na(pmatch("external_img", as.character(plot_body[[i]]))),
-    logical(1)
-  )
-  expect_equal(sum(found), 1L)
-})

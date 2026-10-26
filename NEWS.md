@@ -1,3 +1,12 @@
+# officedown 0.4.4
+
+## Changes
+
+- The unused `external_img()` call kept in the plot hook for package accessr
+is removed: accessr >= 1.1.4 no longer modifies the hook. Older versions of
+accessr fail in `rmd2word()`. The test checking this line was failing under
+covr (#154).
+
 # officedown 0.4.3
 
 ## Issues
